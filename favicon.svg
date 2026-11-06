@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Gernbei">
+<style>g{stroke:#1A6B5A}@media (prefers-color-scheme:dark){g{stroke:#5FB3A0}}</style>
+<g fill="none" stroke-linecap="butt" stroke-linejoin="miter">
+<path d="M4.5 3V29M27.5 3V29" stroke-width="3.5"/>
+<path d="M4.5 16H27.5" stroke-width="2.5"/>
+<path d="M12 11L6.5 16L12 21M20 11L25.5 16L20 21" stroke-width="2.5"/>
+</g>
+</svg>
