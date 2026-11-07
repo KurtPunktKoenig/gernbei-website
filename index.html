@@ -7,6 +7,7 @@
 <meta name="description" content="Eine Assistenz, die Ihre Vorgänge kennt, Ihre Schreiben vorbereitet und sagt, woher sie es weiß. Für Handwerk, Dienstleister und Firmen, eingerichtet von Kurt König aus Würzburg.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="haus.css">
+<link rel="stylesheet" href="startseite.css">
 </head>
 <body>
 
@@ -14,13 +15,9 @@
 <nav class="nav"><div class="wrap">
   <a class="logo" href="index.html"><span class="gb">Gern<b>bei</b></span></a>
   <ul>
-    <li><a href="dienstleister.html">Für Dienstleister</a></li>
-    <li><a href="handwerk.html">Fürs Handwerk</a></li>
-    <li><a href="firmengedaechtnis.html">Firmengedächtnis</a></li>
-    <li><a href="chatbot.html">Chatbot</a></li>
+    <li><a href="#produkte">Produkte</a></li>
     <li><a href="#preis">Preis</a></li>
     <li><a href="#ueber">Über mich</a></li>
-    <li><a href="warum.html">Warum</a></li>
     <li><a href="fragen.html">Fragen</a></li>
   </ul>
   <a class="knopf" href="#kontakt">Gespräch vereinbaren</a>
@@ -30,69 +27,126 @@
   <div class="wrap">
     <p class="ueber"><span class="gb">Gern<b>bei</b></span> · Würzburg</p>
     <h1>Alle reden von KI. In Ihrem Betrieb ist es noch ruhig.</h1>
-    <p class="lead dunkler">Ich richte Ihnen eine Assistenz ein, die nichts vergisst, was Sie ihr geben, Ihre Schreiben vorbereitet und sagt, woher sie es weiß. Persönlich, aus Würzburg.</p>
-    <p class="lead" style="font-size:16px">Im Browser oder am Handy, ohne Gerätekauf. Preis auf Anfrage, dazu Ihr eigenes Claude-Team bei Anthropic.</p>
-    <div class="massgross"><div class="mass"><i></i><span>drei Zuschnitte, eine Maschine</span><i></i></div></div>
+    <p class="lead dunkler">Drei Produkte fürs Büro, die nichts vergessen und Ihre Schreiben vorbereiten. Zwei für Ihre Kunden, die auf Ihrer Website und am Telefon antworten. Persönlich eingerichtet aus Würzburg.</p>
+    <p class="lead" style="font-size:16px">Ohne Gerätekauf. Preis auf Anfrage.</p>
   </div>
 </header>
 
-<div id="tueren"><div class="wrap">
-  <p class="ueber" style="text-align:center;color:var(--grau)">Welcher Betrieb sind Sie?</p>
-  <p class="lead" style="text-align:center;margin:0 auto 28px;font-size:16px">Allein oder mit höchstens zwei Leuten? Für Dienstleister oder fürs Handwerk. Soll das ganze Team dasselbe Wissen nutzen? Firmengedächtnis.</p>
-  <div class="tuer-raster">
-
-    <a class="tuer dienst" href="dienstleister.html">
-      <small>Für Selbständige bis zwei Mitarbeiter</small>
-      <span class="name"><span class="gb">Gern<b>bei</b></span> für Dienstleister</span>
-      <span class="wolke"><svg viewBox="0 0 24 24"><path d="M7 18h10.5a4 4 0 0 0 .6-8 6 6 0 0 0-11.4 1.6A3.3 3.3 0 0 0 7 18z" stroke-linejoin="round"/></svg>Läuft bei Amazon. Kein Rechner nötig.</span>
-      <svg class="figur" viewBox="0 0 90 74" fill="none" stroke="#111214" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="16" r="11"/><path d="M26 15h.4M34 15h.4M27 21c2 1.6 4.5 1.6 6.5 0"/><path d="M30 27v26M30 34l-14 9M30 34l16 5"/><path d="M46 39l8-14"/><rect x="50" y="14" width="13" height="17" rx="1.5" transform="rotate(10 56 22)"/><path d="M30 53l-10 18M30 53l10 18"/><path d="M6 71h60" stroke-width="1.3"/><text x="70" y="66" font-family="Caveat,cursive" font-size="15" fill="#3A3B40" stroke="none">los!</text></svg>
-      <p class="hand">Ihre Kunden haben Sie. Den Papierkram nicht mehr.</p>
-      <p>Gernbei vergisst nichts, was Sie hineingeben, und findet es wieder. Daraus entstehen Angebote, Protokolle und Antworten. Abschicken tun Sie.</p>
-      <small class="zeile">Preis auf Anfrage · dazu Ihr Claude-Team bei Anthropic</small>
-      <span class="fuss-t">Zu <span class="gb">Gern<b>bei</b></span> für Dienstleister <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    </a>
-
-    <a class="tuer handwerk" href="handwerk.html">
-      <small>Für Handwerksbetriebe</small>
-      <span class="name"><span class="gb">Gern<b>bei</b></span> fürs Handwerk</span>
-      <span class="wolke"><svg viewBox="0 0 24 24"><path d="M7 18h10.5a4 4 0 0 0 .6-8 6 6 0 0 0-11.4 1.6A3.3 3.3 0 0 0 7 18z" stroke-linejoin="round"/></svg>Läuft bei Amazon. Kein Rechner nötig.</span>
-      <svg class="figur" viewBox="0 0 90 74" fill="none" stroke="#111214" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="16" r="11"/><path d="M26 16h.4M34 16h.4M27 21.5c2 1.6 4.5 1.6 6.5 0"/><path d="M18.5 12.5a11.5 11 0 0 1 23 0M16 12.5h28"/><path d="M30 27v26M30 34l-12 10M30 34l14-6"/><rect x="44" y="17" width="9" height="15" rx="2" transform="rotate(-12 48 24)"/><path d="M18 44l-8-9"/><path d="M6 38.5l7.5-7" stroke-width="4"/><path d="M30 53l-10 18M30 53l10 18"/><path d="M6 71h60" stroke-width="1.3"/><path d="M58 12l9-5-3 9z" stroke-width="1.5"/><text x="70" y="66" font-family="Caveat,cursive" font-size="15" fill="#3A3B40" stroke="none">ab!</text></svg>
-      <p class="hand">Abends noch Büro? Jetzt nicht mehr.</p>
-      <p>Gernbei vergisst nichts, was Sie hineingeben, auch nicht, was Sie dem Kunden zugesagt haben. Daraus entsteht die Antwort. Sie schicken sie ab.</p>
-      <small class="zeile">Preis auf Anfrage · dazu Ihr Claude-Team bei Anthropic</small>
-      <span class="fuss-t">Zu <span class="gb">Gern<b>bei</b></span> fürs Handwerk <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    </a>
-
-    <a class="tuer plan" href="firmengedaechtnis.html">
-      <small>Für Firmen ab vier Mitarbeitern</small>
-      <span class="name"><span class="gb">Gern<b>bei</b></span> Firmengedächtnis</span>
-      <span class="wolke"><svg viewBox="0 0 24 24"><path d="M7 18h10.5a4 4 0 0 0 .6-8 6 6 0 0 0-11.4 1.6A3.3 3.3 0 0 0 7 18z" stroke-linejoin="round"/></svg>Läuft bei Amazon. Kein Rechner nötig.</span>
-      <svg class="figur team" viewBox="0 0 130 74" fill="none" stroke="#111214" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10a3.5 3.5 0 1 1 4.8 3.2c-.9.4-1.3 1.1-1.3 2v1.2M5.5 20h.4"/><g transform="translate(-7.6 19.9) scale(.72)" stroke-width="2.8"><circle cx="30" cy="16" r="11"/><path d="M26 15h.4M34 15h.4M27 21c2 1.6 4.5 1.6 6.5 0M30 27v26M30 53l-10 18M30 53l10 18"/><path d="M30 34l-11 10M30 34l11 10"/></g><g transform="translate(15.4 19.9) scale(.72)" stroke-width="2.8"><circle cx="30" cy="16" r="11"/><path d="M26 15h.4M34 15h.4M27 21c2 1.6 4.5 1.6 6.5 0M30 27v26M30 53l-10 18M30 53l10 18"/><path d="M30 34l-11 10M30 34l11 10"/></g><g transform="translate(38.4 19.9) scale(.72)" stroke-width="2.8"><circle cx="30" cy="16" r="11"/><path d="M26 15h.4M34 15h.4M27 21c2 1.6 4.5 1.6 6.5 0M30 27v26M30 53l-10 18M30 53l10 18"/><path d="M30 34l-11 10M30 34l12-12"/></g><g transform="translate(61.4 19.9) scale(.72)" stroke-width="2.8"><circle cx="30" cy="16" r="11"/><path d="M26 15h.4M34 15h.4M27 21c2 1.6 4.5 1.6 6.5 0M30 27v26M30 53l-10 18M30 53l10 18"/><path d="M30 34l-11 10M30 34l17-5"/></g><path d="M100 28h10l4 4v18H100z"/><path d="M110 28v4h4M103 36h8M103 40h8M103 44h5"/><path d="M100 55h14M100 52v6M114 52v6" stroke="#D23A26" stroke-width="1.3"/><path d="M2 71h98" stroke-width="1.3"/><text x="106" y="70" font-family="Caveat,cursive" font-size="15" fill="#3A3B40" stroke="none">da!</text></svg>
-      <p class="hand">Wer wusste das noch? Jetzt alle.</p>
-      <p>Frage eintippen, Antwort mit Kontext, Entscheidungsgrund und Verweis auf die Originaldatei. Ihr ganzes Team fragt mit.</p>
-      <small class="zeile">Preis auf Anfrage · dazu das Claude-Team und die Einrichtung je Arbeitsplatz</small>
-      <span class="fuss-t">Zum Firmengedächtnis <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    </a>
-
-    <a class="tuer chatbot" href="chatbot.html">
-      <small>Für Ihre Website</small>
-      <span class="name">Chat-Bot Webseiten</span>
-      <svg class="figur blase" viewBox="0 0 60 44" fill="none" stroke="#2E6B73" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h40a5 5 0 0 1 5 5v18a5 5 0 0 1-5 5H24l-10 8v-8H6a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5z"/><path d="M14 15h24M14 22h16"/></svg>
-      <p class="hand">Er antwortet nur, was auf Ihrer Seite steht.</p>
-      <p>Ihre Besucher fragen, er antwortet aus Ihren Inhalten, mit Quelle. Was er nicht weiß, landet bei Ihnen.</p>
-      <small class="zeile">Preis auf Anfrage</small>
-      <span class="fuss-t">Zum Chatbot <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    </a>
-
+<section class="produkte" id="produkte"><div class="wrap">
+  <div class="leiste-gruppen">
+    <div class="leiste-gruppe buero">
+      <p class="gruppe-titel">Für Ihr Büro</p>
+      <div class="kacheln">
+        <a class="kachel handwerk" href="#p-handwerk">
+          <svg class="zeichen" viewBox="0 0 32 32"><path d="M5 27l13-13"/><path d="M14 8l5-5 8 8-5 5z"/></svg>
+          <span class="name">Fürs Handwerk</span>
+          <span class="tut">Aus Foto, Stichwort oder Sprachnachricht wird der Entwurf.</span>
+          <small>Handwerksbetriebe</small>
+        </a>
+        <a class="kachel" href="#p-dienst">
+          <svg class="zeichen" viewBox="0 0 32 32"><path d="M8 4h11l5 5v19H8z"/><path d="M19 4v5h5M12 15h8M12 19h8M12 23h5"/></svg>
+          <span class="name">Für Dienstleister</span>
+          <span class="tut">Aus Stichworten werden Angebot, Protokoll und Antwort.</span>
+          <small>bis zwei Mitarbeiter</small>
+        </a>
+        <a class="kachel" href="#p-gedaechtnis">
+          <svg class="zeichen" viewBox="0 0 32 32"><path d="M4 9h9l2 3h13v14H4z"/><path d="M4 9V6h8l2 3"/><path d="M10 18h12M10 22h8"/></svg>
+          <span class="name">Firmengedächtnis</span>
+          <span class="tut">Ihr ganzes Team fragt, mit Verweis auf die Originaldatei.</span>
+          <small>ab vier Mitarbeitern</small>
+        </a>
+      </div>
+    </div>
+    <div class="leiste-gruppe kunden">
+      <p class="gruppe-titel">Für Ihre Kunden</p>
+      <div class="kacheln">
+        <a class="kachel" href="#p-chatbot">
+          <svg class="zeichen" viewBox="0 0 32 32"><path d="M6 6h20a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3z"/><path d="M10 12h12M10 16h8"/></svg>
+          <span class="name">Chat-Bot Webseiten</span>
+          <span class="tut">Beantwortet Fragen auf Ihrer Website, mit Quelle.</span>
+          <small>jede Website</small>
+        </a>
+        <a class="kachel" href="#p-telefon">
+          <svg class="zeichen" viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/></svg>
+          <span class="name">KI-Telefonassistent</span>
+          <span class="tut">Nimmt ab, wenn Sie nicht können.</span>
+          <small>im Probebetrieb</small>
+        </a>
+      </div>
+      <p class="gruppe-dazu">Einzeln oder zu jedem Büro-Produkt dazu.</p>
+    </div>
   </div>
-  <p class="tuer-fussnote">Dreimal dieselbe Maschine, zugeschnitten auf Ihren Betrieb. Abgerechnet je Zugang, dazu Ihr eigenes Claude-Team bei Anthropic zum festen Betrag.</p>
-</div></div>
+</div></section>
+
+<section class="produkt" id="p-handwerk"><div class="wrap">
+  <div class="produkt-text">
+    <p class="ueber">Fürs Handwerk</p>
+    <h2>Abends noch Büro? Jetzt nicht mehr.</h2>
+    <p>Gernbei vergisst nichts, was Sie hineingeben, auch nicht, was Sie dem Kunden zugesagt haben. Daraus entsteht die Antwort. Sie schicken sie ab.</p>
+    <p class="zeile">Für Handwerksbetriebe · Preis auf Anfrage</p>
+    <a class="knopf hell" href="handwerk.html">Zu <span class="gb">Gern<b>bei</b></span> fürs Handwerk <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="produkt-bild"><img src="bilder/handwerk-systembild.webp" alt="Gernbei fürs Handwerk: Zettel fotografieren, Gernbei merkt sich alles, Sie prüfen und schicken ab" width="1600" height="1000" loading="lazy"></div>
+</div></section>
+
+<section class="produkt" id="p-dienst"><div class="wrap">
+  <div class="produkt-text">
+    <p class="ueber">Für Dienstleister</p>
+    <h2>Ihre Kunden haben Sie. Den Papierkram nicht mehr.</h2>
+    <p>Gernbei vergisst nichts, was Sie hineingeben, und findet es wieder. Daraus entstehen Angebote, Protokolle und Antworten. Abschicken tun Sie.</p>
+    <p class="zeile">Für Selbständige bis zwei Mitarbeiter · Preis auf Anfrage</p>
+    <a class="knopf hell" href="dienstleister.html">Zu <span class="gb">Gern<b>bei</b></span> für Dienstleister <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="produkt-bild"><img src="bilder/dienstleister-systembild.webp" alt="Gernbei für Dienstleister: Stichworte geben, Gernbei merkt sich alles, Sie prüfen und schicken ab" width="1600" height="1000" loading="lazy"></div>
+</div></section>
+
+<section class="produkt" id="p-gedaechtnis"><div class="wrap">
+  <div class="produkt-text">
+    <p class="ueber">Firmengedächtnis</p>
+    <h2>Wer wusste das noch? Jetzt alle.</h2>
+    <p>Frage eintippen, Antwort mit Kontext, Entscheidungsgrund und Verweis auf die Originaldatei. Ihr ganzes Team fragt mit.</p>
+    <p class="zeile">Für Firmen ab vier Mitarbeitern · Preis auf Anfrage</p>
+    <a class="knopf hell" href="firmengedaechtnis.html">Zum Firmengedächtnis <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="produkt-bild"><img src="bilder/firmengedaechtnis-systembild.webp" alt="Gernbei Firmengedächtnis: das ganze Team fragt, Antwort mit Verweis auf die Originaldatei" width="1600" height="1000" loading="lazy"></div>
+</div></section>
+
+<section class="produkt" id="p-chatbot"><div class="wrap">
+  <div class="produkt-text">
+    <p class="ueber">Für Ihre Website</p>
+    <h2>Er antwortet nur, was auf Ihrer Seite steht.</h2>
+    <p>Ihre Besucher fragen, er antwortet aus Ihren Inhalten, mit Quelle. Was er nicht weiß, landet bei Ihnen.</p>
+    <p class="zeile">Einzeln oder dazu · Preis auf Anfrage</p>
+    <a class="knopf hell" href="chatbot.html">Zu Chat-Bot Webseiten <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="produkt-bild"><img src="bilder/chatbot-webseiten-systembild.webp" alt="Chat-Bot Webseiten: Besucher fragen, die Antwort kommt aus Ihren Inhalten mit Quelle" width="1600" height="1000" loading="lazy"></div>
+</div></section>
+
+<section class="produkt" id="p-telefon"><div class="wrap">
+  <div class="produkt-text">
+    <p class="ueber">Für Ihr Telefon</p>
+    <h2>Er nimmt ab, wenn Sie nicht können.</h2>
+    <p>Er beantwortet, was auf Ihrer Website steht, und nimmt Rückrufwünsche auf. Die Nummer liest er zur Kontrolle vor.</p>
+    <p class="zeile">Im Probebetrieb · Preis auf Anfrage</p>
+    <a class="knopf hell" href="telefon.html">Zum KI-Telefonassistenten <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="produkt-bild">
+    <div class="anruf">
+      <p class="anruf-kopf">Anruf bei Meier Heizung und Sanitär</p>
+      <p class="sie"><b>Anrufer</b>Rufen Sie mich bitte zurück, die Heizung tropft. Aber erst ab 16 Uhr.</p>
+      <p class="er"><b>Assistent</b>Ich habe die Nummer null drei null, zwei drei eins zwei fünf, vier fünf sechs. Soll Herr Meier Sie dort zurückrufen?</p>
+      <p class="sie"><b>Anrufer</b>Ja, passt.</p>
+      <p class="er"><b>Assistent</b>Ist notiert, Herr Meier ruft Sie zurück.</p>
+      <p class="anruf-fuss">Probetext. Der Ablauf ist wie bei den Testanrufen vom 07.11.2026, das Gespräch wird nicht mitgeschrieben.</p>
+    </div>
+  </div>
+</div></section>
 
 <section id="so"><div class="wrap">
   <div class="kopf">
     <p class="ueber">So sieht es aus</p>
     <h2>Eine Arbeitsfläche im Browser. Sie schreiben, <span class="gb">Gern<b>bei</b></span> arbeitet.</h2>
-    <p class="lead">Kein Programm zum Installieren, kein Rechner zu kaufen. Sie öffnen Ihre Adresse am Rechner oder am Handy, schreiben in Stichworten, was Sie brauchen, und bekommen den fertigen Entwurf. Was hinausgeht, lesen Sie vorher und schicken es selbst ab.</p>
+    <p class="lead">Am Rechner oder am Handy, ohne Programm und ohne Gerätekauf. Was hinausgeht, lesen Sie vorher und schicken es selbst ab.</p>
   </div>
   <div class="bildpaar">
     <div>
@@ -142,7 +196,7 @@
       <p class="ueber">Über mich</p>
       <h2>Kurt König</h2>
       <p class="lead">Berater für KI, Veränderung und Zusammenarbeit aus Würzburg. Diplom-Informatiker, seit 35 Jahren in der IT, knapp zwanzig Jahre davon im Konzern, wo ich Teams durch Veränderung begleitet habe.</p>
-      <p>KI ist für mich die Fortsetzung dieser Arbeit: ein Werkzeug, das Entscheidungen verbessert, wenn man es richtig einführt. Keine Technikshow. Sichtbare Ergebnisse.</p>
+      <p>KI ist für mich die Fortsetzung dieser Arbeit: keine Technikshow, sichtbare Ergebnisse.</p>
       <details class="mehr"><summary>Die Vita im Einzelnen</summary><div class="mehr-inhalt"><p>Mehr als zwölf Jahre Projekt- und Engagement Manager, sieben Jahre Agility Master. Teams durch die agile Transformation begleiten, Konflikte moderieren, Führungskräfte coachen. Zertifizierter Projektmanager nach GPM-Standard, Ausbildung in lösungsfokussiertem Coaching.</p></div></details>
       <p class="zitat">„Nicht alles selbst wissen. Aber die richtigen <span>Fragen</span> stellen."</p>
     </div>
@@ -153,7 +207,7 @@
   <div class="raster">
     <div>
       <h2>Erst einmal einen Kaffee?</h2>
-      <p>Kein Pitch. Ein Kaffee und ein offenes Gespräch darüber, wo in Ihrem Betrieb Wissen steckt, das nicht verloren gehen sollte, und welcher der drei Zuschnitte Ihrer ist. Bringen Sie eine Kundenmail, einen Regiezettel oder Projektnotizen mit, dann sehen Sie, was Gernbei daraus macht.</p>
+      <p>Kein Pitch. Ein Kaffee und ein offenes Gespräch darüber, wo in Ihrem Betrieb Wissen steckt, das nicht verloren gehen sollte, und welches Produkt zu Ihrem Betrieb passt. Bringen Sie eine Kundenmail, einen Regiezettel oder Projektnotizen mit, dann sehen Sie, was Gernbei daraus macht.</p>
       <p>Wenn danach klar ist, dass es Sinn macht, richte ich Ihnen den ersten Arbeitsplatz ein. Wenn nicht, hatten Sie einen guten Kaffee.</p>
       <p class="bafa"><b>●</b> BAFA-gelisteter Berater · 50% Förderung für KMU, 1.750 EUR je Beratung</p>
     </div>
