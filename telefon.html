@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Telefonassistent | Gernbei</title>
+<meta name="description" content="Der KI-Telefonassistent nimmt ab, wenn Sie nicht können. Er sagt zuerst, dass er eine KI ist, beantwortet Fragen aus Ihren Inhalten und nimmt Rückrufwünsche auf. Im Probebetrieb, für Ihren Betrieb auf Anfrage.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="haus.css">
+<style>
+/* Paar Chat-Bot Webseiten und KI-Telefonassistent, Entwurf 07.11.2026 */
+.paar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.paar a{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:6px 12px;border:1px solid var(--tinte);color:var(--tinte);text-decoration:none;background:#fff}
+.paar a[aria-current]{background:var(--tinte);color:#fff}
+.anruf{counter-reset:schritt;list-style:none;padding:0;margin:0 auto;max-width:56rem;border-top:1px solid var(--tinte)}
+.anruf li{counter-increment:schritt;display:grid;grid-template-columns:3rem 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--haar);color:var(--tinte-2)}
+.anruf li::before{content:counter(schritt);font-family:var(--display);font-weight:600;font-size:18px;color:var(--rot)}
+.anruf small{display:block;font-family:var(--mono);font-size:11px;color:var(--grau-2);margin-top:4px}
+</style>
+</head>
+<body class="tusche">
+
+
+<nav class="nav"><div class="wrap">
+  <a class="logo" href="index.html"><span class="gb">Gern<b>bei</b></span></a>
+  <ul>
+    <li><a href="dienstleister.html">Für Dienstleister</a></li>
+    <li><a href="handwerk.html">Fürs Handwerk</a></li>
+    <li><a href="firmengedaechtnis.html">Firmengedächtnis</a></li>
+    <li><a href="chatbot.html" class="aktuell">Für Ihre Kunden</a></li>
+    <li><a href="index.html#preis">Preis</a></li>
+    <li><a href="index.html#ueber">Über mich</a></li>
+    <li><a href="warum.html">Warum</a></li>
+    <li><a href="fragen.html">Fragen</a></li>
+  </ul>
+  <a class="knopf" href="index.html#kontakt">Gespräch vereinbaren</a>
+</div></nav>
+
+<header class="hero mit-szene" id="top"><div class="wrap"><div class="raster">
+  <div>
+    <p class="ueber">Für Ihre Kunden · am Telefon</p>
+    <nav class="paar" aria-label="Für Ihre Kunden"><a href="chatbot.html">Chat-Bot Webseiten</a><a href="telefon.html" aria-current="page">KI-Telefonassistent</a></nav>
+    <h1>KI-Telefonassistent.</h1>
+    <p class="hand">Er nimmt ab, wenn Sie nicht können.</p>
+    <p class="lead dunkler" style="font-size:clamp(19px,2.1vw,23px);line-height:1.4">Er sagt zuerst, dass er eine KI ist, beantwortet Fragen aus den Inhalten Ihrer Website und nimmt Rückrufwünsche auf. Die Nummer liest er zur Kontrolle Ziffer für Ziffer vor. Den Rückrufwunsch sehen Sie mit Anliegen, Nummer und Wunschzeit.</p>
+    <div class="knoepfe"><a class="knopf" href="index.html#kontakt">Preis anfragen</a><a class="knopf hell" href="#anruf">So läuft ein Anruf</a></div>
+    <p class="szene-sorglos"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>Im Probebetrieb. Für Ihren Betrieb auf Anfrage.</p>
+  </div>
+  <div>
+    <div class="szene" id="szene">
+      <div class="handy szene-handy">
+        <p class="szene-kopf">Anruf bei <span class="gb">Gern<b>bei</b></span></p>
+        <div class="szene-flaeche" aria-live="polite">
+          <p class="szene-art"><svg viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/></svg><span>Anrufer, am Telefon</span></p>
+          <div class="szene-ich"><span class="szene-zettel" hidden></span><span class="szene-text">Rufen Sie mich bitte zurück. Aber erst ab 16 Uhr.</span></div>
+          <p class="szene-denkt" hidden><i></i><i></i><i></i></p>
+          <ul class="szene-haken">
+            <li>Nummer Ziffer für Ziffer vorgelesen, vom Anrufer bestätigt</li>
+            <li>Erst nach seinem Ja als bestätigt gespeichert</li>
+            <li class="fund">Wunschzeit festgehalten: ab 16 Uhr</li>
+          </ul>
+        </div>
+      </div>
+      <i class="szene-fuss" aria-hidden="true"></i>
+      <p class="szene-geraete"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>Ihr Kunde ruft an,<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg>Sie sehen den Rückrufwunsch.</p>
+      <p class="szene-wahl-kopf">Vier Testanrufe beim KI-Telefonassistenten. Tippen Sie an.</p>
+      <div class="szene-wahl" role="group" aria-label="Anruf wählen">
+        <button type="button" aria-pressed="true">Rückruf mit Wunschzeit</button>
+        <button type="button" aria-pressed="false">Angebot gewünscht</button>
+        <button type="button" aria-pressed="false">Vorher aufgelegt</button>
+        <button type="button" aria-pressed="false">Was beim Betrieb ankommt</button>
+      </div>
+      <p class="bildunter">Testanruf vom 07.11.2026, so gespeichert. Der Satz des Anrufers steht wie auf seinem Testzettel, mitgeschrieben wird nicht.</p>
+    </div>
+  </div>
+</div></div></header>
+
+<section class="nachweise-band"><div class="wrap">
+  <div class="vorteile nachweise"><span>sagt zuerst, dass er eine KI ist</span><span>liest die Nummer zur Kontrolle vor</span><span>verspricht keinen Termin</span><span>persönlich eingerichtet, aus Würzburg</span></div>
+</div></section>
+
+<section class="grau-bg" id="was"><div class="wrap">
+  <div class="kopf">
+    <p class="ueber">Was er tut</p>
+    <h2>Abnehmen, antworten, notieren.</h2>
+  </div>
+  <div class="tafel" style="margin:0 auto">
+    <div><b>Nur Ihre Inhalte</b><p>Er antwortet aus Ihrer Website und dem, was Sie zusätzlich freigeben. Weiß er etwas nicht, sagt er das und bietet den Rückruf an</p></div>
+    <div><b>Die Nummer zum Mithören</b><p>Er liest die Rückrufnummer vor und fragt, ob sie stimmt. Eine Korrektur liest er noch einmal ganz vor</p></div>
+    <div><b><i>Ist notiert</i> heißt notiert</b><p>Erst wenn der Rückrufwunsch gespeichert ist, sagt er es. Legt der Anrufer vorher auf, bleibt der Wunsch als unvollständig stehen</p></div>
+    <div><b>Keine Zusagen</b><p>Er verspricht keinen Termin, kein Angebot und keine Uhrzeit für den Rückruf</p></div>
+  </div>
+</div></section>
+
+<section id="anruf"><div class="wrap">
+  <div class="kopf">
+    <p class="ueber">So läuft ein Anruf</p>
+    <h2>Vier Schritte, für Ihren Anrufer.</h2>
+  </div>
+  <ol class="anruf">
+    <li><div>Er nimmt ab und sagt, dass er eine KI ist.</div></li>
+    <li><div>Er beantwortet die Frage kurz, aus Ihren Inhalten.</div></li>
+    <li><div>Will der Anrufer einen Rückruf: Anliegen, Nummer, auf Wunsch Name und Wunschzeit. Er fasst zusammen und speichert nach dem Ja.</div></li>
+    <li><div>Sie rufen zurück.<small>Die Meldung aufs Handy ist in Fertigstellung.</small></div></li>
+  </ol>
+</div></section>
+
+<section class="grau-bg" id="start"><div class="wrap">
+  <div class="kopf">
+    <p class="ueber">So kommen Sie dazu</p>
+    <h2>Drei Schritte bis zum ersten Anruf.</h2>
+  </div>
+  <div class="raster-3">
+    <div class="nb"><b>1 · Sie</b><h3>Zeiten nennen</h3><p>Sie sagen, wann der Assistent abnehmen soll, etwa nach Feierabend oder wenn besetzt ist.</p></div>
+    <div class="nb"><b>2 · ich</b><h3>Einrichten</h3><p>Ich richte ihn ein, mit Ihren Inhalten und Ihrer Ansage.</p></div>
+    <div class="nb"><b>3 · Sie mit Ihrem Anbieter</b><h3>Weiterleiten</h3><p>Ihr Telefonanbieter oder Ihre Anlage leitet zu diesen Zeiten weiter. Was einzustellen ist, sage ich Ihnen.</p></div>
+  </div>
+  <div class="knoepfe"><a class="knopf" href="index.html#kontakt">Preis anfragen</a></div>
+</div></section>
+
+<section id="offen" class="kurz"><div class="wrap">
+  <div class="grenze">
+    <small>Offen gesagt</small>
+    <p>Er läuft heute im Probebetrieb bei uns selbst. Weiterverbinden an Ihr Handy und die Meldung aufs Handy sind in Fertigstellung. Die Sprache verarbeiten amerikanische Anbieter. Gespeichert wird der Rückrufwunsch, nicht das Gespräch.</p>
+  </div>
+  <p class="tafel-zeile" style="max-width:52rem">Zusammen mit <a href="chatbot.html">Chat-Bot Webseiten</a> antwortet er aus denselben Inhalten, geschrieben und gesprochen.</p>
+</div></section>
+
+<footer class="fuss"><div class="wrap">
+  <div class="plankopf">
+    <div><small>Planverfasser</small>Kurt König · <span class="gb">Gern<b>bei</b></span></div>
+    <div><small>Ort</small>Wittelsbacher Str. 2, 97074 Würzburg</div>
+    <div><small>Stand</small>07.11.2026</div>
+    <div><small>Blätter</small><a href="fragen.html">Fragen</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></div>
+  </div>
+  <p class="credit">© 2026 Kurt König. Gebaut und gepflegt mit derselben KI, die in der Arbeitsfläche arbeitet. Richtung und Freigabe: Kurt König.</p>
+</div></footer>
+
+<!-- Szenen: Testanrufe T5, T7, T6 vom 07.11.2026, 13:17 bis 13:35 (Bauvorlage-Rueckrufauftrag). Ergebnis so, wie es in den
+     Rückrufdateien steht, gekürzt, nichts hinzugefügt; Nummern weggelassen. Der Satz des Anrufers ist der Wortlaut
+     des Testzettels, weil der Assistent kein Gespräch mitschreibt (Szenen-Echtlauf-2026-11-07). -->
+<script type="application/json" id="szene-daten">
+[
+ {
+  "echt": true,
+  "unter": "Testanruf vom 07.11.2026, so gespeichert. Der Satz des Anrufers steht wie auf seinem Testzettel, mitgeschrieben wird nicht.",
+  "geraet": "handy",
+  "icon": "hoerer",
+  "art": "Anrufer, am Telefon",
+  "zettel": false,
+  "text": "Rufen Sie mich bitte zurück. Aber erst ab 16 Uhr.",
+  "haken": [
+   "Nummer Ziffer für Ziffer vorgelesen, vom Anrufer bestätigt",
+   "Erst nach seinem Ja als bestätigt gespeichert",
+   "Wunschzeit festgehalten: ab 16 Uhr"
+  ]
+ },
+ {
+  "echt": true,
+  "unter": "Testanruf vom 07.11.2026, so gespeichert. Der Satz des Anrufers steht wie auf seinem Testzettel, mitgeschrieben wird nicht.",
+  "geraet": "handy",
+  "icon": "hoerer",
+  "art": "Anrufer, am Telefon",
+  "zettel": false,
+  "text": "Ich möchte ein Angebot.",
+  "haken": [
+   "Anliegen: Angebot angefragt, Rückruf gewünscht",
+   "Nummer bestätigt, nach Name und Wunschzeit gefragt",
+   "Steht beim Betrieb als offener Rückruf"
+  ]
+ },
+ {
+  "echt": true,
+  "unter": "Testanruf vom 07.11.2026, so gespeichert. Der Satz des Anrufers steht wie auf seinem Testzettel, mitgeschrieben wird nicht.",
+  "geraet": "handy",
+  "icon": "hoerer",
+  "art": "Anrufer, legt vor dem Ja auf",
+  "zettel": false,
+  "text": "Rufen Sie mich zurück, ich möchte ein Angebot …",
+  "haken": [
+   "Anrufer legt vor der Bestätigung auf",
+   "Anliegen und Nummer trotzdem gespeichert",
+   "Steht als unvollständig da, nicht als erledigt"
+  ]
+ },
+ {
+  "echt": true,
+  "unter": "Testanrufe vom 07.11.2026, so gemeldet. Nummern hier weggelassen.",
+  "geraet": "rechner",
+  "icon": "tasten",
+  "art": "beim Betrieb, am Rechner",
+  "zettel": false,
+  "text": "Rückrufe offen: 3",
+  "haken": [
+   "13:28, bestätigt: Angebot angefragt, Rückruf gewünscht",
+   "13:25, bestätigt: Wunsch ab 16 Uhr",
+   "13:26, unvollständig: Er möchte ein Angebot haben"
+  ]
+ }
+]
+</script>
+<script src="szene.js" defer></script>
+<script src="fenster.js" data-dienst="https://m2.ki-kurt.de" data-name="Fragen an Gernbei" data-untertitel="Digitaler Assistent, eine KI" data-telefon="0931 45321005" data-mail="hallo@gernbei.de" data-antwortzeit="Ein Mensch antwortet am nächsten Werktag." data-themen="Was kann Gernbei für mich tun?|Welches Angebot passt zu mir?|Wo liegen meine Daten?|Wie fange ich an?" defer></script>
+</body>
+</html>

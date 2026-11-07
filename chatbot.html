@@ -4,11 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chat-Bot Webseiten | Gernbei</title>
-<meta name="description" content="Ein Chatbot für Ihre Website, der nur aus Ihren Inhalten antwortet, jede Antwort mit Quelle. Was er nicht weiß, landet bei Ihnen. Persönlich eingerichtet von Kurt König aus Würzburg.">
+<meta name="description" content="Ein Chatbot für Ihre Website, der nur aus Ihren Inhalten antwortet, jede Antwort mit Quelle. Was er nicht weiß, sagt er und nennt Ihren Kontakt. Persönlich eingerichtet von Kurt König aus Würzburg.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="haus.css">
+<style>
+/* Paar Chat-Bot Webseiten und KI-Telefonassistent, Entwurf 07.11.2026 */
+.paar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.paar a{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:6px 12px;border:1px solid var(--tinte);color:var(--tinte);text-decoration:none;background:#fff}
+.paar a[aria-current]{background:var(--tinte);color:#fff}
+</style>
 </head>
-<body>
+<body class="tusche">
 
 
 <nav class="nav"><div class="wrap">
@@ -17,7 +23,7 @@
     <li><a href="dienstleister.html">Für Dienstleister</a></li>
     <li><a href="handwerk.html">Fürs Handwerk</a></li>
     <li><a href="firmengedaechtnis.html">Firmengedächtnis</a></li>
-    <li><a href="chatbot.html" class="aktuell">Chatbot</a></li>
+    <li><a href="chatbot.html" class="aktuell">Für Ihre Kunden</a></li>
     <li><a href="index.html#preis">Preis</a></li>
     <li><a href="index.html#ueber">Über mich</a></li>
     <li><a href="warum.html">Warum</a></li>
@@ -26,25 +32,86 @@
   <a class="knopf" href="index.html#kontakt">Gespräch vereinbaren</a>
 </div></nav>
 
-<header class="hero mitte" id="top">
-  <div class="wrap">
-    <p class="ueber">Für Ihre Website</p>
+<header class="hero mit-szene" id="top"><div class="wrap"><div class="raster">
+  <div>
+    <p class="ueber">Für Ihre Kunden · auf Ihrer Website</p>
+    <nav class="paar" aria-label="Für Ihre Kunden"><a href="chatbot.html" aria-current="page">Chat-Bot Webseiten</a><a href="telefon.html">KI-Telefonassistent</a></nav>
     <h1>Chat-Bot Webseiten.</h1>
-    <p class="lead dunkler">Er antwortet nur, was auf Ihrer Seite steht. Ihre Besucher fragen in ganzen Sätzen, der Chatbot antwortet aus Ihrer Website und aus dem, was Sie zusätzlich freigeben. Jede Antwort nennt die Seite, von der sie stammt. Weiß er es nicht, sagt er das und nennt Ihren Kontakt.</p>
+    <p class="hand">Er antwortet nur, was auf Ihrer Seite steht.</p>
+    <p class="lead dunkler" style="font-size:clamp(19px,2.1vw,23px);line-height:1.4">Ihre Besucher fragen in ganzen Sätzen, am Handy oder am Rechner. Der Chatbot antwortet aus Ihrer Website und aus dem, was Sie zusätzlich freigeben, und nennt die Seite, von der die Antwort stammt. Weiß er es nicht, sagt er das und nennt Ihren Kontakt.</p>
+    <div class="knoepfe"><a class="knopf" href="index.html#kontakt">Preis anfragen</a><a class="knopf hell" href="#ausprobieren">Selbst ausprobieren</a></div>
+    <p class="szene-sorglos"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/></svg>Eine Zeile auf Ihrer Website. Sie installieren nichts.</p>
   </div>
-</header>
+  <div>
+    <div class="szene" id="szene">
+      <div class="handy szene-handy">
+        <p class="szene-kopf"><span class="gb">Gern<b>bei</b></span>.de · Fragen an <span class="gb">Gern<b>bei</b></span></p>
+        <div class="szene-flaeche" aria-live="polite">
+          <p class="szene-art"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/></svg><span>Besucherin, am Handy</span></p>
+          <div class="szene-ich"><span class="szene-zettel" hidden></span><span class="szene-text">Muss ich dafür etwas installieren?</span></div>
+          <p class="szene-denkt" hidden><i></i><i></i><i></i></p>
+          <ul class="szene-haken">
+            <li>Nein, läuft im Browser, am Rechner oder am Handy</li>
+            <li>Quelle: Häufige Fragen und Startseite</li>
+            <li class="fund">Wörtlich aus den Häufigen Fragen, nicht ausgedacht</li>
+          </ul>
+        </div>
+      </div>
+      <i class="szene-fuss" aria-hidden="true"></i>
+      <p class="szene-geraete"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>Ihre Besucher fragen am Handy<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg>und am Rechner. Dieselbe Antwort.</p>
+      <p class="szene-wahl-kopf">Drei echte Fragen an den Chatbot auf gernbei.de. Tippen Sie an.</p>
+      <div class="szene-wahl" role="group" aria-label="Frage wählen">
+        <button type="button" aria-pressed="true">Antwort mit Quelle</button>
+        <button type="button" aria-pressed="false">Frage nach dem Preis</button>
+        <button type="button" aria-pressed="false">Frage ohne Antwort</button>
+      </div>
+      <p class="bildunter">Echte Antwort des Chatbots auf gernbei.de, 07.11.2026.</p>
+    </div>
+  </div>
+</div></div></header>
 
-<section id="was"><div class="wrap">
-  <div class="schirm" style="max-width:56rem;margin:0 auto 48px"><a href="bilder/chatbot-webseiten-systembild.webp" title="Bild groß ansehen"><img src="bilder/chatbot-webseiten-systembild.webp" alt="Chat-Bot Webseiten im Überblick: Besucher fragen, der Chatbot sucht nur in Ihren Inhalten, Antwort mit Quelle" width="1600" height="1000"></a></div>
+<section class="nachweise-band"><div class="wrap">
+  <div class="vorteile nachweise"><span>nur Ihre Inhalte</span><span>jede Antwort mit Quelle</span><span>mit fester Kostengrenze</span><span>persönlich eingerichtet, aus Würzburg</span></div>
+</div></section>
+
+<section class="grau-bg" id="was"><div class="wrap">
+  <div class="kopf">
+    <p class="ueber">Was er tut</p>
+    <h2>Fragen beantworten, die sonst Sie beantworten.</h2>
+  </div>
   <div class="tafel" style="margin:0 auto">
     <div><b>Nur Ihre Inhalte</b><p>Keine Antwort aus dem allgemeinen Wissen der KI, keine erfundene Öffnungszeit</p></div>
     <div><b>Mit Quelle</b><p>Unter jeder Antwort der Link zur Seite, auf der es steht</p></div>
-    <div><b>Was fehlt, landet bei Ihnen</b><p>Fragen ohne Antwort und Anliegen kommen in Ihren Eingang. So sehen Sie, was auf Ihrer Seite fehlt</p></div>
+    <div><b>Was fehlt, landet bei Ihnen</b><p>Weiß er etwas nicht, nennt er Ihre Mail und Ihr Telefon. Auf Wunsch hinterlässt der Besucher ein Anliegen, das für Sie abgelegt wird</p></div>
     <div><b>Mit fester Kostengrenze</b><p>Wer Fragen hineinschießt, stößt an Grenzen, Ihre Rechnung nicht</p></div>
   </div>
   <p class="tafel-zeile" style="margin:16px auto 0;max-width:56rem"><b>Zwei Ausführungen:</b> Standard antwortet aus Ihrer Website und Ihren Freigaben. Professionell, zusammen mit dem Firmengedächtnis, bleibt von selbst aktuell und schlägt Antworten aus Ihrem internen Wissen vor: in Fertigstellung.</p>
-  <p class="tafel-zeile" style="margin:8px auto 0;max-width:56rem">Probieren Sie ihn aus: unten rechts auf dieser Seite. Preis auf Anfrage, persönlich eingerichtet aus Würzburg.</p>
-  <div class="knoepfe" style="justify-content:center;margin-top:32px"><a class="knopf" href="index.html#kontakt">Preis anfragen</a></div>
+  <details class="mehr" style="max-width:56rem;margin:24px auto 0">
+    <summary>Im Überblick als Bild</summary>
+    <div class="mehr-inhalt"><div class="schirm"><a href="bilder/chatbot-webseiten-systembild.webp" title="Bild groß ansehen"><img src="bilder/chatbot-webseiten-systembild.webp" alt="Chat-Bot Webseiten im Überblick: Besucher fragen, der Chatbot sucht nur in Ihren Inhalten, Antwort mit Quelle" width="1600" height="1000" loading="lazy"></a></div></div>
+  </details>
+</div></section>
+
+<section id="start"><div class="wrap">
+  <div class="kopf">
+    <p class="ueber">So kommen Sie dazu</p>
+    <h2>Drei Schritte bis zum Chatbot auf Ihrer Seite.</h2>
+  </div>
+  <div class="raster-3">
+    <div class="nb"><b>1 · Sie</b><h3>Website nennen</h3><p>Sie nennen mir Ihre Website und was zusätzlich hinein darf, etwa Preise oder Antworten auf häufige Fragen.</p></div>
+    <div class="nb"><b>2 · ich</b><h3>Inhalte aufbereiten</h3><p>Ich bereite die Inhalte auf und richte das Fenster ein. Sie probieren ihn aus, bevor ihn jemand sieht.</p></div>
+    <div class="nb"><b>3 · Ihr Website-Betreuer</b><h3>Eine Zeile einsetzen</h3><p>Die Zeile liefere ich. Danach steht der Chatbot unten rechts auf Ihrer Seite.</p></div>
+  </div>
+  <div class="knoepfe"><a class="knopf" href="index.html#kontakt">Preis anfragen</a></div>
+  <p class="start-satz" id="ausprobieren">Probieren Sie ihn aus: unten rechts auf dieser Seite.</p>
+</div></section>
+
+<section id="offen" class="kurz"><div class="wrap">
+  <div class="grenze">
+    <small>Offen gesagt</small>
+    <p>Er antwortet nicht aus dem allgemeinen Wissen der KI, sondern nur aus Ihren Inhalten. Er sagt am Anfang, dass er eine KI ist. Die Verarbeitung läuft über amerikanische Anbieter.</p>
+  </div>
+  <p class="tafel-zeile" style="max-width:52rem">Dieselben Inhalte beantwortet auf Wunsch der <a href="telefon.html">KI-Telefonassistent</a> am Telefon.</p>
 </div></section>
 
 <footer class="fuss"><div class="wrap">
@@ -57,6 +124,54 @@
   <p class="credit">© 2026 Kurt König. Gebaut und gepflegt mit derselben KI, die in der Arbeitsfläche arbeitet. Richtung und Freigabe: Kurt König.</p>
 </div></footer>
 
+<!-- Szenen: echte Antworten des Chatdienstes auf m2 für gernbei.de, gefragt am 07.11.2026 gegen 18 Uhr, gekürzt, nichts hinzugefügt (Szenen-Echtlauf-2026-11-07, Abschnitt Chatbot und Telefon) -->
+<script type="application/json" id="szene-daten">
+[
+ {
+  "echt": true,
+  "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026.",
+  "geraet": "handy",
+  "icon": "blase",
+  "art": "Besucherin, am Handy",
+  "zettel": false,
+  "text": "Muss ich dafür etwas installieren?",
+  "haken": [
+   "Nein, läuft im Browser, am Rechner oder am Handy",
+   "Quelle: Häufige Fragen und Startseite",
+   "Wörtlich aus den Häufigen Fragen, nicht ausgedacht"
+  ]
+ },
+ {
+  "echt": true,
+  "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026.",
+  "geraet": "rechner",
+  "icon": "blase",
+  "art": "Besucher, am Rechner",
+  "zettel": false,
+  "text": "Was kostet Gernbei fürs Handwerk?",
+  "haken": [
+   "Den Preis nennt Kurt König im Gespräch, passend zum Betrieb",
+   "Quelle: Gernbei fürs Handwerk und Häufige Fragen",
+   "Keine Zahl, die nicht auf der Website steht"
+  ]
+ },
+ {
+  "echt": true,
+  "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026.",
+  "geraet": "handy",
+  "icon": "blase",
+  "art": "Besucherin, am Handy",
+  "zettel": false,
+  "text": "Kann ich bei Ihnen am Samstag vorbeikommen?",
+  "haken": [
+   "Dazu keine freigegebene Auskunft, das sagt er offen",
+   "Termin direkt: Mail und Telefon des Betriebs genannt",
+   "Auf Wunsch ein Anliegen hinterlassen, für den Betrieb abgelegt"
+  ]
+ }
+]
+</script>
+<script src="szene.js" defer></script>
 <script src="fenster.js" data-dienst="https://m2.ki-kurt.de" data-name="Fragen an Gernbei" data-untertitel="Digitaler Assistent, eine KI" data-telefon="0931 45321005" data-mail="hallo@gernbei.de" data-antwortzeit="Ein Mensch antwortet am nächsten Werktag." data-themen="Was kann Gernbei für mich tun?|Welches Angebot passt zu mir?|Wo liegen meine Daten?|Wie fange ich an?" defer></script>
 </body>
 </html>
