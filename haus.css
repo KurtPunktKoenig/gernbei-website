@@ -290,6 +290,11 @@ body.werkzeug{background:var(--braun-platte)}
 .tuer .wolke svg{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6}
 .tuer.handwerk .wolke{color:var(--braun-dunkel)}
 .tuer.dienst .fuss-t{border-top:1.5px solid var(--tinte)}
+.tuer.chatbot{grid-column:1/-1;min-height:auto;background:#fff;border:1.5px solid #2E6B73;box-shadow:4px 4px 0 #2E6B73}
+.tuer.chatbot:hover{box-shadow:6px 6px 0 #2E6B73}
+.tuer.chatbot small{color:var(--grau)}
+.tuer.chatbot .hand{font-family:var(--hand);font-size:21px;color:var(--tinte-2);line-height:1.15}
+.tuer.chatbot svg.blase{width:56px}
 .tuer.plan{background:#fff;border:1px solid var(--haar);background-image:linear-gradient(#F2F2F0 1px,transparent 1px),linear-gradient(90deg,#F2F2F0 1px,transparent 1px);background-size:22px 22px}
 .tuer.plan:hover{box-shadow:0 18px 36px -24px rgba(17,18,20,.4)}
 .tuer.plan small{color:var(--grau-2)}
