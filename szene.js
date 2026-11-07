@@ -6,7 +6,9 @@
   var ICON = {
     mikro: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>',
     foto: '<path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
-    tasten: '<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/>'
+    tasten: '<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/>',
+    hoerer: '<path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/>',
+    blase: '<path d="M4 5h16v11H10l-4 3.5V16H4z"/>'
   };
   // Die Szenen stehen je Seite als JSON in #szene-daten, damit beide Zuschnitte dasselbe Programm nutzen.
   // echt: Bitte und Haken aus einem Lauf auf mithand-t1 (Szenen-Echtlauf-2026-11-07), gekuerzt, nichts
@@ -36,7 +38,8 @@
     var s = SZENEN[folge[n]];
     knoepfe.forEach(function (k, i) { k.setAttribute("aria-pressed", i === n ? "true" : "false"); });
     wurzel.classList.toggle("rechner", s.geraet === "rechner");
-    unter.textContent = s.echt ? "Erfundener Betrieb, echte Antwort." : "Entwurf: Probetext, die echte Antwort steht aus.";
+    // unter: eigene Bildunterschrift, wo kein erfundener Betrieb spricht (Chatbot auf gernbei.de, Testanruf)
+    unter.textContent = s.echt ? (s.unter || "Erfundener Betrieb, echte Antwort.") : "Entwurf: Probetext, die echte Antwort steht aus.";
     art.querySelector("svg").innerHTML = ICON[s.icon];
     art.querySelector("span").textContent = s.art;
     zettel.hidden = !s.zettel;
