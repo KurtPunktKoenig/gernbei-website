@@ -33,6 +33,11 @@
       '<path d="M11.5 13.5v.5M20.5 13.5v.5M10.5 19c1.6 2.4 3.4 3.4 5.5 3.4s3.9-1 5.5-3.4"/></svg></span>';
   }
 
+  // Zeichen Gernbei wie in der Signatur, nur auf gernbei.de (Kurt 07.11.2026: Firmenlogo ueberall probieren)
+  function marke(text) {
+    return esc(text).replace(/Gernbei/g, '<span class="gb">Gern<b>bei</b></span>');
+  }
+
   var wirt = document.createElement("div");
   wirt.id = "auskunft-fenster";
   document.body.appendChild(wirt);
@@ -52,6 +57,9 @@
     '.figur{flex:none;width:30px;height:30px;display:grid;place-items:center}.figur svg,.figur img{width:30px;height:30px}.figur svg{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round}' +
     '.gruss{display:flex;gap:10px;align-items:flex-start}.gruss .figur{color:' + cfg.farbe + ';margin-top:4px}' +
     '.antwortzeit{margin-top:3px;color:#6E6E73}' +
+    '.gb{font-weight:700;white-space:nowrap}.gb b,.kopf .gb b{display:inline;font-size:inherit;color:' + cfg.akzent + ';font-weight:inherit}' +
+    '.gb:before,.gb:after{content:"";display:inline-block;width:.3em;height:.7em;vertical-align:-.02em;background:linear-gradient(#A1A1A6,#A1A1A6) center/100% .08em no-repeat}' +
+    '.gb:before{border-left:.08em solid #A1A1A6;margin-right:.18em}.gb:after{border-right:.08em solid #A1A1A6;margin-left:.18em}' +
     '.kopf{display:flex;align-items:center;gap:6px;padding:12px 12px 12px 14px;background:' + cfg.farbe + ';color:#fff}' +
     '.kopf .figur{margin-right:4px}' +
     '.kopf .titel{flex:1;min-width:0}.kopf b{display:block;font-size:16px;font-weight:600}.kopf small{font-size:12.5px;opacity:.8}' +
@@ -82,7 +90,7 @@
     '</style>' +
     '<button class="start" type="button" aria-haspopup="dialog"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Fragen?</button>' +
     '<div class="panel" role="dialog" aria-label="' + esc(cfg.name) + '">' +
-    '  <div class="kopf">' + figurHtml() + '<div class="titel"><b>' + esc(cfg.name) + '</b><small>' + esc(cfg.untertitel) + '</small></div>' +
+    '  <div class="kopf">' + figurHtml() + '<div class="titel"><b>' + marke(cfg.name) + '</b><small>' + esc(cfg.untertitel) + '</small></div>' +
     '    <button type="button" class="brief" title="Anliegen per Nachricht" aria-label="Anliegen per Nachricht"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg></button>' +
     '    <button type="button" class="gross-knopf" title="Vergrößern" aria-label="Vergrößern" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></button>' +
     '    <button type="button" class="neu" title="Neu beginnen" aria-label="Neu beginnen"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg></button>' +
@@ -145,7 +153,7 @@
   // A1, B2, B3: Begrüßung mit KI-Hinweis, Einstiegsthemen
   function begruessen() {
     verlauf.innerHTML = "";
-    var b = blase('<div class="gruss">' + figurHtml() + "<div><p>Guten Tag. Ich bin der digitale Assistent von Gernbei, eine KI. Ich antworte aus den veröffentlichten Seiten dieser Website.</p>" +
+    var b = blase('<div class="gruss">' + figurHtml() + "<div><p>Guten Tag. Ich bin der digitale Assistent von " + marke("Gernbei") + ", eine KI. Ich antworte aus den veröffentlichten Seiten dieser Website.</p>" +
       '<p class="hinweis">Antworten können ungenau sein; verbindlich sind die verlinkten Seiten und Ihr Angebot. Bitte geben Sie hier keine persönlichen Daten ein.</p></div></div>');
     if (cfg.themen.length) {
       var c = document.createElement("div");

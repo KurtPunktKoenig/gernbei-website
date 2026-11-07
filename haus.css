@@ -52,8 +52,8 @@ section{padding:104px 0}
 .logo{display:flex;align-items:center;gap:6px;text-decoration:none;font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.03em;white-space:nowrap}
 .logo svg{width:10px;height:22px;stroke:var(--rot);fill:none;stroke-width:1.5}
 .logo .r{transform:scaleX(-1)}
-.nav ul{display:flex;gap:24px;list-style:none;font-size:14px}
-.nav ul a{text-decoration:none;color:var(--tinte-2)}
+.nav ul{display:flex;gap:20px;list-style:none;font-size:14px}
+.nav ul a{text-decoration:none;color:var(--tinte-2);white-space:nowrap}
 .nav ul a:hover{color:var(--tinte)}
 .nav ul a.aktuell{color:var(--tinte);font-weight:600}
 .nav .knopf{padding:8px 16px;font-size:14px;white-space:nowrap}
@@ -398,3 +398,12 @@ ol.fragen b{font-family:var(--display);font-weight:600;font-size:clamp(17px,2vw,
 .grau-bg .hinweis-k{background:var(--papier)}
 .hinweis-k h3{font-size:16px;margin-bottom:6px}
 .hinweis-k p{font-size:15px;margin:0}
+
+/* Zeichen Gernbei wie in der Signatur: Massstriche grau, Gern in Schriftfarbe, bei in Rot (Kurt 07.11.2026: Firmenlogo ueberall probieren) */
+.gb{font-weight:700;white-space:nowrap;color:inherit;letter-spacing:-.01em}
+.gb b{color:var(--rot);font-weight:inherit}
+.gb::before,.gb::after{content:"";display:inline-block;width:.3em;height:.7em;vertical-align:-.02em;background:linear-gradient(#A1A1A6,#A1A1A6) center/100% .08em no-repeat}
+.gb::before{border-left:.08em solid #A1A1A6;margin-right:.18em}
+.gb::after{border-right:.08em solid #A1A1A6;margin-left:.18em}
+.logo .gb{font-size:21px;letter-spacing:-.02em}
+.ueber .gb{color:var(--tinte)}
