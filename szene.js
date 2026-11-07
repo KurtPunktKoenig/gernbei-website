@@ -30,9 +30,9 @@
     { echt: false, geraet: "rechner", icon: "tasten", art: "am Rechner, mit Microsoft 365", zettel: false,  // 44
       text: "Beantworte die Mail von Frau Berger.",
       haken: ["Mail in Outlook gelesen", "Antwort liegt in Ihren Entwürfen, abschicken tun Sie", "Aufgefallen: sie fragt auch nach dem Wartungsvertrag"] },
-    { echt: false, geraet: "handy", icon: "mikro", art: "am Handy, morgens im Transporter", zettel: false,  // 11, 6
+    { echt: true, geraet: "handy", icon: "mikro", art: "am Handy, morgens im Transporter", zettel: false,  // 11, 6; Lauf 3, Stand 62
       text: "Was steht heute an?",
-      haken: ["Wartung bei Berger, für heute zugesagt", "Zwei Rückrufe bis Freitag versprochen", "Aufgefallen: Angebot Müller seit drei Wochen offen"] },
+      haken: ["Herr Huber: ihm heute einen Termin zum Nachsehen nennen", "Frau Berger: Wartung der Gastherme, für heute zugesagt", "Bis 14.11.: bei Müller nachfassen, Angebot für Wolf"] },
     { echt: false, geraet: "rechner", icon: "tasten", art: "am Rechner, Kalkulation im OneDrive", zettel: false,  // 44
       text: "Was hat das Bad Müller bisher gekostet?",
       haken: ["Kalkulation im OneDrive gefunden", "Bisher 4.860 Euro für Material und Stunden", "Aufgefallen: die Stunden von Dienstag fehlen noch"] }
