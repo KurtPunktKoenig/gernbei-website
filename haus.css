@@ -478,3 +478,17 @@ ol.fragen b{font-family:var(--display);font-weight:600;font-size:clamp(17px,2vw,
 #offen.kurz .grenze p+p{margin-top:10px}
 /* Ausschnitte aus der echten Arbeitsflaeche in den Karten */
 .nb.mit-bild img{width:100%;max-height:230px;object-fit:cover;object-position:top;border:1px solid var(--braun-haar);border-radius:12px;background:#F3F3F2;margin-bottom:16px}
+/* Szene im Kleid Tusche (Fuer Dienstleister): Tinte statt Braun */
+.tusche .szene-ich{background:var(--tinte)}
+.tusche .szene-haken{border-color:var(--haar);background:#fff}
+.tusche .szene-haken li{color:var(--tinte)}
+.tusche .szene-haken li::before{border-color:var(--tinte)}
+.tusche .szene-haken li.fund{color:var(--rot)}
+.tusche .szene-haken li.fund::before{border-color:var(--rot)}
+.tusche .szene-wahl button{color:var(--tinte-2);border-color:var(--haar)}
+.tusche .szene-wahl button[aria-pressed="true"]{color:#fff;background:var(--tinte);border-color:var(--tinte)}
+.tusche .szene-fuss{background:var(--tinte)}
+.tusche .szene-geraete,.tusche .szene-wahl-kopf{color:var(--tinte-2)}
+.tusche .szene.rechner .szene-kopf::before{background:var(--haar);box-shadow:13px 0 0 var(--haar),26px 0 0 var(--haar)}
+.nb.mit-bild img[src*="dienst-karte"]{padding:10px 12px;background:#F7F7F6}
+.tusche .karten-4{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}

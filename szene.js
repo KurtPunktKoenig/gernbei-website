@@ -8,35 +8,12 @@
     foto: '<path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
     tasten: '<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/>'
   };
-  // Jede Szene steht in Faehigkeiten-Produkte (Zeile in Klammern). echt: Bitte und Haken aus dem Lauf
-  // auf mithand-t1 vom 07.11.2026, gekuerzt, nichts hinzugefuegt (Szenen-Echtlauf-2026-11-07).
-  // Ohne echt bleibt die Szene Probetext und darf so nicht live gehen.
-  var SZENEN = [
-    { echt: true, geraet: "handy", icon: "foto", art: "am Handy, Foto vom Zettel", zettel: true,  // 2, 3, 7
-      text: "Ich hab dir das Foto vom Regiezettel hingelegt. Mach den Regiebericht für Berger draus.",
-      haken: ["Regiebericht R001 für Berger liegt unter Dokumente", "Peter 3,5 Stunden, Jonas 3 Stunden, Material übernommen", "Bitte prüfen: die Zahlen sind vom Zettel gelesen"] },
-    { echt: true, geraet: "rechner", icon: "tasten", art: "am Rechner, getippt", zettel: false,  // 1, 10, 46
-      text: "Angebot für Familie Wolf, Bad: 8 m² Fliesen, Duschwanne tauschen. Wie beim Bad Schmitt.",
-      haken: ["Angebot 2026-001 als Entwurf angelegt", "Zum Vergleich Bad Schmitt: 7,5 m² für 8.950 € brutto", "Es fehlen noch: Adresse, Aufmaß und Einzelpreise"] },
-    { echt: true, geraet: "handy", icon: "mikro", art: "am Handy, gesprochen", zettel: false,  // 30
-      text: "Mach einen Beitrag fürs Google-Unternehmensprofil zum Bad Schmitt.",
-      haken: ["Beitrag fürs Google-Profil entworfen, ohne Kundennamen", "Den Namen nur mit Einverständnis der Schmitts", "Erst posten, wenn Handwerkskammer und Handwerksrolle im Impressum stehen"] },
-    { echt: true, geraet: "rechner", icon: "tasten", art: "am Rechner, abends", zettel: false,  // 6, 10, 32
-      text: "Was ist eigentlich mit dem Angebot Bad Müller?",
-      haken: ["9.480 € brutto, seit dem 17.10. bei Frau Müller", "Das Nachfassschreiben liegt fertig im Entwurf", "Aufgefallen: die Postleitzahl von Frau Müller fehlt noch"] },
-    { echt: true, geraet: "handy", icon: "mikro", art: "am Handy, gesprochen, 16 Uhr", zettel: false,  // 4, 5, 6, 7; Lauf 2, Sonnet 5.5
-      text: "Huber hat angerufen, wann wir kommen. Die Heizung tropft wieder.",
-      haken: ["Anruf von Herrn Huber festgehalten", "Letzter Einsatz bei Huber: 12.09., Ventil getauscht", "Aufgefallen: der Rückruf war bis gestern zugesagt"] },
-    { echt: false, geraet: "rechner", icon: "tasten", art: "am Rechner, mit Microsoft 365", zettel: false,  // 44
-      text: "Beantworte die Mail von Frau Berger.",
-      haken: ["Mail in Outlook gelesen", "Antwort liegt in Ihren Entwürfen, abschicken tun Sie", "Aufgefallen: sie fragt auch nach dem Wartungsvertrag"] },
-    { echt: true, geraet: "handy", icon: "mikro", art: "am Handy, morgens im Transporter", zettel: false,  // 11, 6; Lauf 3, Stand 62
-      text: "Was steht heute an?",
-      haken: ["Herr Huber: ihm heute einen Termin zum Nachsehen nennen", "Frau Berger: Wartung der Gastherme, für heute zugesagt", "Bis 14.11.: bei Müller nachfassen, Angebot für Wolf"] },
-    { echt: false, geraet: "rechner", icon: "tasten", art: "am Rechner, Kalkulation im OneDrive", zettel: false,  // 44
-      text: "Was hat das Bad Müller bisher gekostet?",
-      haken: ["Kalkulation im OneDrive gefunden", "Bisher 4.860 Euro für Material und Stunden", "Aufgefallen: die Stunden von Dienstag fehlen noch"] }
-  ];
+  // Die Szenen stehen je Seite als JSON in #szene-daten, damit beide Zuschnitte dasselbe Programm nutzen.
+  // echt: Bitte und Haken aus einem Lauf auf mithand-t1 (Szenen-Echtlauf-2026-11-07), gekuerzt, nichts
+  // hinzugefuegt. Ohne echt bleibt die Szene Probetext und darf so nicht live gehen.
+  var daten = document.getElementById("szene-daten");
+  if (!daten) return;
+  var SZENEN = JSON.parse(daten.textContent);
   var unter = wurzel.querySelector(".bildunter");
   var ruhig = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var art = wurzel.querySelector(".szene-art"), text = wurzel.querySelector(".szene-text");
