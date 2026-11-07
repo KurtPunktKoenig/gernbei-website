@@ -469,3 +469,10 @@ ol.fragen b{font-family:var(--display);font-weight:600;font-size:clamp(17px,2vw,
 .szene-wahl-kopf{font-weight:600;font-size:14px;color:var(--braun-dunkel);margin-top:18px;text-align:center}
 .szene-wahl{margin-top:10px;max-width:520px}
 @media(prefers-reduced-motion:reduce){.szene-handy,.szene-fuss{transition:none}}
+/* Gekuerzte Seite (Schritt 2): Nachweisleiste unter dem Kopf, vier Karten, Offen gesagt in einem Kasten */
+.nachweise-band{padding:0 0 36px}
+.vorteile.nachweise{margin-top:0;justify-content:center}
+.karten-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+#tut .mehr-inhalt .ueber{margin:22px 0 8px}
+#offen.kurz{padding:56px 0}
+#offen.kurz .grenze p+p{margin-top:10px}
