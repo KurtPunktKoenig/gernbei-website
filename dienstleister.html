@@ -26,132 +26,132 @@
   <a class="knopf" href="#kontakt">Gespräch vereinbaren</a>
 </div></nav>
 
-<header class="hero" id="top"><div class="wrap"><div class="raster">
+<header class="hero mit-szene" id="top"><div class="wrap"><div class="raster">
   <div>
     <p class="ueber">Für alle, die ihre Firma selbst tragen</p>
     <svg class="figur" viewBox="0 0 90 74" fill="none" stroke="#111214" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="16" r="11"/><path d="M26 15h.4M34 15h.4M27 21c2 1.6 4.5 1.6 6.5 0"/><path d="M30 27v26M30 34l-14 9M30 34l16 5"/><path d="M46 39l8-14"/><rect x="50" y="14" width="13" height="17" rx="1.5" transform="rotate(10 56 22)"/><path d="M30 53l-10 18M30 53l10 18"/><path d="M6 71h60" stroke-width="1.3"/><text x="70" y="66" font-family="Caveat,cursive" font-size="15" fill="#3A3B40" stroke="none">los!</text></svg>
     <h1><span class="gb">Gern<b>bei</b></span> für Dienstleister.</h1>
     <p class="hand">Die Arbeit für Ihre Kunden machen Sie. Den Papierkram nicht mehr.</p>
-    <p class="lead dunkler" style="font-size:clamp(19px,2.1vw,23px);line-height:1.4">Gernbei vergisst nichts, was Sie hineingeben, und findet es wieder. Daraus entstehen Angebote, Protokolle und Antworten. Abschicken tun Sie.</p>
-    <div class="streifen start">
-      <p class="kopfzeile">So starten Sie<span class="wolke-klein"><svg viewBox="0 0 24 24"><path d="M7 18h10.5a4 4 0 0 0 .6-8 6 6 0 0 0-11.4 1.6A3.3 3.3 0 0 0 7 18z" stroke-linejoin="round"/></svg>Läuft bei Amazon. Kein Rechner nötig.</span></p>
-      <dl>
-        <dt>Erst zeigen lassen</dt><dd>Bringen Sie eine Kundenmail, Gesprächsnotizen oder ein altes Angebot mit. Im unverbindlichen Gespräch sehen Sie, welches Angebot, welches Protokoll oder welche Antwort Gernbei daraus macht.</dd>
-        <dt>Gleich loslegen</dt><dd>Ich richte Ihren Zugang persönlich ein, den Link bekommen Sie per Mail. Sie installieren nichts; Ihr Claude-Team bei Anthropic legen wir gemeinsam an.</dd>
-        <dt>Kosten</dt><dd>Preis auf Anfrage, dazu Ihr eigenes Claude-Team bei Anthropic. Fester Betrag, keine Rechnung nach Verbrauch. Monatlich kündbar.</dd>
-        <dt>Der erste Einsatz</dt><dd>So kann er aussehen: Mit Gernbei planen Sie den Tag, legen den ersten Kunden oder Auftrag an und bereiten die ersten Schreiben vor. Was dabei entsteht, hängt von Ihrer Aufgabe und Ihren Angaben ab.</dd>
-      </dl>
-      <div class="knoepfe"><a class="knopf" href="#kontakt">Preis anfragen</a><a class="knopf hell" href="#kontakt">Erst zeigen lassen</a></div>
-      <p class="start-satz">Hakt beim Einrichten etwas, helfe ich.</p>
-    </div>
-    <div class="vorteile"><span>Ihre Unterlagen in der EU</span><span>nichts geht verloren</span><span>persönlich eingerichtet aus Würzburg</span><span>Ihre Arbeit nehmen Sie mit</span></div>
+    <p class="lead dunkler" style="font-size:clamp(19px,2.1vw,23px);line-height:1.4">Am Rechner im Büro oder am Handy zwischen zwei Terminen: Sie schreiben ein paar Stichworte. Gernbei findet den Stand, schreibt den Entwurf und merkt sich, was Sie wem zugesagt haben. Abschicken tun Sie.</p>
+    <div class="knoepfe"><a class="knopf" href="#kontakt">Erst zeigen lassen</a><a class="knopf hell" href="#preis">Was es kostet</a></div>
+    <p class="szene-sorglos"><svg viewBox="0 0 24 24"><path d="M7 18h10.5a4 4 0 0 0 .6-8 6 6 0 0 0-11.4 1.6A3.3 3.3 0 0 0 7 18z" stroke-linejoin="round"/></svg>Läuft bei Amazon. Sie installieren nichts, kein Rechner nötig.</p>
   </div>
   <div>
-    <div class="schirm"><a href="bilder/dienstleister-systembild.webp" title="Bild groß ansehen"><img src="bilder/dienstleister-systembild.webp" alt="Gernbei für Dienstleister im Überblick: Sie geben Stichworte, Gernbei vergisst nichts, Sie prüfen und schicken ab" width="1600" height="1000"></a></div>
-    <p class="bildunter">Die Arbeitsfläche am Rechner. Erfundener Betrieb, echte Antwort.</p>
+    <p class="szene-beruf-kopf">Was machen Sie?</p>
+    <div class="szene-beruf" role="group" aria-label="Beruf wählen">
+      <button type="button" aria-pressed="true">Beratung</button>
+      <button type="button" aria-pressed="false">Projektleitung</button>
+      <button type="button" aria-pressed="false">Immobilien</button>
+      <button type="button" aria-pressed="false">Versicherung</button>
+      <button type="button" aria-pressed="false">Gutachten</button>
+      <button type="button" aria-pressed="false">Freelance</button>
+    </div>
+    <div class="szene rechner" id="szene">
+      <div class="handy szene-handy">
+        <p class="szene-kopf"><span class="gb">Gern<b>bei</b></span> für Dienstleister</p>
+        <div class="szene-flaeche" aria-live="polite">
+          <p class="szene-art"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/></svg><span>am Rechner, Sonntagabend</span></p>
+          <div class="szene-ich"><span class="szene-zettel" hidden></span><span class="szene-text">Angebot für Familie Wolf, Wertermittlung Einfamilienhaus in Gerbrunn, wie für Schmitt im März.</span></div>
+          <p class="szene-denkt" hidden><i></i><i></i><i></i></p>
+          <ul class="szene-haken">
+            <li>Angebot 2026-001 für Familie Wolf als Entwurf</li>
+            <li>Aufbau: Besichtigung, Wertermittlung, klare Abgrenzung</li>
+            <li class="fund">Fehlt noch: Preise und Anschrift, die setzt Gernbei nicht</li>
+          </ul>
+        </div>
+      </div>
+      <i class="szene-fuss" aria-hidden="true"></i>
+      <p class="szene-geraete"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg>Am Rechner im Büro,<svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>am Handy unterwegs. Dasselbe Gespräch.</p>
+      <p class="szene-wahl-kopf">Zwei Beispiele aus Ihrem Alltag. Tippen Sie an.</p>
+      <div class="szene-wahl" role="group" aria-label="Beispiel wählen">
+        <button type="button" aria-pressed="true">Angebot wie das letzte</button>
+        <button type="button" aria-pressed="false">Zusagen der Woche</button>
+      </div>
+      <p class="bildunter">Erfundener Betrieb, echte Antwort.</p>
+    </div>
   </div>
 </div></div></header>
 
-<section class="grau-bg" id="allein"><div class="wrap">
+<section class="nachweise-band"><div class="wrap">
+  <div class="vorteile nachweise"><span>persönlich eingerichtet, aus Würzburg</span><span>Sie installieren nichts, kein Gerät zu kaufen</span><span>BAFA-gelisteter Berater</span><span>Ihre Arbeit nehmen Sie mit</span></div>
+</div></section>
+
+<section id="gefunden" hidden><div class="wrap">
   <div class="kopf">
-    <p class="ueber">Sie kennen das</p>
-    <h2>Die Arbeit für den Kunden. Und alles, was keiner sieht.</h2>
-    <p class="lead">Ob Sie vermitteln, beraten, gestalten oder Projekte leiten: Die Arbeit für Ihre Kunden macht Ihnen Freude. Angebote, Kundenpost, Termine und das Nachfassen fressen die Abende.</p>
+    <p class="ueber">Für Makler: gefunden werden</p>
+    <h2>Ihre Kunden suchen Sie, bevor sie anrufen.</h2>
+  </div>
+  <div class="karten-4">
+    <div class="nb mit-bild"><img src="bilder/dienst-karte-website.webp" alt="Antwort in der Arbeitsfläche: Website-Check von gernbei.de mit Note und den wichtigsten Befunden" width="1216" height="294"><b>Website-Check</b><h3>Wie gut werden Sie gefunden?</h3><p>Eine Note von 1 bis 10, die drei wichtigsten Befunde, Titel und Beschreibungen zum Einsetzen und eine Liste für Ihren Webbetreuer. Im Bild geprüft: unsere eigene Seite.</p></div>
+    <div class="nb mit-bild"><img src="bilder/dienst-karte-nische.webp" alt="Antwort in der Arbeitsfläche: Seite für Gewerbeversicherung für Handwerksbetriebe als Entwurf" width="1216" height="358"><b>Nischenseite</b><h3>Eine Seite für Ihre Nische</h3><p>Etwa <i>Gewerbeversicherung für Handwerksbetriebe</i> oder <i>Immobilie geerbt in Würzburg</i>. Zugleich die Seite, die Ihre Kunden weiterempfehlen.</p></div>
+    <div class="nb"><b>Sechs Kanäle</b><h3>Beiträge mit Pflichtangaben</h3><p>LinkedIn, Instagram, Facebook, TikTok, YouTube und Ihr Google-Profil. Gernbei denkt an die Pflichtangaben Ihres Berufs, etwa die Energieangaben bei einer Wohnung.</p></div>
+    <div class="nb"><b>Fachneuigkeit</b><h3>Eine Neuigkeit pro Woche</h3><p>Ein Beitrag zu einer echten Änderung für Ihre Kunden, mit der amtlichen Quelle. So lebt Ihr Profil.</p></div>
+  </div>
+  <p class="satz">Online stellen Sie selbst, mit einem Klick. Und Ihre Website beantwortet Fragen auch nachts: <a href="chatbot.html">der Chatbot für Ihre Seite</a>.</p>
+</div></section>
+
+<section class="grau-bg" id="tut"><div class="wrap">
+  <div class="kopf">
+    <p class="ueber">Was <span class="gb">Gern<b>bei</b></span> für Sie tut</p>
+    <h2>Drei Stichworte reichen.</h2>
+  </div>
+  <div class="karten-4">
+    <div class="nb mit-bild"><img src="bilder/dienst-karte-angebot.webp" alt="Antwort in der Arbeitsfläche: Angebot 2026-001 als Entwurf, Preise und Anschrift fehlen noch" width="1216" height="224"><b>Angebot</b><h3>Angebot wie das letzte</h3><p>Geben Sie ein altes Angebot als Vorlage, dann übernimmt Gernbei Ihren Aufbau. Was fehlt, sagt Gernbei, statt es zu erfinden.</p></div>
+    <div class="nb mit-bild"><img src="bilder/dienst-karte-stand.webp" alt="Antwort in der Arbeitsfläche: Stand der Sache Albers mit Exposé und Besichtigungstermin" width="1216" height="298"><b>Stand</b><h3>Wo steht die Sache?</h3><p>Eine Frage, und Gernbei nennt Stand und offene Punkte eines Kunden.</p></div>
+    <div class="nb mit-bild"><img src="bilder/dienst-karte-zusagen.webp" alt="Antwort in der Arbeitsfläche: zwei Zusagen der Woche mit Datum" width="1216" height="250"><b>Zusagen</b><h3>Was Sie wem versprochen haben</h3><p>Jede Zusage steht mit Datum beim Kunden und morgens im Bericht.</p></div>
+    <div class="nb mit-bild"><img src="bilder/dienst-karte-protokoll.webp" alt="Antwort in der Arbeitsfläche: Protokoll mit Entschiedenem und Offenem" width="1216" height="272"><b>Protokoll</b><h3>Protokoll aus Stichworten</h3><p>Entschiedenes und Offenes getrennt, abgelegt beim Kunden, auf Wunsch als Word-Datei.</p></div>
+  </div>
+  <details class="mehr">
+    <summary>Alles, was Gernbei für Dienstleister kann</summary>
+    <div class="mehr-inhalt">
+      <p class="ueber">Schreiben</p>
+      <ul class="punkte">
+        <li><b>Angebot, Nachfassbrief, Rechnungsentwurf:</b> In Ihrem Stil, mit dem Stand von letzter Woche. Vor dem Versand prüft Gernbei Summen und leere Felder und vergibt die Angebotsnummer selbst</li>
+        <li><b>Protokoll und Bericht:</b> Gesprächsprotokoll, Statusbericht, Entscheidungsvorlage. Als Word-Datei, aus Ihren Notizen</li>
+        <li><b>Foto oder PDF hereingeben:</b> Die Kundenmail, der Zettel, das alte Angebot über die Büroklammer oder einfach ins Gespräch gezogen. Zahlen, die Gernbei vom Foto liest, sehen Sie zur Kontrolle, bevor sie aufs Blatt gehen</li>
+        <li><b>Sprechen statt tippen:</b> Das Mikrofon Ihres Handys schreibt in die Zeile</li>
+        <li><b>Fragt nach, statt zu erfinden:</b> Fehlt eine Angabe, fragt Gernbei nach, statt sie zu ergänzen. Was rausgeht, lesen Sie trotzdem vorher. Den nächsten Schritt tippen Sie einfach an</li>
+        <li><b>Vorlagen, wenn Sie Projekte führen:</b> Steckbrief, Projektstrukturplan, Arbeitspakete, Termin- und Kostenplan, Kommunikationsplan, Änderungsantrag, Abnahme. Klassisch, agil oder hybrid, ob Meilenstein oder Sprint</li>
+        <li><b>Gefunden werden:</b> Website-Check mit Note, Titel und Beschreibungen zum Einsetzen und einer Liste für Ihren Webbetreuer; eine Seite für Ihre Nische, die zugleich Empfehlungsseite ist; jede Woche eine Fachneuigkeit mit amtlicher Quelle; ein Drehzettel für einen kurzen Clip; auf Wunsch ein Anzeigentext. Alles als Entwurf, online stellen Sie</li>
+        <li><b>Dienste, für die sonst eine Rechnung kommt:</b> Beiträge und Profiltexte für LinkedIn, Instagram, Facebook, TikTok, YouTube und das Google-Unternehmensprofil, mit Hinweis, wenn eine Pflichtangabe fehlt; ein Foliensatz aus drei Stichworten; eine Entscheidungsvorlage auf einer Seite; Agenda und Ergebnisprotokoll eines Workshops; Maßstab und Prüfliste für das erste Blatt einer Art; Angaben über Dritte aus Unterlagen nehmen, bevor sie weitergehen. Online stellen Sie selbst, mit einem Klick, und das bleibt so</li>
+      </ul>
+      <p class="ueber">Merken</p>
+      <ul class="punkte">
+        <li><b>Neuer Kunde in einem Satz:</b> Neuer Kunde, neues Mandat, neues Projekt: ein Satz, und Gernbei legt den Vorgang an, mit Beteiligten und offenen Punkten</li>
+        <li><b>Wiederfinden ohne Dateinamen:</b> „Was haben wir Huber im März zugesagt?“ Gernbei sucht in Ihren Notizen und Unterlagen</li>
+        <li><b>Mit Quelle:</b> Jede Antwort nennt die Stelle, oder Gernbei sagt offen, dass es keinen Beleg gibt</li>
+        <li><b>Zusagen mit Datum:</b> „Schicke ich Ihnen bis Freitag“: was Sie wem bis wann versprochen haben, steht beim Vorgang und morgens im Bericht</li>
+        <li><b>Morgens liegt der Bericht da:</b> Nachts wird gesichert und geprüft. Morgens ist klar, was offen ist. Nach dem Urlaub gibt es zuerst einen kurzen Stand</li>
+        <li><b>Selbst nachschlagen:</b> Notizen und Dokumente sehen Sie jederzeit in der Arbeitsfläche, mit Suche. Alles lässt sich als Paket herunterladen</li>
+      </ul>
+      <p class="ueber">Ihr Bereich</p>
+      <ul class="punkte">
+        <li><b>Mehrere Aufträge auf einmal:</b> Bis zu drei Aufträge vormerken, Gernbei arbeitet sie nacheinander ab</li>
+        <li><b>Optimierungen kommen von selbst:</b> Nachts oder auf Ihren Tipp. Eine Karte zeigt, was neu ist</li>
+        <li><b>Mit Microsoft 365:</b> Arbeiten Sie mit Microsoft 365, arbeitet Gernbei mit Outlook, Excel, OneDrive und SharePoint. Der Stand aus den Mails zu einem Kunden oder Projekt. Wer auf Antwort wartet, und die Antwort als Entwurf in Outlook, abschicken tun Sie. Termine und Aufgaben in Kalender und To Do. Tabellen im OneDrive oder SharePoint auswerten, Zahlen nachtragen, Diagramm anlegen, Gernbei zeigt vorher, was sich ändert. Bericht und Foliensatz direkt in den Kunden- oder Projektordner. Gelesen und geschrieben wird nur, wenn Sie es sagen, und nur in der Datei, die Sie nennen. Gelöscht wird nichts. Wer Ihr Microsoft-Konto verwaltet, gibt die Verbindung einmal frei und kann sie jederzeit abschalten; das richte ich mit Ihnen ein.</li>
+      </ul>
+    </div>
+  </details>
+</div></section>
+
+<section id="start"><div class="wrap">
+  <div class="kopf">
+    <p class="ueber">So starten Sie</p>
+    <h2>Drei Schritte bis zum ersten Angebot.</h2>
   </div>
   <div class="raster-3">
-    <div class="nb"><b>Sonntagabend</b><h3>Das Angebot</h3><p>Sie wissen, was drinstehen soll. Nur nicht, wo das alte liegt, an dem Sie sich orientieren wollten.</p></div>
-    <div class="nb"><b>zwischen zwei Terminen</b><h3>Der Stand</h3><p>Ein Kunde will bis morgen wissen, wo seine Sache steht. Der Stand steckt in Mails, Gesprächsnotizen und Ihrem Kopf.</p></div>
-    <div class="nb"><b>irgendwann</b><h3>Die Zusage</h3><p>"Schicke ich Ihnen bis Freitag." Stand nirgends, nur in Ihrem Kopf, und der war voll.</p></div>
+    <div class="nb"><b>1 · Sie und ich</b><h3>Gespräch mit einer Kundenmail</h3><p>Zwanzig Minuten, online oder bei einem Kaffee in Würzburg. Sie sehen, welchen Entwurf Gernbei aus Ihrer Mail macht. Unverbindlich.</p></div>
+    <div class="nb"><b>2 · ich</b><h3>Zugang einrichten</h3><p>Ich richte ihn persönlich ein, den Link bekommen Sie per Mail. Ihr Claude-Team bei Anthropic legen wir gemeinsam an.</p></div>
+    <div class="nb"><b>3 · Sie, ich bin dabei</b><h3>Erster Tag mit Grundkurs</h3><p>Am Ende stehen Ihre ersten Kunden in Gernbei, und Ihr erstes Angebot liegt als Entwurf vor.</p></div>
   </div>
+  <div class="knoepfe"><a class="knopf" href="#kontakt">Preis anfragen</a><a class="knopf hell" href="#kontakt">Erst zeigen lassen</a></div>
+  <p class="start-satz">Hakt beim Einrichten etwas, helfe ich.</p>
 </div></section>
 
-<section id="gedaechtnis"><div class="wrap">
-  <div class="kopf">
-    <p class="ueber">Was <span class="gb">Gern<b>bei</b></span> sich merkt</p>
-    <h2>Was Sie <span class="gb">Gern<b>bei</b></span> geben, bleibt.</h2>
-    <p class="lead">Jede Mail, jede Datei, jede Zusage wird abgelegt, mit Datum und Kunde oder Projekt. Nach Wochen fragen Sie einfach.</p>
-  </div>
-  <div class="tafel">
-    <div><b>Wiederfinden ohne Dateinamen</b><p>„Was haben wir Huber im März zugesagt?“ Gernbei sucht in Ihren Notizen und Unterlagen</p></div>
-    <div><b>Mit Quelle</b><p>Jede Antwort nennt die Stelle, oder Gernbei sagt offen, dass es keinen Beleg gibt</p></div>
-    <div><b>Selbst nachschlagen</b><p>Notizen und Dokumente sehen Sie jederzeit in der Arbeitsfläche, mit Suche. Alles lässt sich als Paket herunterladen</p></div>
-  </div>
-</div></section>
-
-<section id="tut"><div class="wrap">
-  <div class="kopf">
-    <div class="sprech">Antwort an Herrn Albers, Besichtigung am Donnerstag.</div>
-    <p class="ueber">Was <span class="gb">Gern<b>bei</b></span> für Sie tut</p>
-    <h2>Drei Stichworte reichen. Sie sagen das Ergebnis, nicht den Weg.</h2>
-  </div>
-  <div class="tafel">
-    <div><b>Angebot, Nachfassbrief, Rechnungsentwurf</b><p>In Ihrem Stil, mit dem Stand von letzter Woche. Vor dem Versand prüft Gernbei Summen und leere Felder und vergibt die Angebotsnummer selbst</p></div>
-    <div><b>Neuer Kunde in einem Satz</b><p>Neuer Kunde, neues Mandat, neues Projekt: ein Satz, und Gernbei legt den Vorgang an, mit Beteiligten und offenen Punkten</p></div>
-    <div><b>Protokoll und Bericht</b><p>Gesprächsprotokoll, Statusbericht, Entscheidungsvorlage. Als Word-Datei, aus Ihren Notizen</p></div>
-    <div><b>Zusagen mit Datum</b><p>„Schicke ich Ihnen bis Freitag“: was Sie wem bis wann versprochen haben, steht beim Vorgang und morgens im Bericht</p></div>
-    <div><b>Foto oder PDF hereingeben</b><p>Die Kundenmail, der Zettel, das alte Angebot über die Büroklammer oder einfach ins Gespräch gezogen. Zahlen, die Gernbei vom Foto liest, sehen Sie zur Kontrolle, bevor sie aufs Blatt gehen</p></div>
-    <div><b>Sprechen statt tippen</b><p>Das Mikrofon Ihres Handys schreibt in die Zeile</p></div>
-    <div><b>Fragt nach, statt zu erfinden</b><p>Fehlt eine Angabe, fragt Gernbei nach, statt sie zu ergänzen. Was rausgeht, lesen Sie trotzdem vorher. Den nächsten Schritt tippen Sie einfach an</p></div>
-    <div><b>Morgens liegt der Bericht da</b><p>Nachts wird gesichert und geprüft. Morgens ist klar, was offen ist. Nach dem Urlaub gibt es zuerst einen kurzen Stand</p></div>
-    <div><b>Mehrere Aufträge auf einmal</b><p>Bis zu drei Aufträge vormerken, Gernbei arbeitet sie nacheinander ab</p></div>
-    <div><b>Vorlagen, wenn Sie Projekte führen</b><p>Steckbrief, Projektstrukturplan, Arbeitspakete, Termin- und Kostenplan, Kommunikationsplan, Änderungsantrag, Abnahme. Klassisch, agil oder hybrid, ob Meilenstein oder Sprint</p></div>
-    <div><b>Optimierungen kommen von selbst</b><p>Nachts oder auf Ihren Tipp. Eine Karte zeigt, was neu ist</p></div>
-  </div>
-  <div class="ms365">
-    <p class="ueber">Mit Microsoft 365</p>
-    <h3>Arbeiten Sie mit Microsoft 365, arbeitet <span class="gb">Gern<b>bei</b></span> mit Outlook, Excel, OneDrive und SharePoint.</h3>
-    <ul class="punkte">
-      <li><b>Der Stand aus den Mails zu einem Kunden oder Projekt:</b> Gernbei sucht sie heraus und schreibt, wo es steht.</li>
-      <li><b>Postfach im Griff:</b> wer auf Antwort wartet, und die Antwort als Entwurf in Outlook. Abschicken tun Sie.</li>
-      <li><b>Termine und Aufgaben:</b> „Donnerstag 10 Uhr eintragen.“ Gernbei trägt sie in Kalender und To Do ein.</li>
-      <li><b>Tabellen auswerten:</b> Gernbei findet die Datei im OneDrive oder SharePoint und sagt Ihnen, wo Sie beim Budget stehen.</li>
-      <li><b>Live in Ihrer Excel-Datei:</b> Zahlen nachtragen, Diagramm anlegen. Gernbei zeigt vorher, was sich ändert.</li>
-      <li><b>Bericht und Foliensatz direkt in den Kunden- oder Projektordner</b> im OneDrive oder SharePoint.</li>
-    </ul>
-    <p class="tafel-zeile">Gelesen und geschrieben wird nur, wenn Sie es sagen, und nur in der Datei, die Sie nennen. Gelöscht wird nichts. Wer Ihr Microsoft-Konto verwaltet, gibt die Verbindung einmal frei und kann sie jederzeit abschalten; das richte ich mit Ihnen ein.</p>
-  </div>
-</div></section>
-
-<section class="grau-bg" id="sonst"><div class="wrap">
-  <div class="kopf">
-    <p class="ueber">Was Sie sonst einkaufen</p>
-    <h2>Dienste, für die sonst eine Rechnung kommt.</h2>
-  </div>
-  <table class="tab" style="max-width:56rem">
-    <thead><tr><th style="width:30%">Sonst liefert das</th><th>Bei <span class="gb">Gern<b>bei</b></span> im Preis</th></tr></thead>
-    <tbody>
-      <tr><td data-label="Sonst liefert das"><b>Social-Media-Agentur, Texter</b></td><td data-label="Bei Gernbei im Preis">Beiträge und Profiltexte für LinkedIn, Instagram, Facebook, TikTok, YouTube und das Google-Unternehmensprofil, aus Ihrer Ablage, mit Hinweis, wenn eine Pflichtangabe fehlt. Online stellen Sie selbst</td></tr>
-      <tr><td data-label="Sonst liefert das"><b>Büroservice, Assistenz</b></td><td data-label="Bei Gernbei im Preis">Aufgaben organisieren: was ansteht, was wartet, was fällig ist, mit Fristen und Wiedervorlagen</td></tr>
-      <tr><td data-label="Sonst liefert das"><b>Präsentationsgestalter</b></td><td data-label="Bei Gernbei im Preis">Ein Foliensatz aus einem Dokument oder drei Stichworten</td></tr>
-      <tr><td data-label="Sonst liefert das"><b>Unternehmensberater</b></td><td data-label="Bei Gernbei im Preis">Eine Entscheidungsvorlage auf einer Seite, mit Empfehlung und Gegenrede</td></tr>
-      <tr><td data-label="Sonst liefert das"><b>Projektbüro</b></td><td data-label="Bei Gernbei im Preis">Protokoll und Statusbericht aus Ihren Notizen</td></tr>
-      <tr><td data-label="Sonst liefert das"><b>Moderator</b></td><td data-label="Bei Gernbei im Preis">Ein Workshop: Agenda, Moderationsplan, Ergebnisprotokoll aus den Fotos der Karten</td></tr>
-      <tr><td data-label="Sonst liefert das"><b>Qualitätsberater</b></td><td data-label="Bei Gernbei im Preis">Maßstab und Prüfliste für das erste Blatt einer Art</td></tr>
-      <tr><td data-label="Sonst liefert das"><b>Kanzlei, Dienstleister</b></td><td data-label="Bei Gernbei im Preis">Angaben über Dritte aus Unterlagen nehmen, bevor sie weitergehen: Personen werden Rollen, Anschriften werden Orte. Sie sehen das Ergebnis vorher, unsichere Stellen nennt Gernbei</td></tr>
-    </tbody>
-  </table>
-  <p class="tafel-zeile">Online stellen Sie selbst, mit einem Klick, und das bleibt so.</p>
-</div></section>
-
-<section id="offen"><div class="wrap">
-  <div class="offen-raster">
-    <div>
-      <p class="ueber">Was <span class="gb">Gern<b>bei</b></span> nicht tut</p>
-      <div class="grenze">
-        <small>Offen gesagt</small>
-        <p>Gernbei geht nicht ans Telefon, verschickt nichts, auch nicht aus Outlook, und veröffentlicht nichts. Hinaus geht nur, was Sie abschicken.</p>
-      </div>
-    </div>
-    <div>
-      <p class="ueber">Sie sind nie allein</p>
-      <ul class="punkte">
-        <li><b>Hilfe in der Arbeitsfläche.</b> Suchen, oder Gernbei fragen: Die Assistenz erklärt die Bedienung im Gespräch, Schritt für Schritt.</li>
-        <li><b>Persönlich eingerichtet,</b> mit Grundkurs am ersten Tag, von mir.</li>
-        <li><b>Blätter zum Nachlesen,</b> als PDF, für Ihr Claude-Team und den ersten Tag.</li>
-      </ul>
-      <div class="schirm"><div class="leiste"><i></i><i></i><i></i><span><span class="gb">Gern<b>bei</b></span> für Dienstleister · Hilfe</span></div><img src="bilder/dienstleister-hilfe-rechner.webp" alt="Die Hilfe in der Arbeitsfläche Gernbei für Dienstleister: Suchfeld, Fragen an die Assistenz und die Abschnitte zum Nachlesen" width="1600" height="1000" loading="lazy"></div>
-      <p class="bildunter">Die Hilfe, in der Arbeitsfläche selbst.</p>
-    </div>
+<section id="offen" class="kurz"><div class="wrap">
+  <div class="grenze">
+    <small>Offen gesagt</small>
+    <p><b>Was Gernbei nicht tut:</b> Gernbei geht nicht ans Telefon, verschickt nichts, auch nicht aus Outlook, und veröffentlicht nichts. Hinaus geht nur, was Sie abschicken.</p>
   </div>
 </div></section>
 
@@ -182,12 +182,12 @@
   <!-- /baustein preis -->
   <div class="knoepfe"><a class="knopf hell" href="#kontakt">Erst zeigen lassen</a></div>
   <p class="knopf-satz leise">Angebot nur für Unternehmer.</p>
-  <p class="preis-fuss">Hilft Ihnen jemand, etwa in der Buchhaltung oder als Partner? Diese Person bekommt einen eigenen Zugang zum selben Preis und sieht nur ihre Arbeit. Einen gemeinsamen Bereich vereinbaren wir auf Wunsch.</p>
+  <p class="preis-fuss">Hilft Ihnen jemand, etwa in der Buchhaltung? Diese Person bekommt einen eigenen Zugang zum selben Preis.</p>
 </div></section>
 
 <section id="daten" style="padding-bottom:64px"><div class="wrap">
   <p class="ueber">Wo Ihre Daten liegen</p>
-  <p class="lead dunkler" style="max-width:52rem"><b>Ihre Unterlagen liegen bei Amazon Web Services in der EU, in Stockholm, in einem Bereich nur für Ihre Firma.</b> Betreut und jede Nacht gesichert wird er von mir, neue Stände kommen von selbst. Was Gernbei für eine Antwort liest, verarbeitet Anthropic auch in den USA; Amazon und Anthropic sind amerikanische Unternehmen.</p>
+  <p class="lead dunkler" style="max-width:52rem"><b>Ihre Unterlagen liegen bei Amazon in der EU, in Stockholm, in einem Bereich nur für Ihre Firma.</b> Was Gernbei für eine Antwort liest, verarbeitet Anthropic auch in den USA; Amazon und Anthropic sind amerikanische Unternehmen.</p>
   <details class="mehr" style="max-width:52rem">
     <summary>Offen gesagt, bevor Sie fragen</summary>
     <div class="mehr-inhalt">
@@ -196,6 +196,7 @@
         <li>Wenn Sie Gernbei etwas schreiben, gehen die Nachricht und die Unterlagen, die dafür gebraucht werden, über Ihr Claude-Team an Anthropic. Anthropic verarbeitet sie auch in den USA, nach dem Vertrag, den Sie mit Anthropic haben. Nach Anthropics Bedingungen für Unternehmen trainiert Anthropic seine Modelle nicht mit Ihren Inhalten.</li>
         <li>Mit Microsoft 365 liest Gernbei eine Mail oder einen Termin nur, wenn Sie danach fragen, und auch das geht für die Antwort an Anthropic. Gernbei legt Entwürfe ab und verschickt nichts.</li>
         <li>Die Anmeldung sichern Sie auf Wunsch mit einem zweiten Schritt: einem Code aus einer App auf Ihrem Handy.</li>
+        <li>Betreut und jede Nacht gesichert wird Ihr Bereich von mir, neue Stände kommen von selbst.</li>
         <li>Ich betreibe den Bereich und kann technisch zugreifen. Das geschieht nur für Einrichtung, Störung, Herausgabe und Löschung oder auf Ihren Wunsch, und jeder solche Zugriff wird festgehalten.</li>
         <li><b>Wenn Sie aufhören,</b> bekommen Sie alles als Paket zum Herunterladen, 30 Tage lang. Danach lösche ich den Bereich mit allen Sicherungen und bestätige es Ihnen schriftlich.</li>
       </ul>
@@ -207,8 +208,7 @@
   <div class="raster">
     <div>
       <h2>Lassen Sie uns kurz reden.</h2>
-      <p>Zwanzig Minuten, online oder bei einem Kaffee in Würzburg. Bringen Sie eine Kundenmail, Gesprächsnotizen oder ein altes Angebot mit, dann sehen Sie, welchen Entwurf Gernbei daraus macht und woher die Angaben stammen.</p>
-      <p>Passt es, richte ich Ihnen Ihren Arbeitsplatz ein. Passt es nicht, sage ich Ihnen das.</p>
+      <p>Zwanzig Minuten, online oder bei einem Kaffee in Würzburg. Bringen Sie eine Kundenmail mit, dann sehen Sie, was Gernbei daraus macht. Passt es nicht, sage ich Ihnen das.</p>
     </div>
     <form class="anfrage" action="https://65c277db.sibforms.com/serve/MUIFAOdoZyzpypYn5bHScim-nHh7SXz7futXErYjShm8S94rJLQFueK1Lw3jA87WPCsQdzothxFjw56cA22Gx3qvEcs9o7mlh4BhuyfN4GlSv5NXg_9wh0YxWZDmc5l_7kxP5Ze5ElGi1GlhANbFtZMEiV_IFTIuJg0MazPisuGX3z9zup9WZjnYFGqEDRHbNw-CMRPaA1AoT22fZg==" method="POST">
       <input type="hidden" name="SEITE" value="Dienstleister">
@@ -236,6 +236,227 @@
   <p class="credit">© 2026 Kurt König. Gernbei für Dienstleister: der Zuschnitt für alle, die ihre Firma selbst tragen.</p>
 </div></footer>
 
+<script type="application/json" id="szene-daten">
+{
+ "berufe": [
+  {
+   "name": "Beratung",
+   "szenen": [
+    0,
+    1
+   ]
+  },
+  {
+   "name": "Projektleitung",
+   "szenen": [
+    2,
+    3
+   ]
+  },
+  {
+   "name": "Immobilien",
+   "szenen": [
+    4,
+    5
+   ],
+   "band": true
+  },
+  {
+   "name": "Versicherung",
+   "szenen": [
+    6,
+    7
+   ],
+   "band": true
+  },
+  {
+   "name": "Gutachten",
+   "szenen": [
+    8,
+    9
+   ]
+  },
+  {
+   "name": "Freelance",
+   "szenen": [
+    10,
+    11
+   ]
+  }
+ ],
+ "szenen": [
+  {
+   "echt": true,
+   "geraet": "rechner",
+   "icon": "tasten",
+   "art": "am Rechner, Sonntagabend",
+   "zettel": false,
+   "text": "Angebot für Familie Wolf, Wertermittlung Einfamilienhaus in Gerbrunn, wie für Schmitt im März.",
+   "haken": [
+    "Angebot 2026-001 für Familie Wolf als Entwurf",
+    "Aufbau: Besichtigung, Wertermittlung, klare Abgrenzung",
+    "Fehlt noch: Preise und Anschrift, die setzt Gernbei nicht"
+   ],
+   "knopf": "Angebot wie das letzte"
+  },
+  {
+   "echt": true,
+   "geraet": "rechner",
+   "icon": "tasten",
+   "art": "am Rechner, Montagmorgen",
+   "zettel": false,
+   "text": "Was habe ich diese Woche wem versprochen?",
+   "haken": [
+    "Herr Albers: Exposé Sanderstraße 8, bis 11.11.",
+    "Frau Kraus: Bericht zum Hausverkauf, jeden Freitag",
+    "Der nächste Bericht ist Freitag, 13.11., fällig"
+   ],
+   "knopf": "Zusagen der Woche"
+  },
+  {
+   "echt": true,
+   "geraet": "rechner",
+   "icon": "tasten",
+   "art": "am Rechner, vor dem Lenkungskreis",
+   "zettel": false,
+   "text": "Statusbericht für den Lenkungskreis am 16.11. aus meinen Notizen: Design abgenommen, Shop-Anbindung zwei Wochen später, 21.400 Euro verbraucht, Texte vom Kunden fehlen.",
+   "haken": [
+    "Statusbericht als Word-Datei, Gesamtampel Gelb",
+    "Für den Lenkungskreis: Texte bis 1.12. zusagen, Schnittstelle klären",
+    "Nachgerechnet: 45 Prozent Budget bei 31 Prozent Laufzeit"
+   ],
+   "knopf": "Statusbericht aus Notizen"
+  },
+  {
+   "echt": true,
+   "geraet": "rechner",
+   "icon": "tasten",
+   "art": "am Rechner, Projektstart",
+   "zettel": false,
+   "text": "Mach mir einen Projektstrukturplan für den Relaunch: Konzept, Design, Shop mit Warenwirtschaft, Texte und Bilder, Test, Go-live mit Schulung.",
+   "haken": [
+    "Projektstrukturplan als Excel-Tabelle, 30 Arbeitspakete",
+    "Ergänzt: Projektleitung und Rechtstexte für den Shop",
+    "Kritisch: Schnittstelle und Produkttexte, beide nicht bei der Agentur"
+   ],
+   "knopf": "Projektstrukturplan"
+  },
+  {
+   "echt": true,
+   "geraet": "handy",
+   "icon": "mikro",
+   "art": "am Handy, zwischen zwei Terminen",
+   "zettel": false,
+   "text": "Wo steht die Sache Albers?",
+   "haken": [
+    "Wohnung Sanderstraße 8, Interessent Herr Albers",
+    "Besichtigung Donnerstag, 12.11., 17 Uhr",
+    "Offen: Exposé bis Mittwoch, noch nicht geschrieben"
+   ],
+   "knopf": "Stand zwischen zwei Terminen"
+  },
+  {
+   "echt": true,
+   "geraet": "rechner",
+   "icon": "tasten",
+   "art": "am Rechner, getippt",
+   "zettel": false,
+   "text": "Mach einen LinkedIn-Beitrag zur verkauften Wohnung im Frauenland.",
+   "haken": [
+    "Fragt zuerst, was der Beitrag erzählen soll",
+    "Rät: ohne Straße, Preis und Namen, mit Einverständnis der Verkäufer",
+    "Hinweis: Zeigt der Beitrag die Wohnung, gehören die Energieangaben hinein"
+   ],
+   "knopf": "LinkedIn-Beitrag"
+  },
+  {
+   "echt": true,
+   "geraet": "rechner",
+   "icon": "tasten",
+   "art": "am Rechner, neuer Kunde",
+   "zettel": false,
+   "text": "Herr Krämer wechselt mit drei Verträgen zu mir: Hausrat und Privathaftpflicht bei der Mainland Versicherung, Wohngebäude bei der Frankenland.",
+   "haken": [
+    "Vier Blätter für den Wechsel als Entwurf, drei Verträge erfasst",
+    "Jetzt hinaus: das Anschreiben an Herrn Krämer, der Rest wartet auf die Vollmacht",
+    "Fehlt noch: die Policen, Gernbei schreibt keine Vertragsnummer aus dem Kopf"
+   ],
+   "knopf": "Bestandswechsel"
+  },
+  {
+   "echt": true,
+   "geraet": "handy",
+   "icon": "mikro",
+   "art": "am Handy, gesprochen",
+   "zettel": false,
+   "text": "Schadenmeldung: Wasserschaden bei Familie Ott, in der Küche ist am 5.11. eine Leitung unter der Spüle geplatzt.",
+   "haken": [
+    "Schadenmeldung als Word-Datei, Entwurf",
+    "Hergang wie geschildert, keine Ursache und keine Schuldfrage dazu",
+    "Fehlt noch: Vertragsnummer, Anschrift, beschädigte Gegenstände"
+   ],
+   "knopf": "Schadenmeldung"
+  },
+  {
+   "echt": true,
+   "geraet": "handy",
+   "icon": "mikro",
+   "art": "am Handy, nach dem Ortstermin",
+   "zettel": false,
+   "text": "Meine Notizen vom Ortstermin in Höchberg, erfasse den Befund: Kellerwand Nord, waagrechter Riss, etwa 1,80 m lang, bis 0,5 mm breit, Ausblühungen darunter, Feuchte 6,8, 7,1 und 4,2 Prozent.",
+   "haken": [
+    "Befund vom Ortstermin als Word-Datei, Entwurf",
+    "Riss, Ausblühungen, drei Messwerte und Anwesende erfasst",
+    "Ursache und Bewertung bleiben leer, die gehören Ihnen"
+   ],
+   "knopf": "Befund vom Ortstermin"
+  },
+  {
+   "echt": true,
+   "geraet": "rechner",
+   "icon": "tasten",
+   "art": "am Rechner, Gerichtsauftrag",
+   "zettel": false,
+   "text": "Kostenschätzung nach § 407a für das Landgericht im Fall Weber gegen Hofmann. 14 Stunden Gutachten, dazu Ortstermin mit Fahrt 4 Stunden.",
+   "haken": [
+    "Kostenschätzung als Entwurf, 18 Stunden zusammengerechnet",
+    "Mit Hinweis an das Gericht und Freigabevermerk für Sie",
+    "Fehlt noch: Ihr Stundensatz nach JVEG, Gernbei setzt keinen Betrag ein"
+   ],
+   "knopf": "Kostenschätzung fürs Gericht"
+  },
+  {
+   "echt": true,
+   "geraet": "rechner",
+   "icon": "tasten",
+   "art": "am Rechner, Projekt vom Portal",
+   "zettel": false,
+   "text": "Hier ist ein Projekt von einem Portal, passt das zu mir? UX Designer für ein B2B-Kundenportal, Start 04.01.2027, 3 bis 4 Tage pro Woche, Nürnberg, bis 85 Euro die Stunde.",
+   "haken": [
+    "Einstufung: passt, mit einer Lücke",
+    "Passt: Figma, Usability-Tests, Start im Januar, Nürnberg",
+    "Satz bis 85 Euro: rund 100 Euro am Tag unter Ihrem"
+   ],
+   "knopf": "Projekt vom Portal"
+  },
+  {
+   "echt": false,
+   "geraet": "rechner",
+   "icon": "tasten",
+   "art": "am Rechner, mit Microsoft 365",
+   "zettel": false,
+   "text": "Wer wartet auf eine Antwort von mir?",
+   "haken": [
+    "Postfach in Outlook durchgesehen",
+    "Zwei Mails warten auf Antwort",
+    "Antwort an Herrn Albers liegt in Ihren Entwürfen"
+   ],
+   "knopf": "Wer wartet auf Antwort?"
+  }
+ ]
+}
+</script>
+<script src="szene.js" defer></script>
 <script src="fenster.js" data-dienst="https://m2.ki-kurt.de" data-name="Fragen an Gernbei" data-untertitel="Digitaler Assistent, eine KI" data-telefon="0931 45321005" data-mail="hallo@gernbei.de" data-antwortzeit="Ein Mensch antwortet am nächsten Werktag." data-themen="Was kann Gernbei für mich tun?|Welches Angebot passt zu mir?|Wo liegen meine Daten?|Wie fange ich an?" defer></script>
 </body>
 </html>
