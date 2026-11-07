@@ -491,7 +491,7 @@ ol.fragen b{font-family:var(--display);font-weight:600;font-size:clamp(17px,2vw,
 .tusche .szene-geraete,.tusche .szene-wahl-kopf{color:var(--tinte-2)}
 .tusche .szene.rechner .szene-kopf::before{background:var(--haar);box-shadow:13px 0 0 var(--haar),26px 0 0 var(--haar)}
 .nb.mit-bild img[src*="dienst-karte"]{padding:10px 12px;background:#F7F7F6}
-.tusche .karten-4{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.tusche .karten-4{grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr))}
 /* Berufswahl ueber der Szene (Fuer Dienstleister, Entwurf 07.11.2026): erst der Beruf, dann nur seine Szenen */
 .szene-beruf-kopf{font-family:var(--display);font-weight:600;font-size:17px;color:var(--tinte);text-align:center;margin-bottom:10px}
 .szene-beruf{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 auto 22px;max-width:520px}
