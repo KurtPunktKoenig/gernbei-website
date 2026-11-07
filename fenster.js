@@ -26,11 +26,13 @@
   var sitzung = null;
   try { sitzung = sessionStorage.getItem("auskunft-sitzung"); } catch (e) {}
 
+  var MASSBLASE = '<path d="M3 9v12M3 15h4M29 9v12M29 15h-4"/><path d="M10 8h12a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-5l-4 4v-4h-3a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3z"/><path d="M12.5 14h.01M16 14h.01M19.5 14h.01" stroke-width="2.6"/>';
+
   // Die Figur: ein Bild der eigenen Website, sonst eine eingebettete Strichfigur (nichts von Dritten)
   function figurHtml() {
     if (cfg.figur) return '<span class="figur"><img src="' + esc(cfg.figur) + '" alt=""></span>';
-    return '<span class="figur" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="13"/>' +
-      '<path d="M11.5 13.5v.5M20.5 13.5v.5M10.5 19c1.6 2.4 3.4 3.4 5.5 3.4s3.9-1 5.5-3.4"/></svg></span>';
+    // Massblase: Sprechblase zwischen den Massstrichen des Zeichens Gernbei (Kurt 07.11.2026: 1, Massblase)
+    return '<span class="figur" aria-hidden="true"><svg viewBox="0 0 32 32">' + MASSBLASE + '</svg></span>';
   }
 
   // Zeichen Gernbei wie in der Signatur, nur auf gernbei.de (Kurt 07.11.2026: Firmenlogo ueberall probieren)
@@ -49,12 +51,12 @@
     '*{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}' +
     '.start{position:fixed;right:20px;bottom:20px;z-index:2147483000;display:flex;align-items:center;gap:8px;background:' + cfg.farbe + ';color:#fff;border:0;border-radius:999px;padding:13px 20px;font-size:15px;font-weight:500;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.18)}' +
     '.start:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{outline:2px solid ' + cfg.akzent + ';outline-offset:2px}' +
-    '.start svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}' +
+    '.start svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}' +
     '.panel{position:fixed;right:20px;bottom:20px;z-index:2147483001;width:380px;max-width:calc(100vw - 32px);height:600px;max-height:calc(100vh - 40px);background:#fff;color:#111214;border-radius:18px;box-shadow:0 12px 48px rgba(0,0,0,.22);display:none;flex-direction:column;overflow:hidden;font-size:15px;line-height:1.5}' +
     '.panel.offen{display:flex}' +
     '.panel.gross{width:min(760px,calc(100vw - 32px));height:calc(100vh - 40px)}' +
     '@media(max-width:520px){.panel{right:0;bottom:0;width:100vw;max-width:100vw;height:100%;max-height:100%;border-radius:0}.start{right:16px;bottom:16px}.kopf .gross-knopf{display:none}}' +
-    '.figur{flex:none;width:30px;height:30px;display:grid;place-items:center}.figur svg,.figur img{width:30px;height:30px}.figur svg{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round}' +
+    '.figur{flex:none;width:30px;height:30px;display:grid;place-items:center}.figur svg,.figur img{width:30px;height:30px}.figur svg{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}' +
     '.gruss{display:flex;gap:10px;align-items:flex-start}.gruss .figur{color:' + cfg.farbe + ';margin-top:4px}' +
     '.antwortzeit{margin-top:3px;color:#6E6E73}' +
     '.gb{font-weight:700;white-space:nowrap}.gb b,.kopf .gb b{display:inline;font-size:inherit;color:' + cfg.akzent + ';font-weight:inherit}' +
@@ -88,7 +90,7 @@
     '.tippt{color:#6E6E73;font-size:13.5px}' +
     '.unsichtbar{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}' +
     '</style>' +
-    '<button class="start" type="button" aria-haspopup="dialog"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Fragen?</button>' +
+    '<button class="start" type="button" aria-haspopup="dialog"><svg viewBox="0 0 32 32" stroke-linecap="round" stroke-linejoin="round">' + MASSBLASE + '</svg>Fragen?</button>' +
     '<div class="panel" role="dialog" aria-label="' + esc(cfg.name) + '">' +
     '  <div class="kopf">' + figurHtml() + '<div class="titel"><b>' + marke(cfg.name) + '</b><small>' + esc(cfg.untertitel) + '</small></div>' +
     '    <button type="button" class="brief" title="Anliegen per Nachricht" aria-label="Anliegen per Nachricht"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg></button>' +
