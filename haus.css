@@ -476,3 +476,5 @@ ol.fragen b{font-family:var(--display);font-weight:600;font-size:clamp(17px,2vw,
 #tut .mehr-inhalt .ueber{margin:22px 0 8px}
 #offen.kurz{padding:56px 0}
 #offen.kurz .grenze p+p{margin-top:10px}
+/* Ausschnitte aus der echten Arbeitsflaeche in den Karten */
+.nb.mit-bild img{width:100%;max-height:230px;object-fit:cover;object-position:top;border:1px solid var(--braun-haar);border-radius:12px;background:#F3F3F2;margin-bottom:16px}
