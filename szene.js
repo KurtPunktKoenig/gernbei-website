@@ -11,23 +11,29 @@
   // Die Szenen stehen je Seite als JSON in #szene-daten, damit beide Zuschnitte dasselbe Programm nutzen.
   // echt: Bitte und Haken aus einem Lauf auf mithand-t1 (Szenen-Echtlauf-2026-11-07), gekuerzt, nichts
   // hinzugefuegt. Ohne echt bleibt die Szene Probetext und darf so nicht live gehen.
+  // Eine Liste: alle Szenen, Knoepfe stehen im HTML. Ein Objekt mit berufe: oben die Frage
+  // "Was machen Sie?", je Beruf nur seine Szenen, die Knoepfe baut das Programm (Entwurf 07.11.2026).
   var daten = document.getElementById("szene-daten");
   if (!daten) return;
-  var SZENEN = JSON.parse(daten.textContent);
+  var DATEN = JSON.parse(daten.textContent);
+  var SZENEN = Array.isArray(DATEN) ? DATEN : DATEN.szenen;
+  var BERUFE = Array.isArray(DATEN) ? null : DATEN.berufe;
   var unter = wurzel.querySelector(".bildunter");
   var ruhig = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var art = wurzel.querySelector(".szene-art"), text = wurzel.querySelector(".szene-text");
   var zettel = wurzel.querySelector(".szene-zettel"), denkt = wurzel.querySelector(".szene-denkt");
-  var liste = wurzel.querySelector(".szene-haken"), knoepfe = wurzel.querySelectorAll(".szene-wahl button");
+  var liste = wurzel.querySelector(".szene-haken"), wahl = wurzel.querySelector(".szene-wahl");
+  var knoepfe = [], folge = SZENEN.map(function (s, i) { return i; });
   var jetzt = 0, uhren = [], automatisch = !ruhig;
 
   function spaeter(f, ms) { uhren.push(setTimeout(f, ms)); }
   function anhalten() { uhren.forEach(clearTimeout); uhren = []; wurzel.classList.remove("tippt"); }
 
+  // n zaehlt in der Folge des gewaehlten Berufs, ohne Berufe in allen Szenen
   function zeigen(n, sofort) {
     anhalten();
     jetzt = n;
-    var s = SZENEN[n];
+    var s = SZENEN[folge[n]];
     knoepfe.forEach(function (k, i) { k.setAttribute("aria-pressed", i === n ? "true" : "false"); });
     wurzel.classList.toggle("rechner", s.geraet === "rechner");
     unter.textContent = s.echt ? "Erfundener Betrieb, echte Antwort." : "Entwurf: Probetext, die echte Antwort steht aus.";
@@ -52,12 +58,40 @@
     liste.querySelectorAll("li").forEach(function (li, i) {
       spaeter(function () { li.classList.remove("zu"); }, t + 150 + i * 650);
     });
-    if (automatisch) spaeter(function () { zeigen((jetzt + 1) % SZENEN.length, false); }, t + 6500);
+    if (automatisch) spaeter(function () { zeigen((jetzt + 1) % folge.length, false); }, t + 6500);
   }
 
-  knoepfe.forEach(function (k, i) {
-    k.addEventListener("click", function () { automatisch = false; zeigen(i, ruhig); });
-  });
+  function knoepfeVerbinden() {
+    knoepfe = Array.prototype.slice.call(wahl.querySelectorAll("button"));
+    knoepfe.forEach(function (k, i) {
+      k.addEventListener("click", function () { automatisch = false; zeigen(i, ruhig); });
+    });
+  }
+
+  function berufWaehlen(b, sofort) {
+    var beruf = BERUFE[b];
+    folge = beruf.szenen;
+    document.querySelectorAll(".szene-beruf button").forEach(function (k, i) {
+      k.setAttribute("aria-pressed", i === b ? "true" : "false");
+    });
+    wahl.innerHTML = folge.map(function (n) {
+      return '<button type="button" aria-pressed="false">' + SZENEN[n].knopf + "</button>";
+    }).join("");
+    knoepfeVerbinden();
+    // Das Band "Gefunden werden" steht nur bei den Maklern offen
+    var band = document.getElementById("gefunden");
+    if (band) band.hidden = !beruf.band;
+    zeigen(0, sofort);
+  }
+
+  if (BERUFE) {
+    document.querySelectorAll(".szene-beruf button").forEach(function (k, i) {
+      k.addEventListener("click", function () { automatisch = !ruhig; berufWaehlen(i, ruhig); });
+    });
+    // Vorwahl ohne Bewegung, damit Knoepfe und Band zum ersten Beruf passen
+    folge = BERUFE[0].szenen;
+  }
+  knoepfeVerbinden();
   if (ruhig) return;
   // Erst loslaufen, wenn die Szene zu sehen ist
   if ("IntersectionObserver" in window) {

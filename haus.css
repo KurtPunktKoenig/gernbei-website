@@ -492,3 +492,11 @@ ol.fragen b{font-family:var(--display);font-weight:600;font-size:clamp(17px,2vw,
 .tusche .szene.rechner .szene-kopf::before{background:var(--haar);box-shadow:13px 0 0 var(--haar),26px 0 0 var(--haar)}
 .nb.mit-bild img[src*="dienst-karte"]{padding:10px 12px;background:#F7F7F6}
 .tusche .karten-4{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+/* Berufswahl ueber der Szene (Fuer Dienstleister, Entwurf 07.11.2026): erst der Beruf, dann nur seine Szenen */
+.szene-beruf-kopf{font-family:var(--display);font-weight:600;font-size:17px;color:var(--tinte);text-align:center;margin-bottom:10px}
+.szene-beruf{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 auto 22px;max-width:520px}
+.szene-beruf button{font:600 14px var(--text);color:var(--tinte);background:#fff;border:1.5px solid var(--tinte);border-radius:10px;padding:8px 14px;cursor:pointer}
+.szene-beruf button[aria-pressed="true"]{color:#fff;background:var(--tinte);box-shadow:3px 3px 0 var(--rot)}
+/* Band Gefunden werden: nur fuer die Makler offen, sonst eine Zeile in der Klappe */
+#gefunden[hidden]{display:none}
+#gefunden .satz{margin-top:22px;font-size:15.5px;max-width:52rem}
