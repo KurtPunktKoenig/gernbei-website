@@ -24,9 +24,9 @@
     { echt: true, geraet: "rechner", icon: "tasten", art: "am Rechner, abends", zettel: false,  // 6, 10, 32
       text: "Was ist eigentlich mit dem Angebot Bad Müller?",
       haken: ["9.480 € brutto, seit dem 17.10. bei Frau Müller", "Das Nachfassschreiben liegt fertig im Entwurf", "Aufgefallen: die Postleitzahl von Frau Müller fehlt noch"] },
-    { echt: false, geraet: "handy", icon: "mikro", art: "am Handy, gesprochen, 16 Uhr", zettel: false,  // 4, 5, 6
-      text: "Huber fragt, wann wir kommen. Die Heizung tropft wieder.",
-      haken: ["Letzter Einsatz bei Huber: 12.09., Ventil getauscht", "Antwort an Herrn Huber entworfen", "Aufgefallen: Rückruf bis Freitag zugesagt"] },
+    { echt: true, geraet: "handy", icon: "mikro", art: "am Handy, gesprochen, 16 Uhr", zettel: false,  // 4, 5, 6, 7; Lauf 2, Sonnet 5.5
+      text: "Huber hat angerufen, wann wir kommen. Die Heizung tropft wieder.",
+      haken: ["Anruf von Herrn Huber festgehalten", "Letzter Einsatz bei Huber: 12.09., Ventil getauscht", "Aufgefallen: der Rückruf war bis gestern zugesagt"] },
     { echt: false, geraet: "rechner", icon: "tasten", art: "am Rechner, mit Microsoft 365", zettel: false,  // 44
       text: "Beantworte die Mail von Frau Berger.",
       haken: ["Mail in Outlook gelesen", "Antwort liegt in Ihren Entwürfen, abschicken tun Sie", "Aufgefallen: sie fragt auch nach dem Wartungsvertrag"] },
