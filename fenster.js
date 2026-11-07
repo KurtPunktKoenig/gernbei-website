@@ -35,7 +35,7 @@
     return '<span class="figur" aria-hidden="true"><svg viewBox="0 0 32 32">' + MASSBLASE + '</svg></span>';
   }
 
-  // Zeichen Gernbei wie in der Signatur, nur auf gernbei.de (Kurt 07.11.2026: Firmenlogo ueberall probieren)
+  // Zeichen Gernbei wie in der Signatur, nur im Kopf; im Fliesstext schlicht Gernbei (Kurt 07.11.2026: Ja, alle vier)
   function marke(text) {
     return esc(text).replace(/Gernbei/g, '<span class="gb">Gern<b>bei</b></span>');
   }
@@ -155,7 +155,7 @@
   // A1, B2, B3: Begrüßung mit KI-Hinweis, Einstiegsthemen
   function begruessen() {
     verlauf.innerHTML = "";
-    var b = blase('<div class="gruss">' + figurHtml() + "<div><p>Guten Tag. Ich bin der digitale Assistent von " + marke("Gernbei") + ", eine KI. Ich antworte aus den veröffentlichten Seiten dieser Website.</p>" +
+    var b = blase('<div class="gruss">' + figurHtml() + "<div><p>Guten Tag. Ich bin der digitale Assistent von Gernbei, eine KI. Ich antworte aus den veröffentlichten Seiten dieser Website.</p>" +
       '<p class="hinweis">Antworten können ungenau sein; verbindlich sind die verlinkten Seiten und Ihr Angebot. Bitte geben Sie hier keine persönlichen Daten ein.</p></div></div>');
     if (cfg.themen.length) {
       var c = document.createElement("div");
