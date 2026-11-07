@@ -8,16 +8,32 @@
     foto: '<path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
     tasten: '<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/>'
   };
+  // Jede Szene steht in Faehigkeiten-Produkte (Zeile in Klammern). Probetexte bis zum echten Lauf.
   var SZENEN = [
-    { icon: "mikro", art: "gesprochen, 16 Uhr auf der Baustelle", zettel: false,
+    { geraet: "handy", icon: "mikro", art: "am Handy, gesprochen, 16 Uhr", zettel: false,  // 4, 5, 6
       text: "Huber fragt, wann wir kommen. Die Heizung tropft wieder.",
       haken: ["Letzter Einsatz bei Huber: 12.09., Ventil getauscht", "Antwort an Herrn Huber entworfen", "Aufgefallen: Rückruf bis Freitag zugesagt"] },
-    { icon: "foto", art: "Foto vom Zettel aus dem Handschuhfach", zettel: true,
+    { geraet: "handy", icon: "foto", art: "am Handy, Foto vom Zettel", zettel: true,  // 2, 3, 7
       text: "Mach den Regiebericht für Berger draus.",
       haken: ["Regiebericht Familie Berger als Word-Datei", "6,5 Stunden und 3 Materialpositionen übernommen", "Bitte prüfen: die Stunden sind vom Foto gelesen"] },
-    { icon: "tasten", art: "getippt, abends", zettel: false,
-      text: "Was ist eigentlich mit dem Bad Müller?",
-      haken: ["Angebot Bad Müller: seit drei Wochen ohne Antwort", "Nachfassbrief an Frau Müller entworfen", "Aufgefallen: zwei weitere Angebote ohne Antwort"] }
+    { geraet: "rechner", icon: "tasten", art: "am Rechner, getippt", zettel: false,  // 1, 10, 46
+      text: "Angebot Bad Müller: 8 m² Fliesen, Duschwanne tauschen. Wie beim Bad Schmitt.",
+      haken: ["Angebot 2026-041 als Word und PDF, Aufbau wie Bad Schmitt", "Endsumme und Steuersatz nachgerechnet", "Aufgefallen: der Ausführungszeitraum fehlt noch"] },
+    { geraet: "rechner", icon: "tasten", art: "am Rechner, abends", zettel: false,  // 6, 10, 32
+      text: "Was ist eigentlich mit dem Angebot Bad Müller?",
+      haken: ["Seit drei Wochen ohne Antwort", "Nachfassbrief an Frau Müller entworfen", "Aufgefallen: zwei weitere Angebote ohne Antwort"] },
+    { geraet: "handy", icon: "mikro", art: "am Handy, morgens im Transporter", zettel: false,  // 11, 6
+      text: "Was steht heute an?",
+      haken: ["Wartung bei Berger, für heute zugesagt", "Zwei Rückrufe bis Freitag versprochen", "Aufgefallen: Angebot Müller seit drei Wochen offen"] },
+    { geraet: "rechner", icon: "tasten", art: "am Rechner, mit Microsoft 365", zettel: false,  // 44
+      text: "Beantworte die Mail von Frau Berger.",
+      haken: ["Mail in Outlook gelesen", "Antwort liegt in Ihren Entwürfen, abschicken tun Sie", "Aufgefallen: sie fragt auch nach dem Wartungsvertrag"] },
+    { geraet: "rechner", icon: "tasten", art: "am Rechner, Kalkulation im OneDrive", zettel: false,  // 44
+      text: "Was hat das Bad Müller bisher gekostet?",
+      haken: ["Kalkulation im OneDrive gefunden", "Bisher 4.860 Euro für Material und Stunden", "Aufgefallen: die Stunden von Dienstag fehlen noch"] },
+    { geraet: "handy", icon: "foto", art: "am Handy, drei Fotos vom fertigen Bad", zettel: false,  // 30
+      text: "Mach einen Beitrag zum Bad Müller fürs Google-Profil.",
+      haken: ["Beitrag mit drei Fotos in Ihrem Ton entworfen", "Online stellen Sie selbst, mit einem Klick", "Hinweis: im Profil fehlt noch die Telefonnummer"] }
   ];
   var ruhig = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var art = wurzel.querySelector(".szene-art"), text = wurzel.querySelector(".szene-text");
@@ -33,6 +49,7 @@
     jetzt = n;
     var s = SZENEN[n];
     knoepfe.forEach(function (k, i) { k.setAttribute("aria-pressed", i === n ? "true" : "false"); });
+    wurzel.classList.toggle("rechner", s.geraet === "rechner");
     art.querySelector("svg").innerHTML = ICON[s.icon];
     art.querySelector("span").textContent = s.art;
     zettel.hidden = !s.zettel;

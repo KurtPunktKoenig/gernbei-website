@@ -457,3 +457,15 @@ ol.fragen b{font-family:var(--display);font-weight:600;font-size:clamp(17px,2vw,
   .hero.mit-szene .szene-sorglos{order:7}
   .szene-handy{min-height:380px}
 }
+/* Handy und Rechner (Kurt 07.11.2026: es darf nicht wirken, als ginge es nur am Handy): das Geraet wechselt mit der Szene */
+.szene-handy{transition:width .45s ease,border-radius .45s ease,min-height .45s ease}
+.szene.rechner .szene-handy{width:min(100%,500px);min-height:360px;border-radius:12px;padding-top:10px}
+.szene.rechner .szene-kopf{position:relative}
+.szene.rechner .szene-kopf::before{content:"";position:absolute;left:4px;top:9px;width:8px;height:8px;border-radius:50%;background:var(--braun-haar);box-shadow:13px 0 0 var(--braun-haar),26px 0 0 var(--braun-haar)}
+.szene-fuss{display:block;width:0;height:0;transition:width .45s ease}
+.szene.rechner .szene-fuss{width:min(108%,560px);height:9px;background:var(--braun-dunkel);border-radius:2px 2px 9px 9px;margin-top:-1px}
+.szene-geraete{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 6px;font-family:var(--mono);font-size:12px;color:var(--braun-mittel);margin-top:18px;text-align:center}
+.szene-geraete svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6}
+.szene-wahl-kopf{font-weight:600;font-size:14px;color:var(--braun-dunkel);margin-top:18px;text-align:center}
+.szene-wahl{margin-top:10px;max-width:520px}
+@media(prefers-reduced-motion:reduce){.szene-handy,.szene-fuss{transition:none}}
