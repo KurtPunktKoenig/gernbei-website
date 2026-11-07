@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wissensverlust-Rechner | Gernbei</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="haus.css">
+<style>
+.rechner-kopf{padding:72px 0 28px}
+.rechner-kopf h1{font-size:clamp(34px,5.4vw,58px);max-width:15em;margin-bottom:16px}
+.formular{max-width:46rem;border-top:1px solid var(--tinte)}
+.feld{padding:22px 0;border-bottom:1px solid var(--haar)}
+.feld label{display:block;font-family:var(--display);font-weight:600;font-size:clamp(18px,2vw,21px);letter-spacing:-.015em;line-height:1.3;color:var(--tinte)}
+.feld .hinweis{display:block;font-size:14px;color:var(--grau);margin:6px 0 12px}
+.zeile{display:flex;align-items:center;gap:12px}
+.zeile input{width:140px;border:1px solid var(--haar);border-radius:10px;padding:10px 12px;font:500 18px var(--display);text-align:right;background:var(--papier-2);color:var(--tinte);outline:none;font-variant-numeric:tabular-nums}
+.zeile input:focus{border-color:var(--tinte);background:#fff}
+.zeile input.field-error{border-color:var(--tinte);box-shadow:inset 0 0 0 1px var(--tinte)}
+.zeile span{font-family:var(--mono);font-size:12px;color:var(--grau-2)}
+.fehler{display:none;align-items:center;gap:10px;margin-top:20px;font-size:15px;color:var(--tinte)}
+.fehler.visible{display:flex}
+.fehler::before{content:"!";display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;flex:none;border:1.5px solid var(--tinte);border-radius:50%;font:600 12px var(--mono)}
+.formular .knopf{margin-top:26px}
+.ergebnis{display:none;max-width:56rem;margin-top:56px;border-top:1px solid var(--tinte)}
+.ergebnis.visible{display:block}
+.ergebnis .zwei{display:grid;grid-template-columns:1fr 1fr}
+.ergebnis .zwei>div{padding:24px 24px 24px 0;border-bottom:1px solid var(--haar)}
+.ergebnis .zwei>div+div{padding-left:24px;border-left:1px solid var(--haar)}
+@media(max-width:640px){.ergebnis .zwei{grid-template-columns:1fr}.ergebnis .zwei>div+div{padding-left:0;border-left:0}}
+.e-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--rot)}
+.e-zahl{font-family:var(--display);font-weight:600;font-size:clamp(34px,4.6vw,52px);letter-spacing:-.04em;line-height:1.05;margin:8px 0 4px;font-variant-numeric:tabular-nums;color:var(--tinte)}
+.e-zusatz{font-size:14px;color:var(--grau)}
+.posten{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:16px 0;border-bottom:1px solid var(--haar)}
+.posten h3{font-size:17px;margin-bottom:4px}
+.posten p{font-size:14.5px;color:var(--grau);max-width:34rem}
+.posten b{font-family:var(--display);font-weight:600;font-size:20px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.szenario{margin-top:22px;font-size:17px;color:var(--tinte-2);max-width:46rem}
+.szenario strong{color:var(--tinte)}
+.schluss{margin:56px 0 0;background:var(--tinte);border-radius:20px;padding:clamp(24px,4vw,40px);max-width:56rem}
+.schluss .zitat{font-family:var(--display);font-size:clamp(20px,2.4vw,26px);font-weight:500;letter-spacing:-.02em;color:#fff;margin-bottom:22px}
+.schluss h2{color:#fff;font-size:clamp(24px,3vw,32px);margin-bottom:10px}
+.schluss p{color:#C7C7CC}
+.schluss .knopf{background:#fff;color:var(--tinte);margin-top:20px}
+.schluss .alt{font-size:14px;margin-top:16px;color:#A1A1A6}
+.schluss .alt a{color:#fff}
+.rechner{padding:0 0 96px}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <a class="logo" href="index.html"><svg viewBox="0 0 13 30"><path d="M1.25 1V29M1.25 15H13M7.5 11L2 15L7.5 19"/></svg>Gernbei<svg class="r" viewBox="0 0 13 30"><path d="M1.25 1V29M1.25 15H13M7.5 11L2 15L7.5 19"/></svg></a>
+  <ul>
+    <li><a href="dienstleister.html">Für Dienstleister</a></li>
+    <li><a href="handwerk.html">Fürs Handwerk</a></li>
+    <li><a href="firmengedaechtnis.html">Firmengedächtnis</a></li>
+    <li><a href="index.html#preis">Preis</a></li>
+    <li><a href="index.html#ueber">Über mich</a></li>
+    <li><a href="warum.html">Warum</a></li>
+    <li><a href="fragen.html">Fragen</a></li>
+  </ul>
+  <a class="knopf" href="index.html#kontakt">Gespräch vereinbaren</a>
+</div></nav>
+
+<section class="rechner-kopf"><div class="wrap">
+  <p class="ueber">Ihre Zahl</p>
+  <h1>Was kostet es Ihre Firma, wenn Wissen in den falschen Köpfen steckt?</h1>
+  <p class="lead">6 Fragen, 3 Minuten, zwei Zahlen. Kein Login, kein Kleingedrucktes.</p>
+</div></section>
+
+<section class="rechner"><div class="wrap">
+  <div class="formular">
+    <div class="feld">
+      <label for="persons">Wie viele Schlüsselpersonen gibt es bei Ihnen, ohne die der Laden nicht rund läuft?</label>
+      <span class="hinweis">"Die Leute, bei denen alle sagen: Frag den Müller."</span>
+      <div class="zeile"><input type="number" id="persons" min="1" max="50" value="3"><span>Personen</span></div>
+    </div>
+    <div class="feld">
+      <label for="salary">Was verdient so eine Person im Schnitt brutto pro Monat?</label>
+      <span class="hinweis">Grobe Schätzung reicht.</span>
+      <div class="zeile"><input type="number" id="salary" min="1000" max="50000" step="100" value="4500"><span>€ / Monat</span></div>
+    </div>
+    <div class="feld">
+      <label for="replacement">Wie lange dauert es realistisch, so eine Position nachzubesetzen?</label>
+      <span class="hinweis">Denken Sie an den Fachkräftemangel.</span>
+      <div class="zeile"><input type="number" id="replacement" min="1" max="36" value="6"><span>Monate</span></div>
+    </div>
+    <div class="feld">
+      <label for="rampup">Wie viele Monate braucht ein Nachfolger, bis er wirklich produktiv ist?</label>
+      <span class="hinweis">Nicht bis er da sitzt, sondern bis er wirklich weiß, wie Sie arbeiten.</span>
+      <div class="zeile"><input type="number" id="rampup" min="1" max="36" value="6"><span>Monate</span></div>
+    </div>
+    <div class="feld">
+      <label for="searchhours">Wie viele Stunden pro Woche verbringt Ihr Team damit, Informationen zu suchen, die irgendwo sein müssten?</label>
+      <span class="hinweis">E-Mails durchsuchen, Kollegen fragen, Ablage durchwühlen.</span>
+      <div class="zeile"><input type="number" id="searchhours" min="0" max="80" value="5"><span>Stunden / Woche</span></div>
+    </div>
+    <div class="feld">
+      <label for="hourlyrate">Was ist der durchschnittliche Stundensatz Ihres Teams?</label>
+      <span class="hinweis">Gehalt geteilt durch Monatsstunden. 30-50 € ist bei KMU typisch.</span>
+      <div class="zeile"><input type="number" id="hourlyrate" min="10" max="300" value="40"><span>€ / Stunde</span></div>
+    </div>
+    <p class="fehler" id="errorMsg">Bitte füllen Sie alle Felder aus.</p>
+    <button class="knopf" id="calcBtn" type="button">Berechnen</button>
+  </div>
+
+  <div class="ergebnis" id="result">
+    <div class="zwei">
+        <div><div class="e-label">Jeder Abgang kostet Sie</div><div class="e-zahl" id="perExitAmount">--</div><div class="e-zusatz">einmalig, je Schlüsselperson, geschätzt aus Ihren Angaben</div></div>
+        <div><div class="e-label">Suchen statt arbeiten kostet</div><div class="e-zahl" id="searchAmount">--</div><div class="e-zusatz">jedes Jahr, auch ohne Abgang</div></div>
+    </div>
+      <div class="posten"><div><h3>Ausfall während der Vakanz</h3><p>Die Leistung fällt weg, das Gehalt sparen Sie, einen Teil fängt das Team auf. Was bleibt, ist echter Verlust.</p></div><b id="vacancyAmount">--</b></div>
+      <div class="posten"><div><h3>Wiederbesetzung</h3><p>Ausschreibung, Auswahl, Vertragsanbahnung und die Zeit, die Ihre Leute dafür aufwenden.</p></div><b id="hiringAmount">--</b></div>
+      <div class="posten"><div><h3>Einarbeitung</h3><p>Der Nachfolger wird voll bezahlt, bevor er die Leistung seines Vorgängers bringt.</p></div><b id="rampAmount">--</b></div>
+      <div class="posten"><div><h3>Suchzeit im Team</h3><p>Läuft jedes Jahr, unabhängig davon, ob jemand geht.</p></div><b id="searchAmount2">--</b></div>
+    <p class="szenario" id="scenario">--</p>
+    <details class="mehr"><summary>So rechnen wir</summary><div class="mehr-inhalt">
+      <p><b>Ausfall während der Vakanz:</b> Monate bis zur Nachbesetzung mal Monatsgehalt mal 65 Prozent, weil Sie das Gehalt sparen und das Team einen Teil auffängt.</p>
+      <p><b>Wiederbesetzung:</b> 20 Prozent eines Jahresgehalts für Ausschreibung, Auswahl und die Zeit Ihrer Leute.</p>
+      <p><b>Einarbeitung:</b> Monate bis zur vollen Leistung mal Monatsgehalt mal 50 Prozent, weil der Nachfolger anfangs etwa halb so viel schafft.</p>
+      <p><b>Suchzeit:</b> Stunden pro Woche mal Stundensatz mal 52 Wochen.</p>
+      <p>Das sind Schätzwerte aus Ihren Angaben, keine Messung. Ein Firmengedächtnis verhindert keinen Abgang und keine Ausschreibung. Es verkürzt Einarbeitung und Suchzeit und hält fest, was sonst mit der Person geht.</p>
+    </div></details>
+  </div>
+
+  <div class="schluss" id="closing" style="display:none;">
+    <p class="zitat">"Diese Zahl wird nicht kleiner, wenn Sie warten. Aber sie lässt sich absichern."</p>
+    <h2>Wollen Sie sehen, wie diese Zahl kleiner wird?</h2>
+    <p>Zwanzig Minuten am Telefon. Ich schaue mir an, wo bei Ihnen das meiste Wissen hängt, und sage Ihnen ehrlich, ob sich etwas lohnt. Auch wenn die Antwort nein ist.</p>
+    <a class="knopf" href="index.html#kontakt">Gespräch vereinbaren</a>
+    <p class="alt">Lieber direkt: <a href="mailto:hallo@gernbei.de">hallo@gernbei.de</a> &middot; <a href="tel:+4993145321005">0931 45321005</a></p>
+  </div>
+</div></section>
+
+<footer class="fuss"><div class="wrap">
+  <div class="plankopf">
+    <div><small>Planverfasser</small>Kurt König · Gernbei</div>
+    <div><small>Ort</small>Wittelsbacher Str. 2, 97074 Würzburg</div>
+    <div><small>Stand</small>07.11.2026</div>
+    <div><small>Blätter</small><a href="fragen.html">Fragen</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></div>
+  </div>
+  <p class="credit">© 2026 Kurt König. Gebaut und gepflegt mit derselben KI, die in der Arbeitsfläche arbeitet. Richtung und Freigabe: Kurt König.</p>
+</div></footer>
+
+<script>
+  function formatEuro(n) {
+    return n.toLocaleString('de-DE', { maximumFractionDigits: 0 }) + ' €';
+  }
+
+  function getVal(id) {
+    const el = document.getElementById(id);
+    const v = parseFloat(el.value);
+    return isNaN(v) ? null : v;
+  }
+
+  document.getElementById('calcBtn').addEventListener('click', function() {
+    const fields = ['persons','salary','replacement','rampup','searchhours','hourlyrate'];
+    let allValid = true;
+
+    fields.forEach(function(id) {
+      const el = document.getElementById(id);
+      const v = getVal(id);
+      if (v === null || v < 0) {
+        el.classList.add('field-error');
+        allValid = false;
+      } else {
+        el.classList.remove('field-error');
+      }
+    });
+
+    const errEl = document.getElementById('errorMsg');
+    if (!allValid) {
+      errEl.classList.add('visible');
+      return;
+    }
+    errEl.classList.remove('visible');
+
+    const persons = getVal('persons');
+    const salary = getVal('salary');
+    const replacement = getVal('replacement');
+    const rampup = getVal('rampup');
+    const searchhours = getVal('searchhours');
+    const hourlyrate = getVal('hourlyrate');
+
+    // Je Abgang einer Schluesselperson, einmalig.
+    // Vakanz: Leistung faellt weg, Gehalt wird gespart, ein Teil wird vom Team aufgefangen.
+    const vacancy = replacement * salary * 0.65;
+    // Wiederbesetzung: Ausschreibung, Auswahl, Aufwand der Kollegen. Rund 20 % eines Jahresgehalts.
+    const hiring = salary * 12 * 0.20;
+    // Einarbeitung: volles Gehalt bei etwa halber Leistung.
+    const ramp = rampup * salary * 0.5;
+    const perExit = vacancy + hiring + ramp;
+
+    // Laeuft jedes Jahr, unabhaengig von Abgaengen.
+    const search = searchhours * hourlyrate * 52;
+
+    document.getElementById('perExitAmount').textContent = formatEuro(perExit);
+    document.getElementById('searchAmount').textContent = formatEuro(search);
+    document.getElementById('vacancyAmount').textContent = formatEuro(vacancy);
+    document.getElementById('hiringAmount').textContent = formatEuro(hiring);
+    document.getElementById('rampAmount').textContent = formatEuro(ramp);
+    document.getElementById('searchAmount2').textContent = formatEuro(search);
+
+    const personWort = persons === 1 ? 'Schlüsselperson' : 'Schlüsselpersonen';
+    document.getElementById('scenario').innerHTML =
+      'Bei ' + persons + ' ' + personWort + ' summiert sich das auf <strong>' +
+      formatEuro(perExit * persons) + '</strong>, sobald alle ausscheiden. Dazu <strong>' +
+      formatEuro(search) + '</strong> Suchzeit in jedem einzelnen Jahr.';
+
+    const resultEl = document.getElementById('result');
+    resultEl.classList.add('visible');
+
+    document.getElementById('closing').style.display = 'block';
+
+    setTimeout(function() {
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  });
+
+  document.querySelectorAll('input[type="number"]').forEach(function(input) {
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('calcBtn').click();
+      }
+    });
+    input.addEventListener('input', function() {
+      this.classList.remove('field-error');
+      document.getElementById('errorMsg').classList.remove('visible');
+    });
+  });
+</script>
+</body>
+</html>

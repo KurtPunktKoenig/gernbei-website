@@ -58,7 +58,7 @@ section{padding:104px 0}
 .nav ul a.aktuell{color:var(--tinte);font-weight:600}
 .nav .knopf{padding:8px 16px;font-size:14px;white-space:nowrap}
 /* Am Handy steht das Menue als zweite Zeile zum Wischen, statt zu verschwinden (Kurt 31.10.2026, Handytest) */
-@media(max-width:900px){.nav .wrap{flex-wrap:wrap;height:auto;padding-top:10px;row-gap:2px}.nav ul{order:3;width:100%;overflow-x:auto;white-space:nowrap;gap:18px;padding:6px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.nav ul::-webkit-scrollbar{display:none}}
+@media(max-width:1120px){.nav .wrap{flex-wrap:wrap;height:auto;padding-top:10px;row-gap:2px}.nav ul{order:3;width:100%;overflow-x:auto;white-space:nowrap;gap:18px;padding:6px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.nav ul::-webkit-scrollbar{display:none}}
 
 /* Hero */
 .hero{position:relative;padding:92px 0 72px;overflow:hidden}
@@ -272,29 +272,24 @@ body.werkzeug{background:var(--braun-platte)}
 .tuer p{font-size:15.5px;line-height:1.5}
 .tuer .fuss-t{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;font-weight:500;padding-top:14px}
 .tuer .fuss-t svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;flex:none}
-.tuer.geselle{background:var(--braun-platte);box-shadow:inset 0 0 0 1px var(--braun-haar),inset 0 1px 0 rgba(255,255,255,.8);color:var(--braun-dunkel)}
-.tuer.geselle:hover{box-shadow:inset 0 0 0 1px var(--braun-haar),0 18px 36px -24px rgba(43,42,39,.5)}
-.tuer.geselle small{color:var(--braun-leise)}
-.tuer.geselle p{color:var(--braun-mittel)}
-.tuer.geselle .fuss-t{border-top:1px solid var(--braun-haar)}
-.tuer.kompagnon{background:#fff;border:1.5px solid var(--tinte);box-shadow:4px 4px 0 var(--tinte)}
-.tuer.kompagnon:hover{box-shadow:6px 6px 0 var(--tinte)}
-.tuer.kompagnon small{color:var(--grau)}
-.tuer.kompagnon .hand{font-family:var(--hand);font-size:21px;color:var(--tinte-2);line-height:1.15}
+.tuer.handwerk{background:var(--braun-platte);box-shadow:inset 0 0 0 1px var(--braun-haar),inset 0 1px 0 rgba(255,255,255,.8);color:var(--braun-dunkel)}
+.tuer.handwerk:hover{box-shadow:inset 0 0 0 1px var(--braun-haar),0 18px 36px -24px rgba(43,42,39,.5)}
+.tuer.handwerk small{color:var(--braun-leise)}
+.tuer.handwerk p{color:var(--braun-mittel)}
+.tuer.handwerk .fuss-t{border-top:1px solid var(--braun-haar)}
+.tuer.dienst{background:#fff;border:1.5px solid var(--tinte);box-shadow:4px 4px 0 var(--tinte)}
+.tuer.dienst:hover{box-shadow:6px 6px 0 var(--tinte)}
+.tuer.dienst small{color:var(--grau)}
+.tuer.dienst .hand{font-family:var(--hand);font-size:21px;color:var(--tinte-2);line-height:1.15}
 .tuer svg.figur{width:78px;height:auto;margin:2px 0}
 .tuer.plan svg.team{width:124px}
 .tuer .hand{font-family:var(--hand);font-size:21px;line-height:1.15}
-.tuer.geselle .hand{color:var(--braun-dunkel)}
+.tuer.handwerk .hand{color:var(--braun-dunkel)}
 .tuer.plan .hand{color:var(--tinte-2)}
 .tuer .wolke{display:flex;align-items:center;gap:6px;font-size:13.5px;letter-spacing:-.01em;font-weight:500;line-height:1.3;color:var(--tinte);margin-top:-4px}
 .tuer .wolke svg{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6}
-.tuer.geselle .wolke{color:var(--braun-dunkel)}
-.tuer.kompagnon .fuss-t{border-top:1.5px solid var(--tinte)}
-.tuer.chatbot{grid-column:1/-1;min-height:auto;background:#fff;border:1.5px solid #2E6B73;box-shadow:4px 4px 0 #2E6B73}
-.tuer.chatbot:hover{box-shadow:6px 6px 0 #2E6B73}
-.tuer.chatbot small{color:var(--grau)}
-.tuer.chatbot .hand{font-family:var(--hand);font-size:21px;color:var(--tinte-2);line-height:1.15}
-.tuer.chatbot svg.blase{width:56px}
+.tuer.handwerk .wolke{color:var(--braun-dunkel)}
+.tuer.dienst .fuss-t{border-top:1.5px solid var(--tinte)}
 .tuer.plan{background:#fff;border:1px solid var(--haar);background-image:linear-gradient(#F2F2F0 1px,transparent 1px),linear-gradient(90deg,#F2F2F0 1px,transparent 1px);background-size:22px 22px}
 .tuer.plan:hover{box-shadow:0 18px 36px -24px rgba(17,18,20,.4)}
 .tuer.plan small{color:var(--grau-2)}
