@@ -29,10 +29,12 @@
    Mindesthöhe wie auf den Produktseiten, damit die Seite beim Tippen nicht springt. */
 .produkt .szene .bildunter{max-width:26rem;margin-left:auto;margin-right:auto}
 .produkt .szene-wahl{margin-left:auto;margin-right:auto}
+/* Knopftext darf umbrechen, sonst drueckt er bei 320 Pixeln die Spalte breiter als den Schirm (08.11.2026) */
+.produkt .knopf{flex-wrap:wrap;column-gap:.3em}
 
 @media(max-width:900px){
   .leiste-gruppen{grid-template-columns:1fr;gap:22px}
-  .produkt .wrap{grid-template-columns:1fr;gap:28px}
+  .produkt .wrap{grid-template-columns:minmax(0,1fr);gap:28px}
   .produkt:nth-of-type(odd) .produkt-bild{order:0}
 }
 @media(max-width:620px){
