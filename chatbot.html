@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chat-Bot Webseiten | Gernbei</title>
-<meta name="description" content="Ein Chatbot für Ihre Website, der nur aus Ihren Inhalten antwortet, jede Antwort mit Quelle. Was er nicht weiß, sagt er und nennt Ihren Kontakt. Persönlich eingerichtet von Kurt König aus Würzburg.">
+<meta name="description" content="Ein Chatbot für Ihre Website, der nur aus Ihren Inhalten antwortet, jede Antwort mit Quelle. Bei einer neuen Frage nennt er Ihren Kontakt. Persönlich eingerichtet von Kurt König aus Würzburg.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="haus.css">
 <style>
@@ -34,12 +34,12 @@
     <nav class="paar" aria-label="Für Ihre Kunden"><a href="chatbot.html" aria-current="page">Chat-Bot Webseiten</a><a href="telefon.html">KI-Telefonassistent</a></nav>
     <h1>Chat-Bot Webseiten.</h1>
     <p class="hand">Er antwortet nur, was auf Ihrer Seite steht.</p>
-    <p class="lead dunkler" style="font-size:clamp(19px,2.1vw,23px);line-height:1.4">Ihre Besucher fragen in ganzen Sätzen, am Handy oder am Rechner. Der Chatbot antwortet aus Ihrer Website und aus dem, was Sie zusätzlich freigeben, und nennt die Seite, von der die Antwort stammt. Weiß er es nicht, sagt er das und nennt Ihren Kontakt.</p>
+    <p class="lead dunkler" style="font-size:clamp(19px,2.1vw,23px);line-height:1.4">Ihre Besucher fragen in ganzen Sätzen, am Handy oder am Rechner. Der Chatbot antwortet aus Ihrer Website und aus dem, was Sie zusätzlich freigeben, und nennt die Seite, von der die Antwort stammt. Bei einer neuen Frage nennt er Ihren Kontakt.</p>
     <div class="knoepfe"><a class="knopf" href="index.html#kontakt">Preis anfragen</a><a class="knopf hell" href="#ausprobieren">Selbst ausprobieren</a></div>
-    <p class="szene-sorglos"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/></svg>Eine Zeile auf Ihrer Website. Sie installieren nichts.</p>
+    <p class="szene-sorglos"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/></svg>Eine Zeile auf Ihrer Website, fertig.</p>
   </div>
   <div>
-    <div class="szene" id="szene">
+    <div class="szene" id="szene" data-szenen="chatbot">
       <div class="handy szene-handy">
         <p class="szene-kopf"><span class="gb">Gern<b>bei</b></span>.de · Fragen an <span class="gb">Gern<b>bei</b></span></p>
         <div class="szene-flaeche" aria-live="polite">
@@ -47,9 +47,9 @@
           <div class="szene-ich"><span class="szene-zettel" hidden></span><span class="szene-text">Muss ich dafür etwas installieren?</span></div>
           <p class="szene-denkt" hidden><i></i><i></i><i></i></p>
           <ul class="szene-haken">
-            <li>Nein, läuft im Browser, am Rechner oder am Handy</li>
+            <li>Läuft im Browser, am Rechner oder am Handy</li>
             <li>Quelle: Häufige Fragen und Startseite</li>
-            <li class="fund">Wörtlich aus den Häufigen Fragen, nicht ausgedacht</li>
+            <li class="fund">Wörtlich belegt aus den Häufigen Fragen</li>
           </ul>
         </div>
       </div>
@@ -59,7 +59,7 @@
       <div class="szene-wahl" role="group" aria-label="Frage wählen">
         <button type="button" aria-pressed="true">Antwort mit Quelle</button>
         <button type="button" aria-pressed="false">Frage nach dem Preis</button>
-        <button type="button" aria-pressed="false">Frage ohne Antwort</button>
+        <button type="button" aria-pressed="false">Frage für Sie</button>
       </div>
       <p class="bildunter">Echte Antwort des Chatbots auf gernbei.de, 07.11.2026.</p>
     </div>
@@ -76,10 +76,10 @@
     <h2>Fragen beantworten, die sonst Sie beantworten.</h2>
   </div>
   <div class="tafel" style="margin:0 auto">
-    <div><b>Nur Ihre Inhalte</b><p>Keine Antwort aus dem allgemeinen Wissen der KI, keine erfundene Öffnungszeit</p></div>
+    <div><b>Nur Ihre Inhalte</b><p>Jede Antwort aus Ihrer Seite, jede Öffnungszeit von Ihnen</p></div>
     <div><b>Mit Quelle</b><p>Unter jeder Antwort der Link zur Seite, auf der es steht</p></div>
-    <div><b>Was fehlt, landet bei Ihnen</b><p>Weiß er etwas nicht, nennt er Ihre Mail und Ihr Telefon. Auf Wunsch hinterlässt der Besucher ein Anliegen, das für Sie abgelegt wird</p></div>
-    <div><b>Mit fester Kostengrenze</b><p>Wer Fragen hineinschießt, stößt an Grenzen, Ihre Rechnung nicht</p></div>
+    <div><b>Was fehlt, landet bei Ihnen</b><p>Bei offenen Fragen nennt er Ihre Mail und Ihr Telefon. Auf Wunsch hinterlässt der Besucher ein Anliegen, das für Sie abgelegt wird</p></div>
+    <div><b>Mit fester Kostengrenze</b><p>Ihre Rechnung bleibt planbar, auch wenn jemand Fragen hineinschießt</p></div>
   </div>
   <p class="tafel-zeile" style="margin:16px auto 0;max-width:56rem"><b>Zwei Ausführungen:</b> Standard antwortet aus Ihrer Website und Ihren Freigaben. Professionell, zusammen mit dem Firmengedächtnis, bleibt von selbst aktuell und schlägt Antworten aus Ihrem internen Wissen vor: in Fertigstellung.</p>
   <details class="mehr" style="max-width:56rem;margin:24px auto 0">
@@ -105,9 +105,9 @@
 <section id="offen" class="kurz"><div class="wrap">
   <div class="grenze">
     <small>Offen gesagt</small>
-    <p>Er antwortet nicht aus dem allgemeinen Wissen der KI, sondern nur aus Ihren Inhalten. Er sagt am Anfang, dass er eine KI ist. Die Verarbeitung läuft über amerikanische Anbieter.</p>
+    <p>Er antwortet allein aus Ihren Inhalten. Er sagt am Anfang, dass er eine KI ist. Die Verarbeitung läuft über amerikanische Anbieter.</p>
   </div>
-  <p class="tafel-zeile" style="max-width:52rem">Für jede Firma mit Website. Auch zusammen mit Gernbei für Ihren Betrieb, aber nicht nötig. Dieselben Inhalte beantwortet auf Wunsch der <a href="telefon.html">KI-Telefonassistent</a> am Telefon.</p>
+  <p class="tafel-zeile" style="max-width:52rem">Für jede Firma mit Website, für sich allein oder zusammen mit Gernbei für Ihren Betrieb. Dieselben Inhalte beantwortet auf Wunsch der <a href="telefon.html">KI-Telefonassistent</a> am Telefon.</p>
 </div></section>
 
 <footer class="fuss"><div class="wrap">
@@ -121,52 +121,7 @@
 </div></footer>
 
 <!-- Szenen: echte Antworten des Chatdienstes auf m2 für gernbei.de, gefragt am 07.11.2026 gegen 18 Uhr, gekürzt, nichts hinzugefügt (Szenen-Echtlauf-2026-11-07, Abschnitt Chatbot und Telefon) -->
-<script type="application/json" id="szene-daten">
-[
- {
-  "echt": true,
-  "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026.",
-  "geraet": "handy",
-  "icon": "blase",
-  "art": "Besucherin, am Handy",
-  "zettel": false,
-  "text": "Muss ich dafür etwas installieren?",
-  "haken": [
-   "Nein, läuft im Browser, am Rechner oder am Handy",
-   "Quelle: Häufige Fragen und Startseite",
-   "Wörtlich aus den Häufigen Fragen, nicht ausgedacht"
-  ]
- },
- {
-  "echt": true,
-  "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026.",
-  "geraet": "rechner",
-  "icon": "blase",
-  "art": "Besucher, am Rechner",
-  "zettel": false,
-  "text": "Was kostet Gernbei fürs Handwerk?",
-  "haken": [
-   "Den Preis nennt Kurt König im Gespräch, passend zum Betrieb",
-   "Quelle: Gernbei fürs Handwerk und Häufige Fragen",
-   "Keine Zahl, die nicht auf der Website steht"
-  ]
- },
- {
-  "echt": true,
-  "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026.",
-  "geraet": "handy",
-  "icon": "blase",
-  "art": "Besucherin, am Handy",
-  "zettel": false,
-  "text": "Kann ich bei Ihnen am Samstag vorbeikommen?",
-  "haken": [
-   "Dazu keine freigegebene Auskunft, das sagt er offen",
-   "Termin direkt: Mail und Telefon des Betriebs genannt",
-   "Auf Wunsch ein Anliegen hinterlassen, für den Betrieb abgelegt"
-  ]
- }
-]
-</script>
+<script src="szenen-daten.js" defer></script>
 <script src="szene.js" defer></script>
 <script src="fenster.js" data-dienst="https://m2.ki-kurt.de" data-name="Fragen an Gernbei" data-untertitel="Digitaler Assistent, eine KI" data-telefon="0931 45321005" data-mail="hallo@gernbei.de" data-antwortzeit="Ein Mensch antwortet am nächsten Werktag." data-themen="Was kann Gernbei für mich tun?|Welches Angebot passt zu mir?|Wo liegen meine Daten?|Wie fange ich an?" defer></script>
 </body>
