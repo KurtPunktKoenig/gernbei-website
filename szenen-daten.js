@@ -392,13 +392,75 @@ window.SZENEN_DATEN = {
    "echt": true,
    "geraet": "rechner",
    "icon": "tasten",
-   "art": "am Rechner, im Team",
+   "art": "Lukas, Woche zwei, am Rechner",
    "zettel": false,
+   "weg": "aus Peters Notiz, März 2024 → für Lukas, heute",
+   "unter": "Erfundenes Büro, echte Antwort.",
+   "text": "Wie machen wir bei uns den Brandschutznachweis?",
+   "haken": [
+    "Fünf Schritte, so wie Peter Brandt sie festgehalten hat",
+    "Rettungswege zuerst, dann die Grundrisse",
+    "Quelle: Projektnotiz Schulstraße 14, 21.03.2024"
+   ]
+  },
+  {
+   "echt": true,
+   "geraet": "handy",
+   "icon": "tasten",
+   "art": "Sandra, Projektleitung, auf der Baustelle",
+   "zettel": false,
+   "weg": "aus dem Protokoll vom 17.03.2025 → für Sandra, auf der Baustelle",
+   "unter": "Erfundenes Büro, echte Antwort.",
    "text": "Warum haben wir beim Sonnenhof damals Variante B genommen?",
    "haken": [
-    "Entschieden am 17.03. für Variante B",
+    "Entschieden am 17.03.2025 für Variante B, das Holztragwerk",
     "Rund 18 Prozent günstiger, die Statik ist freigegeben",
-    "Quelle: Protokoll Baubesprechung Sonnenhof, Punkt 4"
+    "Quelle: Protokoll der Baubesprechung, Sandra Vogt"
+   ]
+  },
+  {
+   "echt": true,
+   "geraet": "rechner",
+   "icon": "tasten",
+   "art": "Thomas, Inhaber, nach dem Urlaub",
+   "zettel": false,
+   "weg": "aus den Notizen des Teams → für Thomas, am ersten Morgen",
+   "unter": "Erfundenes Büro, echte Antwort.",
+   "text": "Ich bin zurück aus dem Urlaub. Was hat das Team in den zwei Wochen notiert?",
+   "haken": [
+    "Diese Woche laufen drei Fristen aus",
+    "Für Sie zu entscheiden: Gemeinde Zell und Vertrag Klinikum",
+    "Quelle: Wochennotizen von Sandra, Lukas und Anna"
+   ]
+  },
+  {
+   "echt": true,
+   "geraet": "rechner",
+   "icon": "tasten",
+   "art": "Anna, Sekretariat, am Rechner",
+   "zettel": false,
+   "weg": "aus der gemeinsamen Ablage → für Anna, im Sekretariat",
+   "unter": "Erfundenes Büro, echte Antwort.",
+   "text": "Wo ist der Wartungsvertrag Klinikum von 2024?",
+   "haken": [
+    "Liegt im gemeinsamen Bereich bei den Verträgen",
+    "Kündigungsfrist am 30.09. abgelaufen, läuft vermutlich bis Ende 2027",
+    "Quelle: Wartungsvertrag WV-2024-07"
+   ]
+  },
+  {
+   "echt": true,
+   "geraet": "handy",
+   "icon": "tasten",
+   "art": "Lukas, ein Jahr später, am Handy",
+   "zettel": false,
+   "weg": "Peter ist seit März in Rente. Seine Notiz von 2024 → für Lukas, heute",
+   "unter": "Erfundenes Büro, echte Antwort.",
+   "text": "Welche Prüfstelle hatte beim Brandschutz Ärger gemacht?",
+   "haken": [
+    "Prüfstelle Müller in Würzburg",
+    "Will die Pläne vorab als PDF, sonst gibt es eine Nachforderung",
+    "Quelle: Peter Brandts Notiz vom 21.03.2024"
    ]
   }
  ]

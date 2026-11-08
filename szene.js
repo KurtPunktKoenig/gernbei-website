@@ -27,6 +27,8 @@
     var art = wurzel.querySelector(".szene-art"), text = wurzel.querySelector(".szene-text");
     var zettel = wurzel.querySelector(".szene-zettel"), denkt = wurzel.querySelector(".szene-denkt");
     var liste = wurzel.querySelector(".szene-haken"), wahl = wurzel.querySelector(".szene-wahl");
+    // Firmengedaechtnis (Kurt 08.11.2026: Ja, einbauen): Zeile "aus Peters Notiz -> fuer Lukas" ueber den Haken
+    var weg = wurzel.querySelector(".szene-weg");
     var knoepfe = [], folge = SZENEN.map(function (s, i) { return i; });
     var jetzt = 0, uhren = [], automatisch = !ruhig, sichtbar = false, gestartet = false;
 
@@ -47,10 +49,11 @@
       art.querySelector("svg").innerHTML = ICON[s.icon];
       art.querySelector("span").textContent = s.art;
       zettel.hidden = !s.zettel;
+      if (weg) { weg.textContent = s.weg || ""; weg.classList.toggle("zu", !sofort); }
       liste.innerHTML = s.haken.map(function (h, i) {
         return '<li class="' + (i === 2 ? "fund" : "") + (sofort ? "" : " zu") + '">' + h + "</li>";
       }).join("");
-      if (sofort) { text.textContent = s.text; denkt.hidden = true; liste.classList.remove("zu"); return; }
+      if (sofort) { text.textContent = s.text; denkt.hidden = true; liste.classList.remove("zu"); if (weg) weg.classList.remove("zu"); return; }
       text.textContent = "";
       liste.classList.add("zu");
       wurzel.classList.add("tippt");
@@ -61,7 +64,7 @@
       }
       spaeter(function () { wurzel.classList.remove("tippt"); denkt.hidden = false; }, t + 300);
       t += 1500;
-      spaeter(function () { denkt.hidden = true; liste.classList.remove("zu"); }, t);
+      spaeter(function () { denkt.hidden = true; liste.classList.remove("zu"); if (weg) weg.classList.remove("zu"); }, t);
       liste.querySelectorAll("li").forEach(function (li, i) {
         spaeter(function () { li.classList.remove("zu"); }, t + 150 + i * 650);
       });
