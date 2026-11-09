@@ -67,3 +67,6 @@
 .flagge .bildunter{color:#A1A1A8}
 .flagge + .produkt{border-top:0}
 @media(max-width:900px){.flagge .wrap{grid-template-columns:minmax(0,1fr)}.produkt.flagge{padding:64px 0}}
+/* Slogan als Antwort auf die Überschrift (Kurt 09.11.2026) */
+.slogan-antwort{font-family:var(--hand);font-size:clamp(34px,4.4vw,48px);line-height:1;color:var(--tinte-2);margin:-8px 0 26px;transform:rotate(-2deg);transform-origin:center}
+.slogan-antwort span{color:var(--rot)}
