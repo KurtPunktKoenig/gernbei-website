@@ -85,13 +85,6 @@ window.SZENEN_DATEN = {
  "dienstleister": {
   "berufe": [
    {
-    "name": "Beratung",
-    "szenen": [
-     0,
-     1
-    ]
-   },
-   {
     "name": "Projektleitung",
     "szenen": [
      2,
@@ -101,6 +94,8 @@ window.SZENEN_DATEN = {
    {
     "name": "Immobilien",
     "szenen": [
+     0,
+     1,
      4,
      5
     ],
@@ -288,7 +283,7 @@ window.SZENEN_DATEN = {
  "chatbot": [
   {
    "echt": true,
-   "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026.",
+   "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026, gekürzt.",
    "geraet": "handy",
    "icon": "blase",
    "art": "Besucherin, am Handy",
@@ -302,7 +297,7 @@ window.SZENEN_DATEN = {
   },
   {
    "echt": true,
-   "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026.",
+   "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026, gekürzt.",
    "geraet": "rechner",
    "icon": "blase",
    "art": "Besucher, am Rechner",
@@ -316,7 +311,7 @@ window.SZENEN_DATEN = {
   },
   {
    "echt": true,
-   "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026.",
+   "unter": "Echte Antwort des Chatbots auf gernbei.de, 07.11.2026, gekürzt.",
    "geraet": "handy",
    "icon": "blase",
    "art": "Besucherin, am Handy",
@@ -395,7 +390,7 @@ window.SZENEN_DATEN = {
    "art": "Lukas, Woche zwei, am Rechner",
    "zettel": false,
    "weg": "aus Peters Notiz, März 2024 → für Lukas, heute",
-   "unter": "Erfundenes Büro, echte Antwort.",
+   "unter": "Erfundenes Büro, echte Antwort, gekürzt.",
    "text": "Wie machen wir bei uns den Brandschutznachweis?",
    "haken": [
     "Fünf Schritte, so wie Peter Brandt sie festgehalten hat",
@@ -410,7 +405,7 @@ window.SZENEN_DATEN = {
    "art": "Sandra, Projektleitung, auf der Baustelle",
    "zettel": false,
    "weg": "aus dem Protokoll vom 17.03.2025 → für Sandra, auf der Baustelle",
-   "unter": "Erfundenes Büro, echte Antwort.",
+   "unter": "Erfundenes Büro, echte Antwort, gekürzt.",
    "text": "Warum haben wir beim Sonnenhof damals Variante B genommen?",
    "haken": [
     "Entschieden am 17.03.2025 für Variante B, das Holztragwerk",
@@ -425,7 +420,7 @@ window.SZENEN_DATEN = {
    "art": "Thomas, Inhaber, nach dem Urlaub",
    "zettel": false,
    "weg": "aus den Notizen des Teams → für Thomas, am ersten Morgen",
-   "unter": "Erfundenes Büro, echte Antwort.",
+   "unter": "Erfundenes Büro, echte Antwort, gekürzt.",
    "text": "Ich bin zurück aus dem Urlaub. Was hat das Team in den zwei Wochen notiert?",
    "haken": [
     "Diese Woche laufen drei Fristen aus",
@@ -440,7 +435,7 @@ window.SZENEN_DATEN = {
    "art": "Anna, Sekretariat, am Rechner",
    "zettel": false,
    "weg": "aus der gemeinsamen Ablage → für Anna, im Sekretariat",
-   "unter": "Erfundenes Büro, echte Antwort.",
+   "unter": "Erfundenes Büro, echte Antwort, gekürzt.",
    "text": "Wo ist der Wartungsvertrag Klinikum von 2024?",
    "haken": [
     "Liegt im gemeinsamen Bereich bei den Verträgen",
@@ -455,7 +450,7 @@ window.SZENEN_DATEN = {
    "art": "Lukas, ein Jahr später, am Handy",
    "zettel": false,
    "weg": "Peter ist seit März in Rente. Seine Notiz von 2024 → für Lukas, heute",
-   "unter": "Erfundenes Büro, echte Antwort.",
+   "unter": "Erfundenes Büro, echte Antwort, gekürzt.",
    "text": "Welche Prüfstelle hatte beim Brandschutz Ärger gemacht?",
    "haken": [
     "Prüfstelle Müller in Würzburg",

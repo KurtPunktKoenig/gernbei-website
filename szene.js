@@ -45,7 +45,7 @@
       // echt: Bitte und Haken aus einem Lauf auf mithand-t1 (Szenen-Echtlauf-2026-11-07), gekuerzt, nichts
       // hinzugefuegt. Ohne echt bleibt die Szene Probetext und darf so nicht live gehen.
       // unter: eigene Bildunterschrift, wo kein erfundener Betrieb spricht (Chatbot auf gernbei.de, Testanruf)
-      unter.textContent = s.echt ? (s.unter || "Erfundener Betrieb, echte Antwort.") : "Entwurf: Probetext, die echte Antwort steht aus.";
+      unter.textContent = s.echt ? (s.unter || "Erfundener Betrieb, echte Antwort, gekürzt.") : "Entwurf: Probetext, die echte Antwort steht aus.";
       art.querySelector("svg").innerHTML = ICON[s.icon];
       art.querySelector("span").textContent = s.art;
       zettel.hidden = !s.zettel;

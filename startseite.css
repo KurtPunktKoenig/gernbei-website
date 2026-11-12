@@ -70,3 +70,21 @@
 /* Slogan als Antwort auf die Überschrift (Kurt 09.11.2026) */
 .slogan-antwort{font-family:var(--hand);font-size:clamp(34px,4.4vw,48px);line-height:1;color:var(--tinte-2);margin:-8px 0 26px;transform:rotate(-2deg);transform-origin:center}
 .slogan-antwort span{color:var(--rot)}
+
+/* Einstieg mit Nutzen, Gespraech und Oberflaeche (Kurt 12.11.2026: Ja, so bauen; Bewertung der zwei Website-Analysen) */
+#top .dach{font-family:var(--display);font-weight:600;font-size:clamp(18px,2.2vw,24px);letter-spacing:-.02em;color:var(--grau);margin-bottom:14px}
+#top h1{font-size:clamp(34px,5.4vw,62px);max-width:15em}
+#top .einstieg-satz{font-size:16px;color:var(--tinte-2);max-width:34rem;margin:10px auto 18px}
+#top .einstieg-bild{margin:44px auto 0;max-width:900px}
+#top .einstieg-bild .schirm img{display:block;width:100%;height:auto}
+#top .einstieg-bild .handy{margin:0 auto}
+#top .einstieg-bild .handy img{display:block;width:100%;height:auto}
+.nur-klein{display:none}
+@media(max-width:620px){.nur-gross{display:none}.nur-klein{display:block}}
+.einladung{font-size:14.5px;color:var(--grau)!important;margin:0 0 18px!important}
+.einladung a,.peter a{color:var(--tinte);font-weight:600;text-decoration:none;border-bottom:1px solid currentColor}
+.flagge .einladung{color:#B9B9C0!important}
+.flagge .einladung a,.flagge .peter a{color:#fff}
+.produkt-text .peter{font-size:14.5px;margin:18px 0 0;max-width:30rem}
+.flagge .produkt-text .peter{color:#D7D7DC}
+.flagge .produkt-text .peter + .peter{margin-top:8px}
