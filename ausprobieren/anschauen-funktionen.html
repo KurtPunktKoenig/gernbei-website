@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Funktionen entdecken in Gernbei</title>
+<link rel="stylesheet" href="schriften.css">
+<style>
+:root{--bg:#FAFAF8;--karte:#FFFFFF;--leiste:#F5F5F3;--text:#111214;--mid:#3A3B40;--muted:#6E6E73;--linie:#D9D9D5;--akzent:#C2410C;--akzent-hell:#FDEEE4;--tinte:#111214;--rot:#B3261E;
+--c-nach:#4C7A5A;--c-texte:#2E6B73;--c-suchen:#3D6FA8;--c-notizen:#8A6116;--c-pruefen:#6B4E9B;--c-kunden:#B4472E;--c-einrichten:#5E5F64}
+:root[data-akzent="tinte"]{--akzent:#111214;--akzent-hell:#EDEDEA}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--text);font:16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--akzent);outline-offset:2px;border-radius:6px}
+svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.versteckt{display:none!important}
+
+/* Entwurfsleiste, gehoert nicht zum Produkt */
+.entwurf{background:#111214;color:#fff;display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:8px 16px;font-size:14px}
+.entwurf b{font-weight:600}
+.entwurf .frei{flex:1}
+.schalter{display:inline-flex;border:1px solid #55565c;border-radius:8px;overflow:hidden}
+.schalter button{background:none;border:0;color:#cfd0d4;padding:5px 12px;font-size:14px}
+.schalter button[aria-pressed="true"]{background:#fff;color:#111214;font-weight:600}
+
+.app{flex:1;display:flex;min-height:0}
+nav{width:270px;flex:none;background:var(--leiste);border-right:1px solid var(--linie);display:flex;flex-direction:column;padding:16px 12px;overflow-y:auto}
+.logo{display:flex;align-items:center;gap:10px;padding:4px 8px 14px}
+.logo .zeichen{width:34px;height:34px;color:var(--akzent)}
+.logo b{font-size:22px;line-height:1;letter-spacing:-.02em}
+.logo b i{font-style:normal;color:var(--akzent)}
+.logo small{display:block;font-size:13px;color:var(--mid)}
+.logo .zu{margin-left:auto;background:none;border:0;color:var(--muted);padding:6px;border-radius:6px}
+.neu{display:flex;align-items:center;gap:10px;width:calc(100% - 3px);background:var(--karte);color:var(--text);border:1px solid var(--text);border-radius:10px;box-shadow:2px 2px 0 #D23A26;padding:11px 14px;font-weight:600}
+.etikett{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:18px 8px 6px;display:flex;justify-content:space-between}
+.etikett button{background:none;border:0;color:var(--muted);font-size:16px;line-height:1;padding:0 4px}
+.punkt{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;text-align:left;padding:8px;border-radius:8px;color:var(--text)}
+.punkt:hover{background:#EBEBE8}
+.punkt.an{background:var(--akzent-hell);font-weight:600}
+.punkt small{display:block;font-size:12px;color:var(--muted);font-weight:400}
+.punkt .pf{width:10px;height:10px;border-radius:50%;margin:0 5px}
+.luft{flex:1;min-height:12px}
+.person{border-top:1px solid var(--linie);margin-top:8px;padding-top:10px}
+.person .bild{width:32px;height:32px;border-radius:50%;background:var(--tinte);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600;flex:none}
+
+main{flex:1;min-width:0;overflow-y:auto}
+.innen{max-width:1000px;margin:0 auto;padding:28px 32px 56px}
+.oben-mobil{display:none}
+.vorzeile{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--akzent);font-weight:700;margin:0 0 6px}
+h1{font-size:34px;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px}
+h2{font-size:22px;letter-spacing:-.01em;margin:0}
+.unter{color:var(--mid);font-size:17px;margin:0 0 20px}
+
+.suche{display:flex;gap:10px;margin-bottom:18px}
+.suchfeld{flex:1;display:flex;align-items:center;gap:10px;background:var(--karte);border:1.5px solid #B9B9B4;border-radius:10px;padding:0 14px;color:var(--muted)}
+.suchfeld:focus-within{border-color:var(--akzent)}
+.suchfeld input{flex:1;border:0;outline:0;background:none;padding:13px 0;min-width:0;color:var(--text)}
+.suchfeld .leeren{background:none;border:0;color:var(--muted);padding:6px;font-size:18px;line-height:1}
+.haupt{background:var(--akzent);color:#fff;border:0;border-radius:10px;padding:12px 22px;font-weight:700}
+.haupt[disabled]{opacity:.6;cursor:default}
+.dunkel{background:var(--tinte);color:#fff;border:0;border-radius:8px;padding:9px 16px;font-weight:600}
+.neben{background:var(--karte);color:var(--text);border:1.5px solid #B9B9B4;border-radius:8px;padding:8px 14px;font-weight:600}
+.neben[disabled]{color:var(--muted);border-style:dashed;cursor:default}
+.link{background:none;border:0;padding:0;color:var(--text);text-decoration:underline;text-underline-offset:3px}
+
+.filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{background:var(--karte);border:1.5px solid #B9B9B4;border-radius:999px;padding:7px 16px;display:inline-flex;align-items:center;gap:8px}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--f)}
+.chip[aria-pressed="true"]{background:var(--tinte);border-color:var(--tinte);color:#fff;font-weight:600}
+.chip[aria-pressed="true"]::before{content:"✓";font-size:13px}
+.einr{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;color:var(--mid);font-size:15px;padding-bottom:18px;border-bottom:1px solid var(--linie);margin-bottom:22px}
+.einr span{display:inline-flex;align-items:center;gap:8px;font-weight:600}
+.hinweis{background:var(--akzent-hell);border-radius:8px;padding:9px 14px;margin:0 0 18px;font-size:15px}
+
+.gruppe{margin-bottom:30px}
+.gkopf{display:flex;align-items:center;gap:10px}
+.gkopf i{width:14px;height:14px;border-radius:50%;background:var(--f)}
+.gtext{color:var(--mid);margin:2px 0 12px}
+.karten{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.karte{background:var(--karte);border:1px solid var(--linie);border-radius:12px;padding:16px 18px;display:flex;gap:14px}
+.kachel{width:42px;height:42px;border-radius:10px;background:color-mix(in srgb,var(--f) 13%,#fff);color:var(--f);display:grid;place-items:center;flex:none}
+.karte h3{margin:0 0 2px;font-size:18px;letter-spacing:-.01em}
+.karte p{margin:0 0 12px;color:var(--mid)}
+.kinhalt{display:flex;flex-direction:column;flex:1;min-width:0}
+.kinhalt .fuss{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.marke{font-size:13px;color:var(--mid);border:1px solid var(--linie);border-radius:999px;padding:2px 10px}
+.marke.auf{border-color:var(--akzent);color:var(--akzent);font-weight:600}
+.treffer-bereich{font-size:13px;color:var(--f);font-weight:600;margin-bottom:2px}
+.frage{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;background:var(--karte);border:1px solid var(--linie);border-radius:12px;padding:14px 18px;margin-top:8px}
+
+/* Assistent */
+.pfad{font-size:15px;color:var(--mid);margin-bottom:6px}
+.pfad button{color:var(--akzent);font-weight:600;text-decoration:none}
+.stufen{display:flex;align-items:center;gap:10px;list-style:none;padding:0;margin:18px 0 20px;flex-wrap:wrap}
+.stufen li{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.stufen li b{width:28px;height:28px;border-radius:50%;border:1.5px solid #B9B9B4;display:grid;place-items:center;font-size:14px;background:var(--karte)}
+.stufen li[aria-current]{color:var(--text);font-weight:700}
+.stufen li[aria-current] b{background:var(--akzent);border-color:var(--akzent);color:#fff}
+.stufen li[aria-current] span{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+.stufen li.fertig{color:var(--text)}
+.stufen li.fertig b{background:var(--tinte);border-color:var(--tinte);color:#fff}
+.stufen .strich{flex:1;min-width:20px;max-width:110px;height:1px;background:#B9B9B4}
+.zwei{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}
+.blatt{background:var(--karte);border:1px solid var(--linie);border-radius:12px;padding:20px 22px}
+.feld{margin-bottom:16px}
+.feld label,.feld legend{display:block;font-weight:600;margin-bottom:5px;padding:0}
+.feld fieldset{border:0;padding:0;margin:0}
+.feld input[type=text],.feld textarea,.feld select{width:100%;background:#fff;border:1.5px solid #B9B9B4;border-radius:8px;padding:10px 12px}
+.feld textarea{min-height:92px;resize:vertical}
+.feld .hilfe{font-size:14px;color:var(--muted);margin-top:4px}
+.feld .fehler{font-size:14px;color:var(--rot);font-weight:600;margin-top:4px}
+.feld.falsch input,.feld.falsch textarea{border-color:var(--rot)}
+.wahl{display:flex;flex-wrap:wrap;gap:8px}
+.wahl label{font-weight:400;margin:0;border:1.5px solid #B9B9B4;border-radius:8px;padding:7px 14px;display:inline-flex;gap:6px;align-items:center;cursor:pointer;background:#fff}
+.wahl input{position:absolute;opacity:0}
+.wahl label:has(input:checked){border-color:var(--tinte);font-weight:600;box-shadow:inset 0 0 0 1px var(--tinte)}
+.wahl label:has(input:checked)::before{content:"✓"}
+.wahl label:has(input:focus-visible){outline:3px solid var(--akzent);outline-offset:2px}
+.herkunft{font-size:14px;color:var(--c-texte);margin-top:4px}
+.seite{background:var(--akzent-hell);border-radius:12px;padding:18px 20px}
+.seite h2{font-size:19px;margin-bottom:4px}
+.seite ul{margin:10px 0 0;padding-left:20px}
+.seite li{margin-bottom:4px}
+.fuss-hinweis{display:flex;gap:8px;align-items:center;color:var(--mid);font-size:14px;margin-top:14px}
+.reihe{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.wartet{display:flex;align-items:center;gap:12px;padding:30px 4px;font-weight:600}
+.kreis{width:22px;height:22px;border:3px solid var(--linie);border-top-color:var(--akzent);border-radius:50%;animation:dreh 1s linear infinite}
+@keyframes dreh{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.kreis{animation:none}}
+.platzhalter{border:1.5px dashed #B9B9B4;border-radius:8px;padding:10px 12px;font-size:14px;color:var(--mid);margin-bottom:14px}
+.ok{background:#EAF3EC;border-radius:8px;padding:10px 14px;margin-top:14px}
+details{margin-top:16px;font-size:14px;color:var(--mid)}
+details pre{white-space:pre-wrap;background:var(--leiste);padding:10px 12px;border-radius:8px;font:13px/1.5 ui-monospace,Consolas,monospace;color:var(--text)}
+.vorschau{white-space:pre-wrap;background:var(--leiste);border-radius:8px;padding:14px 16px;margin:0 0 16px}
+
+/* Erklaerseite */
+.erkl h2{margin:30px 0 8px}
+.erkl h2:first-of-type{margin-top:8px}
+.erkl table{border-collapse:collapse;width:100%;background:var(--karte);font-size:15px}
+.erkl th,.erkl td{border:1px solid var(--linie);padding:7px 10px;text-align:left;vertical-align:top}
+.erkl th{background:var(--leiste)}
+.erkl .tw{overflow-x:auto}
+.erkl li{margin-bottom:6px}
+.kasten{background:var(--karte);border:1px solid var(--linie);border-left:4px solid var(--akzent);border-radius:8px;padding:12px 16px;margin:12px 0}
+
+@media (max-width:860px){
+  nav{display:none;position:fixed;inset:0 auto 0 0;z-index:5;box-shadow:0 0 40px rgba(0,0,0,.3)}
+  nav.offen{display:flex}
+  .oben-mobil{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--linie);background:var(--leiste);position:sticky;top:0;z-index:2}
+  .oben-mobil button{background:none;border:0;padding:6px}
+  .innen{padding:20px 16px 48px}
+  h1{font-size:27px}
+  .karten,.zwei{grid-template-columns:1fr}
+  .suche{flex-wrap:wrap}.suche .haupt{width:100%}
+  .stufen .strich{min-width:10px}
+}
+.kontext{font-size:14px;color:var(--mid);border-bottom:1px solid var(--linie);padding-bottom:10px;margin-bottom:18px}
+.verlauf{display:flex;flex-direction:column;gap:14px;max-width:760px;margin:0 auto}
+.ich{align-self:flex-end;background:var(--tinte);color:#fff;border-radius:14px 14px 4px 14px;padding:10px 14px;max-width:85%}
+.sie p{margin:0 0 8px}
+.ekasten{background:var(--karte);border:1px solid var(--linie);border-radius:12px;padding:16px 18px}
+.ekasten.alt{background:var(--leiste)}
+.ekasten.alt .vorschau{background:none;padding:0;margin:6px 0 0}
+.ekopf{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:6px}
+.ekasten .stufen{margin:8px 0 14px}
+.etrenn{border-top:1px solid var(--linie);margin:16px 0 12px}
+.klein{font-size:14px;color:var(--muted)}
+.zeile-unten{max-width:760px;margin:22px auto 0;display:flex;align-items:center;gap:10px;border:1.5px solid #B9B9B4;border-radius:14px;background:#fff;padding:12px 14px;color:var(--muted)}
+.zeile-unten span{flex:1}
+.zeile-unten span.voll{color:var(--text)}
+.zeile-unten b{width:32px;height:32px;border-radius:50%;background:var(--tinte);color:#fff;display:grid;place-items:center;flex:none}
+.akarte{max-width:760px;margin:90px auto 0;border:1px solid var(--linie);border-bottom:0;border-radius:12px 12px 0 0;background:var(--leiste);padding:12px 16px;font-size:15px}
+.akarte p{margin:4px 0 0;color:var(--mid)}
+.akarte .z1{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.akarte .z1 span{color:var(--muted)}
+.akarte+.zeile-unten{margin-top:0;border-radius:0 0 14px 14px}
+/* Fassung 3: Auswahl oben, Blatt unten; Orange dezent; Leiste kuerzer */
+nav{padding:12px 10px}
+.logo{padding:2px 8px 10px}
+.neu{padding:9px 14px}
+.etikett{padding:12px 8px 3px}
+.punkt{padding:6px 8px}
+@media (max-height:760px){nav{font-size:15px;padding:8px 10px}.logo{padding-bottom:6px}.logo .zeichen{width:28px;height:28px}.logo b{font-size:20px}.neu{padding:7px 14px}.punkt small{display:none}.etikett{padding:7px 8px 2px}.punkt{padding:3px 8px}.luft{min-height:4px}.person{margin-top:2px;padding-top:4px}.person .bild{width:28px;height:28px}}
+.abschnitt{font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted);margin:18px 0 6px}
+.abschnitt span{text-transform:none;letter-spacing:0;font-weight:400;margin-left:8px}
+.auswahl{display:flex;flex-wrap:wrap;gap:12px 28px;background:var(--karte);border:1px solid var(--linie);border-radius:12px;padding:14px 18px}
+.auswahl .feld{margin:0}
+.auswahl .wahl label{padding:6px 12px}
+.bogen{background:#fff;border:1px solid var(--linie);border-radius:6px;box-shadow:0 2px 14px rgba(17,18,20,.08);padding:24px 28px;max-width:720px;margin:0 auto}
+.bogen.im{box-shadow:none;max-width:none;padding:14px 18px}
+.bogen .zl{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--linie)}
+.bogen .zl>b{width:64px;color:var(--muted);font-weight:600;flex:none}
+.bogen input[type=text],.bogen textarea{width:100%;border:1.5px solid #B9B9B4;border-radius:8px;padding:9px 12px;background:#fff}
+.bogen textarea{min-height:112px;resize:vertical;display:block}
+.bogen.im textarea{min-height:230px;margin-top:14px}
+.eintrag{flex:1;min-width:0}
+.eintrag label{font-weight:600;display:block;margin-bottom:4px}
+.eintrag .hilfe{font-size:14px;color:var(--muted);margin-top:4px}
+.eintrag .fehler{font-size:14px;color:var(--rot);font-weight:600;margin-top:4px}
+.eintrag.falsch input,.eintrag.falsch textarea{border-color:var(--rot)}
+.grau{color:#6E6E73;background:#F1F1EE;border-radius:6px;padding:2px 9px;display:inline-block}
+.gernbei{color:#6E6E73;margin:14px 0}
+.gernbei .dein{color:var(--text);font-weight:600}
+.briefkopf{text-align:right;margin-bottom:22px}
+.anschrift{max-width:330px;display:flex;flex-direction:column;gap:6px;align-items:flex-start;margin-bottom:14px}
+.anschrift .eintrag{width:100%}
+.datum{text-align:right;margin-bottom:14px}
+.unterbogen{max-width:720px;margin:16px auto 0}
+@media (max-width:860px){.bogen{padding:16px 14px}}
+.mikro{display:inline-flex;align-items:center;gap:8px;background:var(--tinte);color:#fff;border:0;border-radius:999px;padding:9px 18px;font-weight:600}
+.mikro.klein-m{padding:7px 12px;background:var(--karte);color:var(--text);border:1.5px solid #B9B9B4}
+.mikro.hoert{background:var(--rot);color:#fff;border-color:var(--rot)}
+.mikro.hoert svg{animation:puls 1s ease-in-out infinite}
+@keyframes puls{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.mikro.hoert svg{animation:none}}
+.diktatzeile{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-top:8px}
+.diktatzeile .st{font-size:14px;color:var(--mid)}
+.leise-wahl{font-size:14px;color:var(--muted);margin-left:8px;text-transform:none;letter-spacing:0;font-weight:400}
+.ansage{background:var(--karte);border:2px solid var(--tinte);border-radius:18px 18px 18px 4px;padding:16px 18px}
+.ansage:focus-within{border-color:var(--akzent)}
+.ansage.falsch{border-color:var(--rot)}
+.ansage label{font-weight:700;font-size:19px;display:block;margin-bottom:8px}
+.ansage textarea{width:100%;min-height:92px;border:0;outline:0;resize:vertical;background:none;font-size:17px;padding:0;display:block}
+.ansage .hilfe{font-size:14px;color:var(--muted);margin-top:8px}
+.ansage .fehler{font-size:14px;color:var(--rot);font-weight:600;margin-top:6px}
+.pfeil{text-align:center;font-weight:700;color:var(--akzent);margin:20px 0 10px}
+.pfeil small{display:block;font-weight:400;color:var(--muted)}
+.bogen.bsp{color:var(--muted)}
+.marke-bsp{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;border:1px solid var(--linie);border-radius:999px;padding:1px 10px;margin-bottom:8px}
+.bsp-aus{font-size:14px;margin-bottom:12px}
+.vorschau-text{white-space:pre-wrap;margin:14px 0 0}
+.grau.block{display:block;padding:14px 12px;margin:10px 0}
+.erledigt{display:flex;flex-wrap:wrap;gap:6px 8px;margin:10px auto 0;max-width:720px;font-size:14px;color:var(--mid)}
+.erledigt span{border:1px solid var(--linie);border-radius:999px;padding:2px 10px;background:var(--karte)}
+/* Stand 103: Ueberschriften wie auf gernbei.de, duenn, rot, in Grossbuchstaben; Funktionen entdecken in der Form des Website-Knopfs, leise */
+.etikett,.vorzeile,.gkopf h2{font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:#D23A26}
+.etikett button{font-family:Inter,system-ui,sans-serif}
+.gkopf h2{font-size:12px;margin:0}
+.gtext{color:var(--text);font-size:22px;font-weight:600;letter-spacing:-.01em;margin:2px 0 12px}
+#nav-funk{background:var(--karte);border:1px solid var(--text);border-radius:10px;box-shadow:2px 2px 0 #D23A26;font-weight:600;width:calc(100% - 3px)}
+.bkacheln{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:6px}
+.bkachel{background:var(--karte);border:1px solid var(--linie);border-radius:16px;padding:16px 16px 12px;display:flex;flex-direction:column;min-width:0}
+.bkachel .gtext{font-size:17px;line-height:1.3;margin:2px 0 8px}
+.bzeile{display:flex;align-items:center;gap:9px;width:calc(100% + 12px);margin:0 -6px;padding:6px;border:0;background:none;border-radius:9px;font:inherit;font-size:15px;color:var(--text);text-align:left;cursor:pointer;min-height:42px}
+.bzeile:hover{background:var(--leiste)}.bzeile .kachel{width:26px;height:26px;border-radius:7px;flex:none}.bzeile .kachel svg{width:15px;height:15px}.bzeile .bt{flex:1;min-width:0}
+.bzeile em{font-style:normal;font-size:12px;color:var(--muted);white-space:nowrap}
+.bmehr{margin-top:auto;padding-top:8px;align-self:flex-start}
+@media (max-width:1100px){.bkacheln{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:600px){.bkacheln{grid-template-columns:1fr}}
+
+.entwurf .schalter{margin-left:auto;display:flex;gap:4px;align-items:center;font-size:13px}
+.entwurf .schalter button{background:none;border:1px solid #666;color:#ddd;border-radius:6px;padding:3px 9px;font:inherit;cursor:pointer}
+.entwurf .schalter button[aria-pressed=true]{background:#fff;color:#111;border-color:#fff}
+.bezug{background:var(--karte);border:1.5px solid var(--linie);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.bezug .bkopfz{font-weight:700;font-size:16px;margin-bottom:8px}
+.bezug .bkopfz small,.ansage label small{font-weight:400;color:var(--mid);font-size:13px;margin-left:6px}
+.bezug .gewaehlt{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--tinte);border-radius:8px;padding:9px 12px}
+.bezug .gewaehlt.ohne{border-style:dashed;border-color:#B9B9B4;color:var(--mid)}
+.bezug .gewaehlt svg,.bezug .wzeile svg,.bezug .neben svg{width:18px;height:18px;flex:none}
+.bezug .gewaehlt span{flex:1;display:flex;flex-direction:column}
+.bezug small{color:var(--mid);font-size:13px}
+.bezug .liste{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+.bezug .wzeile{display:flex;align-items:center;gap:10px;text-align:left;background:#fff;border:1px solid var(--linie);border-radius:8px;padding:8px 12px;font:inherit;cursor:pointer}
+.bezug .wzeile span{display:flex;flex-direction:column}
+.bezug .wzeile.an{border-color:var(--tinte);box-shadow:inset 3px 0 0 var(--akzent)}
+.bezug .neben{display:inline-flex;align-items:center;gap:8px;margin-top:6px;align-self:flex-start}
+.bezug .leer{margin:0 0 8px;color:var(--mid)}
+.karte p.erst{margin:-6px 0 12px;font-size:13px;color:var(--muted)}
+.entwurf .rolle{font-size:13px;color:#cfd0d4}
+.entwurf .berufsel{display:none}
+.entwurf .berufsel select{background:#fff;color:#111214;border:1px solid #fff;border-radius:6px;padding:4px 9px;font:inherit;font-size:14px}
+@media (max-width:760px){.entwurf .schalter,.entwurf .rolle{display:none}.entwurf .berufsel{display:inline-flex;align-items:center;gap:8px;margin-left:0}}
+</style>
+</head>
+<body>
+<svg style="display:none" aria-hidden="true">
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+<symbol id="i-blatt" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></symbol>
+<symbol id="i-lupe" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+<symbol id="i-notiz" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+<symbol id="i-haken" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+<symbol id="i-ruf" viewBox="0 0 24 24"><path d="M4 10v4h3l6 4V6l-6 4zM17 9a4 4 0 0 1 0 6"/></symbol>
+<symbol id="i-rad" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-rede" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+<symbol id="i-frage" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17h.01"/></symbol>
+<symbol id="i-foto" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l2-3h4l2 3"/><circle cx="12" cy="13.500" r="3"/></symbol>
+<symbol id="i-tel" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A15 15 0 0 1 4 5a1 1 0 0 1 1-1z"/></symbol>
+<symbol id="i-folie" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v4M8 20h8"/></symbol>
+<symbol id="i-waage" viewBox="0 0 24 24"><path d="M12 4v16M6 20h12M5 7h14M5 7l-2 6a3 3 0 0 0 4 0zM19 7l-2 6a3 3 0 0 0 4 0z"/></symbol>
+<symbol id="i-liste" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+<symbol id="i-weg" viewBox="0 0 24 24"><circle cx="5" cy="18" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><path d="m6.500 16.500 4-3M13.500 10.500l4-3"/></symbol>
+<symbol id="i-menue" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-leiste" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+<symbol id="i-haus" viewBox="0 0 24 24"><path d="M3 12 12 4l9 8M6 10v10h12V10"/></symbol>
+</svg>
+
+<div class="entwurf"><b>Vorführung.</b><span><span id="bar-bsp">Am Beispiel eines Malerbetriebs. </span>Mit Ihren Sachen passiert nichts, und es wird nichts gestartet.</span><div class="schalter" role="group" aria-label="Beruf wählen" id="beruf-schalter"><span class="rolle">Ihr Beruf:</span></div><label class="berufsel"><span class="rolle">Ihr Beruf:</span><select id="beruf-sel" aria-label="Beruf wählen"></select></label></div>
+
+<div class="app" id="app">
+  <nav id="nav" aria-label="Seitenleiste">
+    <div class="logo">
+      <svg class="zeichen" viewBox="0 0 24 24"><use href="#i-haus"/></svg>
+      <div><b>Gern<i>bei</i></b><small id="logo-sub">fürs Handwerk</small></div>
+      <button class="zu" type="button" aria-label="Seitenleiste einklappen" title="Seitenleiste einklappen (bleibt wie heute)"><svg><use href="#i-leiste"/></svg></button>
+    </div>
+    <button class="neu" type="button"><svg><use href="#i-plus"/></svg>Neues Gespräch</button>
+    <div class="etikett">Projekte<button type="button" aria-label="Neues Projekt" title="Neues Projekt">+</button></div>
+    <button class="punkt" type="button"><i class="pf" style="background:#C2410C"></i>Rathaus</button>
+    <button class="punkt" type="button"><i class="pf" style="background:#3D6FA8"></i>Neubau Schule</button>
+    <button class="punkt" type="button"><i class="pf" style="background:#4C8A3F"></i>Privatkunden</button>
+    <div class="etikett">Letzte Gespräche</div>
+    <div id="letzte">
+      <button class="punkt" type="button"><svg><use href="#i-rede"/></svg>Angebot für Dachsanierung</button>
+      <button class="punkt" type="button"><svg><use href="#i-rede"/></svg>Kundenmail formulieren</button>
+    </div>
+    <div class="etikett">Arbeit</div>
+    <button class="punkt an" type="button" id="nav-funk" aria-current="page"><svg><use href="#i-lupe"/></svg>Funktionen entdecken</button>
+    <button class="punkt" type="button"><svg><use href="#i-notiz"/></svg><span>Notizen<small>Was ich mir gemerkt habe</small></span></button>
+    <button class="punkt" type="button"><svg><use href="#i-blatt"/></svg><span>Dokumente<small>Ihre fertigen Briefe und Angebote</small></span></button>
+    <div class="luft"></div>
+    <div class="etikett">Hilfe</div>
+    <button class="punkt" type="button"><svg><use href="#i-frage"/></svg><span>Hilfe<small>Suchen, nachlesen, zuschauen</small></span></button>
+    <div class="person"><button class="punkt" type="button" title="Darstellung, Konto, Abmelden (bleibt wie heute)"><span class="bild">TB</span>Thomas Brandt</button></div>
+  </nav>
+  <main id="main">
+    <div class="oben-mobil"><button type="button" id="menue" aria-label="Menü öffnen"><svg><use href="#i-menue"/></svg></button><b>Gernbei</b> <span id="logo-sub2">fürs Handwerk</span></div>
+    <div class="innen" id="innen" tabindex="-1"></div>
+  </main>
+</div>
+
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function ic(n){return '<svg aria-hidden="true"><use href="#i-'+n+'"/></svg>'}
+
+var BEREICHE=[
+ {id:"weg",name:"Schritt für Schritt",alt:"Geführte Wege",text:"Gernbei führt Sie durch eine größere Aufgabe",f:"var(--c-kunden)"},
+ {id:"nachschlagen",name:"Nachschlagen",alt:"Nachschlagen",text:"Antworten aus Ihren eigenen Unterlagen",f:"var(--c-nach)"},
+ {id:"texte",name:"Schreiben",alt:"Texte & Dokumente",text:"E-Mails, Briefe und Angebote",f:"var(--c-texte)"},
+ {id:"suchen",name:"Überblick",alt:"Suchen & Überblick",text:"Termine, Zusagen und Unterlagen",f:"var(--c-suchen)"},
+ {id:"notizen",name:"Festhalten",alt:"Notizen & Protokolle",text:"Aufschreiben, was Sie hören und zusagen",f:"var(--c-notizen)"},
+ {id:"pruefen",name:"Prüfen",alt:"Zweiter Blick",text:"Ein zweiter Blick, bevor etwas rausgeht",f:"var(--c-pruefen)"},
+ {id:"kunden",name:"Kunden gewinnen",alt:"Kunden gewinnen",text:"Beiträge und Seiten für mehr Anfragen",f:"var(--c-kunden)"},
+ {id:"stil",name:"Stil & Vorlagen",alt:"Auf Sie einstellen",text:"Dann sieht das nächste aus wie Ihres",f:"var(--c-einrichten)"}
+];
+var PROJEKTE=["Rathaus","Neubau Schule","Privatkunden"];
+/* Stand 103: der Knopf sagt, was passiert, wie auf der Seite (Knopf neu in schaufenster.md) */
+var WORT_KARTE={entscheidung:"Vorbereiten",suchen:"Suchen",foto:"Foto übernehmen",website:"Starten",aufbau:"Starten",kampagne:"Starten"};
+var WORT_BEREICH={texte:"Schreiben",suchen:"Anzeigen",notizen:"Festhalten",pruefen:"Prüfen",kunden:"Schreiben"};
+var TON={k:"ton",l:"Wie soll es klingen?",typ:"wahl",opt:["Freundlich","Sachlich"]};
+function F(k,l,typ,req,extra){var f={k:k,l:l,typ:typ||"text",req:!!req};for(var x in (extra||{}))f[x]=extra[x];return f}
+
+/* Stand 107 (Alles für alle): die Karten und ihre Reihenfolge je Beruf stammen aus der Liste, die das Programm ausliefert; Texte aus schaufenster.md */
+var BERUFE=[{"id":"handwerk","n":"Handwerk","logo":"fürs Handwerk","wege":true,"ab":{},"lay":[["nachschlagen",["wiemachenwirdasb","warumsoentschied"]],["texte",["dokumentausstich","nachfassenbevore","angebotwiebeimle","auftragszettelfu","mail","foliensatz","entscheidung","rechnungvorberei"]],["suchen",["heute","zusagenderwoche","standzwischenzwe","alles","innotizenunddoku","wieliefderletzte"]],["notizen",["ihrersterauftrag","notizenvomfotoue","einanruffestgeha","rueckmeldungvome","aufmassaufnehmen","protokolldasnach"]],["pruefen",["woliegtmeinergeb","wasueberseheich","diegegenredezuih"]],["kunden",["einbeitragfuersg","einbeitragfuerli","eineseitefuerihr","fachneuigkeitder"]],["stil",["eigenevorlagever","passtnichtsagens"]]]},{"id":"allgemein","n":"Dienstleister allgemein","logo":"für Dienstleister","wege":true,"ab":{},"lay":[["nachschlagen",["wiemachenwirdasb","warumsoentschied"]],["texte",["dokumentausstich","nachfassenbevore","angebotwiebeimle","mail","foliensatz","entscheidung","workshopvorberei","rechnungvorberei"]],["suchen",["heute","zusagenderwoche","standzwischenzwe","alles","innotizenunddoku","wieliefderletzte"]],["notizen",["ihrersterauftrag","notizenvomfotoue","einanruffestgeha","protokolldasnach"]],["pruefen",["woliegtmeinergeb","wasueberseheich","diegegenredezuih"]],["kunden",["einbeitragfuersg","einbeitragfuerli","eineseitefuerihr","fachneuigkeitder"]],["stil",["eigenevorlagever","passtnichtsagens"]]]},{"id":"projektleitung","n":"Projektleitung","logo":"für Dienstleister","wege":true,"ab":{"ihrersterauftrag":["Projekt festhalten","Sagen Sie, was ansteht. Gernbei legt es an und merkt sich, was noch fehlt."]},"lay":[["nachschlagen",["wiemachenwirdasb","warumsoentschied"]],["texte",["dokumentausstich","nachfassenbevore","angebotwiebeimle","statusberichtaus","mail","foliensatz","entscheidung","workshopvorberei","rechnungvorberei"]],["suchen",["heute","zusagenderwoche","standzwischenzwe","alles","innotizenunddoku","wieliefderletzte"]],["notizen",["ihrersterauftrag","notizenvomfotoue","einanruffestgeha","protokolldasnach"]],["pruefen",["woliegtmeinergeb","wasueberseheich","diegegenredezuih"]],["kunden",["einbeitragfuersg","einbeitragfuerli","eineseitefuerihr","fachneuigkeitder"]],["stil",["eigenevorlagever","passtnichtsagens"]]]},{"id":"lehrkraft","n":"Lehrkraft","logo":"für Dienstleister","wege":false,"ab":{"heute":["Mein Unterrichtstag","Ihre Stunden heute, mit dem, was dafür bereitliegt."],"ihrersterauftrag":["Klasse anlegen","Sagen Sie Jahrgangsstufe, Zweig und was die Klasse schon kann. Gernbei legt das Klassenprofil an."],"wasueberseheich":["Was übersehe ich?","Ein ehrlicher zweiter Blick auf Ihr Arbeitsblatt oder Ihren Elternbrief, bevor es rausgeht."]},"lay":[["nachschlagen",["wiemachenwirdasb","warumsoentschied"]],["texte",["dokumentausstich","mail","arbeitsblatterst","erwartungshorizo","elternbrief","foliensatz","entscheidung","leistungsnachwei"]],["suchen",["heute","zusagenderwoche","standzwischenzwe","alles","innotizenunddoku","wieliefderletzte"]],["notizen",["ihrersterauftrag","notizenvomfotoue","protokolldasnach"]],["pruefen",["woliegtmeinergeb","wasueberseheich","diegegenredezuih"]],["stil",["eigenevorlagever","passtnichtsagens"]]]},{"id":"trainer","n":"Trainer","logo":"für Dienstleister","wege":true,"ab":{},"lay":[["nachschlagen",["wiemachenwirdasb","warumsoentschied"]],["texte",["dokumentausstich","nachfassenbevore","angebotwiebeimle","mail","foliensatz","entscheidung","workshopvorberei","rechnungvorberei","seminarvorbereit"]],["suchen",["heute","zusagenderwoche","standzwischenzwe","alles","innotizenunddoku","wieliefderletzte"]],["notizen",["ihrersterauftrag","notizenvomfotoue","einanruffestgeha","protokolldasnach"]],["pruefen",["woliegtmeinergeb","wasueberseheich","diegegenredezuih"]],["kunden",["einbeitragfuersg","einbeitragfuerli","eineseitefuerihr","fachneuigkeitder"]],["stil",["eigenevorlagever","passtnichtsagens"]]]},{"id":"konzernmitarbeiter","n":"Konzernmitarbeiter","logo":"für Dienstleister","wege":false,"ab":{"ihrersterauftrag":["Thema festhalten","Sagen Sie, was ansteht. Gernbei legt es an und merkt sich, was noch fehlt."]},"lay":[["nachschlagen",["wiemachenwirdasb","warumsoentschied"]],["texte",["dokumentausstich","statusberichtaus","mail","foliensatz","entscheidung","workshopvorberei","jourfixevorberei","eskalationaufein"]],["suchen",["heute","zusagenderwoche","standzwischenzwe","alles","innotizenunddoku","wieliefderletzte"]],["notizen",["ihrersterauftrag","notizenvomfotoue","einanruffestgeha","protokolldasnach"]],["pruefen",["woliegtmeinergeb","wasueberseheich","diegegenredezuih"]],["stil",["eigenevorlagever","passtnichtsagens"]]]},{"id":"versicherungsvermittler","n":"Versicherungsvermittler","logo":"für Dienstleister","wege":true,"ab":{"ihrersterauftrag":["Kunde festhalten","Sagen Sie, was ansteht. Gernbei legt es an und merkt sich, was noch fehlt."]},"lay":[["nachschlagen",["wiemachenwirdasb","warumsoentschied"]],["texte",["dokumentausstich","nachfassenbevore","angebotwiebeimle","bestandswechsel","mail","foliensatz","entscheidung","workshopvorberei","rechnungvorberei"]],["suchen",["heute","zusagenderwoche","standzwischenzwe","alles","innotizenunddoku","wieliefderletzte"]],["notizen",["ihrersterauftrag","notizenvomfotoue","einanruffestgeha","protokolldasnach","beratungsdokumen"]],["pruefen",["woliegtmeinergeb","wasueberseheich","diegegenredezuih"]],["kunden",["einbeitragfuersg","einbeitragfuerli","eineseitefuerihr","fachneuigkeitder"]],["stil",["eigenevorlagever","passtnichtsagens"]]]},{"id":"sachverstaendige","n":"Sachverständige","logo":"für Dienstleister","wege":true,"ab":{"ihrersterauftrag":["Gutachten festhalten","Sagen Sie, was ansteht. Gernbei legt es an und merkt sich, was noch fehlt."]},"lay":[["nachschlagen",["wiemachenwirdasb","warumsoentschied"]],["texte",["dokumentausstich","nachfassenbevore","angebotwiebeimle","befundvomortster","mail","foliensatz","entscheidung","workshopvorberei","rechnungvorberei"]],["suchen",["heute","zusagenderwoche","standzwischenzwe","alles","innotizenunddoku","wieliefderletzte"]],["notizen",["ihrersterauftrag","notizenvomfotoue","einanruffestgeha","protokolldasnach"]],["pruefen",["woliegtmeinergeb","wasueberseheich","diegegenredezuih"]],["kunden",["einbeitragfuersg","einbeitragfuerli","eineseitefuerihr","fachneuigkeitder"]],["stil",["eigenevorlagever","passtnichtsagens"]]]},{"id":"planung","n":"Planung","logo":"für Dienstleister","wege":true,"ab":{"ihrersterauftrag":["Projekt festhalten","Sagen Sie, was ansteht. Gernbei legt es an und merkt sich, was noch fehlt."]},"lay":[["nachschlagen",["wiemachenwirdasb","warumsoentschied"]],["texte",["dokumentausstich","nachfassenbevore","angebotwiebeimle","mail","foliensatz","entscheidung","workshopvorberei","rechnungvorberei"]],["suchen",["heute","zusagenderwoche","standzwischenzwe","alles","innotizenunddoku","wieliefderletzte"]],["notizen",["ihrersterauftrag","notizenvomfotoue","einanruffestgeha","protokolldasnach"]],["pruefen",["woliegtmeinergeb","wasueberseheich","diegegenredezuih"]],["kunden",["einbeitragfuersg","einbeitragfuerli","eineseitefuerihr","fachneuigkeitder"]],["stil",["eigenevorlagever","passtnichtsagens"]]]},{"id":"firmengedaechtnis","n":"Firmengedächtnis (Büro)","logo":"Firmengedächtnis","wege":true,"bsp":{"wiemachenwirdasb":"wie machen wir bei uns den brandschutznachweis","warumsoentschied":"warum haben wir beim sonnenhof variante b genommen"},"ab":{"wiemachenwirdasb":["Wie machen wir das bei uns?","Die Antwort aus dem, was Kollegen festgehalten haben, mit Quelle."],"warumsoentschied":["Warum haben wir so entschieden?","Grund und Quelle einer Entscheidung im Büro, auch Jahre später."],"ihrersterauftrag":["Projekt festhalten","Sagen Sie, was ansteht. Gernbei legt es an und merkt sich, was noch fehlt."]},"lay":[["nachschlagen",["wiemachenwirdasb","warumsoentschied"]],["texte",["dokumentausstich","nachfassenbevore","angebotwiebeimle","mail","foliensatz","entscheidung","workshopvorberei","rechnungvorberei"]],["suchen",["heute","zusagenderwoche","standzwischenzwe","alles","innotizenunddoku","wieliefderletzte"]],["notizen",["ihrersterauftrag","notizenvomfotoue","einanruffestgeha","protokolldasnach","fueralleimbuero"]],["pruefen",["woliegtmeinergeb","wasueberseheich","diegegenredezuih"]],["kunden",["einbeitragfuersg","einbeitragfuerli","eineseitefuerihr","fachneuigkeitder"]],["stil",["eigenevorlagever","passtnichtsagens"]]]}];
+var KARTEN={"ihrersterauftrag":{"ic":"notiz","t":"Auftrag festhalten","d":"Sagen Sie, was ansteht. Gernbei legt es an und merkt sich, was noch fehlt."},"eigenevorlagever":{"ic":"blatt","t":"Eigene Vorlage verwenden","d":"Geben Sie Gernbei ein altes Angebot oder Schreiben von Ihnen. Das nächste sieht dann genauso aus.","datei":1},"dokumentausstich":{"ic":"blatt","t":"Bericht oder Aushang aus Stichpunkten","d":"Sie nennen ein paar Punkte und Zahlen. Gernbei macht daraus ein fertiges Blatt zum Ausdrucken."},"passtnichtsagens":{"ic":"notiz","t":"Arbeitsweise festhalten","d":"Sagen Sie einmal, was immer gelten soll. Gernbei hält sich künftig daran."},"woliegtmeinergeb":{"ic":"haken","t":"Fertig zum Verschicken","d":"Sie geben es frei. Gernbei prüft ein letztes Mal, nimmt den Entwurfsvermerk heraus und legt Word und PDF ab."},"notizenvomfotoue":{"ic":"foto","t":"Notizen vom Foto übernehmen","d":"Fotografieren Sie Ihren Zettel. Gernbei tippt ihn ab und macht ein Protokoll oder einen Bericht daraus.","datei":1},"wasueberseheich":{"ic":"haken","t":"Was übersehe ich?","d":"Ein ehrlicher zweiter Blick auf Ihr Angebot oder Schreiben, bevor es rausgeht."},"diegegenredezuih":{"ic":"waage","t":"Was spricht gegen meinen Plan?","d":"Die stärksten Einwände gegen Ihr Vorhaben, nur für Sie."},"heute":{"ic":"liste","t":"Was steht heute an?","d":"Ihre Termine und Zusagen von heute, auch die, die sonst untergehen.","dir":1},"einanruffestgeha":{"ic":"tel","t":"Anruf festhalten","d":"Wer angerufen hat und worum es ging. Gernbei erinnert, wenn etwas liegen bleibt."},"nachfassenbevore":{"ic":"mail","t":"Bei einem offenen Angebot nachfragen","d":"Eine freundliche Nachfrage, wenn auf Ihr Angebot keine Antwort kam. Abschicken tun Sie.","erst":"Briefkopf einmal ergänzen, etwa 1 Minute"},"zusagenderwoche":{"ic":"liste","t":"Zusagen der Woche","d":"Wem Sie was bis wann versprochen haben, auf einen Blick.","dir":1},"standzwischenzwe":{"ic":"lupe","t":"Wo steht eine Sache?","d":"Der Stand einer Sache in drei Zeilen, zum Beispiel vor einem Termin."},"alles":{"ic":"liste","t":"Alles, was gerade läuft","d":"Jede Sache, wo sie steht und wer dran ist.","dir":1},"einbeitragfuersg":{"ic":"ruf","t":"Beitrag fürs Google-Profil","d":"Aus einem Auftrag wird ein Beitrag, der zeigt, was Sie können."},"einbeitragfuerli":{"ic":"ruf","t":"Beitrag für LinkedIn, Instagram, Facebook","d":"In Ihrem Ton und mit den Angaben, die Ihr Beruf verlangt."},"eineseitefuerihr":{"ic":"blatt","t":"Seite für Ihre Wunschkunden","d":"Eine Seite für genau die Kunden, die Sie suchen, zum Weitergeben."},"angebotwiebeimle":{"ic":"blatt","t":"Angebot wie beim letzten Mal","d":"Ihr letztes Angebot dient als Vorlage für das neue.","erst":"Briefkopf einmal ergänzen, etwa 1 Minute"},"statusberichtaus":{"ic":"blatt","t":"Statusbericht aus Notizen","d":"Ein Statusbericht für den Lenkungskreis, mit Ampel und nachgerechnetem Budget."},"bestandswechsel":{"ic":"blatt","t":"Bestandswechsel","d":"Alle Blätter für den Wechsel, ohne eine Nummer zu erfinden."},"befundvomortster":{"ic":"notiz","t":"Befund vom Ortstermin","d":"Ihre Maße und Werte, die Bewertung bleibt bei Ihnen."},"rueckmeldungvome":{"ic":"notiz","t":"Rückmeldung vom Einsatz","d":"Fügen Sie ein, was Ihr Monteur nach dem Einsatz geschickt hat. Gernbei macht den Regiebericht und fragt nach, wenn der Kunde etwas dazu wollte."},"auftragszettelfu":{"ic":"blatt","t":"Auftragszettel","d":"Sagen Sie, wer wann zu welchem Kunden fährt. Gernbei schreibt eine Seite mit allem, was dort zugesagt ist."},"aufmassaufnehmen":{"ic":"notiz","t":"Aufmaß aufnehmen","d":"Sagen Sie die Maße vor Ort. Gernbei rechnet jede Zeile mit Rechenweg und zeigt sie Ihnen, bevor daraus ein Angebot wird."},"wiemachenwirdasb":{"ic":"lupe","t":"Wie habe ich das beim letzten Mal gemacht?","d":"Die Antwort aus Ihren früheren Aufträgen, mit Fundstelle."},"warumsoentschied":{"ic":"waage","t":"Warum habe ich so entschieden?","d":"Grund und Quelle einer früheren Entscheidung, aus Ihren Vorlagen und Protokollen."},"mail":{"ic":"mail","t":"E-Mail oder Brief schreiben","d":"Sagen Sie, an wen und worum es geht. Gernbei schreibt die Mail oder den Brief.","erst":"Briefkopf einmal ergänzen, etwa 1 Minute","bespoke":1},"arbeitsblatterst":{"ic":"blatt","t":"Arbeitsblatt erstellen","d":"Nach Ihren Layout-Regeln, mit Lösung, wenn Sie es so festgehalten haben."},"erwartungshorizo":{"ic":"haken","t":"Erwartungshorizont","d":"Was eine gute Antwort enthält, mit Punkten, für Sie zum Korrigieren."},"elternbrief":{"ic":"mail","t":"Elternbrief","d":"Klar und freundlich, ohne Namen von Kindern."},"foliensatz":{"ic":"folie","t":"Folien für eine Präsentation","d":"Aus ein paar Stichpunkten oder einer Datei werden Folien zum Zeigen."},"entscheidung":{"ic":"waage","t":"Entscheidung vorbereiten","d":"Empfehlung, Gründe und Einwände auf einer Seite, damit Sie entscheiden können.","bespoke":1},"innotizenunddoku":{"ic":"lupe","t":"In Ihren Unterlagen suchen","d":"Gernbei findet die Antwort in Ihren Notizen und abgelegten Dateien und sagt, wo sie steht."},"workshopvorberei":{"ic":"folie","t":"Workshop vorbereiten","d":"Agenda und Ablauf für Ihren Workshop, danach Ergebnis und Maßnahmen."},"rechnungvorberei":{"ic":"blatt","t":"Rechnung vorbereiten","d":"Aus Ihrem Angebot und dem, was anders kam, wird ein Rechnungsentwurf für Ihre Buchhaltung.","erst":"Briefkopf einmal ergänzen, etwa 1 Minute"},"protokolldasnach":{"ic":"notiz","t":"Protokoll, das nachträgt","d":"Aus Ihrer Mitschrift wird ein Protokoll. Aufgaben der anderen kommen mit Datum auf Ihre Liste."},"fueralleimbuero":{"ic":"notiz","t":"Für alle im Büro festhalten","d":"Was alle im Büro wissen sollen, kommt mit Ihrem Ja in den gemeinsamen Bereich."},"wieliefderletzte":{"ic":"liste","t":"Wie lief der letzte Monat?","d":"Ein kurzer Rückblick: was fertig wurde, was offen ist, wo sich ein Folgeauftrag lohnt.","dir":1},"fachneuigkeitder":{"ic":"ruf","t":"Fachneuigkeit der Woche","d":"Eine Neuigkeit aus Ihrem Fach mit amtlicher Quelle, als Beitrag für Ihre Kunden.","erst":"einmal freischalten lassen, meist am selben Tag"},"leistungsnachwei":{"ic":"haken","t":"Leistungsnachweis planen","d":"Termin geprüft, Aufgaben, Erwartungshorizont und ein Satz für die Eltern."},"seminarvorbereit":{"ic":"folie","t":"Seminar vorbereiten","d":"Angebot, Ablauf und Folien, was bestellt ist und was die Teilnehmenden brauchen getrennt."},"jourfixevorberei":{"ic":"liste","t":"Jour fixe vorbereiten","d":"Was Sie bringen, was Sie brauchen, was zuletzt vereinbart war."},"eskalationaufein":{"ic":"waage","t":"Eskalation auf einer Seite","d":"Was steht, was Sie versucht haben, was Sie brauchen, bis wann."},"beratungsdokumen":{"ic":"notiz","t":"Beratungsdokumentation","d":"Aus Ihrer Gesprächsnotiz die Dokumentation nach § 61 VVG, als Entwurf."}};
+var ANSAGE={"ihrersterauftrag":{"knopf":"Festhalten","kopf":"Sagen Sie, was ansteht, so wie einem Kollegen.","erl":["Auftrag angelegt","Termin vorgemerkt","offene Punkte notiert"],"feld":"pflicht","bspH":"rathaus flur zweiter stock streichen, ab 24.11., zwei leute, farbe stellt die stadt","bspD":"wertgutachten für familie wolf, besichtigung am 24.11., abgabe bis mitte dezember","ergH":"Der Auftrag Rathaus, Flur 2. OG ist angelegt, Beginn 24.11. vorgemerkt.","rotH":"Offen: Farbton und Menge, die Stadt liefert."},"dokumentausstich":{"knopf":"Schreiben","kopf":"Sagen Sie, was es werden soll, für wen, und die Zahlen, die Sie haben.","erl":["Überschrift und Gliederung","ganze Sätze","gerechnet nur mit Ihren Zahlen","Word und PDF"],"feld":"pflicht","bspH":"aushang fürs treppenhaus rosenweg 3, ab montag 8 uhr malerarbeiten, drei tage, bitte nichts abstellen","bspD":"exposé für die wohnung sanderstraße 8, 349.000 euro, 3. og mit aufzug, westbalkon, baujahr 1995","ergH":"Der Aushang liegt als Word und PDF unter Dokumente."},"passtnichtsagens":{"knopf":"Festhalten","kopf":"Sagen Sie einmal, was immer gelten soll.","erl":["als Regel festgehalten","gilt ab der nächsten Aufgabe","jederzeit änderbar"],"feld":"pflicht","bspH":"angebote immer mit zahlungsziel 14 tage und ohne dankessatz am anfang","bspD":"angebote immer mit zahlungsziel 14 tage und ohne dankessatz am anfang"},"woliegtmeinergeb":{"knopf":"Freigeben","kopf":"Wählen Sie, was hinausgeht. Mit Freigeben geben Sie es frei.","erl":["Summen nachgerechnet","leere Felder","Word und PDF fertig","was fehlt, in Rot"],"bezug":{"art":"dokument","l":"Was soll raus?","pflicht":1},"feld":"frei","feldL":"Worauf soll ich besonders achten?","bspH":"die mehrwertsteuer bitte genau ansehen","bspD":"die mehrwertsteuer bitte genau ansehen"},"wasueberseheich":{"knopf":"Prüfen","kopf":"Wählen Sie, was Gernbei durchsehen soll.","erl":["Summen nachgerechnet","fehlende Angaben","was ein Kunde zuerst fragt","ein ehrliches Urteil","bleibt Entwurf"],"bezug":{"art":"dokument","l":"Was soll ich prüfen?","pflicht":1},"feld":"frei","feldL":"Worauf soll ich besonders achten?","bspH":"ob die zahlungsbedingungen passen","bspD":"ob die zahlungsbedingungen passen"},"diegegenredezuih":{"knopf":"Gegenrede holen","kopf":"Sagen Sie, was Sie vorhaben. Gernbei sucht die stärksten Einwände.","erl":["die drei stärksten Einwände","die schwächste Zahl","ein Urteil"],"bezug":{"art":"dokument","l":"Gibt es dazu schon ein Dokument?","pflicht":0},"feld":"pflicht","bspH":"ich will ab märz einen zweiten transporter leasen für 690 euro im monat","bspD":"ich will ab januar nur noch online beraten und das büro aufgeben","ergH":"Die Gegenrede steht: drei Einwände und ein Urteil, nur für Sie."},"einanruffestgeha":{"knopf":"Festhalten","kopf":"Sagen Sie, wer angerufen hat und worum es ging.","erl":["Notiz beim Kunden","letzter Stand dazu","Erinnerung an den Rückruf"],"feld":"pflicht","bspH":"frau huber hat angerufen, will die küche auch machen lassen, rückruf morgen vormittag","bspD":"herr berger hat angerufen, will den termin verschieben, rückruf bis freitag","ergH":"Notiert bei Familie Huber, dazu: Angebot Bad vom 12.11. ist noch offen. Rückruf morgen vormittag vorgemerkt."},"nachfassenbevore":{"knopf":"Nachfrage schreiben","kopf":"Wählen Sie das Angebot. Gernbei schreibt eine freundliche Nachfrage.","erl":["Bezug auf Ihr Angebot mit Datum","freundlicher Ton","Ihre Signatur","als Entwurf"],"bezug":{"art":"angebot","l":"Welches Angebot?","pflicht":1},"feld":"frei","feldL":"Noch etwas dazu?","bspH":"wir könnten schon in kw 49 anfangen","bspD":"wir könnten schon in kw 49 anfangen"},"standzwischenzwe":{"knopf":"Nachsehen","kopf":"Sagen Sie, um welche Sache es geht.","erl":["der Stand in drei Zeilen","was offen ist","wer dran ist"],"feld":"pflicht","bspH":"wie steht es bei familie wolf","bspD":"wie steht es bei familie wolf"},"einbeitragfuersg":{"knopf":"Beitrag schreiben","kopf":"Sagen Sie, über welche Arbeit.","erl":["Text in Ihrem Ton","passende Länge für Google","als Entwurf, einstellen tun Sie"],"feld":"pflicht","bspH":"treppenhaus rosenweg fertig, alte ölfarbe runter, jetzt hell und freundlich, kunde sehr zufrieden","bspD":"wertgutachten für ein haus in gerbrunn abgeschlossen, familie wolf konnte damit gut verhandeln","ergH":"Der Beitrag liegt als Entwurf bereit. Einstellen tun Sie im Google-Profil."},"einbeitragfuerli":{"knopf":"Beitrag schreiben","kopf":"Sagen Sie, worüber, und für welchen Kanal.","erl":["je Kanal die passende Länge","in Ihrem Ton","als Entwurf, einstellen tun Sie"],"feld":"pflicht","bspH":"für facebook und instagram: wir suchen einen gesellen ab januar","bspD":"für linkedin: drei dinge, die man vor dem hauskauf prüfen sollte","ergH":"Zwei Beiträge liegen als Entwurf bereit, je einer für Facebook und Instagram."},"eineseitefuerihr":{"knopf":"Seite schreiben","kopf":"Sagen Sie, für wen die Seite ist und was Sie ihnen anbieten.","erl":["Überschrift, die anspricht","Nutzen in Kundensprache","Lücken, die nur Sie füllen"],"feld":"pflicht","bspH":"für hausbesitzer in würzburg mit altbau, fassade streichen mit gerüst aus einer hand","bspD":"für erben in würzburg, die ein haus verkaufen wollen, wertgutachten in zwei wochen","ergH":"Der Text der Seite liegt als Word unter Dokumente, mit drei Lücken zum Füllen."},"angebotwiebeimle":{"knopf":"Angebot schreiben","kopf":"Sagen Sie, für wen und was diesmal anders ist. Gernbei nimmt Ihr letztes Angebot als Vorlage.","erl":["Aufbau und Preise aus der Vorlage","neue Mengen","Nummer und Datum","Word und PDF","Offenes rot markiert"],"bezug":{"art":"angebot","l":"Als Vorlage","pflicht":1},"feld":"pflicht","bspH":"für familie meier, bad im ersten stock, 6 m² statt 8, sonst wie bei huber","bspD":"für familie wolf, wertermittlung einfamilienhaus in gerbrunn, sonst wie für schmitt im märz","ergH":"Angebot 2026-014 für Familie Meier liegt als Word und PDF unter Dokumente. Positionen und Einzelpreise wie im Angebot Bad Huber, Fliesen auf 6 m² umgerechnet.","rotH":"Bitte prüfen: Anschrift von Familie Meier fehlt noch."},"statusberichtaus":{"knopf":"Schreiben","kopf":"Sagen Sie, für welches Projekt und bis wann.","erl":["Ampel","Budget nachgerechnet","Risiken","nächste Schritte"],"feld":"pflicht","bspH":"statusbericht projekt nord für den lenkungskreis am donnerstag","bspD":"statusbericht projekt nord für den lenkungskreis am donnerstag"},"bestandswechsel":{"knopf":"Vorbereiten","kopf":"Sagen Sie, für wen und welche Verträge.","erl":["alle Blätter für den Wechsel","keine erfundene Nummer","Offenes markiert"],"feld":"pflicht","bspH":"bestandswechsel für familie wolf, hausrat und haftpflicht, bisher bei der alten agentur","bspD":"bestandswechsel für familie wolf, hausrat und haftpflicht, bisher bei der alten agentur"},"befundvomortster":{"knopf":"Schreiben","kopf":"Sagen Sie Ihre Maße und Werte vom Termin.","erl":["Befund gegliedert","Ihre Werte unverändert","Bewertung bleibt bei Ihnen"],"feld":"pflicht","bspH":"ortstermin keller sanderstraße 8, feuchte 18 prozent an der nordwand, putz lose auf 2 m², fotos liegen bei","bspD":"ortstermin keller sanderstraße 8, feuchte 18 prozent an der nordwand, putz lose auf 2 m², fotos liegen bei"},"rueckmeldungvome":{"knopf":"Übernehmen","kopf":"Fügen Sie die Rückmeldung ein, so wie sie gekommen ist.","erl":["Regiebericht mit Ihren Zahlen","offene Punkte mit Datum","Nachtrag erkannt, Preis nennen Sie"],"feld":"pflicht","bspH":"dörfler fertig drei stunden zu zweit zwei meter nym mehr überspannungsschutz drin kunde will noch außensteckdose garage lan dose fehlt noch","bspD":"dörfler fertig drei stunden zu zweit, kunde will noch eine außensteckdose an der garage","ergH":"Regiebericht R002 Dörfler liegt unter Dokumente: 2 m NYM zusätzlich, Überspannungsschutz eingebaut. Offen: LAN-Dose, vorgemerkt. Drei Stunden zu zweit: je Person oder zusammen?","rotH":"Herr Dörfler möchte eine Außensteckdose an der Garage. Ist das ein Nachtrag? Den Preis nennen Sie."},"auftragszettelfu":{"knopf":"Zettel schreiben","kopf":"Sagen Sie, wer wann zu welchem Kunden fährt.","erl":["was zu tun ist","was zugesagt wurde","Material","als PDF zum Weiterschicken"],"feld":"pflicht","bspH":"markus montag acht uhr zu dörfler, lan dose setzen und energiemanager anschließen","bspD":"markus montag acht uhr zu dörfler","ergH":"Auftragszettel für Markus, Montag 8 Uhr, Dörfler, liegt als PDF unter Dokumente. Zugesagt: Überschussladen mit App.","rotH":"Bitte prüfen: Telefon von Herrn Dörfler steht nicht im Auftrag."},"aufmassaufnehmen":{"knopf":"Aufmaß anlegen","kopf":"Sagen Sie Auftrag, Raum und Maße, so wie Sie messen.","erl":["jede Zeile mit Rechenweg","Summe je Raum","fehlende Maße bleiben offen","Grundlage fürs Angebot"],"feld":"pflicht","bspH":"aufmaß dörfler wohnzimmer wand nord vier zwanzig mal zwei sechzig minus fenster eins zwanzig mal eins vierzig","bspD":"aufmaß dörfler wohnzimmer wand nord vier zwanzig mal zwei sechzig","ergH":"Aufmaß Dörfler: Wohnzimmer Wand Nord 4,20 × 2,60 − 1,20 × 1,40 = 9,24 m²."},"wiemachenwirdasb":{"knopf":"Fragen","kopf":"Sagen Sie, was Sie wissen wollen.","erl":["sucht in Ihren Unterlagen","nennt die Stelle","sagt, wenn nichts da ist"],"feld":"pflicht","bspH":"wie haben wir beim bad schmitt die abdichtung gemacht","bspD":"wie habe ich das gutachten für familie wolf aufgebaut"},"warumsoentschied":{"knopf":"Fragen","kopf":"Sagen Sie, um welche Entscheidung es geht.","erl":["Entscheidung mit Datum","der Grund","die Quelle","sagt, wenn nichts festgehalten ist"],"feld":"pflicht","bspH":"warum haben wir beim dach müller tonziegel genommen","bspD":"warum habe ich mich für den neuen website-anbieter entschieden"},"arbeitsblatterst":{"knopf":"Erstellen","kopf":"Sagen Sie Thema und Klasse.","erl":["nach Ihren Layout-Regeln","mit Lösung, wenn festgehalten","Word und PDF"],"feld":"pflicht","bspH":"arbeitsblatt zu den alpen, klasse 5, mit lösung","bspD":"arbeitsblatt zu den alpen, klasse 5, mit lösung"},"erwartungshorizo":{"knopf":"Erstellen","kopf":"Geben Sie die Aufgabe, getippt oder als Dokument.","erl":["was eine gute Antwort enthält","Punkte je Teil","zum Korrigieren"],"bezug":{"art":"dokument","l":"Aus einem Dokument?","pflicht":0},"feld":"pflicht","bspH":"erwartungshorizont zur erörterung handyverbot an schulen, klasse 9, 20 punkte","bspD":"erwartungshorizont zur erörterung handyverbot an schulen, klasse 9, 20 punkte"},"elternbrief":{"knopf":"Schreiben","kopf":"Sagen Sie, worum es geht und bis wann.","erl":["klar und freundlich","ohne Namen von Kindern","mit Rückmeldeabschnitt, wenn nötig"],"feld":"pflicht","bspH":"elternbrief zum wandertag am 12.12., 5 euro mitbringen, rückmeldung bis freitag","bspD":"elternbrief zum wandertag am 12.12., 5 euro mitbringen, rückmeldung bis freitag"},"foliensatz":{"knopf":"Folien machen","kopf":"Sagen Sie, worum es geht und wer zuschaut.","erl":["Gliederung","eine Aussage je Folie","PowerPoint unter Dokumente"],"bezug":{"art":"dokument","l":"Aus einem Dokument?","pflicht":0},"feld":"pflicht","bspH":"fünf folien für die bauherren vom neubau schule, stand der malerarbeiten, was bis weihnachten fertig wird","bspD":"fünf folien für das erstgespräch mit neuen kunden, wer wir sind, wie wir arbeiten, was es kostet","ergH":"Fünf Folien liegen als PowerPoint unter Dokumente."},"innotizenunddoku":{"knopf":"Suchen","kopf":"Sagen Sie, was Sie suchen.","erl":["sucht in Notizen und Dokumenten","nennt die Stelle","sagt, wenn nichts da ist"],"feld":"pflicht","bspH":"welche farbe hatten wir im treppenhaus schmitt","bspD":"was hatten wir mit herrn berger zum honorar vereinbart","ergH":"RAL 9010 Reinweiß, matt. Steht im Regiebericht Treppenhaus Schmitt vom 14.06."},"workshopvorberei":{"knopf":"Vorbereiten","kopf":"Sagen Sie, wann, mit wem und was am Ende stehen soll.","erl":["Agenda mit Zeiten","Ablauf je Abschnitt","Material","danach Ergebnis und Maßnahmen"],"feld":"pflicht","bspH":"workshop am 3.12. mit dem team von wagner bau, sechs leute, drei stunden, am ende sollen klare zuständigkeiten stehen","bspD":"workshop am 3.12. mit dem team von wagner bau, sechs leute, drei stunden, am ende sollen klare zuständigkeiten stehen"},"rechnungvorberei":{"knopf":"Rechnung vorbereiten","kopf":"Wählen Sie das Angebot. Gernbei macht daraus einen Entwurf für Ihre Buchhaltung, keine fertige Rechnung.","erl":["Positionen aus dem Angebot","Änderungen eingerechnet","Summen nachgerechnet","Entwurf, die Rechnung stellt Ihre Buchhaltung"],"bezug":{"art":"angebot","l":"Zu welchem Angebot?","pflicht":0},"feld":"frei","feldL":"Was kam anders als angeboten?","bspH":"rinne zwei meter mehr, sonst wie angeboten","bspD":"wie angeboten, dazu eine stunde mehr für die nachbesprechung"},"protokolldasnach":{"knopf":"Protokoll machen","kopf":"Geben Sie Ihre Mitschrift, getippt, diktiert oder als Dokument.","erl":["Protokoll mit Entscheidungen und Aufgaben","Aufgaben der anderen mit Datum","was zusätzlich gewünscht wurde","Word und PDF"],"bezug":{"art":"dokument","l":"Aus einem Dokument?","pflicht":0},"feld":"pflicht","bspH":"baubesprechung schule: maler ab 1.12. im zweiten stock, elektriker bis 28.11. fertig, bauherr will noch den flur","bspD":"jour fixe shop-relaunch: design abgenommen, herr lang liefert die texte bis 1.12., kunde fragt nach einem newsletter-modul"},"fueralleimbuero":{"knopf":"Festhalten","kopf":"Sagen Sie, was alle im Büro wissen sollen.","erl":["zeigt Ihnen zuerst, was hineinkommt","ohne Ihr Ja nichts","danach für alle Freigegebenen zu finden"],"feld":"pflicht","bspH":"leg das protokoll von heute in den gemeinsamen bereich","bspD":"leg das protokoll von heute in den gemeinsamen bereich"},"fachneuigkeitder":{"knopf":"Beitrag schreiben","kopf":"Sagen Sie, für wen und zu welchem Thema.","erl":["eine Neuigkeit mit amtlicher Quelle","in Ihrem Ton","als Entwurf, einstellen tun Sie"],"feld":"pflicht","bspH":"was sich bei der förderung für den heizungstausch ändert, für hausbesitzer","bspD":"was sich beim energieausweis ändert, für verkäufer"},"leistungsnachwei":{"knopf":"Planen","kopf":"Sagen Sie Klasse, Thema und Tag.","erl":["Termin gegen die Schulordnung geprüft","Aufgaben mit Lösung","Erwartungshorizont","auf Wunsch zwei Sätze für die Eltern","keine Namen von Kindern"],"feld":"pflicht","bspH":"probe in der 7a über brüche, nächsten donnerstag","bspD":"probe in der 7a über brüche, nächsten donnerstag"},"seminarvorbereit":{"knopf":"Vorbereiten","kopf":"Sagen Sie, für wen, wie lange und was am Ende sitzen soll.","erl":["Ablauf mit Zeiten","was bestellt ist und was die Teilnehmenden brauchen","Folien auf Wunsch","Tage und Reisekosten zusammengerechnet"],"feld":"pflicht","bspH":"zwei tage führungstraining für sechs teamleiter bei der firma berger, am ende sollen sie schwierige gespräche führen können","bspD":"zwei tage führungstraining für sechs teamleiter bei der firma berger, am ende sollen sie schwierige gespräche führen können"},"jourfixevorberei":{"knopf":"Vorbereiten","kopf":"Sagen Sie, mit wem und zu welchem Thema.","erl":["was Sie bringen","was Sie brauchen","was zuletzt vereinbart war","eine Seite"],"feld":"pflicht","bspH":"jour fixe mit frau keller am donnerstag zum thema lieferantenwechsel","bspD":"jour fixe mit frau keller am donnerstag zum thema lieferantenwechsel"},"eskalationaufein":{"knopf":"Schreiben","kopf":"Sagen Sie, was hängt und was Sie schon versucht haben.","erl":["was steht","was Sie versucht haben","was Sie brauchen, bis wann","was sonst passiert"],"feld":"pflicht","bspH":"die it gibt die schnittstelle seit drei wochen nicht frei, zwei mails ohne antwort, ohne freigabe verschiebt sich der start um einen monat","bspD":"die it gibt die schnittstelle seit drei wochen nicht frei, zwei mails ohne antwort, ohne freigabe verschiebt sich der start um einen monat"},"beratungsdokumen":{"knopf":"Festhalten","kopf":"Sagen Sie, mit wem, wozu beraten und was empfohlen wurde.","erl":["Wünsche und Bedürfnisse","Rat und Gründe","was offen ist","als Entwurf zum Prüfen"],"feld":"pflicht","bspH":"beratung familie wolf zur hausratversicherung, umzug in größere wohnung, empfohlen anpassung der summe","bspD":"beratung familie wolf zur hausratversicherung, umzug in größere wohnung, empfohlen anpassung der summe"}};
+var PROBIER_NEU={"eigenevorlagever":"Nimm dieses alte Stück als Vorbild.","notizenvomfotoue":"Mach mir ein Protokoll aus diesem Foto.","heute":"Was steht heute an?","zusagenderwoche":"Was habe ich diese Woche wem versprochen?","alles":"Zeig mir alles","wieliefderletzte":"Wie lief der letzte Monat?"};
+var KNOPF_NEU={"ihrersterauftrag":"Festhalten","eigenevorlagever":"Vorlage geben","dokumentausstich":"Schreiben","passtnichtsagens":"Festhalten","woliegtmeinergeb":"Freigeben","notizenvomfotoue":"Foto übernehmen","wasueberseheich":"Prüfen","diegegenredezuih":"Gegenrede holen","einanruffestgeha":"Festhalten","nachfassenbevore":"Nachfrage schreiben","standzwischenzwe":"Nachsehen","einbeitragfuersg":"Beitrag schreiben","einbeitragfuerli":"Beitrag schreiben","eineseitefuerihr":"Seite schreiben","angebotwiebeimle":"Angebot schreiben","statusberichtaus":"Schreiben","bestandswechsel":"Vorbereiten","befundvomortster":"Schreiben","rueckmeldungvome":"Übernehmen","auftragszettelfu":"Zettel schreiben","aufmassaufnehmen":"Aufmaß anlegen","wiemachenwirdasb":"Fragen","warumsoentschied":"Fragen","arbeitsblatterst":"Erstellen","erwartungshorizo":"Erstellen","elternbrief":"Schreiben","foliensatz":"Folien machen","entscheidung":"Vorbereiten","innotizenunddoku":"Suchen","workshopvorberei":"Vorbereiten","rechnungvorberei":"Rechnung vorbereiten","protokolldasnach":"Protokoll machen","fachneuigkeitder":"Beitrag schreiben","leistungsnachwei":"Planen","seminarvorbereit":"Vorbereiten","jourfixevorberei":"Vorbereiten","eskalationaufein":"Schreiben","beratungsdokumen":"Festhalten"};
+
+var AUFGABEN=[
+ {id:"mail",b:"texte",ic:"mail",t:"E-Mail oder Brief schreiben",d:"Sagen Sie, an wen und worum es geht. Gernbei schreibt die Mail oder den Brief.",heute:"Mail oder Brief",
+  kopf:"Ihre E-Mail vorbereiten",erg:"Eine ausformulierte E-Mail mit Betreff.",knopf:"Entwurf erstellen",stich:"mail email brief anschreiben nachricht kunde schreiben antwort",
+  felder:[F("art","Was soll es werden?","wahl",0,{opt:["E-Mail","Brief"]}),F("an","An wen schreiben Sie?","text",1,{ph:"Name der Person oder Firma"}),F("was","Was möchten Sie mitteilen?","lang",1,{hilfe:"Stichpunkte genügen."}),TON],
+  satz:function(e){return (e.art||"E-Mail")+" an "+e.an+", Ton "+(e.ton||"freundlich").toLowerCase()+": "+e.was}},
+ {id:"entscheidung",b:"texte",ic:"waage",t:"Entscheidung vorbereiten",d:"Empfehlung, Gründe und Einwände auf einer Seite, damit Sie entscheiden können.",heute:"Entscheidungsvorlage",
+  kopf:"Ihre Entscheidung vorbereiten",erg:"Eine Seite mit Empfehlung und Gegenrede.",knopf:"Entwurf erstellen",stich:"entscheidung abwägen optionen empfehlung",
+  felder:[F("was","Worum geht es?","text",1),F("mehr","Welche Möglichkeiten sehen Sie?","lang",1,{hilfe:"Stichpunkte genügen."})],
+  satz:function(e){return "Entscheidungsvorlage zu "+e.was+". Möglichkeiten: "+e.mehr}},
+ {id:"website",b:"kunden",ic:"weg",t:"Website verbessern",d:"Eine Note für Ihre Website, neue Titel je Seite und was zuerst wichtiger ist als Google.",heute:"Website verbessern (Kachel oben)",weg:5,
+  kopf:"Ihre Website verbessern",erg:"Eine Note, die drei wichtigsten Punkte und neue Titel je Seite.",knopf:"Weg starten",stich:"website homepage google seo gefunden werden",
+  felder:[F("was","Adresse Ihrer Website","text",1,{ph:"www."})],
+  satz:function(e){return "Schau dir meine Website an: "+e.was}},
+ {id:"aufbau",b:"kunden",ic:"weg",t:"Social Media aufbauen",d:"Vom ersten Profil bis zum festen Rhythmus, in Ihrem Ton.",heute:"Social Media aufbauen (Kachel oben)",weg:6,direkt:1,
+  kopf:"Social Media aufbauen",erg:"Ein Fahrplan in sechs Schritten.",knopf:"Weg starten",stich:"social media anfangen profil einrichten",felder:[],
+  satz:function(){return "Ich will mit Social Media anfangen"}},
+ {id:"kampagne",b:"kunden",ic:"weg",t:"Kampagne planen",d:"Ein Anlass, ein paar Wochen. Jeder Beitrag liegt am Vortag bereit.",heute:"Kampagne planen (Kachel oben)",weg:5,
+  kopf:"Ihre Kampagne planen",erg:"Ein Plan für die Wochen, danach die Beiträge einzeln zur Freigabe.",knopf:"Weg starten",stich:"kampagne aktion serie beiträge werbung",
+  felder:[F("was","Was ist der Anlass?","text",1,{ph:"zum Beispiel neue Leistung, Saison, Jubiläum"})],
+  satz:function(e){return "Ich will eine Kampagne machen. Anlass: "+e.was}}
+];
+(function(){
+  AUFGABEN.forEach(function(a){a.on=false;a.pos=0;a.t0=a.t;a.d0=a.d;a.stich=a.stich||""});
+  Object.keys(KARTEN).forEach(function(i){
+    var k=KARTEN[i];if(k.bespoke)return;
+    AUFGABEN.push({id:i,b:"texte",ic:k.ic,t:k.t,d:k.d,t0:k.t,d0:k.d,stich:"",felder:[],on:false,pos:0,direkt:k.dir?1:0,
+      satz:function(){return PROBIER_NEU[i]||k.t}});
+  });
+  Object.keys(KARTEN).forEach(function(i){var a=AUFGABEN.filter(function(x){return x.id===i})[0];if(a&&KARTEN[i].erst)a.erst=KARTEN[i].erst});
+  var m=AUFGABEN.filter(function(x){return x.id==="mail"})[0];if(m)m.erst=KARTEN.mail.erst;
+})();
+var EINRICHTEN=[
+ {gruppe:"Verbindungen",alt:"Verbinden",karten:[
+  {ic:"mail",t:"Microsoft 365",d:"Mails, Kalender und Dateien lesen, Antworten als Entwurf ablegen. Gesendet und gelöscht wird nie.",knopf:"Einrichten",stand:"Noch nicht verbunden"},
+  {ic:"foto",t:"Canva",d:"Gestaltung aus Ihrem Canva-Konto.",knopf:"Einrichten",stand:"Noch nicht verbunden"}]}
+];
+var BEISPIEL={art:"E-Mail",an:"Frau Schneider",was:"Der Montagetermin verschiebt sich auf Donnerstag um 9 Uhr. Bitte um kurze Bestätigung.",ton:"Freundlich"};
+
+var Z={ansicht:"liste",bereich:"alle",bereichVor:null,q:"",aufgabe:null,schritt:1,ein:{},erg:{},zurueck:null,abgelegt:{},beruf:"handwerk"};
+function aktive(){return AUFGABEN.filter(function(a){return a.on})}
+function inB(id){return aktive().filter(function(a){return a.b===id}).sort(function(x,y){return x.pos-y.pos})}
+function bereicheAkt(){return BEREICHE.filter(function(b){return inB(b.id).length})}
+function A(id){return AUFGABEN.filter(function(a){return a.id===id})[0]}
+function B(id){return BEREICHE.filter(function(b){return b.id===id})[0]}
+function stufen(a){return ["Angaben",a.b==="suchen"||a.b==="pruefen"||a.weg?"Ergebnis":"Entwurf","Fertigstellen"]}
+function angefangen(a){var e=Z.ein[a.id];return e&&Object.keys(e).some(function(k){return k!=="projekt"&&e[k]&&a.felder.some(function(f){return f.k===k&&f.typ!=="wahl"})})}
+
+/* ---------- Ansicht A: Aufgabe finden ---------- */
+function karte(a,mitBereich){
+  var b=B(a.b),marken="";
+  if(a.weg)marken+='<span class="marke">Geführt · '+a.weg+' Schritte</span>';
+  if(Z.erg[a.id])marken+='<span class="marke auf">Entwurf liegt bereit</span>';
+  else if(angefangen(a))marken+='<span class="marke auf">Angefangen</span>';
+  var wort=Z.erg[a.id]||angefangen(a)?"Weitermachen":(WORT_KARTE[a.id]||WORT_BEREICH[a.b]||"Starten");
+  return '<article class="karte" style="--f:'+b.f+'"><div class="kachel">'+ic(a.ic)+'</div><div class="kinhalt">'+
+    (mitBereich?'<div class="treffer-bereich">'+esc(b.name)+'</div>':'')+
+    '<h3>'+esc(a.t)+'</h3><p>'+esc(a.d)+'</p>'+(a.erst?'<p class="klein erst">Beim ersten Mal: '+esc(a.erst)+'</p>':'')+'<div class="fuss"><button class="dunkel" type="button" data-start="'+a.id+'">'+wort+'</button>'+marken+'</div></div></article>';
+}
+function trefferMalen(){
+  var q=Z.q.trim().toLowerCase(),h="";
+  if(q){
+    var t=aktive().filter(function(a){return (a.t+" "+a.d+" "+a.stich+" "+B(a.b).name).toLowerCase().indexOf(q)>=0});
+    h+='<p class="hinweis" role="status">'+(t.length?t.length+(t.length===1?" Aufgabe":" Aufgaben")+" in allen Bereichen":"Keine Aufgabe")+' zu „'+esc(Z.q.trim())+'“. <button class="link" type="button" id="q-leeren">Suche löschen</button></p>';
+    if(t.length)h+='<div class="karten">'+t.map(function(a){return karte(a,true)}).join("")+'</div>';
+    else h+='<div class="frage"><span><b>Dafür gibt es keine fertige Aufgabe.</b> Schreiben Sie es Gernbei einfach so, wie Sie es sagen würden.</span><button class="dunkel" type="button">„'+esc(Z.q.trim())+'“ im Gespräch fragen</button></div>';
+  }else if(Z.bereich==="alle"){
+    /* Stand 103: je Bereich eine Kachel mit den ersten vier Aufgaben, wie auf der Seite */
+    h+='<div class="bkacheln">'+bereicheAkt().map(function(b){
+      var aa=inB(b.id);
+      return '<div class="bkachel" style="--f:'+b.f+'"><div class="gkopf"><i></i><h2>'+esc(b.name)+'</h2></div><p class="gtext">'+esc(b.text)+'</p>'+
+        aa.slice(0,4).map(function(a){return '<button class="bzeile" type="button" data-start="'+a.id+'"><span class="kachel">'+ic(a.ic)+'</span><span class="bt">'+esc(a.t)+'</span>'+(a.direkt?'<em>zeigt sofort</em>':'')+'</button>'}).join("")+
+        '<button class="link bmehr" type="button" data-bereich="'+b.id+'">'+(aa.length>4?'Alle '+aa.length+' ansehen':'Ansehen')+'</button></div>'}).join("")+'</div>';
+  }else{
+    h+='<p class="pfad"><button class="link" type="button" data-bereich="alle">← Alle Bereiche</button></p>';
+    bereicheAkt().filter(function(b){return Z.bereich===b.id}).forEach(function(b){
+      h+='<section class="gruppe" style="--f:'+b.f+'"><div class="gkopf"><i></i><h2>'+esc(b.name)+'</h2></div><p class="gtext">'+esc(b.text)+'</p><div class="karten">'+
+        inB(b.id).map(function(a){return karte(a)}).join("")+'</div></section>';
+    });
+  }
+  h+='<div class="frage"><span style="display:flex;gap:10px;align-items:center">'+ic("frage")+'<b>Ihre Aufgabe ist nicht dabei?</b></span><button class="link" type="button">Einfach im Gespräch schreiben oder sprechen</button></div>';
+  $("#treffer").innerHTML=h;
+  document.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",String(c.dataset.bereich===Z.bereich))});
+  var l=$("#leeren");if(l)l.classList.toggle("versteckt",!Z.q);
+}
+function listeMalen(){
+  Z.ansicht="liste";
+  $("#innen").innerHTML='<p class="vorzeile">Funktionen entdecken</p><h1>Was möchten Sie erledigen?</h1>'+
+   '<p class="unter">Wählen Sie eine Aufgabe. Gernbei fragt nach und erstellt mit Ihnen das Ergebnis.</p>'+
+   '<form class="suche" id="suche" role="search"><label class="suchfeld">'+ic("lupe")+'<input id="q" type="text" autocomplete="off" placeholder="Aufgabe oder Funktion suchen …" aria-label="Aufgabe oder Funktion suchen" value="'+esc(Z.q)+'"><button class="leeren versteckt" type="button" id="leeren" aria-label="Suche löschen">×</button></label><button class="haupt" type="submit">Suchen</button></form>'+
+   '<div class="einr"><span>'+ic("rad")+'Gernbei einrichten</span><button class="link" type="button" data-einr="1">Verbindungen</button></div>'+
+   '<div id="treffer"></div>';
+  trefferMalen();
+}
+function sucheSetzen(w){
+  if(w&&!Z.q){Z.bereichVor=Z.bereich;Z.bereich="alle"}
+  if(!w&&Z.q&&Z.bereichVor){Z.bereich=Z.bereichVor;Z.bereichVor=null}
+  Z.q=w;trefferMalen();
+}
+
+/* ---------- Gernbei einrichten ---------- */
+function einrichtenMalen(){
+  Z.ansicht="einrichten";
+  $("#innen").innerHTML='<div class="pfad"><button class="link" type="button" data-zurueck>Funktionen entdecken</button> / Gernbei einrichten</div><h1>Gernbei einrichten</h1><p class="unter">Einmal einstellen, dann gilt es bei jeder Aufgabe.</p>'+
+   EINRICHTEN.map(function(g){return '<section class="gruppe" style="--f:var(--c-einrichten)"><div class="gkopf"><i></i><h2>'+esc(g.gruppe)+'</h2></div><p class="gtext"></p><div class="karten">'+
+     g.karten.map(function(k){return '<article class="karte" style="--f:var(--c-einrichten)"><div class="kachel">'+ic(k.ic)+'</div><div class="kinhalt"><h3>'+esc(k.t)+'</h3><p>'+esc(k.d)+'</p><div class="fuss"><button class="neben" type="button">'+esc(k.knopf)+'</button>'+(k.stand?'<span class="marke">'+esc(k.stand)+'</span>':'')+'</div></div></article>'}).join("")+'</div></section>'}).join("");
+}
+
+/* ---------- Formular (nur E-Mail oder Brief) ---------- */
+var PROBIER={dokument:"Leg los mit diesen Angaben: ",angebot:"Angebot für ",nachfassen:"Was ist eigentlich mit dem Angebot ",folien:"Foliensatz zu ",entscheidung:"Entscheidungsvorlage zu ",heute:"Was steht heute an?",alles:"Zeig mir alles",suchen:"Such in meinen Notizen nach ",auftrag:"Diese Woche steht an: ",anruf:"Kunde hat angerufen: ",foto:"Mach mir ein Protokoll aus diesem Foto.",rueckmeldung:"Rückmeldung vom Einsatz: ",aufmass:"Aufmaß: ",zettel:"Auftragszettel: ",uebersehen:"Was übersehe ich bei ",gegenrede:"Schreib mir die Gegenrede: ",raus:"Das Angebot kann raus.",google:"Mach einen Beitrag fürs Google-Profil zu ",social:"Mach einen Beitrag für ",wunsch:"Schreib eine Seite für ",website:"Schau dir meine Website an",aufbau:"Ich will mit Social Media anfangen",kampagne:"Ich will eine Kampagne machen",mail:"Mail an "};
+for(var pk in PROBIER_NEU)PROBIER[pk]=PROBIER_NEU[pk];
+function pfadHtml(a){return '<div class="pfad"><button class="link" type="button" data-zurueck>Funktionen entdecken</button> / '+esc(a.t)+'</div>'}
+function stufenHtml(nr){
+  return '<ol class="stufen" aria-label="Schritte">'+["Angaben","Entwurf","Fertigstellen"].map(function(n,i){var k=i+1;
+    return (i?'<li class="strich" aria-hidden="true"></li>':'')+'<li'+(k===nr?' aria-current="step"':k<nr?' class="fertig"':'')+'><b>'+(k<nr?"✓":k)+'</b><span>'+n+'</span></li>'}).join("")+'</ol>';
+}
+BEISPIEL={art:"E-Mail",an:"",was:"mail an frau schneider montagetermin verschiebt sich auf donnerstag neun uhr soll kurz bestätigen",ton:"Ihr Stil"};
+var MIKRO='<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.500V21"/></svg>';
+function gross(s){return s.replace(/(^|[\s-])([a-zäöü])/g,function(m,a,b){return a+b.toUpperCase()})}
+/* Was die Seite aus der Ansage schon zeigt (verbindlich liest es im Produkt Gernbei) */
+function adresse(e){var m=(e.was||"").match(/[\w.+-]+@[\w-]+(\.[\w-]+)+/);return m?m[0]:""}
+function nameAus(e){
+  var m=(e.was||"").match(/\b(frau|herrn?|familie|firma)\s+([a-zäöüß][\wäöüß-]+)/i);
+  return m?gross(m[1].toLowerCase().replace("herrn","herr"))+" "+gross(m[2].toLowerCase()):"";
+}
+function empf(e){return nameAus(e)||adresse(e)}
+A("mail").satz=function(e){return e.art+(e.ton==="Ihr Stil"?"":", "+e.ton.toLowerCase())+": "+e.was};
+function gruss(e){return e.ton==="Sachlicher"?"Mit freundlichen Grüßen":e.ton==="Freundlicher"?"Herzliche Grüße":"Freundliche Grüße"}
+function herkunftMalen(){
+  var e=Z.ein.mail,h=$("#herkunft");if(!h)return;
+  h.classList.toggle("versteckt",!e.projekt);
+  h.textContent=e.projekt?"Das Gespräch beginnt im Projekt "+e.projekt+". Dort gelten Ihre Projektregeln.":"";
+}
+function wahlHtml(k,l,opt,v){
+  return '<div class="feld"><fieldset><legend>'+l+'</legend><div class="wahl">'+opt.map(function(o){return '<label><input type="radio" name="f-'+k+'" data-k="'+k+'" value="'+o+'"'+(o===v?" checked":"")+'>'+o+'</label>'}).join("")+'</div></fieldset></div>';
+}
+function vorschauMalen(){
+  var e=Z.ein.mail,brief=e.art==="Brief",leer=!String(e.was||"").trim(),n=nameAus(e),ad=adresse(e),h;
+  var briefOben='<div class="briefkopf"><span class="grau">Ihr Briefkopf, wenn eine Vorlage hinterlegt ist</span></div>',briefDatum='<div class="datum"><span class="grau">Datum von heute</span></div>';
+  if(leer){
+    var b=mailText({was:BEISPIEL.was,ton:"Ihr Stil",art:e.art});
+    h='<div class="marke-bsp">Beispiel</div><div class="bsp-aus">Aus der Ansage: „'+esc(BEISPIEL.was)+'“</div>'+(brief?briefOben:'')+
+      '<div class="zl"><b>An</b><span>Frau Schneider</span></div>'+(brief?briefDatum:'')+'<div class="zl"><b>Betreff</b><span>'+esc(b.betreff)+'</span></div><p class="vorschau-text">'+esc(b.text)+'</p>';
+  }else{
+    var an=n||ad?'<span class="dein">'+esc([n,ad].filter(Boolean).join(" · "))+'</span>':'<span class="grau">noch nicht genannt. Sagen Sie zum Beispiel „an Frau Schneider“.</span>';
+    h=(brief?briefOben:'')+'<div class="zl"><b>An</b>'+an+'</div>'+(brief?'<div class="zl"><b>Anschrift</b><span class="grau">aus Ihren Unterlagen, sonst fragt Gernbei nach</span></div>'+briefDatum:'')+
+      '<div class="zl"><b>Betreff</b><span class="grau">schreibt Gernbei aus Ihrem Anliegen</span></div>'+
+      '<p class="gernbei">Guten Tag'+(n?' <span class="dein">'+esc(n)+'</span>':'')+',</p>'+
+      '<div class="grau block">Ihr Anliegen, ausformuliert: ganze Sätze, fehlerfrei, in Ihrem Stil.</div>'+
+      '<p class="gernbei">'+(e.ton==="Ihr Stil"?"Ihr Gruß, wie Sie ihn sonst schreiben":esc(gruss(e)))+'<br>Thomas Brandt</p>';
+  }
+  var bo=$("#bogen");bo.innerHTML=h;bo.classList.toggle("bsp",leer);
+  $("#kopf-h1").textContent=brief?"Sagen Sie es. Gernbei schreibt den Brief.":"Sagen Sie es. Gernbei schreibt die E-Mail.";
+  $("#legende").textContent=leer?"So sieht das Ergebnis aus. Sobald Sie etwas sagen, zeigt das Blatt Ihre Angaben.":"Dunkel: aus Ihrer Ansage erkannt. Grau: schreibt Gernbei dazu.";
+}
+function angabenMalen(a){
+  var e=Z.ein[a.id];Z.ansicht="assistent";if(!e.art)e.art="E-Mail";if(!e.ton||e.ton==="Freundlich"||e.ton==="Sachlich")e.ton="Ihr Stil";
+  $("#innen").innerHTML=pfadHtml(a)+'<h1 id="kopf-h1"></h1>'+stufenHtml(1)+'<form id="angaben" novalidate>'+
+    '<div class="ansage" data-feld="was"><label for="f-was">Sagen oder schreiben Sie es, wie es kommt</label>'+
+    '<textarea id="f-was" data-k="was" placeholder="Zum Beispiel: '+esc(BEISPIEL.was)+'">'+esc(e.was||"")+'</textarea>'+
+    '<div class="diktatzeile"><button class="mikro" type="button" data-mikro="f-was" aria-pressed="false">'+MIKRO+'<span>Diktieren</span></button><button class="haupt" type="submit">Entwurf erstellen</button><span class="st" id="st-f-was" role="status"></span></div>'+
+    '<div class="hilfe">Sie schreiben hier keine E-Mail. Sie sagen nur, an wen und was hinein soll, in beliebiger Reihenfolge.</div><div class="fehler versteckt" role="alert"></div></div>'+
+    '<div class="abschnitt">Erkannt und voreingestellt<span>Ändern Sie nur, was diesmal anders sein soll.</span></div><div class="auswahl">'+wahlHtml("art","Was soll es werden?",["E-Mail","Brief"],e.art)+wahlHtml("ton","Wie soll es klingen?",["Ihr Stil","Freundlicher","Sachlicher"],e.ton)+
+    '<div class="feld"><label for="f-projekt">Gehört es zu einem Projekt?</label><select id="f-projekt" data-k="projekt"><option value="">Kein Projekt</option>'+PROJEKTE.map(function(p){return '<option'+(e.projekt===p?" selected":"")+'>'+p+'</option>'}).join("")+'</select></div></div><div class="herkunft versteckt" id="herkunft" style="margin-top:6px"></div>'+
+    '<div class="pfeil">↓ Daraus macht Gernbei<small id="legende"></small></div><div class="bogen" id="bogen"></div>'+
+    '<div class="erledigt" aria-label="Das erledigt Gernbei"><b>Das erledigt Gernbei:</b><span>Betreff</span><span>Anrede und Gruß</span><span>ganze Sätze</span><span>Rechtschreibung</span><span>Ihr Stil</span><span>beim Brief Datum und Anschrift</span></div>'+
+    '</form><div class="fuss-hinweis unterbogen">'+ic("info")+'<span>Sie prüfen den Entwurf, bevor Sie ihn verwenden. Gesendet wird nichts. <button class="link" type="button" id="beispiel">Beispiel einsetzen</button></span></div>';
+  herkunftMalen();vorschauMalen();
+}
+/* Diktieren wie an der Schreibzeile: ein Tipp, sprechen, der Text steht im Feld. Ohne Mikrofon spielt die Ansicht ein Beispiel ein. */
+var Erk=null,dRec=null,dSim=null,dKnopf=null;
+var DIKTAT_BEISPIEL={"f-ewas":"soll ich ab januar nur noch fassaden machen und die innenarbeiten abgeben, der jonas würde dann gehen, entscheiden muss ich bis weihnachten","f-was":BEISPIEL.was,"r-wunsch":"schreib noch dazu dass wir das material mitbringen"};
+function diktatEnde(){
+  var k=dKnopf;dKnopf=null;if(dSim){clearInterval(dSim);dSim=null}if(!k||!document.body.contains(k))return;
+  k.classList.remove("hoert");k.setAttribute("aria-pressed","false");k.querySelector("span").textContent="Diktieren";
+  var st=$("#st-"+k.dataset.mikro);if(st&&st.dataset.art!=="bleibt")st.textContent="";
+}
+function diktieren(k){
+  if(dKnopf){if(dRec){try{dRec.stop()}catch(x){}}diktatEnde();return}
+  var ziel=$("#"+k.dataset.mikro),st=$("#st-"+k.dataset.mikro),vorher=ziel.value?ziel.value.replace(/\s*$/," "):"";
+  function setzen(t){ziel.value=vorher+t;ziel.dispatchEvent(new Event("input",{bubbles:true}))}
+  function spielen(){
+    var w=DIKTAT_BEISPIEL[k.dataset.mikro].split(" "),i=0;st.dataset.art="bleibt";st.textContent="In der Vorführung wird ein Beispiel eingesprochen.";
+    dSim=setInterval(function(){if(i>=w.length){diktatEnde();return}setzen(w.slice(0,++i).join(" "))},130);
+  }
+  dKnopf=k;k.classList.add("hoert");k.setAttribute("aria-pressed","true");k.querySelector("span").textContent="Fertig";
+  st.dataset.art="";st.textContent="Ich höre zu. Zum Beenden auf Fertig tippen.";
+  if(!Erk)return spielen();
+  dRec=new Erk();dRec.lang="de-DE";dRec.continuous=true;dRec.interimResults=true;
+  dRec.onresult=function(ev){var t="";for(var i=0;i<ev.results.length;i++)t+=ev.results[i][0].transcript;setzen(t)};
+  dRec.onend=function(){if(!dSim)diktatEnde()};
+  dRec.onerror=function(){dRec.onend=null;spielen()};
+  try{dRec.start()}catch(x){spielen()}
+}
+function pruefen(a){
+  var e=Z.ein[a.id],el=$('[data-feld="was"]'),m=$(".fehler",el),t="";
+  if(!String(e.was||"").trim())t="Sagen oder schreiben Sie, worum es geht.";
+  else if(!empf(e))t="Sagen Sie noch, an wen es geht, zum Beispiel „an Frau Schneider“ oder eine E-Mail-Adresse.";
+  el.classList.toggle("falsch",!!t);m.classList.toggle("versteckt",!t);m.textContent=t;
+  if(t)$("#f-was").focus();
+  return !t;
+}
+function mailText(e){
+  var n=nameAus(e),anr="Guten Tag"+(n?" "+n:"")+",";
+  if(e.was===BEISPIEL.was)return {betreff:"Neuer Montagetermin: Donnerstag um 9 Uhr",text:anr+"\n\nder Montagetermin bei Ihnen verschiebt sich: Wir kommen am Donnerstag um 9 Uhr."+(e.ton==="Freundlicher"?" Ich hoffe, das passt Ihnen gut.":"")+"\n\nBitte bestätigen Sie mir den Termin kurz.\n\n"+gruss(e)+"\nThomas Brandt",echt:true};
+  return {betreff:"(Betreff von Gernbei)",text:anr+"\n\n"+e.was+"\n\n"+gruss(e)+"\nThomas Brandt",echt:false};
+}
+
+/* ---------- Gespraech mit dem Kasten Entwurf ---------- */
+function letzteSie(){var g=Z.g,i=g.eintraege.length;while(i--){if(g.eintraege[i].wer==="sie")return g.eintraege[i]}return null}
+function felderLesen(){
+  if(!Z.g)return false;var v=letzteSie(),b=$("#r-betreff"),t=$("#r-text");if(!v||!t)return false;
+  var hand=t.value!==v.text||(b&&b.value!==v.betreff);
+  v.text=t.value;if(b)v.betreff=b.value;return hand;
+}
+Z.ms=false;
+function entwurfKasten(v,aktiv){
+  var e=Z.ein.mail,g=Z.g,brief=e.art==="Brief",n=nameAus(e),ad=adresse(e);
+  if(!aktiv)return '<div class="ekasten alt"><div class="ekopf">Frühere Fassung</div><div><b>Betreff:</b> '+esc(v.betreff)+'</div><p class="vorschau">'+esc(v.text)+'</p></div>';
+  var f=g.fertig||{};
+  var haupt=brief?'<button class="haupt" style="padding:10px 22px" type="button" id="ablegen">Als Word und PDF ablegen</button>'
+    :Z.ms?'<button class="haupt" style="padding:10px 22px" type="button" id="outlook">Als Entwurf in Outlook ablegen</button>'
+    :'<button class="haupt" style="padding:10px 22px" type="button" id="mailprog">Im E-Mail-Programm öffnen</button>';
+  var dazu=brief?'Liegt dann unter Dokumente, zum Drucken oder Anhängen.'
+    :Z.ms?'Gernbei legt die Mail in Outlook unter Entwürfe. Dort schicken Sie sie ab. Gesendet wird nichts.'
+    :'Öffnet eine neue Nachricht mit Empfänger, Betreff und Text. Sie schicken selbst ab. Ist Microsoft 365 verbunden, legt Gernbei sie direkt als Entwurf ab. <button class="link" type="button" data-einr="1">Verbinden</button>';
+  return '<div class="ekasten"><div class="ekopf">Entwurf · '+(brief?"Brief":"E-Mail")+'</div>'+stufenHtml(g.fertig?3:2)+
+    (v.echt?'':'<div class="platzhalter"><b>Platzhalter in dieser Vorführung.</b> Bei Ihnen steht hier der Text, den Gernbei aus dem Gesagten fehlerfrei und in Ihrem Stil ausformuliert.</div>')+
+    '<div class="bogen im"><div class="zl"><b>An</b><span>'+esc([n,ad].filter(Boolean).join(" · "))+'</span></div><div class="zl"><b><label for="r-betreff">Betreff</label></b><input type="text" id="r-betreff" value="'+esc(v.betreff)+'"></div>'+
+    '<textarea id="r-text" aria-label="'+(brief?"Brief":"Nachricht")+'">'+esc(v.text)+'</textarea></div>'+
+    '<div class="reihe" style="margin-top:14px">'+haupt+'<button class="link" type="button" id="kopieren">Nur den Text kopieren</button></div>'+
+    '<div class="klein" style="margin-top:6px">'+dazu+'</div>'+
+    (f.outlook?'<div class="ok" role="status">✓ Liegt in Outlook unter Entwürfe'+(ad?', an '+esc(ad):'')+'. Dort prüfen und abschicken.'+(ad?'':' Die Adresse sucht Gernbei in Ihren Outlook-Kontakten. Findet es keine, bleibt „An“ im Entwurf leer.')+'</div>':'')+
+    (f.mailprog?'<div class="ok" role="status">✓ Bei Ihnen öffnet sich jetzt Ihr E-Mail-Programm mit der fertigen Nachricht. Dort schicken Sie sie ab.</div>':'')+
+    (f.kopiert?'<div class="ok" role="status">✓ Kopiert. Fügen Sie den Text in Ihr Mailprogramm ein.</div>':'')+
+    (f.dokument?'<div class="ok" role="status">✓ Liegt unter Dokumente: „Brief an '+esc(empf(e))+'“, als Word und PDF.</div>':'')+
+    '<div class="etrenn"></div><label for="r-wunsch" style="font-weight:600;display:block;margin-bottom:6px">Noch etwas ändern?</label>'+
+    '<div class="reihe"><input type="text" id="r-wunsch" placeholder="Sagen oder schreiben Sie, was anders soll." style="flex:1;min-width:200px;border:1.5px solid #B9B9B4;border-radius:8px;padding:9px 12px;background:#fff">'+
+    '<button class="mikro klein-m" type="button" data-mikro="r-wunsch" aria-pressed="false">'+MIKRO+'<span>Diktieren</span></button><button class="dunkel" type="button" id="wunsch-ok">Ändern lassen</button></div>'+
+    '<div class="diktatzeile"><span class="st" id="st-r-wunsch" role="status"></span></div>'+
+    '<div class="reihe"><span class="klein">Oder kurz:</span><button class="neben" type="button" data-aendern="kurz">Kürzer</button><button class="neben" type="button" data-aendern="nett">Freundlicher</button><span class="klein">Sie können auch direkt im Blatt ändern.</span></div>'+
+    '<div class="reihe" style="margin-top:12px"><button class="link" type="button" id="angaben-aendern">Ansage ändern</button><button class="link" type="button" data-zurueck>Nächste Aufgabe</button></div></div>';
+}
+function gespraechMalen(){
+  var g=Z.g,e=Z.ein.mail,letzter=-1;Z.ansicht="gespraech";
+  g.eintraege.forEach(function(x,i){if(x.wer==="sie")letzter=i});
+  var h='<div class="kontext">'+(e.projekt?'Für '+esc(e.projekt)+' · ':'Ohne Projekt · Ihre allgemeine Arbeitsweise gilt · ')+'<button class="link" type="button">Was hier gilt</button></div><div class="verlauf">';
+  g.eintraege.forEach(function(x,i){
+    if(x.wer==="ich")h+='<div class="ich">'+esc(x.text)+'</div>';
+    else h+='<div class="sie"><p>'+esc(x.satz)+'</p>'+entwurfKasten(x,i===letzter&&!g.wartet)+'</div>';
+  });
+  if(g.wartet)h+='<div class="wartet" role="status" style="padding:6px 4px"><span class="kreis"></span>Gernbei schreibt …</div>';
+  h+='</div><div class="zeile-unten"><span>Schreiben oder sprechen …</span><b aria-hidden="true">↑</b></div>';
+  $("#innen").innerHTML=h;
+}
+function nachUnten(){var m=$("#main");m.scrollTop=m.scrollHeight}
+function formularSenden(a){
+  var e=Z.ein.mail;
+  Z.g={eintraege:[{wer:"ich",text:a.satz(e)}],wartet:true,fertig:null};Z.erg.mail=Z.g;
+  gespraechMalen();
+  setTimeout(function(){
+    var r=mailText(e);r.wer="sie";r.satz=e.projekt?"Hier ist der Entwurf, nach den Regeln des Projekts "+e.projekt+".":"Hier ist der Entwurf.";
+    Z.g.eintraege.push(r);Z.g.wartet=false;letzteMalen();if(Z.ansicht==="gespraech"){gespraechMalen();$("#innen").focus()}
+  },1300);
+}
+function aendern(art,dazu){
+  var g=Z.g,hand=felderLesen(),v=letzteSie(),teile=v.text.split("\n\n"),neu;
+  if(art==="kurz"){neu=teile.filter(function(t,i){return i===0||i===teile.length-1||!/hoffe|Vielen Dank|schönen Tag/.test(t)}).join("\n\n").replace(" Ich hoffe, das passt Ihnen gut.","")}
+  if(art==="nett"){teile.splice(teile.length-1,0,"Vielen Dank für Ihr Verständnis. Bei Fragen rufen Sie mich gern an.");neu=teile.join("\n\n")}
+  if(art==="dazu"){teile.splice(teile.length-1,0,dazu===DIKTAT_BEISPIEL["r-wunsch"]?"Das Material bringen wir mit.":dazu);neu=teile.join("\n\n")}
+  g.eintraege.push({wer:"ich",text:{kurz:"Formuliere den Entwurf kürzer.",nett:"Formuliere den Entwurf freundlicher.",dazu:"Ändere den Entwurf: "+dazu}[art]+(hand?" Nimm meine geänderte Fassung als Stand.":"")});
+  g.wartet=true;g.fertig=null;gespraechMalen();nachUnten();
+  setTimeout(function(){
+    g.eintraege.push({wer:"sie",satz:{kurz:"Kürzer gefasst.",nett:"Etwas freundlicher formuliert.",dazu:"Geändert."}[art],betreff:v.betreff,text:neu,echt:v.echt});
+    g.wartet=false;if(Z.ansicht==="gespraech"){gespraechMalen();nachUnten()}
+  },1100);
+}
+
+/* ---------- Blatt der Entscheidungsvorlage (Stand 101) ---------- */
+var EBSP_D="welchen anbieter nehmen wir für die neue website, drei angebote liegen vor, entscheiden will ich bis ende november";
+var EBSP_H="soll ich ab januar nur noch fassaden machen und die innenarbeiten abgeben, der jonas würde dann gehen, entscheiden muss ich bis weihnachten",EBSP=EBSP_H;
+function eFrist(t){
+  var re=/(?:^|[\s,.;:])bis\s+((?:(?:zum|zur|ende|anfang|mitte|nächste[nrs]?|kommende[nrs]?)\s+)?[a-zäöüß0-9.]+(?:\s+[0-9]{4})?)/gi,m,f="";
+  while((m=re.exec(t||""))){if(!/^(jetzt|auf|dahin|dato|zu|hin|unter|heute|dann|der|die|das|wir|ich|er|sie)$/i.test(m[1].trim())){f=m[1].trim();break}}
+  if(!f)return "";
+  return f.replace(/[,;:]+$/,"").replace(/([^0-9])\.+$/,"$1").split(/\s+/).map(function(w,i,a){return (i===a.length-1||/^(ende|anfang|mitte)$/i.test(w))&&/^[a-zäöü]/.test(w)?w.charAt(0).toUpperCase()+w.slice(1):w}).join(" ");
+}
+function eGrau(x){return '<div class="grau block">'+x+'</div>'}
+function eVorschau(){
+  var e=Z.ein.entscheidung,leer=!String(e.was||"").trim(),t=leer?EBSP:String(e.was).trim(),bis=eFrist(t);
+  var bo=$("#bogen");if(!bo)return;
+  bo.innerHTML=(leer?'<div class="marke-bsp">Beispiel</div><div class="bsp-aus">Aus der Ansage: „'+esc(EBSP)+'“</div>':'')+
+    '<div class="zl"><b>Wer</b><span class="grau">Sie entscheiden, wenn Sie niemand anderen nennen</span></div>'+
+    '<div class="zl"><b>Bis</b>'+(bis?'<span class="dein">'+esc(bis)+'</span>':'<span class="grau">noch nicht genannt. Sagen Sie zum Beispiel „bis Weihnachten“.</span>')+'</div>'+
+    '<p class="gernbei" style="margin-bottom:4px">Ihre Frage im Wortlaut</p><p class="vorschau-text" style="margin-top:0">„'+esc(t)+'“</p>'+
+    eGrau("Empfehlung in einem Satz, mit drei Gründen")+eGrau("Die Möglichkeiten im Vergleich, immer auch: nichts tun")+eGrau("Gegenrede mit Urteil")+
+    eGrau("Annahme und Probe: worauf die Empfehlung baut, und an welchem Tag Sie nachsehen")+eGrau("Plan B");
+  bo.classList.toggle("bsp",leer);
+  $("#legende").textContent=leer?"So sieht das Ergebnis aus. Sobald Sie etwas sagen, zeigt das Blatt Ihre Angaben.":"Dunkel: aus Ihrer Ansage erkannt. Grau: schreibt Gernbei dazu.";
+}
+function eAngabenMalen(a){
+  var e=Z.ein.entscheidung;Z.ansicht="assistent";
+  $("#innen").innerHTML=pfadHtml(a)+'<h1 id="kopf-h1">Sagen Sie, was Sie entscheiden müssen. Gernbei macht daraus eine Seite.</h1>'+stufenHtml(1)+'<form id="e-angaben" novalidate>'+
+    '<div class="ansage" data-feld="ewas"><label for="f-ewas">Sagen oder schreiben Sie es, wie es kommt</label>'+
+    '<textarea id="f-ewas" data-k="was" placeholder="Zum Beispiel: '+esc(EBSP)+'">'+esc(e.was||"")+'</textarea>'+
+    '<div class="diktatzeile"><button class="mikro" type="button" data-mikro="f-ewas" aria-pressed="false">'+MIKRO+'<span>Diktieren</span></button><button class="haupt" type="submit">Entwurf erstellen</button><span class="st" id="st-f-ewas" role="status"></span></div>'+
+    '<div class="hilfe">Sie schreiben hier keine Vorlage. Sie sagen nur, worum es geht, welche Möglichkeiten Sie sehen und bis wann es entschieden sein muss.</div><div class="fehler versteckt" role="alert"></div></div>'+
+    '<div class="pfeil">↓ Daraus macht Gernbei<small id="legende"></small></div><div class="bogen" id="bogen"></div>'+
+    '<div class="erledigt" aria-label="Das erledigt Gernbei"><b>Das erledigt Gernbei:</b><span>Ihre Frage im Wortlaut</span><span>Möglichkeiten, auch nichts tun</span><span>Empfehlung mit Gründen</span><span>Gegenrede</span><span>Annahme und Probe</span><span>Plan B</span></div>'+
+    '</form><div class="fuss-hinweis unterbogen">'+ic("info")+'<span>Die Seite ist ein Entwurf. Entscheiden tun Sie. <button class="link" type="button" id="e-beispiel">Beispiel einsetzen</button></span></div>';
+  eVorschau();
+}
+function eSeite(t){
+  var bsp=t===EBSP_H,bis=eFrist(t);
+  function ab(h,x){return '<p class="gernbei" style="margin:14px 0 4px"><b>'+h+'</b></p>'+x}
+  return '<div class="bogen im"><div class="zl"><b>Wer</b><span>Sie entscheiden</span></div><div class="zl"><b>Bis</b><span>'+esc(bis||"noch offen, Gernbei fragt einmal danach")+'</span></div>'+
+    ab("Ihre Frage im Wortlaut",'<p class="vorschau-text" style="margin-top:0">„'+esc(t)+'“</p>')+
+    (bsp?ab("Empfehlung",'<p style="margin:0">Fassaden als Schwerpunkt, Innenarbeit nur noch für Stammkunden. Jonas bleibt, sein Können geht nicht verloren. Der Schritt lässt sich zurücknehmen. Die Fassadenaufträge tragen den größeren Teil, laut Ihrer Auftragsliste.</p>')+
+      ab("Die Möglichkeiten",'<p style="margin:0">Nur Fassaden, Innenarbeit abgeben · Fassaden als Schwerpunkt, Innenarbeit für Stammkunden · Nichts tun: alles bleibt, wie es ist. Je mit Dafür, Dagegen und Kosten, jede Zahl mit Quelle.</p>')+
+      ab("Gegenrede",'<p style="margin:0">Schwächste Zahl: der Anteil der Innenarbeit am Ertrag ist geschätzt. Bequemste Annahme: dass Jonas mit weniger Innenarbeit bleibt. Urteil: trägt, wenn Sie vorher mit Jonas sprechen.</p>')+
+      ab("Annahme und Probe",'<p style="margin:0">Die Empfehlung baut darauf, dass die Fassadenaufträge den Rückgang bis März ausgleichen. Probe am 31.03.: Liegt der Auftragseingang Fassade über dem Vorjahr?</p>')+
+      ab("Plan B",'<p style="margin:0">Trägt es nicht, nehmen Sie Innenarbeit wieder für alle Kunden an.</p>')
+    :eGrau("Empfehlung in einem Satz, mit drei Gründen, aus Ihren Unterlagen")+eGrau("Die Möglichkeiten im Vergleich, immer auch: nichts tun")+eGrau("Gegenrede mit Urteil")+eGrau("Annahme und Probe, mit einem Tag zum Nachsehen")+eGrau("Plan B"))+'</div>';
+}
+function eGespraechMalen(){
+  var g=Z.eg,t=Z.ein.entscheidung.was;Z.ansicht="egespraech";
+  var h='<div class="kontext">Projekt Betrieb · <button class="link" type="button">Was hier gilt</button></div><div class="verlauf"><div class="ich">'+esc("Entscheidungsvorlage: "+t)+'</div>';
+  if(g.wartet)h+='<div class="wartet" role="status" style="padding:6px 4px"><span class="kreis"></span>Gernbei schreibt …</div>';
+  else h+='<div class="sie"><p>'+(t===EBSP_H?'Die Vorlage steht. Die Probe am 31.03. habe ich Ihnen vorgemerkt, an dem Tag lege ich sie Ihnen wieder vor. Passt der Tag?':'In der Vorführung steht hier nur das Gerüst. Bei Ihnen schreibt Gernbei die Seite aus Ihren Unterlagen und schlägt Annahme und Probe vor.')+'</p>'+
+    '<div class="ekasten"><div class="ekopf">Entscheidungsvorlage · eine Seite</div>'+stufenHtml(3)+eSeite(t)+
+    '<div class="ok" role="status" style="margin-top:12px">✓ Liegt unter Dokumente, im Projekt Betrieb. Auf Wunsch als Word oder als zwei bis drei Folien.</div>'+
+    '<div class="reihe" style="margin-top:12px"><button class="link" type="button" id="e-aendern">Ansage ändern</button><button class="link" type="button" data-zurueck>Nächste Aufgabe</button></div></div></div>';
+  h+='</div><div class="zeile-unten"><span>Schreiben oder sprechen …</span><b aria-hidden="true">↑</b></div>';
+  $("#innen").innerHTML=h;
+}
+function eSenden(){
+  Z.eg={wartet:true};Z.erg.entscheidung=Z.eg;eGespraechMalen();
+  setTimeout(function(){Z.eg.wartet=false;if(Z.ansicht==="egespraech"){eGespraechMalen();$("#innen").focus()}},1300);
+}
+
+/* ---------- Alle anderen Karten: wie heute, Satzanfang in der Schreibzeile ---------- */
+function schreibzeileMalen(a){
+  Z.ansicht="zeile";
+  $("#innen").innerHTML=pfadHtml(a)+'<div class="platzhalter"><b>So beginnt diese Aufgabe.</b> '+
+    (a.id==="mail"?'So geht es auch ohne Blatt: der Satzanfang steht in der Schreibzeile, Sie schreiben oder sprechen ihn zu Ende.':a.weg?'Der geführte Weg beginnt sofort im Gespräch und steht links unter „Schritt für Schritt“, solange er läuft.':'Der Satzanfang steht in der Schreibzeile, Sie schreiben ihn zu Ende.')+'</div>'+
+    '<div class="akarte"><div class="z1"><b>'+esc(a.t)+'</b><span>ohne Projekt</span><button class="link" type="button" data-zurueck>Andere Aufgabe</button></div><p>'+esc(a.d)+'</p><p class="klein">Abgeschickt wird erst mit dem Pfeil.</p></div>'+
+    '<div class="zeile-unten"><span class="voll">'+esc(PROBIER[a.id]||"")+'</span><b aria-hidden="true">↑</b></div>';
+}
+function starten(id){
+  var a=A(id);Z.aufgabe=id;if(!Z.ein[id])Z.ein[id]={};
+  if(id==="entscheidung"){if(Z.eg)eGespraechMalen();else eAngabenMalen(a)}
+  else if(id!=="mail")schreibzeileMalen(a);
+  else if(Z.g)gespraechMalen();
+  else angabenMalen(a);
+  $("#main").scrollTop=0;$("#innen").focus();
+}
+function letzteMalen(){
+  var fest='<button class="punkt" type="button">'+ic("rede")+'Angebot für Dachsanierung</button><button class="punkt" type="button">'+ic("rede")+'Kundenmail formulieren</button>';
+  var e=Z.ein.mail,neu=Z.g&&Z.g.eintraege.length>1?'<button class="punkt" type="button" data-start="mail">'+ic("rede")+esc((e.art||"E-Mail")+" an "+(empf(e)||"…"))+'</button>':'';
+  $("#letzte").innerHTML=neu+fest;
+}
+
+/* ---------- Ereignisse ---------- */
+$("#innen").addEventListener("click",function(ev){
+  var t=ev.target.closest("button");if(!t)return;
+  var a=Z.aufgabe&&A(Z.aufgabe);
+  if(t.dataset.start)return starten(t.dataset.start);
+  if(t.dataset.mikro)return diktieren(t);
+  if(t.id==="outlook"){felderLesen();(Z.g.fertig=Z.g.fertig||{}).outlook=true;return gespraechMalen()}
+  if(t.id==="mailprog"){felderLesen();var rm=letzteSie();(Z.g.fertig=Z.g.fertig||{}).mailprog=true;gespraechMalen();return}
+  if(t.id==="wunsch-ok"){var w=$("#r-wunsch").value.trim();if(w)aendern("dazu",w);return}
+  if(t.dataset.bereich){Z.bereich=t.dataset.bereich;if(Z.q){Z.q="";$("#q").value="";Z.bereichVor=null}return trefferMalen()}
+  if(t.id==="leeren"||t.id==="q-leeren"){$("#q").value="";sucheSetzen("");return $("#q").focus()}
+  if(t.dataset.einr!=null){felderLesen();return einrichtenMalen()}
+  if(t.hasAttribute("data-zurueck")){if(Z.ansicht==="gespraech")felderLesen();return listeMalen()}
+  if(t.id==="beispiel"){Z.ein.mail=Object.assign({projekt:Z.ein.mail.projekt},BEISPIEL,{art:Z.ein.mail.art});return angabenMalen(a)}
+  if(t.id==="frei")return schreibzeileMalen(a);
+  if(t.id==="e-beispiel"){Z.ein.entscheidung.was=EBSP;return eAngabenMalen(a)}
+  if(t.id==="e-aendern"){Z.eg=null;Z.erg.entscheidung=null;return eAngabenMalen(A("entscheidung"))}
+  if(t.id==="angaben-aendern"){felderLesen();return angabenMalen(A("mail"))}
+  if(t.dataset.aendern==="dazu"){$("#dazu").classList.remove("versteckt");return $("#dazu-text").focus()}
+  if(t.dataset.aendern)return aendern(t.dataset.aendern);
+  if(t.id==="dazu-ok"){var v=$("#dazu-text").value.trim();if(v)aendern("dazu",v);return}
+  if(t.id==="kopieren"){felderLesen();var r=letzteSie();try{navigator.clipboard.writeText(r.betreff+"\n\n"+r.text).catch(function(){})}catch(x){}
+    (Z.g.fertig=Z.g.fertig||{}).kopiert=true;return gespraechMalen()}
+  if(t.id==="ablegen"){felderLesen();(Z.g.fertig=Z.g.fertig||{}).dokument=true;return gespraechMalen()}
+});
+function eingabe(ev){
+  var t=ev.target;
+  if(t.id==="q"&&ev.type==="input")return sucheSetzen(t.value);
+  if(t.dataset.k&&Z.aufgabe){
+    var e=Z.ein[Z.aufgabe];e[t.dataset.k]=t.value;
+    if(Z.aufgabe==="entscheidung"){var ef=document.querySelector('[data-feld="ewas"]');if(ef&&t.value.trim()){ef.classList.remove("falsch");ef.querySelector(".fehler").classList.add("versteckt")}return eVorschau()}
+    if(t.dataset.k==="projekt")herkunftMalen();
+    if(t.dataset.k==="art"&&ev.type==="change")e.artFest=true;
+    if(t.dataset.k==="was"&&!e.artFest){
+      var neu=/\bbrief\b/i.test(t.value)?"Brief":"E-Mail";
+      if(neu!==e.art){e.art=neu;var r=document.querySelector('input[name="f-art"][value="'+neu+'"]');if(r)r.checked=true}
+    }
+    if($("#bogen"))vorschauMalen();
+  }
+}
+$("#innen").addEventListener("input",eingabe);
+$("#innen").addEventListener("change",eingabe);
+$("#innen").addEventListener("submit",function(ev){
+  ev.preventDefault();
+  if(ev.target.id==="suche")return sucheSetzen($("#q").value);
+  if(ev.target.id==="e-angaben"){var ee=Z.ein.entscheidung,el=document.querySelector('[data-feld="ewas"]'),leer=!String(ee.was||"").trim();
+    el.classList.toggle("falsch",leer);var fm=el.querySelector(".fehler");fm.classList.toggle("versteckt",!leer);fm.textContent=leer?"Sagen oder schreiben Sie, worum es geht.":"";
+    if(leer){document.getElementById("f-ewas").focus();return}ee.was=String(ee.was).trim();return eSenden()}
+  if(ev.target.id==="angaben"){var a=A("mail");if(pruefen(a)){ev.target.querySelector("[type=submit]").disabled=true;formularSenden(a)}}
+});
+$("#nav").addEventListener("click",function(ev){
+  var t=ev.target.closest("button");if(!t)return;
+  if(t.dataset.start){$("#nav").classList.remove("offen");return starten(t.dataset.start)}
+  if(t.id==="nav-funk"){if(Z.ansicht==="gespraech")felderLesen();$("#nav").classList.remove("offen");listeMalen()}
+});
+$("#menue").addEventListener("click",function(){$("#nav").classList.toggle("offen")});
+$("#main").addEventListener("click",function(ev){if(!ev.target.closest("#menue"))$("#nav").classList.remove("offen")});
+document.querySelector(".entwurf").addEventListener("click",function(ev){
+  var t=ev.target.closest("button");if(!t)return;if(t.dataset.ms){Z.ms=t.dataset.ms==="ja";t.parentNode.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed",String(b===t))});if(Z.ansicht==="gespraech"){felderLesen();gespraechMalen()}return}if(!t.dataset.seite)return;
+  $("#app").classList.toggle("versteckt",t.dataset.seite!=="app");$("#erkl").classList.toggle("versteckt",t.dataset.seite!=="erkl");
+  t.parentNode.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed",String(b===t))});
+});
+
+/* Stand 104 (Kurt 15.11.2026: Ja, so bauen): jede Karte mit Satzanfang oeffnet ein Blatt, sechs mit Auswahl des Dokuments */
+var DOKS_VOLL=[
+ {n:"Angebot Bad Huber",d:"12.11.2026",angebot:1},
+ {n:"Angebot Dachsanierung Müller",d:"05.11.2026",angebot:1},
+ {n:"Regiebericht Rathaus, Flur 1. OG",d:"03.11.2026"},
+ {n:"Angebot Fassade Schmitt",d:"28.10.2026",angebot:1},
+ {n:"Aufmaß Neubau Schule",d:"21.10.2026"}
+];
+var DOKS_D=[
+ {n:"Angebot Familie Schmitt",d:"März 2026",angebot:1},
+ {n:"Protokoll Jour fixe Shop-Relaunch",d:"05.11.2026"}
+];
+var DOKS_L=[
+ {n:"Arbeitsblatt Alpen, Klasse 5",d:"10.11.2026"},
+ {n:"Elternbrief Wandertag",d:"03.11.2026"}
+];
+Z.doks=true;
+function doks(nurAngebot){var l=Z.doks?(Z.beruf==="handwerk"?DOKS_VOLL:Z.beruf==="lehrkraft"?DOKS_L:DOKS_D):[];return nurAngebot?l.filter(function(d){return d.angebot}):l}
+for(var id in ANSAGE)WORT_KARTE[id]=ANSAGE[id].knopf;
+for(var id in KNOPF_NEU)WORT_KARTE[id]=KNOPF_NEU[id];
+var DIREKT_ANTWORT={
+ heute:'<p>Heute:</p><ul style="margin:6px 0 0 18px;padding:0"><li>10:00 Besichtigung Familie Meier, Bad 1. OG</li><li>Zusage an Frau Schneider: Termin Donnerstag 9 Uhr bestätigen</li><li><b>Überfällig:</b> Angebot Fassade Schmitt, seit 28.10. ohne Antwort</li></ul>',
+ alles:'<p>Es laufen fünf Sachen:</p><ul style="margin:6px 0 0 18px;padding:0"><li>Rathaus, Flur 1. OG: in Arbeit, Thomas</li><li>Neubau Schule: wartet auf Freigabe der Farbtöne</li><li>Bad Huber: Angebot offen seit 12.11.</li><li>Dachsanierung Müller: Angebot offen seit 05.11.</li><li>Fassade Schmitt: Angebot offen seit 28.10., nachfragen</li></ul>'
+};
+function direktAntwort(a){return (Z.beruf==="handwerk"&&DIREKT_ANTWORT[a.id])||'<div class="platzhalter"><b>Platzhalter in dieser Vorführung.</b> Bei Ihnen steht hier die Antwort aus Ihren eigenen Unterlagen. '+esc(a.d)+'</div>'}
+function bezugHtml(c,e){
+  if(!c.bezug)return "";
+  var l=doks(c.bezug.art==="angebot");
+  if(!l.length)return '<div class="bezug"><div class="bkopfz">'+esc(c.bezug.l)+'</div><p class="leer">'+(c.bezug.art==="angebot"?"Noch kein Angebot unter Dokumente.":"Noch nichts unter Dokumente.")+' Geben Sie eines hinein'+(c.feld==="pflicht"?' oder sagen Sie unten, was hinein soll.':'.')+'</p><button class="neben" type="button" id="a-datei">'+ic("blatt")+'Datei hineingeben</button></div>';
+  if(e.bezug==null)e.bezug=c.bezug.pflicht||c.bezug.art==="angebot"?0:-1;
+  var gew=e.bezug>=0?l[e.bezug]:null,offen=!!e.waehlen;
+  return '<div class="bezug"><div class="bkopfz">'+esc(c.bezug.l)+(c.bezug.pflicht?'':' <small>freiwillig</small>')+'</div>'+
+   (gew?'<div class="gewaehlt">'+ic("blatt")+'<span><b>'+esc(gew.n)+'</b><small>'+esc(gew.d)+(e.bezug===0?' · Ihr jüngstes':'')+'</small></span><button class="link" type="button" id="a-waehlen">'+(offen?'Schließen':'Anderes wählen')+'</button></div>'
+       :'<div class="gewaehlt ohne"><span>Kein Dokument gewählt</span><button class="link" type="button" id="a-waehlen">'+(offen?'Schließen':'Dokument wählen')+'</button></div>')+
+   (offen?'<div class="liste">'+l.map(function(d,i){return '<button type="button" class="wzeile'+(i===e.bezug?' an':'')+'" data-wahl="'+i+'">'+ic("blatt")+'<span><b>'+esc(d.n)+'</b><small>'+esc(d.d)+'</small></span></button>'}).join("")+
+     (c.bezug.pflicht?'':'<button type="button" class="wzeile" data-wahl="-1"><span><b>Ohne Dokument</b></span></button>')+'<button class="neben" type="button" id="a-datei">'+ic("blatt")+'Datei hineingeben</button></div>':'')+
+   '</div>';
+}
+function aAngabenMalen(a){
+  var c=ANSAGE[a.id],e=Z.ein[a.id];Z.ansicht="assistent";DIKTAT_BEISPIEL["a-was"]=c.bsp;
+  var lab=c.feld==="frei"?(c.feldL||"Noch etwas dazu?")+' <small>freiwillig</small>':"Sagen oder schreiben Sie es, wie es kommt";
+  $("#innen").innerHTML=pfadHtml(a)+'<h1 id="kopf-h1">'+esc(c.kopf)+'</h1>'+stufenHtml(1)+'<form id="a-angaben" novalidate>'+
+    bezugHtml(c,e)+
+    '<div class="ansage" data-feld="awas"><label for="a-was">'+lab+'</label>'+
+    '<textarea id="a-was" data-k="was" placeholder="Zum Beispiel: '+esc(c.bsp)+'">'+esc(e.was||"")+'</textarea>'+
+    '<div class="diktatzeile"><button class="mikro" type="button" data-mikro="a-was" aria-pressed="false">'+MIKRO+'<span>Diktieren</span></button><button class="haupt" type="submit">'+esc(c.knopf)+'</button><span class="st" id="st-a-was" role="status"></span></div>'+
+    '<div class="fehler versteckt" role="alert"></div></div>'+
+    '<div class="erledigt" aria-label="Das erledigt Gernbei"><b>Das erledigt Gernbei:</b>'+c.erl.map(function(x){return '<span>'+esc(x)+'</span>'}).join("")+'</div>'+
+    '</form><div class="fuss-hinweis unterbogen">'+ic("info")+'<span>Halbe Sätze genügen, Gernbei fragt nach, was fehlt. Gesendet wird nichts. <button class="link" type="button" id="a-beispiel">Beispiel einsetzen</button></span></div>';
+}
+function aGespraechMalen(a,wartet){
+  var c=ANSAGE[a.id],e=Z.ein[a.id],gew=c.bezug&&e.bezug>=0?doks(c.bezug.art==="angebot")[e.bezug]:null;Z.ansicht="agespraech";
+  var ich=a.t.replace(/[?.!:]+$/,"")+(gew?", Dokument „"+gew.n+"“":"")+(e.was?": "+e.was:".");
+  var h='<div class="verlauf"><div class="ich">'+esc(ich)+'</div>';
+  if(wartet)h+='<div class="wartet" role="status" style="padding:6px 4px"><span class="kreis"></span>Gernbei '+(c.bezug&&gew?'liest '+esc(gew.n)+' …':'schreibt …')+'</div>';
+  else h+='<div class="sie">'+(c.erg?'<p>'+esc(c.erg)+'</p>':'<div class="platzhalter"><b>Platzhalter in dieser Vorführung.</b> Bei Ihnen steht hier das Ergebnis. Gernbei erledigt: '+esc(c.erl.join(", "))+'.</div>')+(c.rot?'<p style="color:var(--rot);margin-top:6px">'+esc(c.rot)+'</p>':'')+'<div class="reihe" style="margin-top:12px"><button class="link" type="button" id="a-aendern">Ansage ändern</button><button class="link" type="button" data-zurueck>Nächste Aufgabe</button></div></div>';
+  h+='</div><div class="zeile-unten"><span>Schreiben oder sprechen …</span><b aria-hidden="true">↑</b></div>';
+  $("#innen").innerHTML=h;
+}
+function dGespraechMalen(a,wartet){
+  Z.ansicht="agespraech";
+  var h='<div class="verlauf"><div class="ich">'+esc(a.satz({}))+'</div>'+(wartet?'<div class="wartet" role="status" style="padding:6px 4px"><span class="kreis"></span>Gernbei sieht nach …</div>':'<div class="sie">'+direktAntwort(a)+'</div>')+'</div><div class="zeile-unten"><span>Schreiben oder sprechen …</span><b aria-hidden="true">↑</b></div>';
+  $("#innen").innerHTML=h;
+}
+var starten0=starten;
+starten=function(id){
+  var a=A(id);
+  if(ANSAGE[id]){Z.aufgabe=id;if(!Z.ein[id])Z.ein[id]={};aAngabenMalen(a);$("#main").scrollTop=0;$("#innen").focus();return}
+  if(a.direkt){Z.aufgabe=id;dGespraechMalen(a,true);setTimeout(function(){if(Z.aufgabe===id&&Z.ansicht==="agespraech")dGespraechMalen(a,false)},900);return}
+  return starten0(id);
+};
+$("#innen").addEventListener("click",function(ev){
+  var t=ev.target.closest("button");if(!t||!Z.aufgabe||!ANSAGE[Z.aufgabe])return;
+  var a=A(Z.aufgabe),e=Z.ein[a.id],tx=$("#a-was");if(tx)e.was=tx.value;
+  if(t.id==="a-waehlen"){e.waehlen=!e.waehlen;ev.stopImmediatePropagation();return aAngabenMalen(a)}
+  if(t.dataset.wahl!=null){e.bezug=+t.dataset.wahl;e.waehlen=false;ev.stopImmediatePropagation();return aAngabenMalen(a)}
+  if(t.id==="a-datei"){ev.stopImmediatePropagation();var s=$("#st-a-was");if(s){s.dataset.art="bleibt";s.textContent="In der Vorführung öffnet sich hier die Auswahl einer Datei."}return}
+  if(t.id==="a-beispiel"){e.was=ANSAGE[a.id].bsp;ev.stopImmediatePropagation();return aAngabenMalen(a)}
+  if(t.id==="a-aendern"){ev.stopImmediatePropagation();return aAngabenMalen(a)}
+},true);
+$("#innen").addEventListener("submit",function(ev){
+  if(ev.target.id!=="a-angaben")return;
+  ev.preventDefault();ev.stopImmediatePropagation();
+  var a=A(Z.aufgabe),c=ANSAGE[a.id],e=Z.ein[a.id];e.was=String($("#a-was").value||"").trim();
+  var gew=c.bezug&&e.bezug>=0&&doks(c.bezug.art==="angebot").length;
+  var leerL=c.bezug&&!doks(c.bezug.art==="angebot").length;
+  var fehlt=leerL&&c.bezug.pflicht&&!e.was?"Geben Sie oben eine Datei hinein oder sagen Sie, worum es geht.":c.bezug&&c.bezug.pflicht&&!leerL&&!gew?"Wählen Sie oben, worum es geht, oder geben Sie eine Datei hinein.":
+    (c.feld==="pflicht"&&!e.was&&!(c.bezug&&!c.bezug.pflicht&&gew&&a.id!=="angebot"))?"Sagen oder schreiben Sie, worum es geht.":
+    (a.id==="angebot"&&!e.was)?"Sagen Sie, für wen das Angebot ist und was diesmal anders ist.":"";
+  var el=document.querySelector('[data-feld="awas"]'),m=el.querySelector(".fehler");
+  el.classList.toggle("falsch",!!fehlt);m.classList.toggle("versteckt",!fehlt);m.textContent=fehlt;
+  if(fehlt)return;
+  aGespraechMalen(a,true);setTimeout(function(){if(Z.aufgabe===a.id&&Z.ansicht==="agespraech")aGespraechMalen(a,false)},1100);
+},true);
+
+/* Stand 107: Auswahl des Berufs. Die Karten, ihre Namen und die Beispiele wechseln mit. */
+function setBeruf(id){
+  var br=BERUFE.filter(function(x){return x.id===id})[0]||BERUFE[0],pos=0;
+  Z.beruf=br.id;
+  AUFGABEN.forEach(function(a){a.on=false;a.t=a.t0;a.d=a.d0});
+  br.lay.forEach(function(g){g[1].forEach(function(i){
+    var a=A(i);a.on=true;a.b=g[0];a.pos=pos++;var o=br.ab[i];if(o){a.t=o[0];a.d=o[1]}
+  })});
+  if(br.wege)["aufbau","kampagne","website"].forEach(function(i,n){var a=A(i);a.on=true;a.b="weg";a.pos=n});
+  var hw=br.id==="handwerk";
+  Object.keys(ANSAGE).forEach(function(i){var c=ANSAGE[i];c.bsp=(br.bsp&&br.bsp[i])||(hw?c.bspH:c.bspD);c.erg=hw&&c.ergH?c.ergH:"";c.rot=hw?c.rotH:""});
+  EBSP=hw?EBSP_H:EBSP_D;DIKTAT_BEISPIEL["f-ewas"]=EBSP;
+  if(dKnopf){if(dRec){try{dRec.stop()}catch(x){}}diktatEnde()}
+  Z.ein={};Z.erg={};Z.g=null;Z.eg=null;Z.aufgabe=null;Z.q="";Z.bereich="alle";Z.bereichVor=null;Z.ansicht="liste";
+  letzteMalen();
+  $("#bar-bsp").hidden=!hw;$("#logo-sub").textContent=br.logo;$("#logo-sub2").textContent=br.logo;
+  document.querySelectorAll("#beruf-schalter button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.beruf===br.id))});
+  $("#beruf-sel").value=br.id;
+}
+(function(){
+  var s=$("#beruf-schalter"),sel=$("#beruf-sel");
+  BERUFE.forEach(function(b){
+    var k=document.createElement("button");k.type="button";k.dataset.beruf=b.id;k.textContent=b.n;k.setAttribute("aria-pressed","false");s.appendChild(k);
+    var o=document.createElement("option");o.value=b.id;o.textContent=b.n;sel.appendChild(o);
+  });
+  s.addEventListener("click",function(ev){var t=ev.target.closest("button[data-beruf]");if(t)berufWaehlen(t.dataset.beruf)});
+  sel.addEventListener("change",function(){berufWaehlen(sel.value)});
+})();
+function berufWaehlen(id){setBeruf(id);listeMalen();$("#main").scrollTop=0}
+
+setBeruf("handwerk");
+listeMalen();
+})();
+</script>
+</body>
+</html>
