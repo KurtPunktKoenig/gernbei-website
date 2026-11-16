@@ -4,6 +4,20 @@
   // Auf der Website immer hell, wie auf den Bildern der Seite (die echte Seite folgt sonst dem Geraet)
   document.documentElement.setAttribute("data-ansicht", "hell");
   try { localStorage.setItem("ansicht", "hell"); } catch (x) {}
+  // Im Geraet rollt nur die Flaeche selbst, nie die Website drumherum (Befund 16.11.2026: Seite sprang beim Zuschauen)
+  Element.prototype.scrollIntoView = function(opt){
+    var p = this.parentElement;
+    while (p && !(p.scrollHeight > p.clientHeight + 2 && /(auto|scroll)/.test(getComputedStyle(p).overflowY))) p = p.parentElement;
+    if (!p) return;
+    var r = this.getBoundingClientRect(), pr = p.getBoundingClientRect(), b = (opt && opt.block) || "start", d;
+    if (b === "end") d = r.bottom - pr.bottom;
+    else if (b === "center") d = (r.top + r.height / 2) - (pr.top + pr.height / 2);
+    else if (b === "nearest") d = r.top < pr.top ? r.top - pr.top : (r.bottom > pr.bottom ? r.bottom - pr.bottom : 0);
+    else d = r.top - pr.top;
+    p.scrollTop += d;
+  };
+  var fokus = HTMLElement.prototype.focus;
+  HTMLElement.prototype.focus = function(){ return fokus.call(this, {preventScroll:true}); };
   var D = window.BUEHNE_DATEN || {};
   var Q = new URLSearchParams(location.search);
   var PROD = Q.get("p") || "handwerk";

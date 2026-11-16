@@ -132,3 +132,12 @@
 /* Die Website hat eigene Regeln fuer .handy und .schirm (Bildrahmen); innerhalb der Buehne gelten nur die Geraete (16.11.2026) */
 .geraete .handy{border:0;padding:0;background:none;box-shadow:none;border-radius:0}
 .geraete .schirm{border:0;box-shadow:none}
+
+/* Am Handy (Kurt 16.11.2026: iPhone vorn): das iPhone gross im Vordergrund, der Laptop klein und blass dahinter angedeutet;
+   alle Szenen spielen dann im iPhone (Skript in der Seite). */
+@media(max-width:760px){
+  .geraete .laptop{width:62%;margin:0 auto;opacity:.45;pointer-events:none}
+  .geraete .laptop .klick-schutz{display:none}
+  .geraete .handy{width:min(330px,88%);margin:-26% auto 0;z-index:2}
+  .geraete.handy-dran .laptop,.geraete.rechner-dran .laptop{opacity:.45}
+}

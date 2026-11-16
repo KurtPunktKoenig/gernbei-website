@@ -237,6 +237,7 @@
     document.getElementById("boden").classList.remove("liefert");
     document.getElementById("weg").textContent = s ? "Gemeinsames Firmengedächtnis → für " + LEUTE[s.wer] + (s.g === "handy" ? ", am Handy" : ", am Laptop") : "";
   }
+  var KLEIN = window.matchMedia("(max-width:760px)");
   var lauf = 0, n = 0, selbst = false;
   function warte(ms){ return new Promise(function(r){ setTimeout(r, ruhig ? 0 : ms); }); }
   function doc(g){ try { return G[g].f.contentWindow.document; } catch (x) { return null; } }
@@ -320,6 +321,11 @@
     while (mein === lauf && !selbst) {
       var F = PROD === "firmengedaechtnis" ? FOLGE_FG : PROD === "dienstleister" ? FOLGE_DL : FOLGE;
       var s = F[n % F.length]; n++;
+      // Am Handy spielt alles im iPhone: Rechner-Szenen wandern hinueber, der Rundgang ueber die Leiste entfaellt
+      if (KLEIN.matches) {
+        if (s.zeigen) continue;
+        s = Object.assign({}, s, {g:"handy", projekt:"", art:s.art.replace(/am Rechner|am Laptop/, "am Handy")});
+      }
       if (s.wer) {
         hausZeigen(s);
         if (BESITZ[s.g] !== s.wer) await laden(s.g, s.wer);
