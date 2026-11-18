@@ -738,3 +738,17 @@ a.mini2{display:block}
 .koennen{border-top:1px solid var(--haar)}
 .koennen-raster{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:center}
 @media(max-width:900px){.koennen-raster{grid-template-columns:1fr;gap:28px}}
+
+/* Band Das koennen alle drei und Listen Dazu (Kurt 18.11.2026, Gesamtliste Stand 122) */
+.alle-drei{margin:0 0 26px;padding:20px 22px;border-radius:18px;background:#fff;box-shadow:inset 0 0 0 1px var(--haar)}
+.ad-kopf{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-bottom:14px}
+.ad-titel{font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:-.02em;margin:0;color:var(--tinte)}
+.ad-satz{font-size:14.5px;color:var(--grau);margin:0}
+.ad-gruppen{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px}
+.ad-gruppen div{border-top:2px solid var(--tinte);padding-top:8px}
+.ad-gruppen b{display:block;font-size:14.5px;color:var(--tinte);margin-bottom:3px}
+.ad-gruppen span{display:block;font-size:13.5px;line-height:1.45;color:var(--grau)}
+.ad-gruppen .ad-dazu{border-top-color:var(--rot)}
+@media(max-width:900px){.ad-gruppen{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.ad-gruppen{grid-template-columns:1fr}}
+.pt-fg .pt-kann-titel{color:var(--tinte);font-weight:600}
