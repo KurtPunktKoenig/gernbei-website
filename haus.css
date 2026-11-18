@@ -567,3 +567,174 @@ ol.fragen b{font-family:var(--display);font-weight:600;font-size:clamp(17px,2vw,
 .szene-art .szene-dauer[hidden]{display:none}
 .szene-art .szene-dauer svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
 .schirm{border:0;border-radius:10px 10px 4px 4px;box-shadow:0 0 0 11px #0a0a0b,0 0 0 12.5px #b9b9be,0 0 0 13.5px #8d8d92,0 40px 60px -30px rgba(0,0,0,.45);margin:14px 14px 24px}
+
+/* === Geraete und Produktleiste, Startseite neu (Kurt 18.11.2026) === */
+/* Vorschlag 18.11.2026: echte Geraete in den Szenen und in der Produktleiste */
+/* Szenen: iPhone wie auf der Buehne (Titanrahmen, schwarzes Glas, Insel, Tasten, Statuszeile) */
+.szene .ger{position:relative;display:inline-block;max-width:100%;border-radius:54px;padding:4px;background:linear-gradient(135deg,#d9d6d1 0%,#8f8b85 18%,#5b5853 45%,#8f8b85 80%,#cfcbc5 100%);box-shadow:0 0 0 1px rgba(0,0,0,.35),0 50px 80px -30px rgba(0,0,0,.5),0 18px 30px -18px rgba(0,0,0,.35);transition:border-radius .45s,padding .45s,background .45s}
+.szene .ger-glas{border-radius:50px;padding:10px;background:#050505;box-shadow:0 0 0 1px #2a2a2c inset;transition:border-radius .45s,padding .45s}
+.szene .ger .szene-handy{box-shadow:none;border-radius:42px;padding-top:58px;margin:0}
+.szene .ger .szene-handy::before{top:12px}
+.szene .ger .taste{position:absolute;width:3px;background:linear-gradient(90deg,#4d4a45,#9b968f);border-radius:2px}
+.szene .ger .taste.l{left:-2.5px}.szene .ger .taste.r{right:-2.5px;background:linear-gradient(90deg,#9b968f,#4d4a45)}
+.szene .ger .t1{top:17%;height:5%}.szene .ger .t2{top:25%;height:9%}.szene .ger .t3{top:36%;height:9%}.szene .ger .t4{top:27%;height:14%}
+.ger-status{position:absolute;left:40px;right:34px;top:18px;display:flex;justify-content:space-between;align-items:center;font:600 14px var(--text);color:#111}
+/* Am Rechner: Laptopdeckel mit Kerbe, Scharnier und Alu-Unterteil wie auf der Buehne */
+.szene.rechner .ger{border-radius:16px 16px 0 0;padding:0;background:#0a0a0b;box-shadow:0 0 0 1.5px #b9b9be,0 0 0 2.5px #8d8d92}
+.szene.rechner .ger-glas{border-radius:16px 16px 0 0;padding:12px 12px 14px;background:transparent;box-shadow:none}
+.szene.rechner .ger .szene-handy{border-radius:3px;padding-top:18px;box-shadow:none}
+.szene.rechner .ger .szene-handy::before{top:-12px;width:76px;height:12px;margin-left:-38px;border-radius:0 0 8px 8px}
+.szene.rechner .ger .taste,.szene.rechner .ger-status{display:none}
+.szene.rechner .szene-fuss{width:min(112%,600px);height:16px;margin-top:0;background:linear-gradient(#2b2b2e 0,#5a5a5f 3px,#e9e9ec 4px,#d4d4d8 40%,#a9a9ae 100%);border-radius:0 0 50% 50%/0 0 100% 100%;box-shadow:0 22px 26px -16px rgba(0,0,0,.4)}
+@media(max-width:620px){.szene.rechner .szene-fuss{width:100%}.szene .ger .szene-handy{width:min(310px,80vw)}}
+
+/* Produktleiste: drei Produkte, je Laptop mit Handy davor */
+.produkte .gruppe-titel{margin-bottom:14px}
+.ptiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.ptile{display:flex;flex-direction:column;gap:6px;padding:20px 18px 18px;border-radius:18px;background:#fff;box-shadow:inset 0 0 0 1px var(--haar);color:var(--tinte);text-decoration:none;transition:transform .2s,box-shadow .2s}
+.ptile:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1px var(--tinte)}
+.ptile .name{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:-.025em;line-height:1.15}
+.ptile .tut{font-size:14.5px;line-height:1.45;color:var(--grau)}
+.ptile small{margin-top:auto;padding-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--grau-2)}
+.mini{position:relative;padding:2px 16% 12px 2px;margin-bottom:12px}
+.m-deckel{background:#0a0a0b;border-radius:9px 9px 0 0;padding:5px 5px 6px;box-shadow:0 0 0 1px #b9b9be}
+.m-schirm{position:relative;overflow:hidden;background:#fff}
+.m-laptop .m-schirm{aspect-ratio:1280/800;border-radius:2px}
+.m-schirm iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;pointer-events:none}
+.m-unterteil{height:8px;margin:0 -6%;background:linear-gradient(#e9e9ec,#a9a9ae);border-radius:0 0 50% 50%/0 0 100% 100%;box-shadow:0 10px 14px -10px rgba(0,0,0,.4)}
+.m-handy{position:absolute;right:0;bottom:0;width:27%}
+.m-rahmen{border-radius:18%/8.4%;padding:2.4%;background:linear-gradient(135deg,#d9d6d1,#8f8b85 18%,#5b5853 45%,#8f8b85 80%,#cfcbc5);box-shadow:0 14px 22px -8px rgba(0,0,0,.45)}
+.m-glas{border-radius:16%/7.6%;padding:4%;background:#050505}
+.m-handy .m-schirm{aspect-ratio:402/874;border-radius:13%/6%}
+.kunden-zeile{display:grid;grid-template-columns:auto 1fr 1fr;align-items:center;gap:10px 26px;margin-top:22px;padding:14px 18px;border-radius:14px;background:var(--papier-2,#F3F1EC)}
+.kz-titel{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--grau)}
+.kunden-zeile a{display:flex;align-items:center;gap:10px;color:var(--tinte);text-decoration:none;font-size:14.5px;line-height:1.35}
+.kunden-zeile a:hover b{text-decoration:underline}
+.kunden-zeile svg{width:24px;height:24px;flex:none;fill:none;stroke:var(--tinte);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.kunden-zeile small{font-family:var(--mono);font-size:11px;color:var(--grau-2);margin-left:4px}
+@media(max-width:900px){.ptiles{grid-template-columns:1fr}.ptile{max-width:460px}.kunden-zeile{grid-template-columns:1fr}}
+
+/* Abend 18.11.: Buehne in den Produktabschnitten, Chatbot und Telefon in echten Geraeten */
+.buehne-bild{align-self:center}
+.buehne-ein{display:block;width:100%;height:560px;border:0;background:transparent}
+.flagge .buehne-bild .bildunter,.flagge .buehne-bild .bildunter a{color:#cfcac0}
+.chatgeraete,.telgeraete{margin:0 auto;padding-right:110px;max-width:640px}
+.chatgeraete{margin-bottom:50px}
+.chatgeraete .handy{width:128px;bottom:-30px;right:-6px}
+.chatgeraete{padding-right:84px}
+.chatgeraete .innen,.telgeraete .innen{position:absolute;left:0;top:0;transform-origin:0 0}
+.chatgeraete .laptop .innen{width:1280px;height:832px;display:flex;flex-direction:column}
+.chatgeraete .handy .innen,.telgeraete .handy .innen{width:402px;height:874px;display:flex;flex-direction:column;background:#fff}
+.chatgeraete .notiz,.telgeraete .notiz{font-size:22px}
+.ws2{position:relative;flex:1;overflow:hidden;background:#FBFAF7}
+.ws2-seite{padding:28px 60px;opacity:.6}
+.handy .ws2-seite{padding:16px 22px}
+.ws2-kopf{display:flex;justify-content:space-between;align-items:center;font-size:20px;padding-bottom:16px;border-bottom:1px solid #e3e3e6}
+.ws2-nav{display:flex;gap:24px;font-size:15px;color:#555}.ws2-nav i{font-style:normal}
+.handy .ws2-nav{display:none}
+.ws2-h{font:600 46px/1.1 var(--display);letter-spacing:-.03em;margin:60px 0 24px;max-width:780px}
+.handy .ws2-h{font-size:30px;margin:28px 0 16px}
+.ws2-z{height:14px;border-radius:7px;background:#e2e2e5;margin:12px 0;width:60%}.ws2-z.kurz{width:40%}
+.ws2-k{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}.ws2-k i{height:150px;border-radius:14px;background:#efefef}
+.ws2-chat{position:absolute;right:28px;bottom:28px;width:430px;background:#fff;border:1px solid #111214;border-radius:20px;box-shadow:0 30px 60px -20px rgba(0,0,0,.4);overflow:hidden;font-size:17px}
+.handy .ws2-chat{left:10px;right:10px;bottom:10px;width:auto;border-radius:18px;font-size:18px}
+.ws2-chatkopf{background:#111214;color:#fff;padding:14px 18px;display:flex;flex-direction:column}
+.ws2-chatkopf small{color:#bbb;font-size:13px}
+.ws2-verlauf{padding:16px 18px;min-height:250px;display:flex;flex-direction:column;gap:12px}
+.ws2-bitte{align-self:flex-end;background:#111214;color:#fff;border-radius:14px;padding:10px 14px;max-width:86%;margin:0}
+.ws2-denkt{display:flex;gap:5px;margin:0}.ws2-denkt i{width:8px;height:8px;border-radius:50%;background:#bbb;animation:wink 1s infinite}
+.ws2-haken{list-style:none;margin:0;padding:12px 14px;border:1px solid #e3e3e6;border-radius:12px;display:flex;flex-direction:column;gap:8px}
+.ws2-haken li{padding-left:24px;position:relative;line-height:1.35}
+.ws2-haken li::before{content:"";position:absolute;left:2px;top:3px;width:10px;height:6px;border-left:2px solid #111;border-bottom:2px solid #111;transform:rotate(-45deg)}
+.ws2-haken li.fund{color:var(--rot)}.ws2-haken li.fund::before{border-color:var(--rot)}
+.mobil-adresse{margin:6px 16px 6px;background:#EBEBED;border-radius:10px;padding:8px;text-align:center;font-size:15px;color:#444}
+.telgeraete .handy .status.hell{color:#fff;background:transparent;position:absolute;left:0;right:0;top:0;z-index:2}
+.telgeraete .handy .strich.hell{background:#fff;z-index:3}
+.chatgeraete .handy .strich{z-index:3}
+.anruf{flex:1;display:flex;flex-direction:column;align-items:center;background:linear-gradient(#2c3a3a,#151a1d);color:#fff;padding:90px 26px 30px;text-align:center}
+.anruf small{color:#b9c3c3;font-size:16px}.anruf b{font-size:28px;font-weight:600;margin:6px 0 4px}.anruf-zeit{color:#b9c3c3;font-size:17px;font-variant-numeric:tabular-nums}
+.anruf-ich{margin:46px 0 22px;font-size:22px;line-height:1.35;min-height:90px}
+.anruf-haken{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;text-align:left;width:100%}
+.anruf-haken li{background:rgba(255,255,255,.1);border-radius:12px;padding:10px 14px 10px 38px;position:relative;font-size:17px;line-height:1.3}
+.anruf-haken li::before{content:"";position:absolute;left:14px;top:15px;width:11px;height:6px;border-left:2px solid #7fe0a0;border-bottom:2px solid #7fe0a0;transform:rotate(-45deg)}
+.anruf-knoepfe{margin-top:auto;display:flex;gap:34px}.anruf-knoepfe i{width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.18)}.anruf-knoepfe i.auf{background:#e5483b}
+.telgeraete{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;padding-right:0}
+.telgeraete .notiz{grid-column:1/-1}
+.telgeraete .handy{position:relative;right:auto;bottom:auto;width:230px}
+.ankunft{background:#fff;border:1px solid var(--haar);border-radius:14px;padding:16px 18px;box-shadow:0 20px 40px -26px rgba(0,0,0,.35)}
+.ankunft-titel{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--grau);margin:0}
+.ankunft-zahl{font-weight:600;font-size:18px;margin:6px 0 10px}
+.ankunft ul{margin:0;padding-left:18px;font-size:14.5px;line-height:1.45}.ankunft li.offen{color:var(--rot)}
+.ankunft-unter{font-size:12.5px;color:var(--grau);margin:10px 0 0}
+@media(max-width:760px){.chatgeraete{padding-right:0}.chatgeraete .handy{position:relative;right:auto;bottom:auto;width:min(250px,70%);margin:-50px auto 0}
+  .telgeraete{grid-template-columns:1fr}.telgeraete .handy{margin:0 auto;width:min(250px,70%)}}
+
+@media(min-width:901px){.hero.mit-szene .raster:has(.buehne-bild){grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:40px}}
+
+/* Unterschiede sichtbar (Kurt 18.11.2026): Geraete nach Arbeitsweise, Figur, hinein und heraus, Bildwelt nach E109 */
+.ptile .pt-kopf{display:flex;align-items:flex-end;gap:10px;min-height:58px;margin-bottom:4px}
+.ptile .pt-figur{width:74px;height:auto;flex:none}
+.pt-fg .pt-figur{width:96px}
+.ptile .pt-wer{font-family:var(--hand);font-size:19px;line-height:1.15;color:var(--tinte-2,#3A3B40);padding-bottom:4px}
+.mini2{position:relative;aspect-ratio:16/10.6;margin:6px 0 14px}
+.mini2 .m-laptop,.mini2 .m-handy{position:absolute}
+/* Handwerk: Handy gross vorn, Laptop dahinter */
+.hw-l{right:0;top:2%;width:72%;opacity:.92}
+.hw-h{left:6%;bottom:0;width:31%;z-index:2}
+/* Dienstleister: Laptop gross, Handy klein daneben */
+.dl-l{left:0;top:0;width:86%}
+.dl-h{right:0;bottom:0;width:21%;z-index:2}
+/* Firmengedaechtnis: zwei Laptops, ein Handy, drei Namen */
+.fg-a{left:0;top:0;width:60%;opacity:.9}
+.fg-b{right:0;top:20%;width:60%;z-index:2}
+.fg-h{left:30%;bottom:0;width:17%;z-index:3}
+.pt-weg{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px;font:500 13px var(--mono);letter-spacing:.02em;color:var(--tinte)}
+.pt-weg span{background:#fff;border:1px solid var(--haar);border-radius:999px;padding:3px 10px}
+.pt-weg .pt-pfeil{width:16px;height:16px;fill:none;stroke:var(--rot);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* Bildwelten: Werkplan, Werkzeug, Tusche */
+.pt-fg{background-color:#fff;background-image:linear-gradient(rgba(17,18,20,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(17,18,20,.05) 1px,transparent 1px);background-size:22px 22px;box-shadow:inset 0 0 0 1px var(--tinte)}
+.pt-hw{background:var(--braun-platte);box-shadow:inset 0 0 0 1px var(--braun-haar),inset 0 1px 0 #fff}
+.pt-hw .name{color:var(--braun-dunkel)}.pt-hw .tut{color:var(--braun-mittel)}
+.pt-hw .pt-weg span{border-color:var(--braun-haar);background:#FBFAF7}
+.pt-dl{background:#fff;box-shadow:none;border:1.5px solid var(--tinte);box-shadow:6px 6px 0 var(--tinte)}
+.pt-dl:hover{box-shadow:9px 9px 0 var(--tinte)}
+.pt-dl .pt-weg span{border-color:var(--tinte)}
+@media(max-width:900px){.ptiles{gap:26px}}
+
+/* Breite der Produkte (Kurt 18.11.2026): wechselnde Zeile und kurze Liste je Kachel */
+.pt-weg{min-height:66px;align-content:flex-start;transition:opacity .28s}
+.pt-weg.weg-aus{opacity:0}
+.pt-punkte{display:flex;gap:4px;margin-left:auto}
+.pt-punkte i{width:5px;height:5px;border-radius:50%;background:var(--haar)}
+.pt-punkte i.an{background:var(--rot)}
+.pt-kann{margin-top:10px;padding-top:10px;border-top:1px dashed var(--haar)}
+.pt-hw .pt-kann{border-color:var(--braun-haar)}
+.pt-kann-titel{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--grau);margin:0 0 6px}
+.pt-kann ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.pt-kann li{position:relative;padding-left:20px;font-size:13.5px;line-height:1.35;color:var(--tinte)}
+.pt-kann li::before{content:"";position:absolute;left:3px;top:5px;width:9px;height:5px;border-left:1.8px solid var(--rot);border-bottom:1.8px solid var(--rot);transform:rotate(-45deg)}
+.pt-fg .pt-kann li:nth-child(-n+3){font-weight:600}
+
+/* Kacheln ohne Abschnitte darunter (Kurt 18.11.2026): Einladung und Knopf je Produkt */
+.ptile{text-decoration:none}
+.ptile:hover{transform:none}
+a.mini2{display:block}
+.pt-fuss{margin-top:14px;padding-top:12px;border-top:1px solid var(--haar);display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.pt-hw .pt-fuss{border-color:var(--braun-haar)}
+.pt-fuss .einladung{font-size:14px;margin:0;color:var(--grau)}
+.pt-fuss .einladung a{color:var(--tinte)}
+.pt-fuss .knopf{font-size:14px;padding:9px 16px}
+.ptile small{padding-top:6px}
+#einzug{border-top:1px solid var(--haar)}
+
+/* Abgleich 18.11.2026: Versprechen auf den Kacheln, Berufe, Faehigkeiten unter der Buehne */
+.pt-slogan{font-family:var(--hand);font-size:22px;line-height:1.15;color:var(--rot);margin:2px 0 2px}
+.pt-satz{font-size:14px;line-height:1.5;color:var(--tinte);margin:6px 0 0}
+.pt-hw .pt-satz{color:var(--braun-dunkel)}
+.pt-beruf-titel{margin-top:12px!important}
+.pt-berufe{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.pt-berufe li{font-size:13.5px;line-height:1.35}
+.pt-berufe b{display:inline-block;min-width:104px;font-weight:600}
+.koennen{border-top:1px solid var(--haar)}
+.koennen-raster{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:center}
+@media(max-width:900px){.koennen-raster{grid-template-columns:1fr;gap:28px}}

@@ -44,7 +44,16 @@
     <div class="knoepfe"><a class="knopf" href="#kontakt">Erst zeigen lassen</a><a class="knopf hell" href="#preis">Was es kostet</a></div>
     <p class="szene-sorglos"><svg viewBox="0 0 24 24"><path d="M7 18h10.5a4 4 0 0 0 .6-8 6 6 0 0 0-11.4 1.6A3.3 3.3 0 0 0 7 18z" stroke-linejoin="round"/></svg>Läuft bei Amazon. Browser öffnen, loslegen.</p>
   </div>
-  <div>
+  <div class="buehne-bild">
+    <iframe class="buehne-ein" title="Gernbei für Dienstleister am Laptop und am Handy" scrolling="no" src="ausprobieren.html?p=dienstleister&amp;eingebettet=1"></iframe>
+    <p class="bildunter">Am Rechner im Büro, am Handy unterwegs. Dasselbe Gespräch. Erfundener Betrieb, echte Antworten aus Gernbei. <a href="ausprobieren.html?p=dienstleister">Selbst ausprobieren, am Laptop und am Handy →</a></p>
+  </div>
+</div></div></header>
+
+<section class="koennen" id="koennen"><div class="wrap">
+  <div class="koennen-raster">
+    <div><p class="ueber">Was Gernbei für Dienstleister kann</p><h2>Eine Fähigkeit nach der anderen.</h2><p>Jede Antwort stammt aus einem echten Lauf in Gernbei, gekürzt. Tippen Sie an, was Sie sehen möchten.</p></div>
+    <div>
     <p class="szene-beruf-kopf">Was machen Sie?</p>
     <div class="szene-beruf" id="beruf-dienst" role="group" aria-label="Beruf wählen">
       <button type="button" aria-pressed="true">Projektleitung</button>
@@ -54,7 +63,7 @@
       <button type="button" aria-pressed="false">Freelance</button>
     </div>
     <div class="szene rechner" id="szene" data-szenen="dienstleister" data-beruf="beruf-dienst" data-band="gefunden">
-      <div class="handy szene-handy">
+      <div class="ger"><i class="taste l t1"></i><i class="taste l t2"></i><i class="taste l t3"></i><i class="taste r t4"></i><div class="ger-glas"><div class="handy szene-handy"><div class="ger-status" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 70 14" width="58" height="12"><g fill="#111"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/><path d="M27 4.5a10 10 0 0 1 14 0l-1.6 1.7a7.6 7.6 0 0 0-10.8 0zM30.2 7.8a5.5 5.5 0 0 1 7.6 0L34 11.8z"/><rect x="45" y="1" width="22" height="12" rx="3.5" fill="none" stroke="#111" stroke-opacity=".4"/><rect x="47" y="3" width="16" height="8" rx="2"/><rect x="68" y="5" width="2" height="4" rx="1" opacity=".4"/></g></svg></div>
         <p class="szene-kopf"><span class="gb">Gern<b>bei</b></span> für Dienstleister</p>
         <div class="szene-flaeche" aria-live="polite">
           <p class="szene-art"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/></svg><span>am Rechner, vor dem Lenkungskreis</span></p>
@@ -66,7 +75,7 @@
             <li class="fund">Nachgerechnet: 45 Prozent Budget bei 31 Prozent Laufzeit</li>
           </ul>
         </div>
-      </div>
+      </div></div></div>
       <i class="szene-fuss" aria-hidden="true"></i>
       <p class="szene-geraete"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg>Am Rechner im Büro,<svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>am Handy unterwegs. Dasselbe Gespräch.</p>
       <p class="szene-wahl-kopf">Beispiele aus Ihrem Alltag. Tippen Sie an.</p>
@@ -75,10 +84,10 @@
         <button type="button" aria-pressed="false">Projektstrukturplan</button>
       </div>
       <p class="bildunter">Erfundener Betrieb, echte Antwort, gekürzt.</p>
-      <p class="knopf-satz"><a href="ausprobieren.html?p=dienstleister">Selbst ausprobieren, am Laptop und am Handy →</a></p>
     </div>
   </div>
-</div></div></header>
+  </div>
+</div></section>
 
 <section class="nachweise-band"><div class="wrap">
   <div class="vorteile nachweise"><span>persönlich eingerichtet, aus Würzburg</span><span>läuft im Browser, auf Ihren Geräten</span><span>BAFA-gelisteter Berater</span><span>Ihre Arbeit nehmen Sie mit</span></div>
@@ -249,5 +258,9 @@
 <script src="szenen-daten.js" defer></script>
 <script src="szene.js" defer></script>
 <script src="fenster.js" data-dienst="https://m2.ki-kurt.de" data-name="Fragen an Gernbei" data-untertitel="Digitaler Assistent, eine KI" data-telefon="0931 45321005" data-mail="hallo@gernbei.de" data-antwortzeit="Ein Mensch antwortet am nächsten Werktag." data-themen="Was kann Gernbei für mich tun?|Welches Angebot passt zu mir?|Wo liegen meine Daten?|Wie fange ich an?" defer></script>
+<script>
+addEventListener("message", function(e){ if (!e.data || !e.data.buehneHoehe) return;
+  Array.prototype.forEach.call(document.querySelectorAll("iframe.buehne-ein"), function(f){ if (f.contentWindow === e.source) f.style.height = Math.ceil(e.data.buehneHoehe) + "px"; }); });
+</script>
 </body>
 </html>
