@@ -752,3 +752,10 @@ a.mini2{display:block}
 @media(max-width:900px){.ad-gruppen{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.ad-gruppen{grid-template-columns:1fr}}
 .pt-fg .pt-kann-titel{color:var(--tinte);font-weight:600}
+
+/* Alles im Einzelnen je Kaeufer (Kurt 18.11.2026) */
+.alles .mehr-inhalt{columns:2;column-gap:40px}
+.alles .mehr-inhalt .ueber,.alles .punkte{break-inside:avoid-column}
+.alles .alles-satz{column-span:all;font-size:14.5px;color:var(--grau);margin:0 0 12px}
+.alles .nur{display:inline-block;font:500 10.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--rot);border-radius:4px;padding:1px 6px;margin-left:4px;vertical-align:1px}
+@media(max-width:860px){.alles .mehr-inhalt{columns:1}}
