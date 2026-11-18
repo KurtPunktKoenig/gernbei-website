@@ -199,7 +199,7 @@
     {g:"handy", wer:"katrin", art:"Katrin, Projektleitung, auf der Baustelle", text:"Welche Entscheidungen der Grundschule haben Kostenfolgen, und wo steht die Quelle?"},
     {g:"rechner", wer:"renate", art:"Renate, Büroleitung, am Laptop", text:"Welche Termine und Fristen laufen in den nächsten vier Wochen, über alle Projekte?"},
     {g:"handy", wer:"rainer", art:"Rainer, Partner, auf dem Weg zum Bauherrn", text:"Wo steht die Tagesklinik, und was ist offen?"},
-    {g:"handy", wer:"lukas", art:"Lukas, vor der ersten Mail an die Gemeinde", text:"Wem darf ich bei der Gemeinde Tannhofen schreiben, und wer muss in Kopie?"}
+    {g:"rechner", wer:"lukas", art:"Lukas, vor der ersten Mail an die Gemeinde", text:"Wem darf ich bei der Gemeinde Tannhofen schreiben, und wer muss in Kopie?"}
   ];
   var LEUTE = {lukas:"Lukas", katrin:"Katrin", renate:"Renate", rainer:"Rainer"};
   // Dienstleister: Jonas Wiedemer, selbstaendiger IT-Projektleiter (Vorfuehrdaten Variante Freelancer, ganz erfunden)
@@ -238,7 +238,7 @@
     document.getElementById("weg").textContent = s ? "Gemeinsames Firmengedächtnis → für " + LEUTE[s.wer] + (s.g === "handy" ? ", am Handy" : ", am Laptop") : "";
   }
   var KLEIN = window.matchMedia("(max-width:760px)");
-  var lauf = 0, n = 0, selbst = false;
+  var lauf = 0, n = 0, selbst = false, zuletztGeraet = "";
   function warte(ms){ return new Promise(function(r){ setTimeout(r, ruhig ? 0 : ms); }); }
   function doc(g){ try { return G[g].f.contentWindow.document; } catch (x) { return null; } }
   // Zeiger (Rechner) und Fingertipp (Handy) auf ein Element der echten Seite, in Punkten der Flaeche
@@ -326,6 +326,12 @@
         if (s.zeigen) continue;
         s = Object.assign({}, s, {g:"handy", projekt:"", art:s.art.replace(/am Rechner|am Laptop/, "am Handy")});
       }
+      // Firmengedaechtnis: Laptop und Handy immer im Wechsel, auch beim Neubeginn der Runde (Kurt 18.11.2026)
+      else if (s.wer && s.g === zuletztGeraet) {
+        s = s.g === "rechner" ? Object.assign({}, s, {g:"handy", art:s.art.replace(/am Laptop/, "am Handy")})
+                              : Object.assign({}, s, {g:"rechner", art:s.art.replace(/am Handy/, "am Laptop")});
+      }
+      zuletztGeraet = s.g;
       if (s.wer) {
         hausZeigen(s);
         if (BESITZ[s.g] !== s.wer) await laden(s.g, s.wer);

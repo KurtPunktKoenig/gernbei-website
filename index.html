@@ -611,7 +611,7 @@ document.addEventListener("click", function (e) {
     {g:"handy", wer:"katrin", art:"Katrin, Projektleitung, auf der Baustelle", aus:"Pavels Kostenfortschreibung, Oktober", text:"Welche Entscheidungen der Grundschule haben Kostenfolgen, und wo steht die Quelle?"},
     {g:"rechner", wer:"renate", art:"Renate, Büroleitung, am Laptop", aus:"Protokolle und Zusagen aller Projekte", text:"Welche Termine und Fristen laufen in den nächsten vier Wochen, über alle Projekte?"},
     {g:"handy", wer:"rainer", art:"Rainer, Partner, auf dem Weg zum Bauherrn", aus:"Projektstand vom 13.11. und offene Aufgaben", text:"Wo steht die Tagesklinik, und was ist offen?"},
-    {g:"handy", wer:"lukas", art:"Lukas, vor der ersten Mail an die Gemeinde", aus:"Regel des Bauamts und Schreiben vom 12.11.", text:"Wem darf ich bei der Gemeinde Tannhofen schreiben, und wer muss in Kopie?"}
+    {g:"rechner", wer:"lukas", art:"Lukas, vor der ersten Mail an die Gemeinde", aus:"Regel des Bauamts und Schreiben vom 12.11.", text:"Wem darf ich bei der Gemeinde Tannhofen schreiben, und wer muss in Kopie?"}
   ];
   var LEUTE = {lukas:"Lukas", katrin:"Katrin", renate:"Renate", rainer:"Rainer"};
   // Dienstleister: Jonas Wiedemer, selbstaendiger IT-Projektleiter (Vorfuehrdaten Variante Freelancer, ganz erfunden)
@@ -652,7 +652,7 @@ document.addEventListener("click", function (e) {
     if (s && s.aus) setTimeout(function(){ document.getElementById("boden").classList.add("liefert"); }, 600);
   }
   var KLEIN = window.matchMedia("(max-width:760px)");
-  var lauf = 0, n = 0, selbst = false;
+  var lauf = 0, n = 0, selbst = false, zuletztGeraet = "";
   function warte(ms){ return new Promise(function(r){ setTimeout(r, ruhig ? 0 : ms); }); }
   function doc(g){ try { return G[g].f.contentWindow.document; } catch (x) { return null; } }
   // Zeiger (Rechner) und Fingertipp (Handy) auf ein Element der echten Seite, in Punkten der Flaeche
@@ -740,6 +740,12 @@ document.addEventListener("click", function (e) {
         if (s.zeigen) continue;
         s = Object.assign({}, s, {g:"handy", projekt:"", art:s.art.replace(/am Rechner|am Laptop/, "am Handy")});
       }
+      // Firmengedaechtnis: Laptop und Handy immer im Wechsel, auch beim Neubeginn der Runde (Kurt 18.11.2026)
+      else if (s.wer && s.g === zuletztGeraet) {
+        s = s.g === "rechner" ? Object.assign({}, s, {g:"handy", art:s.art.replace(/am Laptop/, "am Handy")})
+                              : Object.assign({}, s, {g:"rechner", art:s.art.replace(/am Handy/, "am Laptop")});
+      }
+      zuletztGeraet = s.g;
       if (s.wer) {
         hausZeigen(s);
         if (BESITZ[s.g] !== s.wer) await laden(s.g, s.wer);
