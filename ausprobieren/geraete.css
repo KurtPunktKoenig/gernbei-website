@@ -10,39 +10,39 @@
 
 /* Laptop nach den Massen eines 13-Zoll-Notebooks (Bild 2560 x 1664, also 1280 x 832 Punkte):
    schmaler Rand, Kerbe oben in der Mitte, Scharnier, Aluminium-Unterteil mit Griffmulde, Schatten. */
-.laptop{position:relative}
-.laptop .deckel{position:relative;background:#0a0a0b;border-radius:2.4% 2.4% 0 0/3.6% 3.6% 0 0;padding:1.25% 1.25% 1.6%;box-shadow:0 0 0 1.5px #b9b9be,0 0 0 2.5px #8d8d92}
-.laptop .schirm{position:relative;aspect-ratio:1280/832;overflow:hidden;border-radius:.6%/1%;background:#fff}
-.laptop .schirm::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 38%)}
-.laptop .kerbe{position:absolute;left:50%;top:0;width:15.5%;height:3%;transform:translateX(-50%);background:#0a0a0b;border-radius:0 0 9px 9px;z-index:3}
-.laptop .kerbe::after{content:"";position:absolute;left:50%;top:32%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#2c3440,#0b0d10 70%)}
-.laptop .scharnier{height:6px;margin:0 1.2%;background:linear-gradient(#2b2b2e,#5a5a5f 60%,#9a9a9f)}
-.laptop .unterteil{position:relative;height:clamp(10px,2vw,20px);margin:0 -7%;background:linear-gradient(#e9e9ec 0%,#d4d4d8 35%,#a9a9ae 100%);border-radius:0 0 50% 50%/0 0 100% 100%;box-shadow:0 1px 0 #f7f7f9 inset}
-.laptop .unterteil::before{content:"";position:absolute;left:50%;top:0;width:17%;height:45%;transform:translateX(-50%);background:linear-gradient(#bdbdc2,#d7d7db);border-radius:0 0 12px 12px}
-.laptop .unterteil::after{content:"";position:absolute;left:4%;right:4%;bottom:-26px;height:26px;background:radial-gradient(ellipse at center,rgba(0,0,0,.22),transparent 70%);z-index:-1}
+.geraete .laptop{position:relative}
+.geraete .laptop .deckel{position:relative;background:#0a0a0b;border-radius:2.4% 2.4% 0 0/3.6% 3.6% 0 0;padding:1.25% 1.25% 1.6%;box-shadow:0 0 0 1.5px #b9b9be,0 0 0 2.5px #8d8d92}
+.geraete .laptop .schirm{position:relative;aspect-ratio:1280/832;overflow:hidden;border-radius:.6%/1%;background:#fff}
+.geraete .laptop .schirm::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 38%)}
+.geraete .laptop .kerbe{position:absolute;left:50%;top:0;width:15.5%;height:3%;transform:translateX(-50%);background:#0a0a0b;border-radius:0 0 9px 9px;z-index:3}
+.geraete .laptop .kerbe::after{content:"";position:absolute;left:50%;top:32%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#2c3440,#0b0d10 70%)}
+.geraete .laptop .scharnier{height:6px;margin:0 1.2%;background:linear-gradient(#2b2b2e,#5a5a5f 60%,#9a9a9f)}
+.geraete .laptop .unterteil{position:relative;height:clamp(10px,2vw,20px);margin:0 -7%;background:linear-gradient(#e9e9ec 0%,#d4d4d8 35%,#a9a9ae 100%);border-radius:0 0 50% 50%/0 0 100% 100%;box-shadow:0 1px 0 #f7f7f9 inset}
+.geraete .laptop .unterteil::before{content:"";position:absolute;left:50%;top:0;width:17%;height:45%;transform:translateX(-50%);background:linear-gradient(#bdbdc2,#d7d7db);border-radius:0 0 12px 12px}
+.geraete .laptop .unterteil::after{content:"";position:absolute;left:4%;right:4%;bottom:-26px;height:26px;background:radial-gradient(ellipse at center,rgba(0,0,0,.22),transparent 70%);z-index:-1}
 
 /* Handy nach den Massen eines 6,3-Zoll-Pro-Modells (402 x 874 Punkte):
    Titanrahmen, schmaler schwarzer Rand, Insel, Tasten links und rechts, Glanz. Ohne Herstellerzeichen. */
-.handy{position:absolute;right:0;bottom:-40px;width:250px}
-@media(max-width:760px){.handy{position:relative;right:auto;bottom:auto;width:min(290px,78%);margin:-60px auto 0}}
-.handy .rahmen{position:relative;border-radius:17.5%/8.1%;padding:1.6%;background:linear-gradient(135deg,#d9d6d1 0%,#8f8b85 18%,#5b5853 45%,#8f8b85 80%,#cfcbc5 100%);box-shadow:0 0 0 1px rgba(0,0,0,.35),0 50px 80px -30px rgba(0,0,0,.5),0 18px 30px -18px rgba(0,0,0,.35)}
-.handy .glas{border-radius:16.4%/7.6%;padding:3.2%;background:#050505;box-shadow:0 0 0 1px #2a2a2c inset}
-.handy .schirm{position:relative;aspect-ratio:402/874;overflow:hidden;border-radius:13.6%/6.3%;background:#fff}
-.handy .schirm::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 30%)}
-.handy .taste{position:absolute;width:3px;background:linear-gradient(90deg,#4d4a45,#9b968f);border-radius:2px}
-.handy .taste.l{left:-2.5px}.handy .taste.r{right:-2.5px;background:linear-gradient(90deg,#9b968f,#4d4a45)}
-.handy .t1{top:17%;height:5%}.handy .t2{top:25%;height:9%}.handy .t3{top:36%;height:9%}.handy .t4{top:27%;height:14%}.handy .t5{top:58%;height:8%}
+.geraete .handy{position:absolute;right:0;bottom:-40px;width:250px}
+@media(max-width:760px){.geraete .handy{position:relative;right:auto;bottom:auto;width:min(290px,78%);margin:-60px auto 0}}
+.geraete .handy .rahmen{position:relative;border-radius:17.5%/8.1%;padding:1.6%;background:linear-gradient(135deg,#d9d6d1 0%,#8f8b85 18%,#5b5853 45%,#8f8b85 80%,#cfcbc5 100%);box-shadow:0 0 0 1px rgba(0,0,0,.35),0 50px 80px -30px rgba(0,0,0,.5),0 18px 30px -18px rgba(0,0,0,.35)}
+.geraete .handy .glas{border-radius:16.4%/7.6%;padding:3.2%;background:#050505;box-shadow:0 0 0 1px #2a2a2c inset}
+.geraete .handy .schirm{position:relative;aspect-ratio:402/874;overflow:hidden;border-radius:13.6%/6.3%;background:#fff}
+.geraete .handy .schirm::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 30%)}
+.geraete .handy .taste{position:absolute;width:3px;background:linear-gradient(90deg,#4d4a45,#9b968f);border-radius:2px}
+.geraete .handy .taste.l{left:-2.5px}.geraete .handy .taste.r{right:-2.5px;background:linear-gradient(90deg,#9b968f,#4d4a45)}
+.geraete .handy .t1{top:17%;height:5%}.geraete .handy .t2{top:25%;height:9%}.geraete .handy .t3{top:36%;height:9%}.geraete .handy .t4{top:27%;height:14%}.geraete .handy .t5{top:58%;height:8%}
 
 /* Innenleben: in fester Groesse gebaut, per transform auf den Schirm skaliert */
 .innen{position:absolute;left:0;top:0;transform-origin:0 0;font-family:var(--text);color:var(--tinte)}
-.laptop .innen{width:1280px;height:832px;display:flex;flex-direction:column}
-.laptop .menue{height:26px;flex:none;background:#ECECEE;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:13px;color:#333}
-.laptop .menue b{font-weight:600;margin-right:16px}
-.laptop .browser{height:46px;flex:none;background:#F7F7F8;border-bottom:1px solid #E3E3E6;display:flex;align-items:center;gap:14px;padding:0 16px}
-.laptop .ampel{display:flex;gap:8px}.laptop .ampel i{width:12px;height:12px;border-radius:50%;background:#FF5F57}.laptop .ampel i:nth-child(2){background:#FEBC2E}.laptop .ampel i:nth-child(3){background:#28C840}
-.laptop .adresse{flex:1;max-width:520px;margin:0 auto;background:#EBEBED;border-radius:8px;padding:6px 14px;font-size:13.5px;color:#444;text-align:center}
-.laptop .app{flex:1;display:flex;min-height:0}
-.handy .innen{width:402px;height:874px;display:flex;flex-direction:column;background:#F4F4F1}
+.geraete .laptop .innen{width:1280px;height:832px;display:flex;flex-direction:column}
+.geraete .laptop .menue{height:26px;flex:none;background:#ECECEE;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:13px;color:#333}
+.geraete .laptop .menue b{font-weight:600;margin-right:16px}
+.geraete .laptop .browser{height:46px;flex:none;background:#F7F7F8;border-bottom:1px solid #E3E3E6;display:flex;align-items:center;gap:14px;padding:0 16px}
+.geraete .laptop .ampel{display:flex;gap:8px}.geraete .laptop .ampel i{width:12px;height:12px;border-radius:50%;background:#FF5F57}.geraete .laptop .ampel i:nth-child(2){background:#FEBC2E}.geraete .laptop .ampel i:nth-child(3){background:#28C840}
+.geraete .laptop .adresse{flex:1;max-width:520px;margin:0 auto;background:#EBEBED;border-radius:8px;padding:6px 14px;font-size:13.5px;color:#444;text-align:center}
+.geraete .laptop .app{flex:1;display:flex;min-height:0}
+.geraete .handy .innen{width:402px;height:874px;display:flex;flex-direction:column;background:#F4F4F1}
 
 .seite{width:268px;background:#F5F5F7;border-right:1px solid #E3E3E6;display:flex;flex-direction:column;padding:18px 12px}
 .seite .marke{display:flex;align-items:center;gap:10px;padding:2px 8px 18px}
@@ -60,15 +60,15 @@
 .haupt{flex:1;display:flex;flex-direction:column;min-width:0}
 .haupt .datum{padding:14px 20px;border-bottom:1px solid #ECECEE;font-size:14px;color:var(--grau)}
 .verlauf{flex:1;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:22px;padding:24px 0}
-.laptop .verlauf{padding-left:calc(50% - 380px);padding-right:calc(50% - 380px)}
-.handy .verlauf{padding:16px 22px;gap:18px}
+.geraete .laptop .verlauf{padding-left:calc(50% - 380px);padding-right:calc(50% - 380px)}
+.geraete .handy .verlauf{padding:16px 22px;gap:18px}
 
 .bitte{align-self:flex-end;background:#111214;color:#fff;border-radius:14px;padding:11px 16px;max-width:78%;font-size:17px;line-height:1.4}
-.handy .bitte{font-size:19px;padding:14px 20px;max-width:88%;border-radius:16px}
+.geraete .handy .bitte{font-size:19px;padding:14px 20px;max-width:88%;border-radius:16px}
 .bitte .foto{display:flex;align-items:center;gap:10px;background:#2A2B2F;border-radius:9px;padding:8px 10px;margin-bottom:10px;font-size:14px;color:#D9D9DC}
 .bitte .foto i{width:34px;height:42px;border-radius:4px;background:repeating-linear-gradient(#FFFDF5 0 6px,#E5E0D0 6px 7px);transform:rotate(-4deg);flex:none}
 .antwort{font-size:17px;line-height:1.5}
-.handy .antwort{font-size:19px}
+.geraete .handy .antwort{font-size:19px}
 .antwort .von{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--grau);margin-bottom:8px}
 .antwort ul{list-style:none}
 .antwort li{position:relative;padding:0 0 10px 30px;transition:opacity .4s,transform .4s}
@@ -82,8 +82,8 @@
 @keyframes hops{0%,60%,100%{opacity:.3}30%{opacity:1}}
 
 .eingabe{display:flex;align-items:center;gap:14px;border:1.5px solid #111214;border-radius:16px;padding:12px 12px 12px 22px;background:#fff;font-size:17px}
-.laptop .eingabe{margin:0 calc(50% - 380px) 20px}
-.handy .eingabe{margin:0 14px 30px;border-radius:24px;font-size:19px;padding:14px 12px 14px 22px}
+.geraete .laptop .eingabe{margin:0 calc(50% - 380px) 20px}
+.geraete .handy .eingabe{margin:0 14px 30px;border-radius:24px;font-size:19px;padding:14px 12px 14px 22px}
 .eingabe .feld{flex:1;color:var(--grau-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:rtl;text-align:left}
 .eingabe .feld.voll{color:var(--tinte)}
 .eingabe .feld span{direction:ltr;unicode-bidi:plaintext}
@@ -93,9 +93,9 @@
 .eingabe .los.an{background:#111214}
 .eingabe .los svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2}
 
-.handy .status{display:flex;justify-content:space-between;align-items:center;padding:16px 34px 0;height:54px;font-weight:600;font-size:16px;background:#fff}
-.handy .insel{position:absolute;left:50%;top:11px;width:126px;height:37px;margin-left:-63px;background:#000;border-radius:20px;z-index:2}
-.handy .leiste .wer{margin-left:auto;width:30px;height:30px;border-radius:50%;background:#111214;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600}
+.geraete .handy .status{display:flex;justify-content:space-between;align-items:center;padding:16px 34px 0;height:54px;font-weight:600;font-size:16px;background:#fff}
+.geraete .handy .insel{position:absolute;left:50%;top:11px;width:126px;height:37px;margin-left:-63px;background:#000;border-radius:20px;z-index:2}
+.geraete .handy .leiste .wer{margin-left:auto;width:30px;height:30px;border-radius:50%;background:#111214;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600}
 
 /* Firmengedaechtnis: das Team, wer fragt und wessen Wissen antwortet */
 .team-band{display:none;margin:70px auto 0;max-width:760px}
@@ -110,16 +110,16 @@
 .team-band li.rente span{border-style:dashed}
 .team-band .weg{font-family:var(--mono);font-size:12.5px;color:var(--rot);text-align:center;margin-top:16px;min-height:20px}
 .team-band.an + .unterzeile{margin-top:14px}
-.handy .leiste{display:flex;align-items:center;gap:14px;padding:10px 22px 14px;background:#fff;border-bottom:1px solid #E6E6E8}
-.handy .leiste .gb{font-size:18px}
-.handy .strich{position:absolute;left:50%;bottom:8px;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:#111}
+.geraete .handy .leiste{display:flex;align-items:center;gap:14px;padding:10px 22px 14px;background:#fff;border-bottom:1px solid #E6E6E8}
+.geraete .handy .leiste .gb{font-size:18px}
+.geraete .handy .strich{position:absolute;left:50%;bottom:8px;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:#111}
 
 /* Zettel von Hand ueber dem Geraet, das gerade dran ist */
 .notiz{font-family:var(--hand);font-size:26px;color:var(--tinte-2);min-height:34px;text-align:center;transition:opacity .3s}
 .unterzeile{font-size:13px;color:var(--grau);text-align:center;margin-top:70px}
 @media(max-width:760px){.unterzeile{margin-top:24px}}
 .geraet-dran{outline:0}
-.laptop,.handy{transition:filter .4s,opacity .4s}
+.geraete .laptop,.geraete .handy{transition:filter .4s,opacity .4s}
 .geraete.handy-dran .laptop{opacity:.82}
 .geraete.rechner-dran .handy .rahmen{box-shadow:0 0 0 2px #4a4a4f,0 0 0 4px #1b1b1d,0 30px 50px -25px rgba(0,0,0,.3)}
 

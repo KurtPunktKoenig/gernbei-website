@@ -20,6 +20,134 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="haus.css">
 <link rel="stylesheet" href="startseite.css">
+<link rel="stylesheet" href="ausprobieren/geraete.css">
+<!-- buehne:stil -->
+<style>
+/* Stufe 2 (16.11.2026): in Laptop und Handy laeuft die echte Gernbei-Seite (ausprobieren/), bedienbar.
+   Zuschauen: die Buehne tippt echte Bitten ins echte Feld. Selbst ausprobieren: der Besucher klickt. */
+.laptop .app iframe,.handy .rest iframe{border:0;display:block;background:#fff}
+.laptop .app{position:relative}
+.handy .rest{flex:1;min-height:0;overflow:hidden}
+.handy .innen .strich{z-index:3}
+.modus{display:flex;gap:10px;justify-content:center;margin:26px 0 0;flex-wrap:wrap}
+.modus button{font:500 15px var(--text);border-radius:999px;padding:10px 20px;cursor:pointer;border:1px solid var(--tinte);background:#fff;color:var(--tinte)}
+.modus button[aria-pressed=true]{background:var(--tinte);color:#fff}
+.hinweis-selbst{font-size:14px;color:var(--grau);text-align:center;margin-top:12px;min-height:22px}
+.geraete .klick-schutz{position:absolute;inset:0;z-index:5;cursor:pointer}
+.geraete.selbst .klick-schutz{display:none}
+/* Einladung zum Selberklicken (Kurt 16.11.2026: mit einer Animation klarer machen, dass man selbst agieren kann) */
+.klick-schutz .einladung{position:absolute;left:50%;bottom:9%;transform:translate(-50%,12px);display:inline-flex;align-items:center;gap:10px;
+  background:var(--tinte);color:#fff;border-radius:999px;padding:12px 20px 12px 16px;font:600 15px var(--text);white-space:nowrap;
+  box-shadow:0 12px 30px -8px rgba(0,0,0,.45);opacity:0;transition:opacity .35s,transform .35s}
+.handy .klick-schutz .einladung{font-size:13px;padding:10px 14px 10px 12px;bottom:12%}
+.klick-schutz .einladung svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;animation:wink 1.1s ease-in-out infinite}
+.klick-schutz:hover .einladung,.klick-schutz.winken .einladung{opacity:1;transform:translate(-50%,0)}
+.klick-schutz.winken .einladung{animation:puls 1.4s ease-in-out infinite}
+@keyframes wink{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px) rotate(-8deg)}}
+@keyframes puls{0%,100%{box-shadow:0 12px 30px -8px rgba(0,0,0,.45),0 0 0 0 rgba(210,58,38,.55)}60%{box-shadow:0 12px 30px -8px rgba(0,0,0,.45),0 0 0 14px rgba(210,58,38,0)}}
+.modus #m-selbst{position:relative}
+.modus #m-selbst.winken{animation:puls 1.4s ease-in-out 3}
+/* Zeiger am Rechner, Fingertipp am Handy, in Punkten der Flaeche */
+.zeiger{position:absolute;left:0;top:0;width:30px;height:30px;z-index:20;pointer-events:none;transition:transform .9s cubic-bezier(.45,0,.2,1),opacity .3s;opacity:0}
+.zeiger.an{opacity:1}
+.zeiger svg{width:30px;height:30px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.tipp{position:absolute;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:rgba(210,58,38,.22);border:2px solid rgba(210,58,38,.6);z-index:21;pointer-events:none;opacity:0}
+.tipp.an{animation:tipp .7s ease-out}
+@keyframes tipp{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(1.5)}}
+/* Produktwahl */
+.wahl{display:flex;gap:8px;justify-content:center;margin:22px 0 0;flex-wrap:wrap}
+.wahl button{font:500 14px var(--text);border:1px solid var(--haar);background:#fff;color:var(--tinte-2);border-radius:999px;padding:8px 16px;cursor:pointer}
+.wahl button[aria-pressed=true]{background:var(--papier-2);color:var(--tinte);border-color:var(--tinte)}
+/* Firmengedaechtnis als Haus (wie das Systembild): je Person ein Zimmer mit Gesicht, darunter das gemeinsame Gedaechtnis */
+.haus{display:none;max-width:760px;margin:64px auto 0;position:relative}
+.haus.an{display:block}
+.haus .haus-titel{font:600 13px var(--mono);letter-spacing:.04em;color:var(--tinte-2);text-align:center;margin-bottom:8px}
+.haus .dach-svg{display:block;width:100%;height:50px;margin-bottom:-2px}
+.haus .dach{height:46px;background:linear-gradient(to top right,transparent calc(50% - 1px),var(--tinte) calc(50% - 1px),var(--tinte) calc(50% + 1px),transparent calc(50% + 1px)) left/50% 100% no-repeat,linear-gradient(to top left,transparent calc(50% - 1px),var(--tinte) calc(50% - 1px),var(--tinte) calc(50% + 1px),transparent calc(50% + 1px)) right/50% 100% no-repeat;position:relative}
+.haus .dach span{position:absolute;left:50%;bottom:4px;transform:translateX(-50%);font:600 13px var(--text);color:var(--tinte-2);white-space:nowrap}
+.haus .zimmer{display:grid;grid-template-columns:repeat(5,1fr);border:2px solid var(--tinte);border-bottom:0;background:#EEF4F4}
+.haus .zi{position:relative;padding:12px 6px 10px;text-align:center;border-left:1.5px solid var(--tinte);transition:background .35s}
+.haus .zi:first-child{border-left:0}
+.haus .zi svg{width:58px;height:58px;display:block;margin:0 auto 4px;transition:transform .35s}
+.haus .zi b{display:block;font-size:13.5px;line-height:1.2;color:var(--tinte)}
+.haus .zi small{display:block;font-size:11.5px;color:var(--grau);line-height:1.3}
+.haus .zi .geraet{position:absolute;top:6px;right:6px;font:500 10px var(--mono);letter-spacing:.06em;color:#fff;background:var(--rot);border-radius:4px;padding:2px 5px;opacity:0;transition:opacity .3s}
+.haus .zi.fragt{background:#FFF}
+.haus .zi.fragt svg{transform:scale(1.12)}
+.haus .zi.fragt .geraet{opacity:1}
+.haus .zi .pfeil{position:absolute;left:50%;bottom:-2px;width:2px;height:0;background:var(--rot);transition:height .5s}
+.haus .zi.fragt .pfeil{height:14px}
+.haus .boden{border:2px solid var(--tinte);background:#FBF3D9;padding:12px 14px;text-align:center;transition:box-shadow .4s}
+.haus .boden b{font-size:16px;color:var(--tinte)}
+.haus .boden small{display:block;font-size:12.5px;color:var(--grau);margin-top:2px}
+.haus .boden.liefert{box-shadow:0 0 0 4px rgba(210,58,38,.25)}
+.haus .weg{font-family:var(--mono);font-size:12.5px;color:var(--rot);text-align:center;margin-top:12px;min-height:20px}
+@media(max-width:620px){.haus .zimmer{grid-template-columns:repeat(5,1fr)}.haus .zi small{display:none}.haus .zi svg{width:44px;height:44px}.haus .zi b{font-size:12px}}
+@media (prefers-reduced-motion:reduce){.zeiger{transition:none}.klick-schutz .einladung svg,.klick-schutz.winken .einladung{animation:none}}
+</style>
+<style>
+/* Startseite: Buehne mit einer Frage, Buerotafel, Band Tempo (startseite.py, Kurt 18.11.2026) */
+.start-buehne{margin-top:10px}
+.modus{display:none}
+.frage-kopf{font:500 15px var(--text);color:var(--tinte-2);text-align:center;margin:30px 0 0}
+.frage-kopf+.wahl{margin-top:10px}
+.wahl button{font-size:15px;padding:10px 18px}
+.hinweis-selbst{font-size:15px}
+.hinweis-selbst button{font:inherit;color:var(--rot);background:none;border:0;padding:0;margin-left:6px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.tempo{max-width:1000px;margin:84px auto 0;text-align:center}
+.tempo-titel{font:600 clamp(20px,2.6vw,26px)/1.25 var(--display);letter-spacing:-.02em;color:var(--tinte);margin:0 0 18px}
+.tempo-reihe{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left}
+.tempo-reihe div{border:1px solid var(--haar);border-radius:12px;background:#fff;padding:14px 16px}
+.tempo-reihe em{display:inline-flex;align-items:center;gap:5px;font:500 12px var(--mono);font-style:normal;color:var(--grau);letter-spacing:.02em}
+.tempo-reihe em svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.tempo-reihe strong{display:block;font-size:15px;color:var(--tinte);margin:6px 0 4px;line-height:1.3}
+.tempo-reihe span{display:block;font-size:14px;color:var(--grau);line-height:1.4}
+.tempo-unter{font-size:13px;color:var(--grau);margin-top:12px}
+@media(max-width:760px){.tempo{margin-top:40px}.tempo-reihe{grid-template-columns:1fr}}
+/* Firmengedaechtnis: Team als Buerotafel ueber (Handy) oder neben (Rechner) den Geraeten */
+.haus{max-width:520px;margin:30px auto 0}
+.haus .haus-titel{font-family:var(--hand);font-size:21px;font-weight:400;letter-spacing:0;color:var(--tinte);text-align:center;margin-bottom:0}
+.haus .weg{font:600 15px/1.3 var(--text);color:var(--rot);text-align:center;margin:2px 0 8px;min-height:22px}
+.haus .dach-svg{display:none}
+.haus .zimmer{background:#FBFBF8;border:6px solid #cfd2d6;border-bottom:0;border-radius:8px 8px 0 0;box-shadow:inset 0 0 0 1px #aeb2b8}
+.haus .zi{padding:6px 3px 5px;border-left:1px dashed #d4d4d8;background:transparent}
+.haus .zi:first-child{border-left:0}
+.haus .zi.fragt{background:#fff;box-shadow:0 4px 10px -4px rgba(0,0,0,.25)}
+.haus .zi svg{width:34px;height:34px;margin-bottom:2px}
+.haus .zi b{font-size:11.5px}
+.haus .zi .geraet{font-size:9px;top:3px;right:3px}
+.haus .boden{display:flex;align-items:center;gap:8px;justify-content:center;flex-wrap:wrap;border:6px solid #cfd2d6;border-top:2px solid #aeb2b8;border-radius:0 0 8px 8px;background:#FBF3D9;box-shadow:0 18px 30px -18px rgba(0,0,0,.35);padding:8px 10px}
+.haus .boden .gehirn{width:46px;height:38px;flex:none}
+.haus .boden b{font-size:13.5px}
+.haus .boden small{display:none}
+.haus .boden .aus{flex-basis:100%;font:500 12.5px/1.35 var(--text);color:var(--rot);text-align:center;min-height:18px}
+.haus.an+.geraete{margin-top:18px}
+@media(max-width:899px){.haus{max-width:440px}.haus .zi small{display:none}}
+@media(max-width:620px){.haus .zi svg{width:28px;height:28px}.haus .zi b{font-size:10.5px}}
+@media(min-width:900px){
+  .start-buehne:has(.haus.an){display:grid;grid-template-columns:170px minmax(0,1fr);column-gap:34px;align-items:center;max-width:1180px;margin:0 auto}
+  .start-buehne:has(.haus.an)>*{grid-column:1/-1}
+  .start-buehne:has(.haus.an)>.haus{grid-column:1;margin:40px 0 0;max-width:none;align-self:center}
+  .start-buehne:has(.haus.an)>.geraete{grid-column:2;margin:40px 0 0;max-width:none;width:auto;justify-self:stretch}
+  .haus.an .haus-titel{text-align:left;font-size:19px;line-height:1.15}
+  .haus.an .weg{text-align:left}
+  .haus.an .zimmer{grid-template-columns:1fr;border:6px solid #cfd2d6;border-bottom:0;border-radius:8px 8px 0 0;overflow:visible}
+  .haus.an .zi{display:grid;grid-template-columns:34px 1fr;column-gap:10px;align-items:center;text-align:left;border-left:0;border-top:1px dashed #d4d4d8;padding:7px 10px}
+  .haus.an .zi:first-child{border-top:0}
+  .haus.an .zi svg{grid-column:1;grid-row:1/3;width:34px;height:34px;margin:0}
+  .haus.an .zi b{grid-column:2;grid-row:1;font-size:13px}
+  .haus.an .zi small{grid-column:2;grid-row:2;display:block;font-size:11px}
+  .haus.an .zi .geraet{grid-column:2;grid-row:2;position:static;justify-self:start;display:none}
+  .haus.an .zi.fragt .geraet{display:inline-block}
+  .haus.an .zi.fragt small{display:none}
+  .haus.an .zi .pfeil{display:none}
+  .haus.an .zi.fragt::after{content:"";position:absolute;right:-22px;top:50%;width:20px;height:2px;background:var(--rot)}
+  .haus.an .zi.fragt::before{content:"";position:absolute;right:-28px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left:8px solid var(--rot)}
+  .haus.an .boden{flex-direction:column;text-align:center}
+  .haus.an .boden .gehirn{width:54px;height:44px}
+}
+</style>
+<!-- /buehne:stil -->
 </head>
 <body>
 
@@ -42,13 +170,87 @@
     <h1>Ihre Büroarbeit liegt vorbereitet da. Sie entscheiden und schicken ab.</h1>
     <p class="slogan-antwort">KI? <span>Gern dabei.</span></p>
     <p class="lead dunkler">Drei Produkte fürs Büro, die behalten, was Sie ablegen, und Ihre Schreiben vorbereiten. Zwei für Ihre Kunden, die auf Ihrer Website und am Telefon antworten. Persönlich eingerichtet aus Würzburg.</p>
-    <p class="einstieg-satz">Bringen Sie eine Kundenmail oder einen Regiezettel mit. Wir schauen gemeinsam, was Gernbei daraus macht.</p>
-    <div class="knoepfe" style="justify-content:center"><a class="knopf" href="#kontakt">Am eigenen Beispiel kennenlernen <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="knopf hell" href="ausprobieren.html">Gernbei ausprobieren</a></div>
-    <figure class="einstieg-bild">
-      <div class="schirm nur-gross"><div class="leiste"><i></i><i></i><i></i><span>Gernbei</span></div><img src="bilder/start-ausschnitt-rechner.webp" alt="Gernbei am Rechner im Projekt Sonnenhof: die Frage, warum beim Sonnenhof Variante B gewählt wurde, und die Antwort mit zwei Gründen und der Quelle, dem Protokoll der Baubesprechung" width="1340" height="403"></div>
-      <div class="handy nur-klein"><img src="bilder/start-ausschnitt-handy.webp" alt="Gernbei am Handy: die Frage, warum beim Sonnenhof Variante B gewählt wurde, und die Antwort mit zwei Gründen und der Quelle, dem Protokoll der Baubesprechung" width="561" height="785"></div>
-      <figcaption class="bildunter">Erfundenes Büro, echte Antwort. Am Rechner und am Handy dasselbe Gespräch, im Browser auf Ihren Geräten.</figcaption>
-    </figure>
+    <!-- buehne -->
+<div class="start-buehne">
+    <span id="ueber-p" hidden></span><span id="lead" hidden></span>
+    <p class="frage-kopf">Was passt zu Ihnen?</p>
+    <div class="wahl" role="group" aria-label="Was passt zu Ihnen?">
+      <button data-p="firmengedaechtnis" aria-pressed="false">Büro mit Team</button>
+      <button data-p="handwerk" aria-pressed="false">Handwerksbetrieb</button>
+      <button data-p="dienstleister" aria-pressed="false">Selbständig im Büro</button>
+    </div>
+    <div class="modus" role="group" aria-label="Ansicht">
+      <button id="m-zu" aria-pressed="true">Zuschauen</button>
+      <button id="m-selbst" aria-pressed="false">Selbst ausprobieren</button>
+    </div>
+    <p class="hinweis-selbst" id="hinweis"></p>
+
+    <div class="haus" id="haus" aria-live="polite">
+      <p class="haus-titel">Haldenmeyer &amp; Sorg Architekten</p>
+      <p class="weg" id="weg"></p>
+      <svg class="dach-svg" viewBox="0 0 760 50" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,50 380,3 760,50" fill="#F3F1EC" stroke="#111214" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+      <div class="zimmer">
+        <div class="zi" data-wer="ottilie"><span class="geraet"></span>
+          <svg viewBox="0 0 60 60"><use href="#kopf"/><circle cx="30" cy="9" r="5" fill="#3A3B40"/><path d="M17.5 22 Q19 12 30 12 Q41 12 42.5 22" fill="none" stroke="#3A3B40" stroke-width="4" stroke-linecap="round"/></svg>
+          <b>Ottilie</b><small>Partnerin</small><i class="pfeil"></i></div>
+        <div class="zi" data-wer="rainer"><span class="geraet"></span>
+          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M17.3 26 Q16.5 16 21 13.5M42.7 26 Q43.5 16 39 13.5" fill="none" stroke="#9A9A9F" stroke-width="3.2" stroke-linecap="round"/><circle cx="25" cy="24" r="4.2" fill="none" stroke="#111" stroke-width="1.6"/><circle cx="35" cy="24" r="4.2" fill="none" stroke="#111" stroke-width="1.6"/><path d="M29.2 24h1.6" stroke="#111" stroke-width="1.6"/></svg>
+          <b>Rainer</b><small>Partner</small><i class="pfeil"></i></div>
+        <div class="zi" data-wer="katrin"><span class="geraet"></span>
+          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M16.5 21 Q16.5 8 30 8 Q43.5 8 43.5 21 Z" fill="#F2C94C" stroke="#111" stroke-width="2"/><path d="M13 21.5 H47" stroke="#111" stroke-width="2.4" stroke-linecap="round"/><path d="M30 8 V13" stroke="#111" stroke-width="1.6"/></svg>
+          <b>Katrin</b><small>Projektleitung</small><i class="pfeil"></i></div>
+        <div class="zi" data-wer="lukas"><span class="geraet"></span>
+          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M17.5 20 L20 12.5 L24 16.5 L27.5 10.5 L31 15.5 L35 10.5 L37.5 16 L42 13 L42.5 20" fill="#6B4E3A" stroke="#111" stroke-width="1.8" stroke-linejoin="round"/><path d="M24.5 30 Q30 37 35.5 30 Z" fill="#111"/></svg>
+          <b>Lukas</b><small>neu im Büro</small><i class="pfeil"></i></div>
+        <div class="zi" data-wer="renate"><span class="geraet"></span>
+          <svg viewBox="0 0 60 60"><path d="M15 33 Q12 12 30 11 Q48 12 45 33 Z" fill="#B5703F" stroke="#111" stroke-width="1.8"/><use href="#kopf"/><path d="M17.5 21 Q22 13 30 14 Q38 13 42.5 21" fill="#B5703F" stroke="#111" stroke-width="1.6"/><circle cx="16.5" cy="31" r="1.6" fill="#D23A26"/><circle cx="43.5" cy="31" r="1.6" fill="#D23A26"/></svg>
+          <b>Renate</b><small>Büroleitung</small><i class="pfeil"></i></div>
+      </div>
+      <div class="boden" id="boden"><svg class="gehirn" viewBox="0 0 64 52" aria-hidden="true"><g fill="#fff" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M31 6c-3-4-10-4-12 1-5-1-9 3-8 8-5 1-7 7-4 11-3 3-2 9 3 10 0 5 5 8 10 6 2 4 8 5 11 1z"/><path d="M33 6c3-4 10-4 12 1 5-1 9 3 8 8 5 1 7 7 4 11 3 3 2 9-3 10 0 5-5 8-10 6-2 4-8 5-11 1z"/></g><g fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round"><path d="M19 7c1 4 4 5 7 5M11 15c3 0 5 2 5 5M7 26c3-1 6 0 7 3M10 36c2-2 6-2 7 0M20 42c0-3 2-5 5-5"/><path d="M45 7c-1 4-4 5-7 5M53 15c-3 0-5 2-5 5M57 26c-3-1-6 0-7 3M54 36c-2-2-6-2-7 0M44 42c0-3-2-5-5-5"/></g><g fill="#D23A26"><circle cx="22" cy="24" r="2.4"/><circle cx="42" cy="20" r="2.4"/><circle cx="38" cy="34" r="2.4"/></g><path d="M22 24L42 20L38 34Z" fill="none" stroke="#D23A26" stroke-width="1.4" stroke-dasharray="2 2"/></svg><b>Das gemeinsame Gedächtnis</b><span class="aus" id="aus"></span><small>Projekte, Protokolle, Entscheidungen, Pläne. Jede Antwort nennt die Quelle.</small></div>
+    </div>
+    <div class="geraete" id="geraete">
+      <p class="notiz" id="notiz" aria-live="polite"></p>
+      <div class="laptop">
+        <div class="deckel"><div class="schirm" id="schirm-rechner">
+          <div class="kerbe"></div>
+          <div class="innen" id="rechner">
+            <div class="menue"><span><b>Browser</b>Ablage&nbsp;&nbsp;&nbsp;Bearbeiten&nbsp;&nbsp;&nbsp;Darstellung</span><span id="menue-uhr"></span></div>
+            <div class="browser"><span class="ampel"><i></i><i></i><i></i></span><span class="adresse">haberkorn.gernbei.de</span><span style="width:60px"></span></div>
+            <div class="app"><iframe id="f-rechner" title="Gernbei am Rechner" width="1280" height="760"></iframe></div>
+            <div class="zeiger" id="zeiger"><svg viewBox="0 0 24 24"><path d="M4 2l15 11.5-6.6.9 3.9 7.1-2.9 1.5-3.8-7.2L4 20z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+            <div class="tipp" id="tipp-rechner"></div>
+          </div>
+          <div class="klick-schutz" data-g="rechner"><span class="einladung"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-4.8-2.4L4.6 15.4a1.6 1.6 0 0 1 2.5-2L9 15V11"/></svg>Selbst ausprobieren</span></div>
+        </div></div>
+        <div class="scharnier"></div>
+        <div class="unterteil"></div>
+      </div>
+      <div class="handy">
+        <div class="rahmen"><i class="taste l t1"></i><i class="taste l t2"></i><i class="taste l t3"></i><i class="taste r t4"></i><i class="taste r t5"></i><div class="glas"><div class="schirm" id="schirm-handy">
+          <div class="innen" id="handy">
+            <div class="insel"></div>
+            <div class="status"><span id="uhr">9:41</span><svg viewBox="0 0 70 14" width="70" height="14"><g fill="#111"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/><path d="M27 4.5a10 10 0 0 1 14 0l-1.6 1.7a7.6 7.6 0 0 0-10.8 0zM30.2 7.8a5.5 5.5 0 0 1 7.6 0L34 11.8z"/><rect x="45" y="1" width="22" height="12" rx="3.5" fill="none" stroke="#111" stroke-opacity=".4"/><rect x="47" y="3" width="16" height="8" rx="2"/><rect x="68" y="5" width="2" height="4" rx="1" opacity=".4"/></g></svg></div>
+            <div class="rest"><iframe id="f-handy" title="Gernbei am Handy" width="402" height="800"></iframe></div>
+            <div class="strich"></div>
+            <div class="tipp" id="tipp-handy"></div>
+          </div>
+          <div class="klick-schutz" data-g="handy"><span class="einladung"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-4.8-2.4L4.6 15.4a1.6 1.6 0 0 1 2.5-2L9 15V11"/></svg>Antippen</span></div>
+        </div></div></div>
+      </div>
+    </div>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <g id="kopf"><path d="M12 59 Q14 44 30 44 Q46 44 48 59" fill="#fff" stroke="#111" stroke-width="2.2" stroke-linecap="round"/><circle cx="30" cy="25" r="13" fill="#fff" stroke="#111" stroke-width="2.2"/><circle cx="25" cy="24" r="1.6" fill="#111"/><circle cx="35" cy="24" r="1.6" fill="#111"/><path d="M24.5 30 Q30 35 35.5 30" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/></g>
+      </defs>
+    </svg>
+    <div class="tempo" id="tempo" aria-live="polite">
+      <p class="tempo-titel">Fertig in wenigen Minuten. Gründlich wie von Hand.</p>
+      <div class="tempo-reihe" id="tempo-reihe"></div>
+      <p class="tempo-unter">Gemessen in den Läufen, die Sie oben sehen: jedes Ergebnis lag nach weniger als drei Minuten da.</p>
+    </div>
+    <p class="unterzeile" id="unterzeile">Erfundener Betrieb, echte Antworten aus Gernbei, ungekürzt.</p>
+    </div>
+<!-- /buehne -->
     <div class="vorteile mitte"><span>Ihre Unterlagen in der EU</span><span>fester Preis im Monat</span><span>persönlich eingerichtet aus Würzburg</span><span>Ihre Arbeit nehmen Sie mit</span></div>
   </div>
 </header>
@@ -104,6 +306,7 @@
     <p class="ueber">Fürs Handwerk</p>
     <h2>Feierabend heißt wieder Feierabend.</h2>
     <p>Gernbei behält, was Sie ablegen, auch jede Zusage an Ihre Kunden, und findet es wieder. Daraus entsteht die Antwort. Sie schicken sie ab.</p>
+    <p class="neu-satz">Der Stundenzettel vom Monteur, die Zusage aus dem Büro, die Mail vom Netzbetreiber: Gernbei hat alles beisammen und sagt Ihnen, was gilt.</p>
     <p class="zeile">Für Handwerksbetriebe</p>
     <p class="einladung">Bringen Sie einen Regiezettel mit. <a href="#kontakt" data-thema="Ich möchte einen Regiezettel mitbringen.">Eigenen Zettel besprechen →</a></p>
     <a class="knopf hell" href="handwerk.html">Alles zu <span class="gb">Gern<b>bei</b></span> fürs Handwerk <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -178,7 +381,7 @@
     <p class="ueberleitung">Und wenn das ganze Team mitarbeitet:</p>
     <p class="ueber">Firmengedächtnis</p>
     <h2>Wer wusste das noch? Jetzt alle.</h2>
-    <p class="team-satz">Fünf Köpfe, ein Gedächtnis. Jede Antwort mit Quelle.</p>
+    <p class="team-satz">Jeder arbeitet in seinem Bereich. Was geteilt ist, wissen alle, mit Quelle.</p>
     <p>Was einer weiß, findet das ganze Team: der Neue, die Projektleiterin, der Chef nach dem Urlaub. Mit dem Grund hinter jeder Entscheidung und dem Verweis auf die Originaldatei.</p>
     <p class="zeile">Für Teams, die Wissen teilen · Erste Stufe über die BAFA förderfähig</p>
     <p class="einladung">Bringen Sie eine Frage mit, die bei Ihnen immer wieder kommt. <a href="#kontakt" data-thema="Ich möchte eine Frage aus unserem Büro mitbringen.">Frage aus Ihrem Büro besprechen →</a></p>
@@ -223,7 +426,15 @@
   </div>
   <div class="produkt-bild tusche">
     <div class="szene" data-szenen="chatbot">
-      <div class="handy szene-handy">
+      <div class="ws">
+        <div class="ws-leiste"><i></i><i></i><i></i><span>gernbei.de</span></div>
+        <div class="ws-seite" aria-hidden="true">
+          <div class="ws-kopf"><span class="gb">Gern<b>bei</b></span><span class="ws-nav"><i></i><i></i><i></i></span></div>
+          <p class="ws-h">Ihre Büroarbeit liegt vorbereitet da. Sie entscheiden und schicken ab.</p>
+          <p class="ws-zeile"></p><p class="ws-zeile kurz"></p>
+          <div class="ws-kacheln"><i></i><i></i><i></i></div>
+        </div>
+        <div class="ws-chat">
         <p class="szene-kopf"><span class="gb">Gern<b>bei</b></span>.de · Fragen an <span class="gb">Gern<b>bei</b></span></p>
         <div class="szene-flaeche" aria-live="polite">
           <p class="szene-art"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4 3.5V16H4z"/></svg><span>Besucherin, am Handy</span></p>
@@ -231,6 +442,8 @@
           <p class="szene-denkt" hidden><i></i><i></i><i></i></p>
           <ul class="szene-haken"><li>Läuft im Browser, am Rechner oder am Handy</li><li>Quelle: Häufige Fragen und Startseite</li><li class="fund">Wörtlich belegt aus den Häufigen Fragen</li></ul>
         </div>
+        </div>
+        <span class="ws-knopf" aria-hidden="true">Fragen?</span>
       </div>
       <i class="szene-fuss" aria-hidden="true"></i>
       <p class="szene-wahl-kopf">Drei echte Fragen an den Chatbot auf gernbei.de. Tippen Sie an.</p>
@@ -240,6 +453,7 @@
         <button type="button" aria-pressed="false">Frage für Sie</button>
       </div>
       <p class="bildunter">Echte Antwort des Chatbots auf gernbei.de, 07.11.2026, gekürzt.</p>
+      <p class="ws-selbst"><button type="button" id="selbst-fragen" class="knopf hell">Selbst fragen, er läuft auf dieser Seite</button></p>
     </div>
   </div>
 </div></section>
@@ -366,5 +580,256 @@ document.addEventListener("click", function (e) {
 <script src="szenen-daten.js" defer></script>
 <script src="szene.js" defer></script>
 <script src="fenster.js" data-dienst="https://m2.ki-kurt.de" data-name="Fragen an Gernbei" data-untertitel="Digitaler Assistent, eine KI" data-telefon="0931 45321005" data-mail="hallo@gernbei.de" data-antwortzeit="Ein Mensch antwortet am nächsten Werktag." data-themen="Was kann Gernbei für mich tun?|Welches Angebot passt zu mir?|Wo liegen meine Daten?|Wie fange ich an?" defer></script>
+<!-- buehne:skript -->
+<script>
+(function(){
+  var ruhig = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var geraete = document.getElementById("geraete");
+  var G = {
+    rechner:{innen:document.getElementById("rechner"), schirm:document.getElementById("schirm-rechner"), w:1280, f:document.getElementById("f-rechner")},
+    handy:{innen:document.getElementById("handy"), schirm:document.getElementById("schirm-handy"), w:402, f:document.getElementById("f-handy")}
+  };
+  function skaliere(){ Object.keys(G).forEach(function(k){ var g=G[k]; g.innen.style.transform="scale("+(g.schirm.clientWidth/g.w)+")"; }); }
+  window.addEventListener("resize", skaliere); skaliere();
+  var heute = new Date();
+  document.getElementById("uhr").textContent = heute.toLocaleTimeString("de-DE",{hour:"numeric",minute:"2-digit"});
+  document.getElementById("menue-uhr").textContent = heute.toLocaleDateString("de-DE",{weekday:"short",day:"numeric",month:"short"})+"  "+heute.toLocaleTimeString("de-DE",{hour:"numeric",minute:"2-digit"});
+
+  // Die Folge der Buehne: echte Bitten, im Wechsel Rechner und Handy (Antworten liefert api.js aus den Laeufen)
+  var FOLGE = (window.BUEHNE_FOLGE || [
+    {g:"handy", art:"am Handy, morgens im Transporter", text:"Was steht heute an?"},
+    {g:"rechner", art:"am Rechner, im Büro", projekt:"02 - Aufträge/BRUNNER", text:"Zählerwechsel Brunner: 24. oder 26.11.? Was stimmt denn jetzt?"},
+    {g:"handy", art:"am Handy, zwischen zwei Baustellen", text:"Mail an Frau Rebhan wegen dem brummenden Dimmer: wir kommen am Donnerstag vormittag, passt ihr das?"},
+    {g:"rechner", art:"Funktionen entdecken: was Gernbei alles kann", zeigen:['css:[data-f="koennen"]', "text:E-Mail oder Brief schreiben", "scroll:420"]},
+    {g:"rechner", art:"am Rechner, Freitagnachmittag", text:"Mach mir aus dem Stundenzettel von Andrzej für KW 46 die Stunden für Brunner."},
+    {g:"rechner", art:"am Rechner, vor der Bestellung", projekt:"02 - Aufträge/DOERFLER", text:"Materialliste Wallbox Dörfler prüfen: fehlt da was?"},
+    {g:"handy", art:"am Handy, beim Kunden", text:"Wie weit ist das Prüfprotokoll DGUV V3 für die Bäckerei Reichart?"}
+  ]);
+  // Firmengedaechtnis: jede Szene gehoert einer Person, ihr Geraet zeigt ihren eigenen Platz (echte Laeufe, Haldenmeyer & Sorg)
+  var FOLGE_FG = [
+    {g:"rechner", wer:"lukas", art:"Lukas, zweite Woche im Büro, am Laptop", aus:"Tobias’ Vermerk auf dem Plan, 10.11.", text:"Welcher Planstand von Bauteil B ist der gültige, und wer hat ihn bekommen?"},
+    {g:"handy", wer:"katrin", art:"Katrin, Projektleitung, auf der Baustelle", aus:"Pavels Kostenfortschreibung, Oktober", text:"Welche Entscheidungen der Grundschule haben Kostenfolgen, und wo steht die Quelle?"},
+    {g:"rechner", wer:"renate", art:"Renate, Büroleitung, am Laptop", aus:"Protokolle und Zusagen aller Projekte", text:"Welche Termine und Fristen laufen in den nächsten vier Wochen, über alle Projekte?"},
+    {g:"handy", wer:"rainer", art:"Rainer, Partner, auf dem Weg zum Bauherrn", aus:"Projektstand vom 13.11. und offene Aufgaben", text:"Wo steht die Tagesklinik, und was ist offen?"},
+    {g:"handy", wer:"lukas", art:"Lukas, vor der ersten Mail an die Gemeinde", aus:"Regel des Bauamts und Schreiben vom 12.11.", text:"Wem darf ich bei der Gemeinde Tannhofen schreiben, und wer muss in Kopie?"}
+  ];
+  var LEUTE = {lukas:"Lukas", katrin:"Katrin", renate:"Renate", rainer:"Rainer"};
+  // Dienstleister: Jonas Wiedemer, selbstaendiger IT-Projektleiter (Vorfuehrdaten Variante Freelancer, ganz erfunden)
+  var FOLGE_DL = [
+    {g:"handy", art:"am Handy, Montagmorgen", text:"Was steht diese Woche an?"},
+    {g:"rechner", art:"am Rechner, Monatsende", text:"Bereite die Rechnungen für Oktober vor. Alles, was ich dafür habe, steht in meinen Notizen."},
+    {g:"handy", art:"am Handy, vor dem Termin beim Einkauf", text:"Wie viel Kontingent ist beim Rahmenvertrag Lauterhain noch übrig, und was passiert zum Jahresende?"},
+    {g:"rechner", art:"am Rechner, Freitagnachmittag", text:"Schreib den Statusbericht für Frau Lindner, KW 46, aus meinen Notizen."},
+    {g:"handy", art:"am Handy, zwischen zwei Terminen", text:"Antworte Frau Falk auf LinkedIn. Freundlich, Interesse ja, ab Februar nur zwei Tage, einen Satz nenne ich noch nicht."}
+  ];
+  var TEXTE = {
+    handwerk:{ueber:"fürs Handwerk", adresse:"haberkorn.gernbei.de", unter:"Erfundener Betrieb, echte Antworten aus Gernbei, ungekürzt."},
+    dienstleister:{ueber:"für Dienstleister", adresse:"wiedemer.gernbei.de", unter:"Erfundener Freiberufler, echte Antworten aus Gernbei, ungekürzt."},
+    firmengedaechtnis:{ueber:"Firmengedächtnis", adresse:"haldenmeyer-sorg.gernbei.de", unter:"Erfundenes Büro, echte Antworten aus Gernbei, an einer Stelle gekürzt."}
+  };
+  var PROD = "", BESITZ = {rechner:"", handy:""};
+  var LEAD = {handwerk:"Das ist Gernbei, wie es bei einem Elektrobetrieb aussieht: Aufträge links, die letzten Gespräche darunter, Funktionen zum Entdecken. Schauen Sie zu oder klicken Sie selbst, am Rechner und am Handy.",
+    dienstleister:"Ein Freiberufler mit drei Kunden: Rechnungen, Kontingente, Statusberichte und Anfragen, vorbereitet aus seinen eigenen Notizen. Schauen Sie zu oder klicken Sie selbst, am Rechner und am Handy.",
+    firmengedaechtnis:"Ein Architekturbüro, ein Gedächtnis: Jeder im Team fragt an seinem eigenen Gerät und bekommt die Antwort aus den gemeinsamen Unterlagen, mit Quelle. Schauen Sie zu oder klicken Sie selbst."};
+  var FASSUNG = Date.now();   // frische Flaeche je Seitenaufruf, damit der Browser keine alte Fassung zeigt
+  function quelle(g, wer){ return "ausprobieren/index.html?p=" + PROD + "&g=" + g + (wer ? "&wer=" + wer : "") + "&v=" + FASSUNG; }
+  function laden(g, wer){
+    return new Promise(function(fertig){
+      var f = G[g].f; BESITZ[g] = wer || "";
+      f.addEventListener("load", function x(){ f.removeEventListener("load", x); setTimeout(fertig, 700); });
+      f.src = quelle(g, wer);
+    });
+  }
+  function hausZeigen(s){
+    Array.prototype.forEach.call(document.querySelectorAll(".haus .zi"), function(z){
+      var an = s && z.getAttribute("data-wer") === s.wer;
+      z.classList.toggle("fragt", !!an);
+      z.querySelector(".geraet").textContent = an ? (s.g === "handy" ? "AM HANDY" : "AM LAPTOP") : "";
+    });
+    document.getElementById("boden").classList.remove("liefert");
+    document.getElementById("weg").textContent = s ? LEUTE[s.wer] + " fragt" + (s.g === "handy" ? " am Handy" : " am Laptop") : "";
+    document.getElementById("aus").textContent = s && s.aus ? "Antwort aus: " + s.aus : "";
+    if (s && s.aus) setTimeout(function(){ document.getElementById("boden").classList.add("liefert"); }, 600);
+  }
+  var KLEIN = window.matchMedia("(max-width:760px)");
+  var lauf = 0, n = 0, selbst = false;
+  function warte(ms){ return new Promise(function(r){ setTimeout(r, ruhig ? 0 : ms); }); }
+  function doc(g){ try { return G[g].f.contentWindow.document; } catch (x) { return null; } }
+  // Zeiger (Rechner) und Fingertipp (Handy) auf ein Element der echten Seite, in Punkten der Flaeche
+  var zeiger = document.getElementById("zeiger");
+  function stelle(g, el){
+    var innen = G[g].innen, f = G[g].f, sk = G[g].schirm.clientWidth / G[g].w;
+    var fr = f.getBoundingClientRect(), ir = innen.getBoundingClientRect(), r = el.getBoundingClientRect();
+    return {x:(fr.left - ir.left) / sk + r.left + r.width / 2, y:(fr.top - ir.top) / sk + r.top + r.height / 2};
+  }
+  async function klicke(g, el, mein, echt){
+    if (!el) return;
+    var p = stelle(g, el);
+    if (g === "rechner") { zeiger.classList.add("an"); zeiger.style.transform = "translate(" + (p.x - 4) + "px," + (p.y - 2) + "px)"; await warte(1000); }
+    else await warte(350);
+    if (mein !== lauf) return;
+    var t = document.getElementById("tipp-" + g);
+    t.style.left = p.x + "px"; t.style.top = p.y + "px";
+    t.classList.remove("an"); void t.offsetWidth; t.classList.add("an");
+    if (echt) el.click();
+    await warte(450);
+  }
+  function winken(){
+    var k = document.querySelectorAll(".klick-schutz"), b = document.getElementById("m-selbst");
+    Array.prototype.forEach.call(k, function(x){ x.classList.add("winken"); });
+    b.classList.remove("winken"); void b.offsetWidth; b.classList.add("winken");
+    setTimeout(function(){ Array.prototype.forEach.call(k, function(x){ x.classList.remove("winken"); }); }, 4200);
+  }
+  async function tippe(g, text, mein, projekt){
+    var d = doc(g); if (!d) return false;
+    if (projekt) {
+      var pk = Array.prototype.filter.call(d.querySelectorAll("[data-projekt]"), function(x){ return x.getAttribute("data-projekt") === projekt; })[0];
+      await klicke(g, pk, mein, true); await warte(900);
+      if (mein !== lauf) return false;
+    }
+    var feld = d.getElementById("text"); if (!feld) return false;
+    if (!feld.offsetParent) { var zg = d.querySelector('[data-f="gespraech"]'); if (zg) { await klicke(g, zg, mein, true); await warte(700); } }
+    await klicke(g, feld, mein, false); feld.focus();
+    for (var i = 1; i <= text.length; i++) {
+      if (mein !== lauf) return false;
+      feld.value = text.slice(0, i);
+      feld.dispatchEvent(new Event("input", {bubbles:true}));
+      await warte(38);
+    }
+    await warte(400);
+    if (mein !== lauf) return false;
+    var knopf = d.getElementById("senden"); if (knopf) { knopf.disabled = false; await klicke(g, knopf, mein, true); }
+    if (PROD === "firmengedaechtnis") document.getElementById("boden").classList.add("liefert");
+    if (g === "rechner") setTimeout(function(){ zeiger.classList.remove("an"); }, 1200);
+    return true;
+  }
+  // Rundgang: Schritte auf der echten Seite zeigen. "css:" waehlt per Selektor, "text:" den Knopf mit diesem Text
+  function suche(d, w){
+    if (w.indexOf("css:") === 0) return d.querySelector(w.slice(4));
+    var t = w.slice(5);
+    return Array.prototype.filter.call(d.querySelectorAll("button,a,[role=button],.fkachel,li"), function(x){
+      return x.offsetParent && x.textContent.replace(/\s+/g, " ").indexOf(t) >= 0; })[0] || null;
+  }
+  async function zeigen(g, schritte, mein){
+    var d = doc(g); if (!d) return false;
+    for (var i = 0; i < schritte.length; i++) {
+      if (mein !== lauf) return false;
+      if (schritte[i].indexOf("scroll:") === 0) {   // Flaeche ruhig nach unten, etwa zum Beispiel unter dem Blatt
+        var sp = d.scrollingElement, kandidaten = Array.prototype.filter.call(d.querySelectorAll("main,section,div"), function(x){ return x.scrollHeight > x.clientHeight + 40 && x.clientHeight > 300; });
+        var box = kandidaten[kandidaten.length - 1] || sp;
+        box.scrollBy({top:parseInt(schritte[i].slice(7), 10), behavior:"smooth"});
+        await warte(3200); continue;
+      }
+      var el = suche(d, schritte[i]);
+      if (!el) continue;
+      el.scrollIntoView({block:"nearest"});
+      await warte(300);
+      await klicke(g, el, mein, true);
+      await warte(2600);
+    }
+    if (g === "rechner") setTimeout(function(){ zeiger.classList.remove("an"); }, 1500);
+    return true;
+  }
+  async function zuschauen(){
+    var mein = ++lauf;
+    while (mein === lauf && !selbst) {
+      var F = PROD === "firmengedaechtnis" ? FOLGE_FG : PROD === "dienstleister" ? FOLGE_DL : FOLGE;
+      var s = F[n % F.length]; n++;
+      // Am Handy spielt alles im iPhone: Rechner-Szenen wandern hinueber, der Rundgang ueber die Leiste entfaellt
+      if (KLEIN.matches) {
+        if (s.zeigen) continue;
+        s = Object.assign({}, s, {g:"handy", projekt:"", art:s.art.replace(/am Rechner|am Laptop/, "am Handy")});
+      }
+      if (s.wer) {
+        hausZeigen(s);
+        if (BESITZ[s.g] !== s.wer) await laden(s.g, s.wer);
+        if (mein !== lauf) return;
+      }
+      geraete.classList.toggle("handy-dran", s.g === "handy");
+      geraete.classList.toggle("rechner-dran", s.g === "rechner");
+      document.getElementById("notiz").textContent = s.art;
+      await warte(900);
+      var ok = s.zeigen ? await zeigen(s.g, s.zeigen, mein) : await tippe(s.g, s.text, mein, s.projekt);
+      if (!ok) { await warte(1000); continue; }
+      await warte(5000);
+      if (mein !== lauf) return;
+      if (n % 2 === 0) winken();   // nach jeder zweiten Szene: Einladung zum Selberklicken
+      await warte(7000);
+    }
+  }
+  function modus(an){
+    selbst = an; lauf++;
+    document.getElementById("m-zu").setAttribute("aria-pressed", an ? "false" : "true");
+    document.getElementById("m-selbst").setAttribute("aria-pressed", an ? "true" : "false");
+    geraete.classList.toggle("selbst", an);
+    zeiger.classList.remove("an");
+    // halb getippte Bitte der Buehne nicht stehen lassen, wenn der Besucher uebernimmt
+    if (an) Object.keys(G).forEach(function(k){ var d = doc(k), t = d && d.getElementById("text");
+      if (t && t.value) { t.value = ""; t.dispatchEvent(new Event("input", {bubbles:true})); } });
+    geraete.classList.remove("handy-dran", "rechner-dran");
+    document.getElementById("notiz").textContent = an ? "Jetzt sind Sie dran" : "";
+    document.getElementById("hinweis").textContent = an ? "Klicken Sie links auf einen Auftrag, ein letztes Gespräch oder auf Funktionen entdecken. Am Handy öffnet das Menü oben links die Leiste." : "";
+    if (!an) zuschauen();
+  }
+  var wahlKnoepfe = document.querySelectorAll(".wahl button");
+  Array.prototype.forEach.call(wahlKnoepfe, function(b){
+    b.onclick = async function(){
+      var p = b.getAttribute("data-p"); if (p === PROD) return;
+      Array.prototype.forEach.call(wahlKnoepfe, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      lauf++; PROD = p; n = 0;
+      var fg = p === "firmengedaechtnis";
+      document.getElementById("haus").classList.toggle("an", fg);
+      document.getElementById("ueber-p").textContent = TEXTE[p].ueber;
+      document.getElementById("lead").textContent = LEAD[p];
+      document.getElementById("unterzeile").textContent = TEXTE[p].unter;
+      document.querySelector(".adresse").textContent = TEXTE[p].adresse;
+      hausZeigen(null);
+      await Promise.all([laden("rechner", fg ? "lukas" : ""), laden("handy", fg ? "katrin" : "")]);
+      if (!selbst) zuschauen();
+    };
+  });
+  var START = new URLSearchParams(location.search).get("p") || "firmengedaechtnis";
+  var sb = document.querySelector('.wahl [data-p="' + START + '"]') || document.querySelector(".wahl button");
+  if ("IntersectionObserver" in window) { var io = new IntersectionObserver(function(e){ if (e.some(function(x){ return x.isIntersecting; })) { io.disconnect(); sb.click(); } }, {rootMargin:"300px"}); io.observe(geraete); }
+  else sb.click();
+  document.getElementById("m-zu").onclick = function(){ modus(false); };
+  document.getElementById("m-selbst").onclick = function(){ modus(true); };
+  Array.prototype.forEach.call(document.querySelectorAll(".klick-schutz"), function(k){ k.onclick = function(){ modus(true); }; });
+  var geladen = 0;
+  Object.keys(G).forEach(function(k){ G[k].f.addEventListener("load", function(){ if (++geladen === 2) setTimeout(zuschauen, 1200); }); });
+})();
+</script>
+<script>
+(function(){
+  var T = {
+    firmengedaechtnis: [["Rainer fragt nach der Tagesklinik","Leistungsphase, Frist 18.12. und fünf offene Punkte mit den Zuständigen."],
+               ["Lukas, zweite Woche, schreibt dem Bauamt","Wer Ansprechpartnerin ist und wer in Kopie muss, nach der Regel des Amts."],
+               ["Welcher Plan von Bauteil B gilt?","Index B nicht freigegeben, Index C noch in Arbeit, die fehlende Liste benannt."]],
+    handwerk: [["Mail an Frau Rebhan","Termin am Donnerstag, Adresse aus dem Kundenstamm, Signatur darunter."],
+               ["Stunden für Brunner aus Andrzejs Stundenzettel","32,5 sichere Stunden. Den unklaren Dienstag fragt Gernbei nach, statt zu raten."],
+               ["Materialliste Wallbox geprüft","Vier Lücken gefunden, zwei davon heute zu klären, damit die Lieferung am Dienstag passt."]],
+    dienstleister: [["Antwort an Frau Falk auf LinkedIn","Interesse, zwei Tage ab Februar, der Tagessatz bleibt offen, wie gewünscht."],
+               ["Rahmenvertrag nachgerechnet","50 Tage offen, der Unterschied zum Einkauf benannt, und dass sie am 31.12. verfallen."],
+               ["Statusbericht für Frau Lindner","Eine Seite in Ihrem Aufbau, Ampel als Vorschlag, drei Lücken benannt statt erfunden."]]
+  };
+  var UHR = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>';
+  var reihe = document.getElementById("tempo-reihe");
+  function zeige(p){ if (!T[p]) return; reihe.innerHTML = T[p].map(function(t){ return "<div><em>" + UHR + "unter 3 Minuten</em><strong>" + t[0] + "</strong><span>" + t[1] + "</span></div>"; }).join(""); }
+  zeige(new URLSearchParams(location.search).get("p") || "firmengedaechtnis");
+  Array.prototype.forEach.call(document.querySelectorAll(".wahl button"), function(b){ b.addEventListener("click", function(){ zeige(b.getAttribute("data-p")); }); });
+  var geraete = document.getElementById("geraete"), hinweis = document.getElementById("hinweis");
+  function lage(){
+    if (geraete.classList.contains("selbst")) {
+      if (!hinweis.querySelector("button")) { var k = document.createElement("button"); k.type = "button"; k.textContent = "Wieder zuschauen"; k.onclick = function(){ document.getElementById("m-zu").click(); }; hinweis.appendChild(k); }
+    } else hinweis.textContent = "Gernbei arbeitet gerade vor. Tippen Sie in den Bildschirm, dann sind Sie dran.";
+  }
+  new MutationObserver(lage).observe(geraete, {attributes:true, attributeFilter:["class"]}); lage();
+})();
+</script>
+<!-- /buehne:skript -->
+<script>
+// Knopf unter der Chatbot-Szene oeffnet den echten Chatbot dieser Seite
+document.getElementById("selbst-fragen").onclick = function(){ var w = document.getElementById("auskunft-fenster"); var b = w && w.shadowRoot && w.shadowRoot.querySelector(".start"); if (b) b.click(); };
+</script>
 </body>
 </html>

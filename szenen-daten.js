@@ -9,6 +9,7 @@ window.SZENEN_DATEN = {
    "icon": "foto",
    "art": "am Handy, Foto vom Zettel",
    "zettel": true,
+   "dauer": "in unter 3 Minuten",
    "text": "Ich hab dir das Foto vom Regiezettel hingelegt. Mach den Regiebericht für Berger draus.",
    "haken": [
     "Regiebericht R001 für Berger liegt unter Dokumente",
@@ -22,6 +23,7 @@ window.SZENEN_DATEN = {
    "icon": "tasten",
    "art": "am Rechner, getippt",
    "zettel": false,
+   "dauer": "in unter 3 Minuten",
    "text": "Angebot für Familie Wolf, Bad: 8 m² Fliesen, Duschwanne tauschen. Wie beim Bad Schmitt.",
    "haken": [
     "Angebot 2026-001 als Entwurf angelegt",
@@ -35,6 +37,7 @@ window.SZENEN_DATEN = {
    "icon": "mikro",
    "art": "am Handy, gesprochen",
    "zettel": false,
+   "dauer": "in unter 4 Minuten",
    "text": "Mach einen Beitrag fürs Google-Unternehmensprofil zum Bad Schmitt.",
    "haken": [
     "Beitrag fürs Google-Profil entworfen, Kundenname weggelassen",
@@ -48,6 +51,7 @@ window.SZENEN_DATEN = {
    "icon": "tasten",
    "art": "am Rechner, abends",
    "zettel": false,
+   "dauer": "in unter 1 Minute",
    "text": "Was ist eigentlich mit dem Angebot Bad Müller?",
    "haken": [
     "9.480 € brutto, seit dem 17.10. bei Frau Müller",
@@ -391,6 +395,7 @@ window.SZENEN_DATEN = {
    "zettel": false,
    "weg": "aus Peters Notiz, März 2024 → für Lukas, heute",
    "unter": "Erfundenes Büro, echte Antwort, gekürzt.",
+   "dauer": "in unter 1 Minute",
    "text": "Wie machen wir bei uns den Brandschutznachweis?",
    "haken": [
     "Fünf Schritte, so wie Peter Brandt sie festgehalten hat",
@@ -406,6 +411,7 @@ window.SZENEN_DATEN = {
    "zettel": false,
    "weg": "aus dem Protokoll vom 17.03.2025 → für Sandra, auf der Baustelle",
    "unter": "Erfundenes Büro, echte Antwort, gekürzt.",
+   "dauer": "in unter 1 Minute",
    "text": "Warum haben wir beim Sonnenhof damals Variante B genommen?",
    "haken": [
     "Entschieden am 17.03.2025 für Variante B, das Holztragwerk",
@@ -436,6 +442,7 @@ window.SZENEN_DATEN = {
    "zettel": false,
    "weg": "aus der gemeinsamen Ablage → für Anna, im Sekretariat",
    "unter": "Erfundenes Büro, echte Antwort, gekürzt.",
+   "dauer": "in unter 1 Minute",
    "text": "Wo ist der Wartungsvertrag Klinikum von 2024?",
    "haken": [
     "Liegt im gemeinsamen Bereich bei den Verträgen",

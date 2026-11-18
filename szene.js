@@ -48,6 +48,9 @@
       unter.textContent = s.echt ? (s.unter || "Erfundener Betrieb, echte Antwort, gekürzt.") : "Entwurf: Probetext, die echte Antwort steht aus.";
       art.querySelector("svg").innerHTML = ICON[s.icon];
       art.querySelector("span").textContent = s.art;
+      // Dauer klein unter der Ortsangabe, nur wo gemessen (Feld dauer in szenen-daten.js)
+      var dz = art.querySelector(".szene-dauer"); if (!dz) { dz = document.createElement("span"); dz.className = "szene-dauer"; art.appendChild(dz); }
+      dz.innerHTML = s.dauer ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>fertig ' + s.dauer : ""; dz.hidden = !s.dauer;
       zettel.hidden = !s.zettel;
       if (weg) { weg.textContent = s.weg || ""; weg.classList.toggle("zu", !sofort); }
       liste.innerHTML = s.haken.map(function (h, i) {

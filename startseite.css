@@ -88,3 +88,22 @@
 .produkt-text .peter{font-size:14.5px;margin:18px 0 0;max-width:30rem}
 .flagge .produkt-text .peter{color:#D7D7DC}
 .flagge .produkt-text .peter + .peter{margin-top:8px}
+
+/* Chatbot in einer gezeichneten Website, Satz Monteur und Buero (Kurt 18.11.2026) */
+.neu-satz{font-weight:500}
+.ws{position:relative;width:min(100%,520px);margin:0 auto;border:1px solid var(--tinte);border-radius:12px;background:#fff;overflow:hidden;box-shadow:0 0 0 1px #c9c9cd,0 40px 70px -40px rgba(17,18,20,.45);text-align:left}
+.ws-leiste{display:flex;align-items:center;gap:6px;padding:8px 12px;border-bottom:1px solid var(--haar);background:#F7F7F8}
+.ws-leiste i{width:9px;height:9px;border-radius:50%;background:#FF5F57}.ws-leiste i:nth-child(2){background:#FEBC2E}.ws-leiste i:nth-child(3){background:#28C840}
+.ws-leiste span{flex:1;text-align:center;font:12px var(--mono);color:#555;background:#EBEBED;border-radius:6px;padding:3px 0;margin:0 40px 0 24px}
+.ws-seite{padding:14px 18px;height:500px;opacity:.55}
+.ws-kopf{display:flex;justify-content:space-between;align-items:center;font-size:14px;padding-bottom:10px;border-bottom:1px solid var(--haar)}
+.ws-nav{display:flex;gap:8px}.ws-nav i{width:34px;height:6px;border-radius:3px;background:#d6d6da}
+.ws-h{font:600 20px/1.2 var(--display);color:var(--tinte);margin:26px 0 12px;max-width:80%;letter-spacing:-.02em}
+.ws-zeile{height:7px;border-radius:4px;background:#e2e2e5;margin:8px 0;width:70%}.ws-zeile.kurz{width:45%}
+.ws-kacheln{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px}.ws-kacheln i{height:70px;border-radius:8px;background:#efefef}
+.ws-chat{position:absolute;right:14px;bottom:62px;width:min(310px,82%);max-height:calc(100% - 110px);overflow:hidden;background:#fff;border:1px solid var(--tinte);border-radius:14px;box-shadow:0 22px 44px -14px rgba(0,0,0,.4);padding:10px 12px 12px;font-size:13.5px}
+.ws-chat .szene-kopf{font-size:13px;padding:2px 0 8px;margin-bottom:10px}
+.ws-chat .szene-art{display:none}
+.ws-knopf{position:absolute;right:14px;bottom:14px;background:var(--tinte);color:#fff;border-radius:999px;padding:8px 14px;font:600 13px var(--text)}
+.ws-selbst{text-align:center;margin-top:14px}
+@media(max-width:760px){.ws-seite{height:520px}.ws-h{font-size:17px}}
