@@ -135,6 +135,17 @@
 .akt-3 .stempel,.akt-4 .stempel{opacity:1;transform:rotate(8deg) scale(1)}
 .akt-3 .b1 .stempel{transition-delay:.8s}.akt-3 .b2 .stempel{transition-delay:1.8s}.akt-3 .b3 .stempel{transition-delay:2.8s}
 
+/* Der Retriever: holt, was Sie abgelegt haben (Kurt 19.11.2026: ja, in die Probe) */
+.hund{position:absolute;right:4%;top:63%;width:19%;z-index:4;opacity:0;transform:translateX(40%);transition:opacity .5s,transform .8s cubic-bezier(.3,1.2,.5,1)}
+.hund svg{display:block;width:100%;height:auto;overflow:visible}
+.akt-0 .hund,.akt-1 .hund,.akt-2 .hund,.akt-3 .hund{opacity:1;transform:none}
+.hund .maul-blatt{opacity:0;transition:opacity .4s .5s}
+.akt-2 .hund .maul-blatt,.akt-3 .hund .maul-blatt{opacity:1}
+.akt-2 .hund svg{animation:hops .55s ease-out .2s 2}
+.akt-2 .hund .rute{transform-box:fill-box;transform-origin:0% 100%;animation:wedel .35s ease-in-out .2s 6 alternate}
+@keyframes hops{0%,100%{transform:none}40%{transform:translateY(-7%)}}
+@keyframes wedel{from{transform:rotate(-8deg)}to{transform:rotate(10deg)}}
+
 /* 4 Abschicken */
 .geraete{position:absolute;left:50%;bottom:6%;width:90%;transform:translateX(-50%) translateY(30%);opacity:0;transition:transform .8s cubic-bezier(.3,1.2,.5,1),opacity .5s;z-index:5;display:flex;align-items:flex-end;justify-content:center;gap:calc(3cqw*var(--z))}
 .akt-4 .geraete{opacity:1;transform:translateX(-50%)}
@@ -338,6 +349,7 @@
   .film{grid-template-columns:minmax(0,1fr);gap:0;padding:0 14px}
   .buehne-hafen{top:var(--film-oben,0px);height:auto;z-index:5;background:var(--papier);padding:12px 0 10px}
   .leinwand{--z:1.4;aspect-ratio:640/620}
+  .hund{top:73%;width:17%;right:3%}
   .szenen{padding:4vh 0 20vh}
   .szene{min-height:62vh;align-items:center;opacity:.4}
   .szene .karte{background:#fff;border:1.5px solid var(--tinte);border-radius:14px;padding:16px 18px;box-shadow:4px 4px 0 var(--tinte)}
@@ -387,6 +399,8 @@
         <svg id="hirn-svg" viewBox="0 0 64 52"><g fill="#fff" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M31 6c-3-4-10-4-12 1-5-1-9 3-8 8-5 1-7 7-4 11-3 3-2 9 3 10 0 5 5 8 10 6 2 4 8 5 11 1z"/><path d="M33 6c3-4 10-4 12 1 5-1 9 3 8 8 5 1 7 7 4 11 3 3 2 9-3 10 0 5-5 8-10 6-2 4-8 5-11 1z"/></g><g fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round"><path d="M19 7c1 4 4 5 7 5M11 15c3 0 5 2 5 5M7 26c3-1 6 0 7 3M10 36c2-2 6-2 7 0M20 42c0-3 2-5 5-5"/><path d="M45 7c-1 4-4 5-7 5M53 15c-3 0-5 2-5 5M57 26c-3-1-6 0-7 3M54 36c-2-2-6-2-7 0M44 42c0-3-2-5-5-5"/></g><path d="M22 24L42 20L38 34Z" fill="none" stroke="#D23A26" stroke-width="1.4" stroke-dasharray="2 2"/><circle class="funke" cx="22" cy="24" r="2.4"/><circle class="funke" cx="42" cy="20" r="2.4"/><circle class="funke" cx="38" cy="34" r="2.4"/></svg>
       </div>
       <p class="hirn-name" id="hirn-name"></p>
+
+      <div class="hund" id="hund"><svg viewBox="200 140 275 272"><g class="rute"><path d="M384 340 C436 330 462 292 452 252" fill="none" stroke="#111214" stroke-width="12" stroke-linecap="round"/><path d="M384 340 C436 330 462 292 452 252" fill="none" stroke="#F2B33D" stroke-width="7" stroke-linecap="round"/></g><g fill="#F5E3A8" stroke="#111214" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M252 250 C214 292 214 370 240 398 L362 398 C390 370 392 296 350 250 Z"/><rect x="258" y="318" width="30" height="80" rx="14"/><rect x="314" y="318" width="30" height="80" rx="14"/><ellipse cx="268" cy="400" rx="18" ry="7"/><ellipse cx="334" cy="400" rx="18" ry="7"/><path d="M252 162 C226 174 224 236 246 250 C266 246 268 206 262 174 Z" fill="#F2B33D"/><path d="M350 162 C376 174 378 236 356 250 C336 246 334 206 340 174 Z" fill="#F2B33D"/><ellipse cx="301" cy="190" rx="58" ry="52"/><ellipse cx="301" cy="218" rx="30" ry="21" fill="#FBF6E4"/></g><g fill="none" stroke="#111214" stroke-width="2" stroke-linecap="round"><path d="M284 300 q8 8 0 16 M318 300 q-8 8 0 16 M300 318 q6 6 0 12"/><path d="M266 168 q11 -6 22 -1 M314 167 q11 -5 22 1"/></g><ellipse cx="301" cy="204" rx="9" ry="6.5" fill="#111214"/><circle cx="278" cy="182" r="5.5" fill="#111214"/><circle cx="324" cy="182" r="5.5" fill="#111214"/><circle cx="280" cy="180" r="1.6" fill="#fff"/><circle cx="326" cy="180" r="1.6" fill="#fff"/><path d="M258 240 Q301 266 344 240" fill="none" stroke="#D23A26" stroke-width="5" stroke-linecap="round"/><line x1="283" y1="252" x2="283" y2="258" stroke="#111214" stroke-width="2"/><svg x="267" y="256" width="32" height="26" viewBox="0 0 64 52"><g fill="#fff" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M31 6c-3-4-10-4-12 1-5-1-9 3-8 8-5 1-7 7-4 11-3 3-2 9 3 10 0 5 5 8 10 6 2 4 8 5 11 1z"/><path d="M33 6c3-4 10-4 12 1 5-1 9 3 8 8 5 1 7 7 4 11 3 3 2 9-3 10 0 5-5 8-10 6-2 4-8 5-11 1z"/></g><path d="M22 24L42 20L38 34Z" fill="none" stroke="#D23A26" stroke-width="2" stroke-dasharray="2 2"/><circle cx="22" cy="24" r="3.4" fill="#D23A26"/><circle cx="42" cy="20" r="3.4" fill="#D23A26"/><circle cx="38" cy="34" r="3.4" fill="#D23A26"/></svg><g class="maul-blatt" transform="rotate(-8 345 247)"><rect x="308" y="222" width="74" height="52" rx="3" fill="#fff" stroke="#111214" stroke-width="2.5"/><g stroke="#111214" stroke-width="1.6" stroke-linecap="round"><line x1="318" y1="236" x2="360" y2="236"/><line x1="318" y1="247" x2="370" y2="247"/><line x1="318" y1="258" x2="344" y2="258"/></g><path d="M352 260 l6 6 l13 -14" fill="none" stroke="#D23A26" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><path d="M288 226 q8 5 16 2" fill="none" stroke="#111214" stroke-width="2" stroke-linecap="round"/></svg></div>
 
       <div id="blaetter"></div>
 
