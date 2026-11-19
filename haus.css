@@ -674,7 +674,7 @@ ol.fragen b{font-family:var(--display);font-weight:600;font-size:clamp(17px,2vw,
 /* Unterschiede sichtbar (Kurt 18.11.2026): Geraete nach Arbeitsweise, Figur, hinein und heraus, Bildwelt nach E109 */
 .ptile .pt-kopf{display:flex;align-items:flex-end;gap:10px;min-height:58px;margin-bottom:4px}
 .ptile .pt-figur{width:74px;height:auto;flex:none}
-.pt-fg .pt-figur{width:96px}
+.pt-fg .pt-figur{width:118px}
 .ptile .pt-wer{font-family:var(--hand);font-size:19px;line-height:1.15;color:var(--tinte-2,#3A3B40);padding-bottom:4px}
 .mini2{position:relative;aspect-ratio:16/10.6;margin:6px 0 14px}
 .mini2 .m-laptop,.mini2 .m-handy{position:absolute}
