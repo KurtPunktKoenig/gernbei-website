@@ -759,3 +759,19 @@ a.mini2{display:block}
 .alles .alles-satz{column-span:all;font-size:14.5px;color:var(--grau);margin:0 0 12px}
 .alles .nur{display:inline-block;font:500 10.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--rot);border-radius:4px;padding:1px 6px;margin-left:4px;vertical-align:1px}
 @media(max-width:860px){.alles .mehr-inhalt{columns:1}}
+
+/* Startseite in der Darstellung vom 18.11. 19:09, alles je Produkt (Kurt 19.11.2026) */
+a.ptile{color:inherit;text-decoration:none}
+.produkt .pk-alles{grid-column:1/-1;order:2;margin-top:8px;padding-top:24px;border-top:1px solid var(--haar)}
+.pk-titel{font:600 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--grau);margin:0 0 14px}
+.pk-gruppen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 26px}
+.pk-gruppen div{border-top:2px solid var(--tinte);padding-top:8px}
+.pk-gruppen b{display:block;font-size:15px;color:var(--tinte);margin-bottom:4px}
+.pk-gruppen span{display:block;font-size:14px;line-height:1.5;color:var(--tinte-2)}
+.produkt.flagge .pk-alles{border-top-color:rgba(255,255,255,.18)}
+.produkt.flagge .pk-titel{color:rgba(255,255,255,.6)}
+.produkt.flagge .pk-gruppen div{border-top-color:var(--rot)}
+.produkt.flagge .pk-gruppen b{color:#fff}
+.produkt.flagge .pk-gruppen span{color:rgba(255,255,255,.78)}
+@media(max-width:980px){.pk-gruppen{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.pk-gruppen{grid-template-columns:minmax(0,1fr)}}
