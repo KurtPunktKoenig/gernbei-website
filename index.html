@@ -21,133 +21,6 @@
 <link rel="stylesheet" href="haus.css">
 <link rel="stylesheet" href="startseite.css">
 <link rel="stylesheet" href="ausprobieren/geraete.css">
-<!-- buehne:stil -->
-<style>
-/* Stufe 2 (16.11.2026): in Laptop und Handy laeuft die echte Gernbei-Seite (ausprobieren/), bedienbar.
-   Zuschauen: die Buehne tippt echte Bitten ins echte Feld. Selbst ausprobieren: der Besucher klickt. */
-.laptop .app iframe,.handy .rest iframe{border:0;display:block;background:#fff}
-.laptop .app{position:relative}
-.handy .rest{flex:1;min-height:0;overflow:hidden}
-.handy .innen .strich{z-index:3}
-.modus{display:flex;gap:10px;justify-content:center;margin:26px 0 0;flex-wrap:wrap}
-.modus button{font:500 15px var(--text);border-radius:999px;padding:10px 20px;cursor:pointer;border:1px solid var(--tinte);background:#fff;color:var(--tinte)}
-.modus button[aria-pressed=true]{background:var(--tinte);color:#fff}
-.hinweis-selbst{font-size:14px;color:var(--grau);text-align:center;margin-top:12px;min-height:22px}
-.geraete .klick-schutz{position:absolute;inset:0;z-index:5;cursor:pointer}
-.geraete.selbst .klick-schutz{display:none}
-/* Einladung zum Selberklicken (Kurt 16.11.2026: mit einer Animation klarer machen, dass man selbst agieren kann) */
-.klick-schutz .einladung{position:absolute;left:50%;bottom:9%;transform:translate(-50%,12px);display:inline-flex;align-items:center;gap:10px;
-  background:var(--tinte);color:#fff;border-radius:999px;padding:12px 20px 12px 16px;font:600 15px var(--text);white-space:nowrap;
-  box-shadow:0 12px 30px -8px rgba(0,0,0,.45);opacity:0;transition:opacity .35s,transform .35s}
-.handy .klick-schutz .einladung{font-size:13px;padding:10px 14px 10px 12px;bottom:12%}
-.klick-schutz .einladung svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;animation:wink 1.1s ease-in-out infinite}
-.klick-schutz:hover .einladung,.klick-schutz.winken .einladung{opacity:1;transform:translate(-50%,0)}
-.klick-schutz.winken .einladung{animation:puls 1.4s ease-in-out infinite}
-@keyframes wink{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px) rotate(-8deg)}}
-@keyframes puls{0%,100%{box-shadow:0 12px 30px -8px rgba(0,0,0,.45),0 0 0 0 rgba(210,58,38,.55)}60%{box-shadow:0 12px 30px -8px rgba(0,0,0,.45),0 0 0 14px rgba(210,58,38,0)}}
-.modus #m-selbst{position:relative}
-.modus #m-selbst.winken{animation:puls 1.4s ease-in-out 3}
-/* Zeiger am Rechner, Fingertipp am Handy, in Punkten der Flaeche */
-.zeiger{position:absolute;left:0;top:0;width:30px;height:30px;z-index:20;pointer-events:none;transition:transform .9s cubic-bezier(.45,0,.2,1),opacity .3s;opacity:0}
-.zeiger.an{opacity:1}
-.zeiger svg{width:30px;height:30px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
-.tipp{position:absolute;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:rgba(210,58,38,.22);border:2px solid rgba(210,58,38,.6);z-index:21;pointer-events:none;opacity:0}
-.tipp.an{animation:tipp .7s ease-out}
-@keyframes tipp{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(1.5)}}
-/* Produktwahl */
-.wahl{display:flex;gap:8px;justify-content:center;margin:22px 0 0;flex-wrap:wrap}
-.wahl button{font:500 14px var(--text);border:1px solid var(--haar);background:#fff;color:var(--tinte-2);border-radius:999px;padding:8px 16px;cursor:pointer}
-.wahl button[aria-pressed=true]{background:var(--papier-2);color:var(--tinte);border-color:var(--tinte)}
-/* Firmengedaechtnis als Haus (wie das Systembild): je Person ein Zimmer mit Gesicht, darunter das gemeinsame Gedaechtnis */
-.haus{display:none;max-width:760px;margin:64px auto 0;position:relative}
-.haus.an{display:block}
-.haus .haus-titel{font:600 13px var(--mono);letter-spacing:.04em;color:var(--tinte-2);text-align:center;margin-bottom:8px}
-.haus .dach-svg{display:block;width:100%;height:50px;margin-bottom:-2px}
-.haus .dach{height:46px;background:linear-gradient(to top right,transparent calc(50% - 1px),var(--tinte) calc(50% - 1px),var(--tinte) calc(50% + 1px),transparent calc(50% + 1px)) left/50% 100% no-repeat,linear-gradient(to top left,transparent calc(50% - 1px),var(--tinte) calc(50% - 1px),var(--tinte) calc(50% + 1px),transparent calc(50% + 1px)) right/50% 100% no-repeat;position:relative}
-.haus .dach span{position:absolute;left:50%;bottom:4px;transform:translateX(-50%);font:600 13px var(--text);color:var(--tinte-2);white-space:nowrap}
-.haus .zimmer{display:grid;grid-template-columns:repeat(5,1fr);border:2px solid var(--tinte);border-bottom:0;background:#EEF4F4}
-.haus .zi{position:relative;padding:12px 6px 10px;text-align:center;border-left:1.5px solid var(--tinte);transition:background .35s}
-.haus .zi:first-child{border-left:0}
-.haus .zi svg{width:58px;height:58px;display:block;margin:0 auto 4px;transition:transform .35s}
-.haus .zi b{display:block;font-size:13.5px;line-height:1.2;color:var(--tinte)}
-.haus .zi small{display:block;font-size:11.5px;color:var(--grau);line-height:1.3}
-.haus .zi .geraet{position:absolute;top:6px;right:6px;font:500 10px var(--mono);letter-spacing:.06em;color:#fff;background:var(--rot);border-radius:4px;padding:2px 5px;opacity:0;transition:opacity .3s}
-.haus .zi.fragt{background:#FFF}
-.haus .zi.fragt svg{transform:scale(1.12)}
-.haus .zi.fragt .geraet{opacity:1}
-.haus .zi .pfeil{position:absolute;left:50%;bottom:-2px;width:2px;height:0;background:var(--rot);transition:height .5s}
-.haus .zi.fragt .pfeil{height:14px}
-.haus .boden{border:2px solid var(--tinte);background:#FBF3D9;padding:12px 14px;text-align:center;transition:box-shadow .4s}
-.haus .boden b{font-size:16px;color:var(--tinte)}
-.haus .boden small{display:block;font-size:12.5px;color:var(--grau);margin-top:2px}
-.haus .boden.liefert{box-shadow:0 0 0 4px rgba(210,58,38,.25)}
-.haus .weg{font-family:var(--mono);font-size:12.5px;color:var(--rot);text-align:center;margin-top:12px;min-height:20px}
-@media(max-width:620px){.haus .zimmer{grid-template-columns:repeat(5,1fr)}.haus .zi small{display:none}.haus .zi svg{width:44px;height:44px}.haus .zi b{font-size:12px}}
-@media (prefers-reduced-motion:reduce){.zeiger{transition:none}.klick-schutz .einladung svg,.klick-schutz.winken .einladung{animation:none}}
-</style>
-<style>
-/* Startseite: Buehne mit einer Frage, Buerotafel, Band Tempo (startseite.py, Kurt 18.11.2026) */
-.start-buehne{margin-top:10px}
-.modus{display:none}
-.frage-kopf{font:500 15px var(--text);color:var(--tinte-2);text-align:center;margin:30px 0 0}
-.frage-kopf+.wahl{margin-top:10px}
-.wahl button{font-size:15px;padding:10px 18px}
-.hinweis-selbst{font-size:15px}
-.hinweis-selbst button{font:inherit;color:var(--rot);background:none;border:0;padding:0;margin-left:6px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-.tempo{max-width:1000px;margin:84px auto 0;text-align:center}
-.tempo-titel{font:600 clamp(20px,2.6vw,26px)/1.25 var(--display);letter-spacing:-.02em;color:var(--tinte);margin:0 0 18px}
-.tempo-reihe{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left}
-.tempo-reihe div{border:1px solid var(--haar);border-radius:12px;background:#fff;padding:14px 16px}
-.tempo-reihe em{display:inline-flex;align-items:center;gap:5px;font:500 12px var(--mono);font-style:normal;color:var(--grau);letter-spacing:.02em}
-.tempo-reihe em svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
-.tempo-reihe strong{display:block;font-size:15px;color:var(--tinte);margin:6px 0 4px;line-height:1.3}
-.tempo-reihe span{display:block;font-size:14px;color:var(--grau);line-height:1.4}
-.tempo-unter{font-size:13px;color:var(--grau);margin-top:12px}
-@media(max-width:760px){.tempo{margin-top:40px}.tempo-reihe{grid-template-columns:1fr}}
-/* Firmengedaechtnis: Team als Buerotafel ueber (Handy) oder neben (Rechner) den Geraeten */
-.haus{max-width:520px;margin:30px auto 0}
-.haus .haus-titel{font-family:var(--hand);font-size:21px;font-weight:400;letter-spacing:0;color:var(--tinte);text-align:center;margin-bottom:0}
-.haus .weg{font:600 15px/1.3 var(--text);color:var(--rot);text-align:center;margin:2px 0 8px;min-height:22px}
-.haus .dach-svg{display:none}
-.haus .zimmer{background:#FBFBF8;border:6px solid #cfd2d6;border-bottom:0;border-radius:8px 8px 0 0;box-shadow:inset 0 0 0 1px #aeb2b8}
-.haus .zi{padding:6px 3px 5px;border-left:1px dashed #d4d4d8;background:transparent}
-.haus .zi:first-child{border-left:0}
-.haus .zi.fragt{background:#fff;box-shadow:0 4px 10px -4px rgba(0,0,0,.25)}
-.haus .zi svg{width:34px;height:34px;margin-bottom:2px}
-.haus .zi b{font-size:11.5px}
-.haus .zi .geraet{font-size:9px;top:3px;right:3px}
-.haus .boden{display:flex;align-items:center;gap:8px;justify-content:center;flex-wrap:wrap;border:6px solid #cfd2d6;border-top:2px solid #aeb2b8;border-radius:0 0 8px 8px;background:#FBF3D9;box-shadow:0 18px 30px -18px rgba(0,0,0,.35);padding:8px 10px}
-.haus .boden .gehirn{width:46px;height:38px;flex:none}
-.haus .boden b{font-size:13.5px}
-.haus .boden small{display:none}
-.haus .boden .aus{flex-basis:100%;font:500 12.5px/1.35 var(--text);color:var(--rot);text-align:center;min-height:18px}
-.haus.an+.geraete{margin-top:18px}
-@media(max-width:899px){.haus{max-width:440px}.haus .zi small{display:none}}
-@media(max-width:620px){.haus .zi svg{width:28px;height:28px}.haus .zi b{font-size:10.5px}}
-@media(min-width:900px){
-  .start-buehne:has(.haus.an){display:grid;grid-template-columns:170px minmax(0,1fr);column-gap:34px;align-items:center;max-width:1180px;margin:0 auto}
-  .start-buehne:has(.haus.an)>*{grid-column:1/-1}
-  .start-buehne:has(.haus.an)>.haus{grid-column:1;margin:40px 0 0;max-width:none;align-self:center}
-  .start-buehne:has(.haus.an)>.geraete{grid-column:2;margin:40px 0 0;max-width:none;width:auto;justify-self:stretch}
-  .haus.an .haus-titel{text-align:left;font-size:19px;line-height:1.15}
-  .haus.an .weg{text-align:left}
-  .haus.an .zimmer{grid-template-columns:1fr;border:6px solid #cfd2d6;border-bottom:0;border-radius:8px 8px 0 0;overflow:visible}
-  .haus.an .zi{display:grid;grid-template-columns:34px 1fr;column-gap:10px;align-items:center;text-align:left;border-left:0;border-top:1px dashed #d4d4d8;padding:7px 10px}
-  .haus.an .zi:first-child{border-top:0}
-  .haus.an .zi svg{grid-column:1;grid-row:1/3;width:34px;height:34px;margin:0}
-  .haus.an .zi b{grid-column:2;grid-row:1;font-size:13px}
-  .haus.an .zi small{grid-column:2;grid-row:2;display:block;font-size:11px}
-  .haus.an .zi .geraet{grid-column:2;grid-row:2;position:static;justify-self:start;display:none}
-  .haus.an .zi.fragt .geraet{display:inline-block}
-  .haus.an .zi.fragt small{display:none}
-  .haus.an .zi .pfeil{display:none}
-  .haus.an .zi.fragt::after{content:"";position:absolute;right:-22px;top:50%;width:20px;height:2px;background:var(--rot)}
-  .haus.an .zi.fragt::before{content:"";position:absolute;right:-28px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left:8px solid var(--rot)}
-  .haus.an .boden{flex-direction:column;text-align:center}
-  .haus.an .boden .gehirn{width:54px;height:44px}
-}
-</style>
-<!-- /buehne:stil -->
 </head>
 <body>
 
@@ -170,107 +43,765 @@
     <h1>Ihre Büroarbeit liegt vorbereitet da. Sie entscheiden und schicken ab.</h1>
     <p class="slogan-antwort">KI? <span>Gern dabei.</span></p>
     <p class="lead dunkler">Drei Produkte fürs Büro, die behalten, was Sie ablegen, und Ihre Schreiben vorbereiten. Zwei für Ihre Kunden, die auf Ihrer Website und am Telefon antworten. Persönlich eingerichtet aus Würzburg.</p>
-    <!-- buehne -->
-<div class="start-buehne">
-    <span id="ueber-p" hidden></span><span id="lead" hidden></span>
-    <p class="frage-kopf">Was passt zu Ihnen?</p>
-    <div class="wahl" role="group" aria-label="Was passt zu Ihnen?">
-      <button data-p="firmengedaechtnis" aria-pressed="false">Büro mit Team</button>
-      <button data-p="handwerk" aria-pressed="false">Handwerksbetrieb</button>
-      <button data-p="dienstleister" aria-pressed="false">Selbständig im Büro</button>
-    </div>
-    <div class="modus" role="group" aria-label="Ansicht">
-      <button id="m-zu" aria-pressed="true">Zuschauen</button>
-      <button id="m-selbst" aria-pressed="false">Selbst ausprobieren</button>
-    </div>
-    <p class="hinweis-selbst" id="hinweis"></p>
-
-    <div class="haus" id="haus" aria-live="polite">
-      <p class="haus-titel">Haldenmeyer &amp; Sorg Architekten</p>
-      <p class="weg" id="weg"></p>
-      <svg class="dach-svg" viewBox="0 0 760 50" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,50 380,3 760,50" fill="#F3F1EC" stroke="#111214" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
-      <div class="zimmer">
-        <div class="zi" data-wer="ottilie"><span class="geraet"></span>
-          <svg viewBox="0 0 60 60"><use href="#kopf"/><circle cx="30" cy="9" r="5" fill="#3A3B40"/><path d="M17.5 22 Q19 12 30 12 Q41 12 42.5 22" fill="none" stroke="#3A3B40" stroke-width="4" stroke-linecap="round"/></svg>
-          <b>Ottilie</b><small>Partnerin</small><i class="pfeil"></i></div>
-        <div class="zi" data-wer="rainer"><span class="geraet"></span>
-          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M17.3 26 Q16.5 16 21 13.5M42.7 26 Q43.5 16 39 13.5" fill="none" stroke="#9A9A9F" stroke-width="3.2" stroke-linecap="round"/><circle cx="25" cy="24" r="4.2" fill="none" stroke="#111" stroke-width="1.6"/><circle cx="35" cy="24" r="4.2" fill="none" stroke="#111" stroke-width="1.6"/><path d="M29.2 24h1.6" stroke="#111" stroke-width="1.6"/></svg>
-          <b>Rainer</b><small>Partner</small><i class="pfeil"></i></div>
-        <div class="zi" data-wer="katrin"><span class="geraet"></span>
-          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M16.5 21 Q16.5 8 30 8 Q43.5 8 43.5 21 Z" fill="#F2C94C" stroke="#111" stroke-width="2"/><path d="M13 21.5 H47" stroke="#111" stroke-width="2.4" stroke-linecap="round"/><path d="M30 8 V13" stroke="#111" stroke-width="1.6"/></svg>
-          <b>Katrin</b><small>Projektleitung</small><i class="pfeil"></i></div>
-        <div class="zi" data-wer="lukas"><span class="geraet"></span>
-          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M17.5 20 L20 12.5 L24 16.5 L27.5 10.5 L31 15.5 L35 10.5 L37.5 16 L42 13 L42.5 20" fill="#6B4E3A" stroke="#111" stroke-width="1.8" stroke-linejoin="round"/><path d="M24.5 30 Q30 37 35.5 30 Z" fill="#111"/></svg>
-          <b>Lukas</b><small>neu im Büro</small><i class="pfeil"></i></div>
-        <div class="zi" data-wer="renate"><span class="geraet"></span>
-          <svg viewBox="0 0 60 60"><path d="M15 33 Q12 12 30 11 Q48 12 45 33 Z" fill="#B5703F" stroke="#111" stroke-width="1.8"/><use href="#kopf"/><path d="M17.5 21 Q22 13 30 14 Q38 13 42.5 21" fill="#B5703F" stroke="#111" stroke-width="1.6"/><circle cx="16.5" cy="31" r="1.6" fill="#D23A26"/><circle cx="43.5" cy="31" r="1.6" fill="#D23A26"/></svg>
-          <b>Renate</b><small>Büroleitung</small><i class="pfeil"></i></div>
-      </div>
-      <div class="boden" id="boden"><svg class="gehirn" viewBox="0 0 64 52" aria-hidden="true"><g fill="#fff" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M31 6c-3-4-10-4-12 1-5-1-9 3-8 8-5 1-7 7-4 11-3 3-2 9 3 10 0 5 5 8 10 6 2 4 8 5 11 1z"/><path d="M33 6c3-4 10-4 12 1 5-1 9 3 8 8 5 1 7 7 4 11 3 3 2 9-3 10 0 5-5 8-10 6-2 4-8 5-11 1z"/></g><g fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round"><path d="M19 7c1 4 4 5 7 5M11 15c3 0 5 2 5 5M7 26c3-1 6 0 7 3M10 36c2-2 6-2 7 0M20 42c0-3 2-5 5-5"/><path d="M45 7c-1 4-4 5-7 5M53 15c-3 0-5 2-5 5M57 26c-3-1-6 0-7 3M54 36c-2-2-6-2-7 0M44 42c0-3-2-5-5-5"/></g><g fill="#D23A26"><circle cx="22" cy="24" r="2.4"/><circle cx="42" cy="20" r="2.4"/><circle cx="38" cy="34" r="2.4"/></g><path d="M22 24L42 20L38 34Z" fill="none" stroke="#D23A26" stroke-width="1.4" stroke-dasharray="2 2"/></svg><b>Das gemeinsame Gedächtnis</b><span class="aus" id="aus"></span><small>Projekte, Protokolle, Entscheidungen, Pläne. Jede Antwort nennt die Quelle.</small></div>
-    </div>
-    <div class="geraete" id="geraete">
-      <p class="notiz" id="notiz" aria-live="polite"></p>
-      <div class="laptop">
-        <div class="deckel"><div class="schirm" id="schirm-rechner">
-          <div class="kerbe"></div>
-          <div class="innen" id="rechner">
-            <div class="menue"><span><b>Browser</b>Ablage&nbsp;&nbsp;&nbsp;Bearbeiten&nbsp;&nbsp;&nbsp;Darstellung</span><span id="menue-uhr"></span></div>
-            <div class="browser"><span class="ampel"><i></i><i></i><i></i></span><span class="adresse">haberkorn.gernbei.de</span><span style="width:60px"></span></div>
-            <div class="app"><iframe id="f-rechner" title="Gernbei am Rechner" width="1280" height="760"></iframe></div>
-            <div class="zeiger" id="zeiger"><svg viewBox="0 0 24 24"><path d="M4 2l15 11.5-6.6.9 3.9 7.1-2.9 1.5-3.8-7.2L4 20z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
-            <div class="tipp" id="tipp-rechner"></div>
-          </div>
-          <div class="klick-schutz" data-g="rechner"><span class="einladung"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-4.8-2.4L4.6 15.4a1.6 1.6 0 0 1 2.5-2L9 15V11"/></svg>Selbst ausprobieren</span></div>
-        </div></div>
-        <div class="scharnier"></div>
-        <div class="unterteil"></div>
-      </div>
-      <div class="handy">
-        <div class="rahmen"><i class="taste l t1"></i><i class="taste l t2"></i><i class="taste l t3"></i><i class="taste r t4"></i><i class="taste r t5"></i><div class="glas"><div class="schirm" id="schirm-handy">
-          <div class="innen" id="handy">
-            <div class="insel"></div>
-            <div class="status"><span id="uhr">9:41</span><svg viewBox="0 0 70 14" width="70" height="14"><g fill="#111"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/><path d="M27 4.5a10 10 0 0 1 14 0l-1.6 1.7a7.6 7.6 0 0 0-10.8 0zM30.2 7.8a5.5 5.5 0 0 1 7.6 0L34 11.8z"/><rect x="45" y="1" width="22" height="12" rx="3.5" fill="none" stroke="#111" stroke-opacity=".4"/><rect x="47" y="3" width="16" height="8" rx="2"/><rect x="68" y="5" width="2" height="4" rx="1" opacity=".4"/></g></svg></div>
-            <div class="rest"><iframe id="f-handy" title="Gernbei am Handy" width="402" height="800"></iframe></div>
-            <div class="strich"></div>
-            <div class="tipp" id="tipp-handy"></div>
-          </div>
-          <div class="klick-schutz" data-g="handy"><span class="einladung"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-4.8-2.4L4.6 15.4a1.6 1.6 0 0 1 2.5-2L9 15V11"/></svg>Antippen</span></div>
-        </div></div></div>
-      </div>
-    </div>
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-      <defs>
-        <g id="kopf"><path d="M12 59 Q14 44 30 44 Q46 44 48 59" fill="#fff" stroke="#111" stroke-width="2.2" stroke-linecap="round"/><circle cx="30" cy="25" r="13" fill="#fff" stroke="#111" stroke-width="2.2"/><circle cx="25" cy="24" r="1.6" fill="#111"/><circle cx="35" cy="24" r="1.6" fill="#111"/><path d="M24.5 30 Q30 35 35.5 30" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/></g>
-      </defs>
-    </svg>
-    <div class="tempo" id="tempo" aria-live="polite">
-      <p class="tempo-titel">Fertig in wenigen Minuten. Sie prüfen und schicken ab.</p>
-      <div class="tempo-reihe" id="tempo-reihe"></div>
-      <p class="tempo-unter">Gemessen in den Läufen, die Sie oben sehen: jedes Ergebnis lag nach weniger als drei Minuten da.</p>
-    </div>
-    <p class="unterzeile" id="unterzeile">Erfundener Betrieb, echte Antworten aus Gernbei, ungekürzt.</p>
-    </div>
-<!-- /buehne -->
     <div class="vorteile mitte"><span>Ihre Unterlagen in der EU</span><span>fester Preis im Monat</span><span>persönlich eingerichtet aus Würzburg</span><span>Ihre Arbeit nehmen Sie mit</span></div>
   </div>
 </header>
 
+<!-- film: gebaut aus Entwurf-Film/film-quelle.html mit film_bauen.py, hier nicht von Hand aendern -->
+<gernbei-film id="film"></gernbei-film>
+<template id="film-vorlage"><style>
+:host{display:block;font-family:var(--text);color:var(--tinte);
+  --tinte:#111214;--tinte-2:#3A3B40;--grau:#6E6E73;--haar:#D2D2D7;--papier:#F6F4EE;
+  --rot:#D23A26;--gelb:#FBF3D9;--gruen:#2E7D4F;--nacht:#1D2333;
+  --z:1;--text:'Inter',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--hand:'Caveat',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+.gb b{color:var(--rot);font-weight:800}
+.gb{font-weight:800;letter-spacing:-.01em}
+
+/* Kopf */
+.film-wahl{text-align:center;padding:8px 24px 0}
+.wahl-kopf{font-size:14px;color:var(--grau);margin:28px 0 10px}
+.wahl{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.wahl button{font:600 15px var(--text);border:1.5px solid var(--tinte);background:#fff;color:var(--tinte);border-radius:999px;padding:9px 18px;cursor:pointer;transition:background .2s,color .2s}
+.wahl button[aria-pressed="true"]{background:var(--tinte);color:#fff;box-shadow:3px 3px 0 var(--rot)}
+.scroll-tipp{font-family:var(--hand);font-size:24px;color:var(--tinte-2);margin-top:26px}
+.scroll-tipp i{display:block;width:2px;height:34px;background:var(--tinte);margin:6px auto 0;animation:tropf 1.6s infinite}
+@keyframes tropf{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* Kapitelleiste: wo im Film man steht */
+.kapitel{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:8px;opacity:0;transition:opacity .4s}
+.kapitel.an{opacity:1;pointer-events:auto}
+.kapitel:not(.an){pointer-events:none}
+.kapitel a{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--tinte);background:#fff;display:block;position:relative}
+.kapitel a.an{background:var(--rot);border-color:var(--rot);transform:scale(1.25)}
+.kapitel a span{position:absolute;right:18px;top:50%;transform:translateY(-50%);font:600 12px var(--text);white-space:nowrap;background:var(--tinte);color:#fff;border-radius:6px;padding:3px 8px;opacity:0;pointer-events:none;transition:opacity .2s}
+.kapitel a:hover span,.kapitel a:focus-visible span{opacity:1}
+
+/* Film */
+.film{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px}
+.buehne-hafen{position:sticky;top:calc(var(--film-oben,0px) + 3vh);height:calc(94vh - var(--film-oben,0px));display:flex;align-items:center}
+.leinwand{position:relative;width:100%;aspect-ratio:640/560;container-type:inline-size;background:
+  radial-gradient(circle at 50% 50%,rgba(210,58,38,.07),transparent 46%),
+  linear-gradient(#e7e3d8 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,#e7e3d8 1px,transparent 1px) 0 0/24px 24px,#FBFAF6;
+  border:2px solid var(--tinte);border-radius:18px;box-shadow:8px 8px 0 var(--tinte);overflow:hidden}
+.szenen{padding:18vh 0 30vh}
+.szene{min-height:78vh;display:flex;align-items:center;opacity:.28;transition:opacity .5s}
+.szene.dran{opacity:1}
+.szene .karte{max-width:430px}
+.szene .nr{font:500 12px var(--mono);letter-spacing:.12em;color:var(--rot);text-transform:uppercase}
+.szene h2{font-size:clamp(28px,3.2vw,42px);line-height:1.08;letter-spacing:-.03em;font-weight:800;margin:10px 0 12px}
+.szene p{font-size:18px;line-height:1.55;color:var(--tinte-2)}
+.szene p.klein{font-size:14px;color:var(--grau);margin-top:10px}
+.szene a{color:var(--tinte);font-weight:700}
+.untertitel{position:absolute;left:3%;top:3%;font:700 calc(3cqw*var(--z)) var(--hand);color:var(--tinte-2);z-index:9;transition:color .6s}
+
+/* Gehirn */
+.hirn{position:absolute;left:50%;top:50%;width:26%;transform:translate(-50%,-50%);z-index:3;transition:top .8s cubic-bezier(.5,0,.2,1),width .8s cubic-bezier(.5,0,.2,1),opacity .5s,left .8s cubic-bezier(.5,0,.2,1)}
+.hirn svg{display:block;width:100%;height:auto;filter:drop-shadow(0 6px 0 rgba(17,18,20,.08))}
+.hirn .puls{position:absolute;inset:-18%;border-radius:50%;border:2px solid var(--rot);opacity:0}
+.leinwand.schluckt .hirn .puls{animation:puls 1.1s ease-out 3}
+@keyframes puls{from{transform:scale(.7);opacity:.7}to{transform:scale(1.25);opacity:0}}
+.hirn-name{position:absolute;left:50%;top:calc(50% + calc(15.5cqw*var(--z)));transform:translateX(-50%);font:600 calc(2.3cqw*var(--z)) var(--mono);letter-spacing:.06em;color:var(--tinte-2);white-space:nowrap;z-index:3;opacity:0;transition:opacity .4s}
+.akt-0 .hirn-name,.akt-1 .hirn-name{opacity:1}
+.funke{fill:var(--rot);transform-box:fill-box;transform-origin:center;animation:funke 2.4s infinite}
+.funke:nth-of-type(2){animation-delay:.8s}.funke:nth-of-type(3){animation-delay:1.6s}
+@keyframes funke{0%,100%{transform:scale(1)}50%{transform:scale(1.6)}}
+
+/* 1 Hinein */
+.ein{position:absolute;z-index:4;background:#fff;border:1.5px solid var(--tinte);border-radius:10px;padding:calc(1.4cqw*var(--z)) calc(1.8cqw*var(--z));font-size:calc(2.35cqw*var(--z));font-weight:600;display:flex;align-items:center;gap:calc(1.2cqw*var(--z));white-space:nowrap;box-shadow:3px 3px 0 rgba(17,18,20,.85);transition:transform 1s cubic-bezier(.6,0,.3,1),opacity .9s;opacity:0}
+.ein svg,.anschluss svg{width:calc(3.4cqw*var(--z));height:calc(3.4cqw*var(--z));flex:none;stroke:var(--tinte);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ein small{display:block;font:500 calc(1.8cqw*var(--z)) var(--mono);color:var(--grau)}
+.ein:nth-child(1){left:4%;top:9%}.ein:nth-child(2){right:4%;top:11%}.ein:nth-child(3){left:3%;top:43%}.ein:nth-child(4){right:3%;top:46%}.ein:nth-child(5){left:30%;top:82%}
+.ein:nth-child(2){transition-delay:.12s}.ein:nth-child(3){transition-delay:.24s}.ein:nth-child(4){transition-delay:.36s}.ein:nth-child(5){transition-delay:.48s}
+.akt-1 .ein{opacity:1}
+.akt-1.geschluckt .ein{opacity:0;transform:var(--zum-hirn) scale(.15)}
+
+/* 2 bis 4 Blaetter */
+.blatt{position:absolute;z-index:4;width:30%;background:#fff;border:1.5px solid var(--tinte);border-radius:6px;padding:calc(2cqw*var(--z)) calc(2cqw*var(--z)) calc(2.4cqw*var(--z));box-shadow:4px 4px 0 var(--tinte);opacity:0;transform:translate(var(--vx),var(--vy)) scale(.3);transition:transform .9s cubic-bezier(.3,1.3,.5,1),opacity .5s}
+.blatt b{display:block;font-size:calc(2.4cqw*var(--z));line-height:1.2;margin-bottom:calc(1.2cqw*var(--z))}
+.blatt .zeile{display:block;font-size:calc(1.95cqw*var(--z));line-height:1.35;color:var(--tinte-2);margin-top:calc(.7cqw*var(--z));padding-left:calc(2.6cqw*var(--z));position:relative}
+.blatt .zeile::before{content:"";position:absolute;left:0;top:calc(.75cqw*var(--z));width:calc(1.5cqw*var(--z));height:calc(.3cqw*var(--z));background:var(--haar)}
+.blatt .haken{display:flex;align-items:flex-start;gap:calc(1cqw*var(--z));margin-top:calc(1.4cqw*var(--z));font:600 calc(1.85cqw*var(--z))/1.3 var(--text);color:var(--rot);opacity:0;transform:translateX(-6px);transition:opacity .4s,transform .4s}
+.blatt .haken svg{width:calc(2.4cqw*var(--z));height:calc(2.4cqw*var(--z));flex:none;stroke:var(--rot);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.blatt.b1{left:4%;top:12%;--vx:42%;--vy:110%}.blatt.b2{right:4%;top:12%;--vx:-42%;--vy:110%}.blatt.b3{left:35%;top:66%;--vx:0%;--vy:-60%}
+.akt-2 .blatt,.akt-3 .blatt,.akt-4 .blatt{opacity:1;transform:none}
+.akt-2 .blatt.b2{transition-delay:.18s}.akt-2 .blatt.b3{transition-delay:.36s}
+.akt-3 .blatt .haken,.akt-4 .blatt .haken{opacity:1;transform:none}
+.akt-3 .blatt.b2 .haken{transition-delay:.35s}.akt-3 .blatt.b3 .haken{transition-delay:.7s}
+.akt-4 .blatt{opacity:0!important}
+.stempel{position:absolute;right:calc(-1*1.5cqw*var(--z));top:calc(-1*2cqw*var(--z));font:700 calc(2.2cqw*var(--z)) var(--hand);color:var(--rot);border:2px solid var(--rot);border-radius:6px;padding:0 calc(1cqw*var(--z));transform:rotate(8deg) scale(1.6);opacity:0;transition:opacity .3s,transform .4s cubic-bezier(.3,1.5,.5,1);background:#fff}
+.akt-3 .stempel,.akt-4 .stempel{opacity:1;transform:rotate(8deg) scale(1)}
+.akt-3 .b1 .stempel{transition-delay:.9s}.akt-3 .b2 .stempel{transition-delay:1.2s}.akt-3 .b3 .stempel{transition-delay:1.5s}
+
+/* 4 Abschicken */
+.geraete{position:absolute;left:50%;bottom:6%;width:90%;transform:translateX(-50%) translateY(30%);opacity:0;transition:transform .8s cubic-bezier(.3,1.2,.5,1),opacity .5s;z-index:5;display:flex;align-items:flex-end;justify-content:center;gap:calc(3cqw*var(--z))}
+.akt-4 .geraete{opacity:1;transform:translateX(-50%)}
+.laptop{width:60%}
+.laptop .deckel{background:#1b1c1f;border-radius:calc(1.6cqw*var(--z)) calc(1.6cqw*var(--z)) 0 0;padding:calc(1.3cqw*var(--z))}
+.laptop .schirm{background:#fff;border-radius:calc(.6cqw*var(--z));aspect-ratio:16/10;font-size:calc(1.9cqw*var(--z));line-height:1.4;overflow:hidden;position:relative}
+.laptop .fuss{height:calc(1.6cqw*var(--z));background:#c9cbd0;border-radius:0 0 calc(2cqw*var(--z)) calc(2cqw*var(--z));margin:0 -4%}
+.handy{width:23%;background:#1b1c1f;border-radius:calc(3.4cqw*var(--z));padding:calc(1cqw*var(--z))}
+.handy .schirm{background:#fff;border-radius:calc(2.6cqw*var(--z));aspect-ratio:402/874;font-size:calc(1.5cqw*var(--z));line-height:1.35;position:relative;overflow:hidden}
+.schirm.echt iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;pointer-events:none;background:#fff}
+.chip{position:absolute;left:4%;right:4%;bottom:5%;background:var(--tinte);color:#fff;font:600 calc(1.7cqw*var(--z))/1.35 var(--text);border-radius:8px;padding:calc(1cqw*var(--z)) calc(1.4cqw*var(--z));box-shadow:3px 3px 0 var(--rot);opacity:0;transform:translateY(8px);transition:opacity .4s .8s,transform .4s .8s}
+.akt-4 .chip{opacity:1;transform:none}
+.entwurf-karte{position:absolute;left:5%;right:5%;bottom:4%;font-size:calc(1.3cqw*var(--z));background:#fff;border:1.5px solid var(--tinte);border-radius:10px;padding:calc(1.2cqw*var(--z));box-shadow:0 -6px 18px rgba(17,18,20,.18)}
+.mini-kopf{font:600 calc(1.6cqw*var(--z)) var(--mono);color:var(--grau);margin-bottom:calc(1cqw*var(--z))}
+.entwurf-text{background:#F1F0EC;border-radius:calc(1cqw*var(--z));padding:calc(1.2cqw*var(--z)) calc(1.4cqw*var(--z));color:var(--tinte)}
+.senden{display:inline-block;margin-top:calc(1.6cqw*var(--z));background:var(--tinte);color:#fff;font-weight:700;border-radius:999px;padding:calc(.7cqw*var(--z)) calc(2cqw*var(--z));transition:background .3s}
+.akt-4 .senden.tippt{background:var(--gruen)}
+.finger{position:absolute;width:calc(5cqw*var(--z));height:calc(5cqw*var(--z));border-radius:50%;background:rgba(210,58,38,.35);border:2px solid var(--rot);transform:scale(0);pointer-events:none}
+.akt-4 .finger.an{animation:tipp .7s ease-out}
+@keyframes tipp{0%{transform:scale(.2);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.gesendet{position:absolute;right:0;top:calc(-1*7cqw*var(--z));font:700 calc(3.6cqw*var(--z)) var(--hand);color:var(--gruen);white-space:nowrap;opacity:0;transition:opacity .4s}
+.akt-4.fertig .gesendet{opacity:1}
+.akt-4 .hirn{top:17%;width:15%}
+
+/* 5 Team */
+.team{position:absolute;inset:0;z-index:2;pointer-events:none}
+.faeden{position:absolute;inset:0;width:100%;height:100%}
+.faeden path{fill:none;stroke:var(--tinte);stroke-width:1.6;stroke-dasharray:6 6;opacity:0;transition:opacity .5s}
+.faeden path.zieht{stroke:var(--rot);stroke-width:2.6;stroke-dasharray:none}
+.akt-5 .faeden path{opacity:.55}
+.akt-5 .faeden path.zieht{opacity:1;animation:zieh 1s ease-out}
+@keyframes zieh{from{stroke-dasharray:400;stroke-dashoffset:400}to{stroke-dasharray:400;stroke-dashoffset:0}}
+.kollege{position:absolute;width:15%;text-align:center;transform:translate(-50%,-50%) scale(.4);opacity:0;transition:transform .6s cubic-bezier(.3,1.4,.5,1),opacity .4s}
+.akt-5 .kollege{opacity:1;transform:translate(-50%,-50%)}
+.kollege svg{width:100%;height:auto;display:block;transition:transform .3s}
+.kollege b{display:block;font-size:calc(2.2cqw*var(--z));line-height:1.1}
+.kollege small{display:block;font-size:calc(1.7cqw*var(--z));color:var(--grau)}
+.kollege.fragt svg{transform:scale(1.12)}
+.blase{position:absolute;z-index:6;max-width:44%;background:#fff;border:1.5px solid var(--tinte);border-radius:14px;padding:calc(1.4cqw*var(--z)) calc(1.8cqw*var(--z));font-size:calc(2.15cqw*var(--z));line-height:1.35;box-shadow:3px 3px 0 var(--tinte);opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+.blase.zeigt{opacity:1;transform:none}
+.blase small{display:block;font:500 calc(1.7cqw*var(--z)) var(--mono);color:var(--rot);margin-top:calc(.8cqw*var(--z))}
+.blase.antwort{border-color:var(--rot);box-shadow:3px 3px 0 var(--rot)}
+.akt-5 .hirn{top:62%;width:17%}
+.privat{position:absolute;left:50%;bottom:2.5%;transform:translateX(-50%);font:600 calc(1.9cqw*var(--z)) var(--mono);color:var(--tinte-2);opacity:0;transition:opacity .5s .6s;white-space:nowrap;display:flex;gap:calc(1cqw*var(--z));align-items:center;z-index:3}
+.privat svg{width:calc(2.4cqw*var(--z));height:calc(2.4cqw*var(--z));stroke:var(--tinte);fill:none;stroke-width:2}
+.akt-5 .privat{opacity:1}
+
+/* 6 Wer sieht was */
+.bereiche{position:absolute;inset:0;z-index:4;pointer-events:none}
+.raum{position:absolute;top:11%;width:21%;background:#fff;border:1.5px solid var(--tinte);border-radius:10px;padding:calc(1.4cqw*var(--z)) calc(1.2cqw*var(--z)) calc(1.6cqw*var(--z));text-align:center;box-shadow:3px 3px 0 var(--tinte);opacity:0;transform:translateY(-14px);transition:opacity .4s,transform .5s cubic-bezier(.3,1.4,.5,1)}
+.raum:nth-child(1){left:3%}.raum:nth-child(2){left:27%;transition-delay:.1s}.raum:nth-child(3){left:51.5%;transition-delay:.2s}.raum:nth-child(4){left:76%;transition-delay:.3s}
+.raum svg.figur{width:44%;display:block;margin:0 auto}
+.raum b{display:block;font-size:calc(2.2cqw*var(--z))}
+.raum small{display:block;font-size:calc(1.65cqw*var(--z));color:var(--grau);line-height:1.25}
+.raum .zu{display:flex;align-items:center;justify-content:center;gap:calc(.6cqw*var(--z));font:600 calc(1.6cqw*var(--z)) var(--mono);color:var(--tinte-2);margin-top:calc(.9cqw*var(--z));padding-top:calc(.8cqw*var(--z));border-top:1px dashed var(--haar)}
+.raum .zu svg{width:calc(2cqw*var(--z));height:calc(2cqw*var(--z));stroke:var(--tinte);fill:none;stroke-width:2.2}
+.raum .rolle{display:inline-block;margin-top:calc(.8cqw*var(--z));font:700 calc(1.55cqw*var(--z)) var(--text);color:#fff;background:var(--rot);border-radius:5px;padding:calc(.3cqw*var(--z)) calc(.9cqw*var(--z))}
+.gemeinsam{position:absolute;left:12%;right:12%;top:58%;background:var(--gelb);border:2px solid var(--tinte);border-radius:12px;padding:calc(2cqw*var(--z)) calc(2.4cqw*var(--z));opacity:0;transform:scale(.92);transition:opacity .4s .4s,transform .5s .4s;display:flex;gap:calc(2.4cqw*var(--z));align-items:center}
+.gemeinsam .mini-hirn{width:14%;flex:none}
+.gemeinsam b{font-size:calc(2.5cqw*var(--z))}
+.gemeinsam ul{list-style:none;display:flex;flex-wrap:wrap;gap:calc(.8cqw*var(--z));margin-top:calc(1cqw*var(--z))}
+.gemeinsam li{font:600 calc(1.75cqw*var(--z)) var(--text);background:#fff;border:1px solid var(--tinte);border-radius:999px;padding:calc(.4cqw*var(--z)) calc(1.3cqw*var(--z))}
+.akt-6 .raum,.akt-6 .gemeinsam{opacity:1;transform:none}
+.teilen{position:absolute;z-index:6;left:59%;top:33%;font:600 calc(1.8cqw*var(--z)) var(--text);background:#fff;border:1.5px solid var(--rot);color:var(--rot);border-radius:8px;padding:calc(.6cqw*var(--z)) calc(1.2cqw*var(--z));opacity:0;transition:transform 1.1s cubic-bezier(.6,0,.3,1),opacity .4s;box-shadow:2px 2px 0 var(--rot)}
+.akt-6 .teilen{opacity:1}
+.akt-6.geteilt .teilen{transform:translate(calc(-1*4cqw*var(--z)),calc(29cqw*var(--z)))}
+.blick{position:absolute;inset:0;width:100%;height:100%;z-index:3}
+.blick path{fill:none;stroke:var(--rot);stroke-width:2;stroke-dasharray:5 5;opacity:0;transition:opacity .5s}
+.akt-6.geteilt .blick path{opacity:1}
+.akt-6 .hirn{opacity:0}
+
+/* 7 Anschluesse */
+.netz{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+.netz line{stroke:var(--tinte);stroke-width:2;stroke-dasharray:4 7;opacity:0;transition:opacity .5s}
+.akt-7 .netz line{opacity:.6;animation:fliesst 1.2s linear infinite}
+@keyframes fliesst{to{stroke-dashoffset:-22}}
+.anschluss{position:absolute;z-index:4;width:28%;transform:translate(-50%,-50%) scale(.5);opacity:0;background:#fff;border:1.5px solid var(--tinte);border-radius:10px;padding:calc(1.3cqw*var(--z)) calc(1.5cqw*var(--z));box-shadow:3px 3px 0 var(--tinte);transition:transform .55s cubic-bezier(.3,1.5,.5,1),opacity .35s}
+.anschluss .k{display:flex;align-items:center;gap:calc(1cqw*var(--z));font-size:calc(2.2cqw*var(--z));font-weight:700}
+.anschluss small{display:block;font-size:calc(1.7cqw*var(--z));color:var(--tinte-2);line-height:1.3;margin-top:calc(.5cqw*var(--z))}
+.akt-7 .anschluss{opacity:1;transform:translate(-50%,-50%)}
+.freigabe{position:absolute;left:50%;bottom:3%;transform:translateX(-50%);font:600 calc(1.9cqw*var(--z)) var(--mono);color:var(--rot);white-space:nowrap;opacity:0;transition:opacity .5s 1s;z-index:4}
+.akt-7 .freigabe{opacity:1}
+.akt-7 .hirn{width:18%}
+
+/* 8 Fuer Ihre Kunden */
+.kunden{position:absolute;inset:0;z-index:4;pointer-events:none}
+.web{position:absolute;left:4%;top:13%;width:52%;background:#fff;border:1.5px solid var(--tinte);border-radius:10px;overflow:hidden;box-shadow:4px 4px 0 var(--tinte);opacity:0;transform:translateX(-20px);transition:opacity .5s,transform .6s}
+.web .leiste{background:#ECEBE6;padding:calc(1cqw*var(--z)) calc(1.4cqw*var(--z));font:500 calc(1.6cqw*var(--z)) var(--mono);color:var(--grau);display:flex;gap:calc(1cqw*var(--z));align-items:center}
+.web .leiste i{width:calc(1.2cqw*var(--z));height:calc(1.2cqw*var(--z));border-radius:50%;background:#D2D2D7;display:inline-block}
+.web .inhalt{padding:calc(2cqw*var(--z));min-height:calc(30cqw*var(--z));position:relative}
+.web .platzhalter{height:calc(1.6cqw*var(--z));background:#EEEDE8;border-radius:4px;margin-bottom:calc(1.2cqw*var(--z))}
+.web .platzhalter.kurz{width:60%}
+.chat{position:absolute;right:calc(2cqw*var(--z));bottom:calc(2cqw*var(--z));width:66%;background:#fff;border:1.5px solid var(--tinte);border-radius:10px;padding:calc(1.2cqw*var(--z));font-size:calc(1.8cqw*var(--z));line-height:1.35;box-shadow:2px 2px 0 var(--tinte)}
+.chat .kopfzeile{font:700 calc(1.7cqw*var(--z)) var(--text);margin-bottom:calc(.8cqw*var(--z))}
+.chat .frage{background:#F1F0EC;border-radius:8px;padding:calc(.7cqw*var(--z)) calc(1cqw*var(--z));margin-bottom:calc(.7cqw*var(--z));opacity:0;transition:opacity .4s .6s}
+.chat .antwort{border:1px solid var(--rot);border-radius:8px;padding:calc(.7cqw*var(--z)) calc(1cqw*var(--z));opacity:0;transition:opacity .4s 1.6s}
+.chat .antwort small{display:block;font:500 calc(1.5cqw*var(--z)) var(--mono);color:var(--rot);margin-top:calc(.4cqw*var(--z))}
+.anruf{position:absolute;right:4%;top:20%;width:34%;background:#1b1c1f;border-radius:calc(3.4cqw*var(--z));padding:calc(1cqw*var(--z));opacity:0;transform:translateX(20px);transition:opacity .5s .2s,transform .6s .2s;box-shadow:4px 4px 0 rgba(17,18,20,.3)}
+.anruf .schirm{background:#fff;border-radius:calc(2.6cqw*var(--z));padding:calc(2cqw*var(--z)) calc(1.6cqw*var(--z));font-size:calc(1.75cqw*var(--z));line-height:1.35;min-height:calc(44cqw*var(--z))}
+.anruf .klingelt{font:700 calc(2cqw*var(--z)) var(--text);text-align:center;margin-bottom:calc(1.2cqw*var(--z))}
+.anruf .klingelt small{display:block;font:500 calc(1.5cqw*var(--z)) var(--mono);color:var(--grau)}
+.anruf .sagt{background:#F1F0EC;border-radius:8px;padding:calc(.8cqw*var(--z)) calc(1cqw*var(--z));opacity:0;transition:opacity .4s 1s}
+.anruf ul{list-style:none;margin-top:calc(1cqw*var(--z))}
+.anruf li{font:600 calc(1.6cqw*var(--z))/1.3 var(--text);color:var(--gruen);padding:calc(.5cqw*var(--z)) 0 calc(.5cqw*var(--z)) calc(2.4cqw*var(--z));position:relative;opacity:0;transition:opacity .4s}
+.anruf li::before{content:"";position:absolute;left:calc(.3cqw*var(--z));top:calc(1cqw*var(--z));width:calc(1.2cqw*var(--z));height:calc(.6cqw*var(--z));border-left:2px solid var(--gruen);border-bottom:2px solid var(--gruen);transform:rotate(-45deg)}
+.anruf li:nth-child(1){transition-delay:2s}.anruf li:nth-child(2){transition-delay:2.5s}.anruf li:nth-child(3){transition-delay:3s}
+.namen{position:absolute;left:4%;right:4%;bottom:4%;display:flex;justify-content:space-between;font:700 calc(2.6cqw*var(--z)) var(--hand);color:var(--tinte-2);opacity:0;transition:opacity .5s .4s}
+.akt-8 .web,.akt-8 .anruf,.akt-8 .namen{opacity:1;transform:none}
+.akt-8 .chat .frage,.akt-8 .chat .antwort,.akt-8 .anruf .sagt,.akt-8 .anruf li{opacity:1}
+.akt-8 .hirn{opacity:0}
+
+/* 9 Nachts und morgens */
+.himmel{position:absolute;inset:0;z-index:1;background:var(--nacht);opacity:0;transition:opacity .9s,background 1.2s}
+.akt-9 .himmel{opacity:.94}
+.akt-9.morgen .himmel{background:#FBE9C7;opacity:.85}
+.akt-9 .untertitel{color:#fff}
+.akt-9.morgen .untertitel{color:var(--tinte-2)}
+.mond,.sonne{position:absolute;right:9%;top:8%;width:11%;z-index:2;opacity:0;transition:opacity .8s,transform 1.2s}
+.akt-9 .mond{opacity:1}
+.akt-9.morgen .mond{opacity:0;transform:translateY(40px)}
+.akt-9.morgen .sonne{opacity:1}
+.nachts{position:absolute;left:8%;top:22%;z-index:4;list-style:none}
+.nachts li{font:600 calc(2.2cqw*var(--z)) var(--text);color:#fff;padding:calc(.9cqw*var(--z)) 0 calc(.9cqw*var(--z)) calc(3.4cqw*var(--z));position:relative;opacity:0;transition:opacity .4s}
+.nachts li::before{content:"";position:absolute;left:0;top:calc(1.5cqw*var(--z));width:calc(1.6cqw*var(--z));height:calc(.8cqw*var(--z));border-left:2px solid #9ad3a8;border-bottom:2px solid #9ad3a8;transform:rotate(-45deg)}
+.akt-9 .nachts li{opacity:1}
+.akt-9 .nachts li:nth-child(2){transition-delay:.5s}.akt-9 .nachts li:nth-child(3){transition-delay:1s}
+.akt-9.morgen .nachts li{opacity:0;transition-delay:0s}
+.bericht{position:absolute;left:50%;top:56%;width:56%;transform:translate(-50%,-40%);z-index:5;background:#fff;border:2px solid var(--tinte);border-radius:12px;padding:calc(2cqw*var(--z)) calc(2.4cqw*var(--z));box-shadow:5px 5px 0 var(--tinte);opacity:0;transition:opacity .5s,transform .6s cubic-bezier(.3,1.3,.5,1)}
+.akt-9.morgen .bericht{opacity:1;transform:translate(-50%,-50%)}
+.bericht .bk{font:500 calc(1.7cqw*var(--z)) var(--mono);letter-spacing:.08em;color:var(--rot);text-transform:uppercase}
+.bericht b{display:block;font-size:calc(2.8cqw*var(--z));margin:calc(.6cqw*var(--z)) 0 calc(1cqw*var(--z))}
+.bericht li{list-style:none;font-size:calc(2cqw*var(--z));line-height:1.35;padding:calc(.6cqw*var(--z)) 0;border-top:1px dashed var(--haar)}
+.akt-9 .hirn{top:28%;width:16%;left:28%}
+.akt-9.morgen .hirn{opacity:0}
+
+/* 10 Sternbild */
+.stern{position:absolute;inset:0;z-index:4;pointer-events:none}
+.strahlen{position:absolute;inset:0;width:100%;height:100%}
+.strahlen line{stroke:var(--tinte);stroke-width:1.2;stroke-dasharray:3 5;opacity:0;transition:opacity .6s}
+.akt-10 .strahlen line{opacity:.35}
+.strahlen line.an{stroke:var(--rot);stroke-width:2.4;stroke-dasharray:none;opacity:1}
+.knoten{position:absolute;transform:translate(-50%,-50%) scale(.3);opacity:0;pointer-events:none;font:700 calc(2.25cqw*var(--z)) var(--text);background:#fff;border:1.5px solid var(--tinte);border-radius:999px;padding:calc(1cqw*var(--z)) calc(2cqw*var(--z));cursor:pointer;white-space:nowrap;transition:transform .55s cubic-bezier(.3,1.5,.5,1),opacity .35s,background .2s,color .2s;color:var(--tinte)}
+.akt-10 .knoten{opacity:1;transform:translate(-50%,-50%);pointer-events:auto}
+.knoten.an{background:var(--tinte);color:#fff;box-shadow:3px 3px 0 var(--rot)}
+.knoten:focus-visible{outline:3px solid var(--rot);outline-offset:3px}
+.beispiel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:40%;z-index:6;background:#fff;border:2px solid var(--tinte);border-radius:14px;padding:calc(2cqw*var(--z)) calc(2.4cqw*var(--z));box-shadow:5px 5px 0 var(--rot);opacity:0;transition:opacity .4s;pointer-events:none}
+.akt-10 .beispiel{opacity:1}
+.beispiel .b-titel{font:500 calc(1.7cqw*var(--z)) var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--rot)}
+.beispiel ul{list-style:none;margin-top:calc(1cqw*var(--z))}
+.beispiel li{font-size:calc(2.1cqw*var(--z));line-height:1.35;padding:calc(.6cqw*var(--z)) 0;border-top:1px dashed var(--haar);opacity:0;transform:translateY(4px);transition:opacity .35s,transform .35s}
+.beispiel li:first-child{border-top:0}
+.beispiel li.da{opacity:1;transform:none}
+.akt-10 .hirn{opacity:.12}
+
+/* 11 Einzug */
+.wege{position:absolute;inset:0;z-index:4;padding:13% 6% 0;pointer-events:none}
+.weg{margin-bottom:calc(5cqw*var(--z));opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s}
+.weg:nth-child(2){transition-delay:.3s}
+.akt-11 .weg{opacity:1;transform:none}
+.weg .wk{font:700 calc(2.8cqw*var(--z)) var(--hand);color:var(--tinte)}
+.weg .wk small{font:600 calc(1.7cqw*var(--z)) var(--mono);color:var(--grau);margin-left:calc(1cqw*var(--z))}
+.spur{position:relative;display:flex;justify-content:space-between;margin-top:calc(1.4cqw*var(--z))}
+.spur::before{content:"";position:absolute;left:3%;right:3%;top:calc(2cqw*var(--z));height:3px;background:var(--haar)}
+.spur .fort{position:absolute;left:3%;top:calc(2cqw*var(--z));height:3px;background:var(--rot);width:0;transition:width 2.4s ease-in-out .6s}
+.akt-11 .spur .fort{width:94%}
+.halt{position:relative;width:23%;text-align:center}
+.halt i{display:block;width:calc(4cqw*var(--z));height:calc(4cqw*var(--z));margin:0 auto;border-radius:50%;background:#fff;border:2px solid var(--tinte);transition:background .3s,border-color .3s}
+.halt b{display:block;font-size:calc(1.9cqw*var(--z));line-height:1.25;margin-top:calc(.8cqw*var(--z))}
+.halt small{display:block;font-size:calc(1.6cqw*var(--z));line-height:1.25;color:var(--grau);margin-top:calc(.3cqw*var(--z))}
+.akt-11 .halt i{background:var(--rot);border-color:var(--rot)}
+.akt-11 .halt:nth-child(2) i{transition-delay:.9s}.akt-11 .halt:nth-child(3) i{transition-delay:1.5s}.akt-11 .halt:nth-child(4) i{transition-delay:2.1s}.akt-11 .halt:nth-child(5) i{transition-delay:2.7s}
+.akt-11 .hirn{opacity:0}
+
+/* 12 Ihr Rahmen */
+.rahmen{position:absolute;inset:0;z-index:4;pointer-events:none}
+.kiste{position:absolute;left:5%;top:12%;width:50%;height:50%;border:2.5px solid var(--tinte);border-radius:14px;background:#fff;padding:calc(2cqw*var(--z));opacity:0;transform:scale(.94);transition:opacity .5s,transform .5s}
+.kiste .ort{font:700 calc(2.3cqw*var(--z)) var(--text)}
+.kiste small{display:block;font-size:calc(1.75cqw*var(--z));color:var(--tinte-2);line-height:1.35;margin-top:calc(.6cqw*var(--z))}
+.wolke{position:absolute;right:5%;top:20%;width:31%;border:2px dashed var(--tinte);border-radius:14px;background:#fff;padding:calc(2cqw*var(--z));opacity:0;transition:opacity .5s .7s}
+.wolke b{font-size:calc(2.2cqw*var(--z));display:block}
+.wolke small{display:block;font-size:calc(1.7cqw*var(--z));color:var(--tinte-2);line-height:1.35;margin-top:calc(.6cqw*var(--z))}
+.frage-pfeil{position:absolute;left:55%;top:36%;width:9%;height:0;border-top:2.5px solid var(--rot);opacity:0;transition:opacity .4s 1.2s}
+.frage-pfeil::after{content:"";position:absolute;right:-2px;top:-7px;border-left:10px solid var(--rot);border-top:6px solid transparent;border-bottom:6px solid transparent}
+.frage-pfeil span{position:absolute;left:0;top:calc(-1*3.6cqw*var(--z));font:600 calc(1.6cqw*var(--z)) var(--mono);color:var(--rot);white-space:nowrap}
+.marken{position:absolute;left:5%;right:5%;top:68%;display:flex;flex-wrap:wrap;gap:calc(1.2cqw*var(--z));justify-content:center}
+.marken span{font:700 calc(2cqw*var(--z)) var(--text);background:#fff;border:1.5px solid var(--tinte);border-radius:999px;padding:calc(.9cqw*var(--z)) calc(1.8cqw*var(--z));opacity:0;transform:translateY(10px);transition:opacity .4s,transform .4s;box-shadow:2px 2px 0 var(--tinte)}
+.akt-12 .kiste{opacity:1;transform:none}
+.akt-12 .wolke,.akt-12 .frage-pfeil{opacity:1}
+.akt-12 .marken span{opacity:1;transform:none}
+.akt-12 .marken span:nth-child(2){transition-delay:1.5s}.akt-12 .marken span:nth-child(3){transition-delay:1.7s}.akt-12 .marken span:nth-child(4){transition-delay:1.9s}.akt-12 .marken span:nth-child(5){transition-delay:2.1s}.akt-12 .marken span:nth-child(1){transition-delay:1.3s}
+.akt-12 .hirn{left:30%;top:45%;width:15%;z-index:5}
+
+/* Schluss */
+.schluss{max-width:860px;margin:0 auto;padding:40px 24px 120px;text-align:center}
+.schluss h2{font-size:clamp(30px,4vw,48px);letter-spacing:-.03em;line-height:1.08}
+.schluss p{font-size:18px;color:var(--tinte-2);margin:14px auto 26px;max-width:40ch}
+.knopf{display:inline-block;background:var(--tinte);color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:14px 26px;box-shadow:4px 4px 0 var(--rot)}
+.knopf.hell{background:#fff;color:var(--tinte);border:1.5px solid var(--tinte);box-shadow:none;margin-left:10px}
+
+@media (max-width:820px){
+  .film{grid-template-columns:minmax(0,1fr);gap:0;padding:0 14px}
+  .buehne-hafen{top:var(--film-oben,0px);height:auto;z-index:5;background:var(--papier);padding:12px 0 10px}
+  .leinwand{--z:1.4;aspect-ratio:640/620}
+  .szenen{padding:4vh 0 20vh}
+  .szene{min-height:62vh;align-items:center;opacity:.4}
+  .szene .karte{background:#fff;border:1.5px solid var(--tinte);border-radius:14px;padding:16px 18px;box-shadow:4px 4px 0 var(--tinte)}
+  .szene p{font-size:16px}
+  .knopf.hell{margin:12px 0 0}
+  .blatt{width:42%}.blatt.b1{left:2%}.blatt.b2{right:2%}.blatt.b3{left:29%}
+  .ein{max-width:60%;white-space:normal}
+  .blase{left:6%!important;right:6%;max-width:none}
+  .blase.antwort{top:66%!important}
+  .raum{width:23%;padding:calc(1cqw*var(--z)) calc(.6cqw*var(--z)) calc(1.2cqw*var(--z))}.raum:nth-child(1){left:1.5%}.raum:nth-child(2){left:26%}.raum:nth-child(3){left:50.5%}.raum:nth-child(4){left:75%}
+  .raum small{display:none}
+  .gemeinsam{left:4%;right:4%}
+  .anschluss{width:31%}
+  .web{width:58%}.anruf{width:36%}
+  .kiste{width:52%;height:52%}.wolke{width:34%}
+  .kapitel{display:none}
+  .frage-pfeil span{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation:none!important;transition-delay:0s!important}
+}
+</style>
+<div class="film-wahl">
+  <p class="wahl-kopf">Was passt zu Ihnen?</p>
+  <div class="wahl" role="group" aria-label="Wer sind Sie?">
+    <button type="button" data-p="team" aria-pressed="true">Büro mit Team</button>
+    <button type="button" data-p="handwerk" aria-pressed="false">Handwerksbetrieb</button>
+    <button type="button" data-p="dienst" aria-pressed="false">Selbständig im Büro</button>
+  </div>
+  <p class="scroll-tipp">Schauen Sie zu, Gernbei in zwölf Szenen<i></i></p>
+</div>
+
+<nav class="kapitel" id="kapitel" aria-label="Szenen"></nav>
+
+<section class="film" aria-label="Wie Gernbei arbeitet">
+  <div class="buehne-hafen">
+    <div class="leinwand akt-0" id="leinwand" aria-hidden="true">
+      <div class="himmel"></div>
+      <svg class="mond" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="#F3E7B3"/></svg>
+      <svg class="sonne" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="#F2B33D"/><g stroke="#F2B33D" stroke-width="2" stroke-linecap="round"><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g></svg>
+      <p class="untertitel" id="untertitel"></p>
+
+      <div id="eingaenge"></div>
+
+      <div class="hirn" id="hirn">
+        <span class="puls"></span>
+        <svg id="hirn-svg" viewBox="0 0 64 52"><g fill="#fff" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M31 6c-3-4-10-4-12 1-5-1-9 3-8 8-5 1-7 7-4 11-3 3-2 9 3 10 0 5 5 8 10 6 2 4 8 5 11 1z"/><path d="M33 6c3-4 10-4 12 1 5-1 9 3 8 8 5 1 7 7 4 11 3 3 2 9-3 10 0 5-5 8-10 6-2 4-8 5-11 1z"/></g><g fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round"><path d="M19 7c1 4 4 5 7 5M11 15c3 0 5 2 5 5M7 26c3-1 6 0 7 3M10 36c2-2 6-2 7 0M20 42c0-3 2-5 5-5"/><path d="M45 7c-1 4-4 5-7 5M53 15c-3 0-5 2-5 5M57 26c-3-1-6 0-7 3M54 36c-2-2-6-2-7 0M44 42c0-3-2-5-5-5"/></g><path d="M22 24L42 20L38 34Z" fill="none" stroke="#D23A26" stroke-width="1.4" stroke-dasharray="2 2"/><circle class="funke" cx="22" cy="24" r="2.4"/><circle class="funke" cx="42" cy="20" r="2.4"/><circle class="funke" cx="38" cy="34" r="2.4"/></svg>
+      </div>
+      <p class="hirn-name" id="hirn-name"></p>
+
+      <div id="blaetter"></div>
+
+      <div class="geraete">
+        <div class="laptop"><div class="deckel"><div class="schirm echt" data-w="1280"><iframe tabindex="-1" title="Gernbei am Rechner" width="1280" height="800" data-g="rechner"></iframe><p class="chip" id="l-text"></p></div></div><div class="fuss"></div></div>
+        <div class="handy"><div class="schirm echt" data-w="402"><iframe tabindex="-1" title="Gernbei am Handy" width="402" height="874" data-g="handy"></iframe><div class="entwurf-karte"><p class="mini-kopf">Entwurf</p><div class="entwurf-text" id="h-text"></div><span class="senden" id="senden">Senden</span></div><span class="finger" id="finger"></span></div></div>
+        <p class="gesendet">Abgeschickt. Von Ihnen.</p>
+      </div>
+
+      <div class="team" id="team"><svg class="faeden" id="faeden" viewBox="0 0 640 560" preserveAspectRatio="none"></svg></div>
+      <p class="blase" id="frage"></p>
+      <p class="blase antwort" id="antwort"></p>
+      <p class="privat"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Persönliches sieht nur jeder selbst</p>
+
+      <div class="bereiche" id="bereiche"></div>
+
+      <svg class="netz" id="netz" viewBox="0 0 640 560" preserveAspectRatio="none"></svg>
+      <div id="anschluesse"></div>
+      <p class="freigabe">Jede Verbindung nur mit Ihrer Freigabe</p>
+
+      <div class="kunden">
+        <div class="web"><div class="leiste"><i></i><i></i><i></i>ihre-website.de</div><div class="inhalt"><p class="platzhalter"></p><p class="platzhalter kurz"></p><p class="platzhalter"></p><p class="platzhalter kurz"></p>
+          <div class="chat"><p class="kopfzeile">Fragen an Ihren Betrieb</p><p class="frage">Muss ich dafür etwas installieren?</p><p class="antwort">Läuft im Browser, am Rechner oder am Handy.<small>Quelle: Häufige Fragen</small></p></div></div></div>
+        <div class="anruf"><div class="schirm"><p class="klingelt">Anruf bei Ihrem Betrieb<small>KI-Telefonassistent</small></p><p class="sagt">Rufen Sie mich bitte zurück. Aber erst ab 16 Uhr.</p><ul><li>Sagt zuerst, dass er eine KI ist</li><li>Nummer Ziffer für Ziffer bestätigt</li><li>Rückrufwunsch: ab 16 Uhr</li></ul></div></div>
+        <p class="namen"><span>Website-Chatbot</span><span>KI-Telefonassistent</span></p>
+      </div>
+
+      <ul class="nachts" id="nachts"></ul>
+      <div class="bericht" id="bericht"></div>
+
+      <div class="stern" id="stern"><svg class="strahlen" id="strahlen" viewBox="0 0 640 560" preserveAspectRatio="none"></svg></div>
+      <div class="beispiel" id="beispiel"><p class="b-titel" id="b-titel"></p><ul id="b-liste"></ul></div>
+
+      <div class="wege" id="wege"></div>
+
+      <div class="rahmen">
+        <div class="kiste"><p class="ort">Ihr Bereich bei Amazon in der EU</p><small>In Stockholm, nur für Ihren Betrieb. Ihre Unterlagen, Notizen und Dokumente liegen hier, nachts gesichert.</small></div>
+        <span class="frage-pfeil"><span>die Frage</span></span>
+        <div class="wolke"><b>Anthropic</b><small>Über das eigene Claude-Team Ihres Betriebs. Anthropic verarbeitet die Frage auch in den USA.</small></div>
+        <div class="marken"><span>Am Rechner und am Handy</span><span>Persönlich eingerichtet aus Würzburg</span><span>Ihre Arbeit nehmen Sie mit</span><span>Monatlich kündbar</span><span>Preis auf Anfrage</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="szenen" id="szenen">
+    <article class="szene" data-akt="1" data-titel="Hinein"><div class="karte"><p class="nr">Szene 1 · Hinein</p><h2>Alles, was ankommt, behält Gernbei.</h2><p id="t1"></p></div></article>
+    <article class="szene" data-akt="2" data-titel="Heraus"><div class="karte"><p class="nr">Szene 2 · Heraus</p><h2>Daraus entsteht die Arbeit. In wenigen Minuten.</h2><p id="t2"></p></div></article>
+    <article class="szene" data-akt="3" data-titel="Zweiter Blick"><div class="karte"><p class="nr">Szene 3 · Zweiter Blick</p><h2>Gernbei prüft nach, bevor Sie es sehen.</h2><p>Summen nachgerechnet, Fristen gegen Zusagen gelegt, jede Angabe mit Fundstelle. Was fehlt, fragt Gernbei nach, statt zu raten.</p></div></article>
+    <article class="szene" data-akt="4" data-titel="Abschicken"><div class="karte"><p class="nr">Szene 4 · Abschicken</p><h2>Sie entscheiden und schicken ab.</h2><p>Am Rechner im Büro oder am Handy unterwegs. Der Entwurf liegt fertig da, das letzte Wort haben Sie.</p></div></article>
+    <article class="szene" data-akt="5" data-titel="Das Team"><div class="karte"><p class="nr">Szene 5 · Das ganze Team</p><h2 id="h5"></h2><p id="t5"></p><p class="klein">Jeder Betrieb hat einen Peter. Was er festgehalten hat, bleibt, auch wenn er geht.</p></div></article>
+    <article class="szene" data-akt="6" data-titel="Wer sieht was"><div class="karte"><p class="nr">Szene 6 · Wer sieht was</p><h2>Jeder hat seinen Bereich. Geteilt wird, was Sie freigeben.</h2><p>Persönliche Gespräche, Notizen und Dokumente sieht nur die Person selbst. Geteilt wird mit <em>Ja, teilen</em>, an das ganze Büro oder eine Gruppe. Die Geschäftsleitung liest alle Projekte mit, die Assistenz verteilt aus ihrem Eingangskorb.</p></div></article>
+    <article class="szene" data-akt="7" data-titel="Anschlüsse"><div class="karte"><p class="nr">Szene 7 · Anschlüsse</p><h2>Gernbei arbeitet mit den Programmen, die Sie schon haben.</h2><p>Microsoft 365 mit Outlook, Kalender, To Do, OneDrive, SharePoint und Excel. Ohne Microsoft Ihr Postfach bei Gmail, GMX oder WEB.DE. Dazu Canva, die Internetsuche und Ihr Mikrofon.</p><p class="klein">Gernbei liest nur, wenn Sie danach fragen, und legt Entwürfe ab. Abschicken und Löschen bleiben bei Ihnen.</p></div></article>
+    <article class="szene" data-akt="8" data-titel="Für Ihre Kunden"><div class="karte"><p class="nr">Szene 8 · Für Ihre Kunden</p><h2>Und Ihre Kunden bekommen Antworten, auch wenn Sie unterwegs sind.</h2><p>Der Website-Chatbot antwortet aus Ihrer Seite, mit Quelle. Der KI-Telefonassistent nimmt ab, sagt, dass er eine KI ist, und notiert den Rückrufwunsch. Einzeln oder dazu.</p><p class="klein">Der Telefonassistent ist im Probebetrieb, für Ihren Betrieb auf Anfrage.</p></div></article>
+    <article class="szene" data-akt="9" data-titel="Über Nacht"><div class="karte"><p class="nr">Szene 9 · Über Nacht</p><h2>Über Nacht arbeitet Gernbei weiter. Morgens liegt der Bericht da.</h2><p>Nachts geprüft und gesichert, neue Fähigkeiten kommen von selbst, vorgemerkte Aufträge laufen weiter, auch bei zugeklapptem Laptop. Morgens sehen Sie die Fristen der nächsten sieben Tage und was liegen geblieben ist.</p></div></article>
+    <article class="szene" data-akt="10" data-titel="Alles"><div class="karte"><p class="nr">Szene 10 · Alles</p><h2>Das alles tut Gernbei für Sie.</h2><p>Tippen Sie auf einen Bereich, dann sehen Sie Beispiele aus Ihrem Alltag. <a id="alles-link" href="#">Alles im Einzelnen →</a></p></div></article>
+    <article class="szene" data-akt="11" data-titel="Einzug"><div class="karte"><p class="nr">Szene 11 · So fangen Sie an</p><h2 id="h11"></h2><p id="t11"></p></div></article>
+    <article class="szene" data-akt="12" data-titel="Ihr Rahmen"><div class="karte"><p class="nr">Szene 12 · Ihr Rahmen</p><h2>Ihr Bereich, Ihre Arbeit, Ihr Tempo.</h2><p>Ihre Unterlagen liegen bei Amazon in der EU, in Stockholm. Was Gernbei für eine Antwort liest, verarbeitet Anthropic auch in den USA; Amazon und Anthropic sind amerikanische Unternehmen. Eingerichtet wird persönlich aus Würzburg, Ihre Arbeit bekommen Sie jederzeit als Paket.</p><p class="klein">Den Preis nennt Ihnen Kurt König im Gespräch, passend zu Ihrem Betrieb.</p></div></article>
+  </div>
+</section>
+
+<section class="schluss">
+  <h2>Bringen Sie ein Beispiel mit.</h2>
+  <p>Einen Zettel, eine Kundenmail oder eine Frage, die bei Ihnen immer wieder kommt. Wir schauen gemeinsam, was Gernbei daraus macht.</p>
+  <a class="knopf" href="#kontakt">Gespräch vereinbaren</a><a class="knopf hell" href="ausprobieren.html">Selbst ausprobieren</a>
+</section>
+</template>
+<script>
+(function(){ var h = document.getElementById("film"), w = h.attachShadow({mode:"open"});
+  w.appendChild(document.getElementById("film-vorlage").content.cloneNode(true));
+  window.FILM_WURZEL = w; window.FILM_BASIS = ""; })();
+</script>
+<script>
+(function(){
+  var I = {
+    zettel:'<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+    mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    tel:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
+    foto:'<path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+    mikro:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+    plan:'<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>',
+    ms:'<rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/>',
+    pinsel:'<path d="M14 4l6 6-8 8H6v-6z"/><path d="M12 6l6 6"/>',
+    lupe:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/>',
+    datei:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/>',
+    schloss:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'
+  };
+  var HAKEN = '<svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>';
+  var KOPF = '<path d="M12 59 Q14 44 30 44 Q46 44 48 59" fill="#fff" stroke="#111" stroke-width="2.2" stroke-linecap="round"/><circle cx="30" cy="25" r="13" fill="#fff" stroke="#111" stroke-width="2.2"/><circle cx="25" cy="24" r="1.6" fill="#111"/><circle cx="35" cy="24" r="1.6" fill="#111"/><path d="M24.5 30 Q30 35 35.5 30" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/>';
+  var HAAR = {
+    ottilie:'<circle cx="30" cy="9" r="5" fill="#3A3B40"/><path d="M17.5 22 Q19 12 30 12 Q41 12 42.5 22" fill="none" stroke="#3A3B40" stroke-width="4" stroke-linecap="round"/>',
+    rainer:'<path d="M17.3 26 Q16.5 16 21 13.5M42.7 26 Q43.5 16 39 13.5" fill="none" stroke="#9A9A9F" stroke-width="3.2" stroke-linecap="round"/><circle cx="25" cy="24" r="4.2" fill="none" stroke="#111" stroke-width="1.6"/><circle cx="35" cy="24" r="4.2" fill="none" stroke="#111" stroke-width="1.6"/>',
+    katrin:'<path d="M16.5 21 Q16.5 8 30 8 Q43.5 8 43.5 21 Z" fill="#F2C94C" stroke="#111" stroke-width="2"/><path d="M13 21.5 H47" stroke="#111" stroke-width="2.4" stroke-linecap="round"/>',
+    lukas:'<path d="M17.5 20 L20 12.5 L24 16.5 L27.5 10.5 L31 15.5 L35 10.5 L37.5 16 L42 13 L42.5 20" fill="#6B4E3A" stroke="#111" stroke-width="1.8" stroke-linejoin="round"/>',
+    renate:'<path d="M17.5 21 Q22 13 30 14 Q38 13 42.5 21" fill="#B5703F" stroke="#111" stroke-width="1.6"/>'
+  };
+  function figur(k){ return '<svg class="figur" viewBox="0 0 60 60">' + KOPF + HAAR[k] + '</svg>'; }
+
+  // Nur Beispiele, die auf gernbei.de oder in der Faehigkeitenliste (Stand 122) belegt sind
+  var P = {
+    team:{
+      wer:"Architekturbüro, erfunden", hirn:"DAS GEDÄCHTNIS DES BÜROS", link:"firmengedaechtnis.html",
+      t1:"Der Plan von Tobias, das Protokoll der Baubesprechung, die Mail der Gemeinde, das Foto vom Flipchart. Jeder legt ab, an seinem Gerät.",
+      t2:"Für jede Person die Büroassistenz: Protokoll mit den Zusagen, Angebot wie beim letzten Projekt, die Mail an die Gemeinde im Briefkopf des Büros.",
+      ein:[["plan","Plan von Tobias","Bauteil B, Index C"],["zettel","Protokoll Baubesprechung","Grundschule"],["mail","Mail der Gemeinde","Tannhofen"],["foto","Foto vom Flipchart","Teamtag"],["tel","Anruf beim Bauherrn","Tagesklinik"]],
+      aus:[["Protokoll Baubesprechung",["Zusagen der anderen","mit Frist"],"Jede Zusage mit Fundstelle"],
+           ["Angebot wie beim letzten Projekt",["auch wenn Katrin es schrieb","Briefkopf des Büros"],"Summen geprüft vor dem Versand"],
+           ["Mail an die Gemeinde",["an die richtige Stelle","wer in Kopie muss"],"Nach der Regel des Bauamts"]],
+      laptop:"Protokoll der Baubesprechung Grundschule liegt im Projekt, die Zusagen als Absprachen mit Frist.",
+      handy:"Planstand Bauteil B anbei, das Bauamt in Kopie.",
+      nacht:["Neue Fähigkeiten eingespielt","Ihre Daten geprüft und gesichert","Fristen aller Projekte durchgesehen"],
+      morgen:["Für Sie steht an: zwei Absprachen bis Freitag","Sie haben angestoßen: Frag Lukas, ob der Plan gilt","Frist Tagesklinik: 18.12."],
+      gruppen:{
+        "Im Team":["Mit dem Büro teilen, mit Absender","Zurück aus dem Urlaub: was das Team notiert hat","Frag Lukas, ob der Plan gilt"],
+        "Wer sieht was":["Jeder in seinem Bereich","Die Chefin liest alle Projekte mit","Die Assistenz verteilt aus ihrem Eingangskorb"],
+        "Festhalten":["Flipchart als Protokoll","Anrufe mit Erinnerung","Ins Handy sprechen, am Rechner weiter"],
+        "Schreiben":["Mail an die Gemeinde","Folien für die Bauherrenbesprechung","Vorlage für die Partnerrunde"],
+        "Nachschlagen":["Wie machen wir bei uns den Brandschutznachweis?","Warum beim Sonnenhof Variante B?","Wer weiß das bei uns?"],
+        "Überblick":["Die Fristen aller Projekte","Wo steht die Tagesklinik?","Was haben die anderen geteilt?"],
+        "Zweiter Blick":["Geprüft vor dem Versand","Einwände für die Partnerrunde","Namen Dritter unkenntlich"],
+        "Kunden gewinnen":["Das fertige Projekt als Referenz","Stellenanzeige für LinkedIn","Website-Check"],
+        "Auf Ihr Büro eingestellt":["Vorlagen des Büros als Vorbild","Ihre Arbeitsweise einmal gesagt","Eigene Regeln je Projekt"],
+        "Im Hintergrund":["Morgens, was für Sie ansteht","Outlook, SharePoint, OneDrive","Neue Fähigkeiten von selbst"]
+      },
+      h11:"So zieht das Firmengedächtnis bei Ihnen ein.",
+      t11:"Zwei Wege: bei sich anfangen und Schritt für Schritt erweitern, oder gleich das ganze Haus in rund drei Monaten. Die erste Stufe, die KI-Standortbestimmung, ist über die BAFA förderfähig.",
+      wege:[["Der kleine Weg","Sie bestimmen das Tempo",[["Ein Zugang für Sie","Ihre eigene Assistenz"],["Ihre Führungskräfte","jeder mit eigenem Bereich"],["Alle ins Firmengedächtnis","mit Schulung beim Umstieg"]]],
+            ["Der direkte Weg","rund drei Monate",[["Standortbestimmung","über die BAFA förderfähig"],["Monat 1","Zugänge, wichtigste Abläufe"],["Monat 2","Schulung, Ihr Bestand hinein"],["Monat 3","Feinschliff, Übergabe"]]]]
+    },
+    handwerk:{
+      wer:"Elektrobetrieb, erfunden", hirn:"IHR GEDÄCHTNIS", link:"handwerk.html",
+      t1:"Das Foto vom Regiezettel, der Anruf von Herrn Huber, das Aufmaß, gesprochen im Transporter. Am Rechner oder am Handy.",
+      t2:"Aus dem Zettel wird der Regiebericht, aus dem Anruf die Erinnerung an den Rückruf, aus Stichworten die Mail an die Kundin.",
+      ein:[["foto","Foto vom Regiezettel","am Handy, auf der Baustelle"],["tel","Herr Huber hat angerufen","Rückruf bis Freitag"],["mikro","Aufmaß, gesprochen","im Transporter"],["mail","Mail vom Netzbetreiber","Zählerwechsel"],["zettel","Stundenzettel von Andrzej","KW 46"]],
+      aus:[["Regiebericht R001, Berger",["Peter 3,5 Std., Jonas 3 Std.","Material übernommen"],"Zahlen vom Zettel zum Prüfen markiert"],
+           ["Angebot wie bei Huber",["Nummer fortlaufend","Ihr Briefkopf"],"Endsumme und Steuersatz nachgerechnet"],
+           ["Mail an Frau Rebhan",["Termin Donnerstagvormittag","Ihre Signatur darunter"],"Adresse aus Ihrem Kundenstamm"]],
+      laptop:"Regiebericht R001 für Berger liegt unter Dokumente, als Word und PDF.",
+      handy:"Frau Rebhan, wir kommen Donnerstagvormittag. Passt Ihnen das?",
+      nacht:["Neue Fähigkeiten eingespielt","Ihre Daten geprüft und gesichert","Fristen der Woche durchgesehen"],
+      morgen:["Fristen der nächsten sieben Tage: Angebot Huber","Liegen geblieben: Rückruf Herr Huber","Was steht heute an? holt Ihren Tag"],
+      gruppen:{
+        "Festhalten":["Auftrag in einem Satz","Regiezettel vom Foto","Aufmaß vor Ort gesprochen, mit Rechenweg"],
+        "Schreiben":["Angebot wie beim letzten Mal","Zahlungserinnerung","Auftragszettel für den Monteur"],
+        "Handwerksblätter":["Regiebericht und Abnahmeprotokoll","Fotodokumentation","Wartungsangebot für Heizungsbetriebe"],
+        "Nachschlagen":["Wie haben wir beim Bad Schmitt abgedichtet?","Warum beim Dach Müller Tonziegel?","Jede Antwort mit Fundstelle"],
+        "Überblick":["Was steht heute an?","Wem habe ich was zugesagt?","Der Monat im Rückblick"],
+        "Zweiter Blick":["Endsumme nachgerechnet","Hinweis auf Gerüst bauseits","Einwände gegen den zweiten Transporter"],
+        "Kunden gewinnen":["Beitrag fürs Google-Profil","Stellenanzeige für Facebook","Bewertungscode zum Scannen"],
+        "Auf Sie eingestellt":["Ihr altes Angebot als Vorbild","14 Tage Zahlungsziel, einmal gesagt","Drei Aufträge vormerken"],
+        "Im Hintergrund":["Morgens die Fristen der Woche","Neue Fähigkeiten von selbst","Auf Wunsch Outlook und Excel"]
+      },
+      h11:"So fangen Sie an.",
+      t11:"Ein Gespräch, Ihr eigenes Beispiel, dann richte ich Ihren Zugang persönlich ein, mit Grundkurs. Danach arbeiten Sie am Rechner und am Handy.",
+      wege:[["Ihr Weg hinein","persönlich, aus Würzburg",[["Gespräch","mit Ihrem Beispiel"],["Angebot","alles einzeln genannt"],["Einrichtung","mit Grundkurs"],["Loslegen","am Rechner und am Handy"]]]]
+    },
+    dienst:{
+      wer:"Freiberufler, erfunden", hirn:"IHR GEDÄCHTNIS", link:"dienstleister.html",
+      t1:"Notizen vom Jour fixe, die Kundenmail, ein Anruf, das Foto vom Flipchart, eine Sprachnotiz zwischen zwei Terminen.",
+      t2:"Aus Ihren Notizen wird der Statusbericht, aus dem Monat die Rechnungsentwürfe, aus drei Stichworten die Antwort an die Kundin.",
+      ein:[["zettel","Notizen vom Jour fixe","Projekt Lauterhain"],["mail","Mail von Frau Lindner","Bitte um Stand"],["tel","Anruf von Frau Falk","über LinkedIn"],["foto","Foto vom Flipchart","Workshop"],["mikro","Sprachnotiz","zwischen zwei Terminen"]],
+      aus:[["Statusbericht KW 46",["Gesamtampel als Vorschlag","Für den Lenkungskreis"],"Drei Lücken benannt statt erfunden"],
+           ["Rechnungen Oktober",["Aus Ihren Notizen","Nummer fortlaufend"],"Summen und leere Felder geprüft"],
+           ["Antwort an Frau Falk",["Interesse, ab Februar zwei Tage","In Ihrem Ton"],"Tagessatz offen, wie gewünscht"]],
+      laptop:"Statusbericht für Frau Lindner, KW 46, eine Seite in Ihrem Aufbau.",
+      handy:"Frau Falk, Interesse habe ich, ab Februar zwei Tage.",
+      nacht:["Neue Fähigkeiten eingespielt","Ihre Daten geprüft und gesichert","Fristen der Woche durchgesehen"],
+      morgen:["Fristen der nächsten sieben Tage: Statusbericht Lindner","Liegen geblieben: Antwort an Frau Falk","Was steht heute an? holt Ihren Tag"],
+      gruppen:{
+        "Festhalten":["Neue Sache in einem Satz, mit Frist","Protokoll vom Jour fixe","Gesprächsnotiz nach dem Termin"],
+        "Schreiben":["Antwort an den Mandanten in Ihrem Ton","Angebot wie für den letzten Kunden","Workshop mit Agenda"],
+        "Je nach Beruf":["Projektleitung: Statusbericht","Versicherung: Bestandswechsel","Gutachten: Befund vom Ortstermin"],
+        "Nachschlagen":["Wie habe ich das Gutachten Wolf aufgebaut?","Was hatten wir zum Honorar vereinbart?","Jede Antwort mit Fundstelle"],
+        "Überblick":["Ihr Tag vor dem ersten Termin","Zusagen der Woche","Stand einer Sache in drei Zeilen"],
+        "Zweiter Blick":["Summen und leere Felder geprüft","Was Käufer zuerst fragen","Einwände gegen Ihren Plan"],
+        "Kunden gewinnen":["LinkedIn-Beitrag","Fachneuigkeit mit amtlicher Quelle","Website-Check"],
+        "Auf Sie eingestellt":["Ihr altes Exposé als Vorbild","kürzer, förmlicher, einmal gesagt","Drei Aufträge vormerken"],
+        "Im Hintergrund":["Morgens die Fristen der Woche","Neue Fähigkeiten von selbst","Auf Wunsch Outlook und Kalender"]
+      },
+      h11:"So fangen Sie an.",
+      t11:"Ein Gespräch, Ihr eigenes Beispiel, dann richte ich Ihren Zugang persönlich ein, mit Grundkurs. Danach arbeiten Sie am Rechner und am Handy.",
+      wege:[["Ihr Weg hinein","persönlich, aus Würzburg",[["Gespräch","mit Ihrem Beispiel"],["Angebot","alles einzeln genannt"],["Einrichtung","mit Grundkurs"],["Loslegen","am Rechner und am Handy"]]]]
+    }
+  };
+  // Szene 5: immer das Firmengedaechtnis (Haldenmeyer & Sorg, erfunden)
+  var TEAM = [
+    {k:"ottilie",n:"Ottilie",r:"Partnerin",x:14,y:30},{k:"rainer",n:"Rainer",r:"Partner",x:32,y:21},
+    {k:"katrin",n:"Katrin",r:"Projektleitung",x:50,y:18},{k:"lukas",n:"Lukas",r:"neu im Büro",x:68,y:21},
+    {k:"renate",n:"Renate",r:"Büroleitung",x:86,y:30}
+  ];
+  var FRAGEN = [
+    {wer:3,f:"Wie machen wir bei uns den Brandschutznachweis?",a:"Fünf Schritte, so wie Peter Brandt sie festgehalten hat.",q:"Quelle: Projektnotiz Schulstraße 14, März 2024"},
+    {wer:1,f:"Wo steht die Tagesklinik, und was ist offen?",a:"Frist 18.12., fünf offene Punkte mit den Zuständigen.",q:"Quelle: Projektstand vom 13.11."},
+    {wer:4,f:"Welche Fristen laufen in den nächsten vier Wochen?",a:"Alle Termine und Fristen, über alle Projekte.",q:"Quelle: Protokolle und Zusagen aller Projekte"}
+  ];
+  // Szene 6: Raeume (Haldenmeyer & Sorg)
+  var RAEUME = [
+    {k:"ottilie",n:"Ottilie",r:"Partnerin",rolle:"liest alle Projekte mit"},
+    {k:"katrin",n:"Katrin",r:"Projektleitung"},
+    {k:"lukas",n:"Lukas",r:"neu im Büro"},
+    {k:"renate",n:"Renate",r:"Büroleitung",rolle:"Eingangskorb"}
+  ];
+  // Szene 7: Anschluesse nach aussen (Faehigkeitenliste, Zeile 44 und 59)
+  var ANSCHLUSS = [
+    {i:"ms",t:"Microsoft 365",s:"Outlook, Kalender, To Do, OneDrive, SharePoint, Excel",x:22,y:18},
+    {i:"mail",t:"Ihr Postfach",s:"Gmail, GMX, WEB.DE: Entwürfe",x:78,y:18},
+    {i:"datei",t:"Ihre Dateien",s:"Word, Excel, PowerPoint, PDF, Fotos",x:16,y:52},
+    {i:"pinsel",t:"Canva",s:"auf Wunsch verbunden",x:84,y:52},
+    {i:"lupe",t:"Internetsuche",s:"auf Wunsch freigeschaltet",x:26,y:84},
+    {i:"mikro",t:"Ihr Mikrofon",s:"sprechen statt tippen",x:74,y:84}
+  ];
+
+  var D = window.FILM_WURZEL || document, BASIS = window.FILM_BASIS === undefined ? "../kurt-website-repo/" : window.FILM_BASIS;
+  var lw = D.getElementById("leinwand");
+  var ruhig = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var PROD = "team", AKT = 0, uhren = [];
+  function spaeter(f, ms){ uhren.push(setTimeout(f, ruhig ? 0 : ms)); }
+  function stopp(){ uhren.forEach(clearTimeout); uhren = []; }
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+  function svgEl(n, a){ var e = document.createElementNS("http://www.w3.org/2000/svg", n); for (var k in a) e.setAttribute(k, a[k]); return e; }
+
+  function fuellen(){
+    var d = P[PROD];
+    D.getElementById("t1").textContent = d.t1;
+    D.getElementById("t2").textContent = d.t2;
+    D.getElementById("hirn-name").textContent = d.hirn;
+    D.getElementById("h5").textContent = PROD === "team" ? "Jeder im Team fragt an seinem Gerät." : "Und wenn das ganze Team mitarbeitet:";
+    D.getElementById("t5").innerHTML = PROD === "team"
+      ? "Die Antwort kommt aus dem gemeinsamen Gedächtnis des Büros, mit Quelle. Für jede Person die Büroassistenz, dazu geteilte Unterlagen und Absprachen."
+      : 'Jeder fragt an seinem Gerät, die Antwort kommt aus dem gemeinsamen Gedächtnis des Büros, mit Quelle. Das ist <span class="gb">Gern<b>bei</b></span> Firmengedächtnis.';
+    D.getElementById("h11").textContent = d.h11;
+    D.getElementById("t11").textContent = d.t11;
+    D.getElementById("alles-link").setAttribute("href", d.link);
+    D.getElementById("eingaenge").innerHTML = d.ein.map(function(e){
+      return '<div class="ein"><svg viewBox="0 0 24 24">' + I[e[0]] + '</svg><span>' + esc(e[1]) + '<small>' + esc(e[2]) + '</small></span></div>'; }).join("");
+    Array.prototype.forEach.call(D.querySelectorAll(".ein"), function(k){
+      var r = lw.getBoundingClientRect(), kr = k.getBoundingClientRect();
+      k.style.setProperty("--zum-hirn", "translate(" + ((r.left + r.width/2) - (kr.left + kr.width/2)) + "px," + ((r.top + r.height/2) - (kr.top + kr.height/2)) + "px)");
+    });
+    D.getElementById("blaetter").innerHTML = d.aus.map(function(b, i){
+      return '<div class="blatt b' + (i+1) + '"><span class="stempel">geprüft</span><b>' + esc(b[0]) + '</b>' + b[1].map(function(z){ return '<span class="zeile">' + esc(z) + '</span>'; }).join("") +
+        '<p class="haken">' + HAKEN + esc(b[2]) + '</p></div>'; }).join("");
+    D.getElementById("l-text").textContent = d.laptop;
+    D.getElementById("h-text").textContent = d.handy;
+    D.getElementById("nachts").innerHTML = d.nacht.map(function(z){ return "<li>" + esc(z) + "</li>"; }).join("");
+    D.getElementById("bericht").innerHTML = '<p class="bk">Morgenbericht</p><b>Guten Morgen.</b><ul>' + d.morgen.map(function(z){ return "<li>" + esc(z) + "</li>"; }).join("") + "</ul>";
+    D.getElementById("wege").innerHTML = d.wege.map(function(w){
+      return '<div class="weg"><p class="wk">' + esc(w[0]) + '<small>' + esc(w[1]) + '</small></p><div class="spur"><span class="fort"></span>' +
+        w[2].map(function(h){ return '<div class="halt"><i></i><b>' + esc(h[0]) + '</b><small>' + esc(h[1]) + '</small></div>'; }).join("") + '</div></div>'; }).join("");
+    sternBauen();
+    untertitel();
+  }
+  function untertitel(){
+    var team = AKT === 5 || AKT === 6;
+    D.getElementById("untertitel").textContent = team ? P.team.wer : AKT >= 7 && AKT !== 10 ? "" : P[PROD].wer;
+  }
+
+  // Szene 4: die echte Oberflaeche im Laptop und im Handy
+  var GP = {team:"firmengedaechtnis", handwerk:"handwerk", dienst:"dienstleister"}, geladen = "";
+  function geraeteLaden(){
+    if (geladen === PROD) return; geladen = PROD;
+    D.querySelectorAll(".schirm.echt iframe").forEach(function(f){
+      var g = f.getAttribute("data-g"), wer = PROD === "team" ? (g === "rechner" ? "&wer=lukas" : "&wer=katrin") : "";
+      f.src = BASIS + "ausprobieren/index.html?p=" + GP[PROD] + "&g=" + g + wer;
+    });
+  }
+  function skaliere(){
+    D.querySelectorAll(".schirm.echt").forEach(function(sc){ var f = sc.querySelector("iframe"); f.style.transform = "scale(" + (sc.clientWidth / +sc.getAttribute("data-w")) + ")"; });
+  }
+
+  // 5 Team
+  function teamBauen(){
+    var t = D.getElementById("team"), f = D.getElementById("faeden");
+    TEAM.forEach(function(p, i){
+      var el = document.createElement("div"); el.className = "kollege"; el.style.left = p.x + "%"; el.style.top = p.y + "%"; el.style.transitionDelay = (i * .09) + "s";
+      el.innerHTML = figur(p.k) + '<b>' + p.n + '</b><small>' + p.r + '</small>';
+      t.appendChild(el);
+      var x = p.x * 6.4, y = p.y * 5.6 + 40, hx = 320, hy = .62 * 560 - 34;
+      f.appendChild(svgEl("path", {d:"M" + x + " " + y + " Q" + ((x + hx) / 2) + " " + (y + 80) + " " + hx + " " + hy}));
+    });
+  }
+  var fragNr = 0;
+  function teamSpielen(){
+    var q = FRAGEN[fragNr % FRAGEN.length]; fragNr++;
+    var k = D.querySelectorAll(".kollege"), pf = D.querySelectorAll("#faeden path");
+    var fr = D.getElementById("frage"), an = D.getElementById("antwort");
+    k.forEach(function(x){ x.classList.remove("fragt"); }); pf.forEach(function(x){ x.classList.remove("zieht"); });
+    fr.classList.remove("zeigt"); an.classList.remove("zeigt");
+    var p = TEAM[q.wer];
+    fr.innerHTML = '<b>' + p.n + ':</b> ' + esc(q.f);
+    fr.style.left = Math.min(Math.max(p.x - 20, 3), 53) + "%"; fr.style.top = (p.y + 17) + "%";
+    an.innerHTML = esc(q.a) + '<small>' + esc(q.q) + '</small>';
+    an.style.left = "29%"; an.style.top = "74%";
+    spaeter(function(){ k[q.wer].classList.add("fragt"); fr.classList.add("zeigt"); }, 500);
+    spaeter(function(){ pf[q.wer].classList.add("zieht"); lw.classList.add("schluckt"); }, 1500);
+    spaeter(function(){ an.classList.add("zeigt"); lw.classList.remove("schluckt"); }, 2900);
+    spaeter(teamSpielen, 7600);
+  }
+
+  // 6 Wer sieht was
+  function bereicheBauen(){
+    var b = D.getElementById("bereiche");
+    b.innerHTML = RAEUME.map(function(r){
+      return '<div class="raum">' + figur(r.k) + '<b>' + r.n + '</b><small>' + r.r + '</small>' + (r.rolle ? '<span class="rolle">' + r.rolle + '</span>' : '') +
+        '<p class="zu"><svg viewBox="0 0 24 24">' + I.schloss + '</svg>nur für ' + (r.k === "ottilie" ? "sie" : r.n) + '</p></div>'; }).join("") +
+      '<div class="gemeinsam"><svg class="mini-hirn" viewBox="0 0 64 52">' + D.getElementById("hirn-svg").innerHTML + '</svg><div><b>Gemeinsam im Büro</b><ul><li>Projekte</li><li>Absprachen</li><li>Gruppen</li><li>Geteilte Unterlagen</li></ul></div></div>' +
+      '<span class="teilen">Plan Bauteil B: Ja, teilen</span>' +
+      '<svg class="blick" viewBox="0 0 640 560" preserveAspectRatio="none"><path d="M92 210 C92 270 150 320 210 330"/></svg>';
+  }
+
+  // 7 Anschluesse
+  function anschluesseBauen(){
+    var a = D.getElementById("anschluesse"), n = D.getElementById("netz");
+    a.innerHTML = ANSCHLUSS.map(function(x, i){
+      return '<div class="anschluss" style="left:' + x.x + '%;top:' + x.y + '%;transition-delay:' + (i * .1) + 's"><p class="k"><svg viewBox="0 0 24 24">' + I[x.i] + '</svg>' + esc(x.t) + '</p><small>' + esc(x.s) + '</small></div>'; }).join("");
+    ANSCHLUSS.forEach(function(x){ n.appendChild(svgEl("line", {x1:320, y1:280, x2:x.x * 6.4, y2:x.y * 5.6})); });
+  }
+
+  // 10 Sternbild
+  var sternAn = -1, nutzer = false, gezeigt = 0;
+  function sternBauen(){
+    var s = D.getElementById("stern"), st = D.getElementById("strahlen");
+    Array.prototype.forEach.call(s.querySelectorAll(".knoten"), function(x){ x.remove(); });
+    st.innerHTML = "";
+    var namen = Object.keys(P[PROD].gruppen), n = namen.length;
+    namen.forEach(function(name, i){
+      var w = -Math.PI / 2 + i * 2 * Math.PI / n, x = 50 + 35 * Math.cos(w), y = 50 + 40 * Math.sin(w);
+      var b = document.createElement("button"); b.type = "button"; b.className = "knoten"; b.textContent = name;
+      b.style.left = x + "%"; b.style.top = y + "%"; b.style.transitionDelay = (i * .07) + "s";
+      b.onclick = function(){ nutzer = true; stopp(); zeigeGruppe(i); };
+      s.appendChild(b);
+      st.appendChild(svgEl("line", {x1:320, y1:280, x2:x * 6.4, y2:y * 5.6}));
+    });
+    sternAn = -1; gezeigt = 0;
+  }
+  function zeigeGruppe(i){
+    var namen = Object.keys(P[PROD].gruppen), name = namen[i];
+    D.querySelectorAll(".knoten").forEach(function(k, j){ k.classList.toggle("an", j === i); });
+    D.querySelectorAll("#strahlen line").forEach(function(l, j){ l.classList.toggle("an", j === i); });
+    D.getElementById("b-titel").textContent = name;
+    var ul = D.getElementById("b-liste");
+    ul.innerHTML = P[PROD].gruppen[name].map(function(z){ return "<li>" + esc(z) + "</li>"; }).join("");
+    var erst = gezeigt < Object.keys(P[PROD].gruppen).length;
+    ul.querySelectorAll("li").forEach(function(li, j){ spaeter(function(){ li.classList.add("da"); }, 400 + j * (erst ? 1100 : 600)); });
+    sternAn = i; gezeigt++;
+  }
+  function sternLauf(){
+    if (AKT !== 10 || nutzer) return;
+    var erst = gezeigt < Object.keys(P[PROD].gruppen).length;
+    zeigeGruppe((sternAn + 1) % Object.keys(P[PROD].gruppen).length);
+    spaeter(sternLauf, erst ? 7000 : 5200);
+  }
+
+  // Szenen umschalten
+  function akt(n){
+    if (n === AKT) return;
+    stopp(); AKT = n;
+    lw.className = "leinwand akt-" + n;
+    D.querySelectorAll(".blase").forEach(function(b){ b.classList.remove("zeigt"); });
+    untertitel();
+    D.querySelectorAll("#kapitel a").forEach(function(a){ a.classList.toggle("an", +a.getAttribute("data-akt") === n); });
+    D.getElementById("kapitel").classList.toggle("an", n > 0);
+    if (n === 1) spaeter(function(){ lw.classList.add("geschluckt", "schluckt"); }, 1500);
+    if (n >= 2 && n <= 6) geraeteLaden();
+    if (n === 4) {
+      var f = D.getElementById("finger"), s = D.getElementById("senden");
+      s.classList.remove("tippt");
+      spaeter(function(){ var r = s.getBoundingClientRect(), h = s.parentNode.getBoundingClientRect();
+        f.style.left = (r.left - h.left + r.width/2 - f.offsetWidth/2) + "px"; f.style.top = (r.top - h.top + r.height/2 - f.offsetHeight/2) + "px";
+        f.classList.remove("an"); void f.offsetWidth; f.classList.add("an"); s.classList.add("tippt"); }, 1400);
+      spaeter(function(){ lw.classList.add("fertig"); }, 1900);
+    }
+    if (n === 5) { fragNr = 0; teamSpielen(); }
+    if (n === 6) spaeter(function(){ lw.classList.add("geteilt"); }, 1300);
+    if (n === 9) spaeter(function(){ lw.classList.add("morgen"); }, 2600);
+    if (n === 10) { nutzer = false; spaeter(sternLauf, 1200); }
+  }
+  var szenen = D.querySelectorAll(".szene");
+  // Kapitelleiste
+  var kap = D.getElementById("kapitel");
+  szenen.forEach(function(s){
+    var a = document.createElement("a"); a.href = "#"; a.setAttribute("data-akt", s.getAttribute("data-akt"));
+    a.setAttribute("aria-label", s.getAttribute("data-titel")); a.innerHTML = "<span>" + s.getAttribute("data-titel") + "</span>";
+    a.onclick = function(e){ e.preventDefault(); s.scrollIntoView({behavior: ruhig ? "auto" : "smooth", block:"center"}); };
+    kap.appendChild(a);
+  });
+  // welche Szene steht auf Hoehe der Bildmitte (am Handy: Mitte unter der Buehne)
+  var wartet = false;
+  function lage(){
+    wartet = false;
+    var hb = D.querySelector(".buehne-hafen").getBoundingClientRect().bottom;
+    var mitte = window.innerWidth <= 820 ? (hb + window.innerHeight) / 2 : window.innerHeight * .5, treffer = null;
+    szenen.forEach(function(s){ var r = s.getBoundingClientRect(); if (r.top <= mitte && r.bottom > mitte) treffer = s; });
+    szenen.forEach(function(s){ s.classList.toggle("dran", s === treffer); });
+    akt(treffer ? +treffer.getAttribute("data-akt") : 0);
+  }
+  window.addEventListener("scroll", function(){ if (!wartet) { wartet = true; setTimeout(lage, 60); } }, {passive:true});
+
+  D.querySelectorAll(".wahl button").forEach(function(b){
+    b.onclick = function(){
+      PROD = b.getAttribute("data-p");
+      D.querySelectorAll(".wahl button").forEach(function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      var a = AKT; AKT = -1; lw.className = "leinwand"; fuellen(); if (geladen) geraeteLaden(); akt(a || 0);
+    };
+  });
+  teamBauen(); bereicheBauen(); anschluesseBauen(); fuellen(); lage();
+  function oben(){ var n = document.querySelector("body > nav.nav"), h = D.host || document.documentElement;
+    if (n && getComputedStyle(n).position !== "static") h.style.setProperty("--film-oben", Math.ceil(n.getBoundingClientRect().height) + "px"); }
+  oben(); skaliere();
+  window.addEventListener("resize", function(){ oben(); if (AKT !== 1) fuellen(); skaliere(); lage(); });
+})();
+</script>
+<!-- /film -->
+
 <!-- stand1909 --><!-- animation1911 -->
 <section class="produkte" id="produkte"><div class="wrap">
   <p class="gruppe-titel">Für Ihr Büro, drei Arten zu arbeiten</p>
-  <div class="alle-drei" id="alle-drei">
-    <div class="ad-kopf"><p class="ad-titel">Das können alle drei</p><p class="ad-satz">Jedes Produkt bringt den ganzen Grundstock mit. Was dazukommt, steht auf den Kacheln darunter. Weiter unten steht bei jedem Produkt alles, was es für Sie tut.</p></div>
-    <div class="ad-gruppen">
-      <div><b>Festhalten</b><span>Ein Satz, ein Foto vom Zettel, ein Anruf: Gernbei legt es an, macht das Protokoll und merkt sich, was fehlt.</span></div>
-      <div><b>Schreiben</b><span>Mail, Brief, Angebot wie beim letzten Mal, Auftragsbestätigung, Rechnungsentwurf, Zahlungserinnerung, Folien, Entscheidungsvorlage.</span></div>
-      <div><b>Nachschlagen</b><span>Wie haben wir das gemacht, warum so entschieden: die Antwort aus Ihren Unterlagen, mit Fundstelle.</span></div>
-      <div><b>Überblick</b><span>Was steht heute an, wem habe ich was zugesagt, wo steht eine Sache, wie lief der Monat.</span></div>
-      <div><b>Zweiter Blick</b><span>Summen nachgerechnet, was noch fehlt, die Gegenrede zu Ihrem Plan, bevor etwas hinausgeht.</span></div>
-      <div><b>Kunden gewinnen</b><span>Beiträge für Google, LinkedIn und Co., Texte für eine Seite an Ihre Wunschkunden, eine Kampagne für neue Kunden. Einstellen tun Sie.</span></div>
-      <div><b>Auf Sie eingestellt</b><span>Ihr altes Angebot als Vorbild, Ihre Regeln einmal gesagt, und sie gelten von da an.</span></div>
-      <div class="ad-dazu"><b>Und im Hintergrund</b><span>Auf Wunsch verbunden mit Microsoft 365, Ihrem Postfach oder Canva. Neue Stände kommen von selbst, Ihre Arbeit nehmen Sie jederzeit mit.</span></div>
-    </div>
-  </div>
   <div class="ptiles">
         <a class="ptile pt-fg" href="#p-gedaechtnis" data-wechsel='[["Wie machen wir den Brandschutznachweis?", "aus Peters Notiz, mit Quelle"], ["Zurück aus dem Urlaub", "was das Team notiert hat"], ["Frag Lukas, ob der Plan gilt", "Frage in den Absprachen"], ["Wo ist der Wartungsvertrag?", "Fundstelle und Frist"], ["Foto von der Baustelle", "für alle geteilt"], ["Fristen aller Projekte", "eine Liste"], ["Warum damals Variante B?", "die Gründe aus dem Protokoll"], ["Ein Jahr, nachdem Peter ging", "sein Wissen ist noch da"]]'>
           <div class="pt-kopf"><svg class="pt-figur" viewBox="0 0 150 64" aria-hidden="true"><g transform="translate(0,4)"><use href="#kopf"/></g><g transform="translate(44,0)"><use href="#kopf"/></g><g transform="translate(88,4)"><use href="#kopf"/></g><text x="134" y="58" font-family="Caveat,cursive" font-size="15" fill="#3A3B40">wir!</text></svg><span class="pt-wer">Büro mit Team, jeder an seinem Gerät</span></div>
@@ -345,7 +876,6 @@
     <iframe class="buehne-ein" title="Gernbei fürs Handwerk am Laptop und am Handy" loading="lazy" scrolling="no" src="ausprobieren.html?p=handwerk&amp;eingebettet=1"></iframe>
     <p class="bildunter">Erfundener Betrieb, echte Antworten aus Gernbei. <a href="ausprobieren.html?p=handwerk">Selbst ausprobieren →</a></p>
   </div>
-  <div class="pk-alles"><p class="pk-titel">Was <span class="gb">Gern<b>bei</b></span> fürs Handwerk alles für Sie tut</p><div class="pk-gruppen"><div><b>Festhalten</b><span>Auftrag in einem Satz, Regiezettel vom Foto, Anruf mit Erinnerung an den Rückruf, Protokoll der Baubesprechung mit den Zusagen der anderen, Rückmeldung vom Monteur als Regiebericht und Nachtrag, Aufmaß vor Ort gesprochen mit Rechenweg, Belege und Lieferscheine vom Foto, im Transporter sprechen statt tippen.</span></div><div><b>Schreiben</b><span>Mail an den Kunden mit Ihrer Signatur, Angebot wie beim letzten Mal mit fortlaufender Nummer, Nachfassen, Auftragsbestätigung, Rechnungsentwurf, Zahlungserinnerung, Aushang fürs Treppenhaus, Folien für die Bauherren, Entscheidungsvorlage, Auftragszettel für den Monteur.</span></div><div><b>Handwerksblätter</b><span>Angebot mit Aufmaß, Regiebericht, Abnahmeprotokoll, Fotodokumentation, Nachfassbrief, für Heizungsbetriebe das Wartungsangebot. Alte Word- und Excel-Dateien liest Gernbei und macht heutige daraus.</span></div><div><b>Nachschlagen</b><span><em>Wie haben wir beim Bad Schmitt abgedichtet?</em>, <em>Warum beim Dach Müller Tonziegel?</em>, <em>Welche Farbe im Treppenhaus?</em> Jede Antwort mit Fundstelle. Eine Liste prüft Gernbei gegen Ihre Unterlagen.</span></div><div><b>Überblick</b><span>Was heute ansteht, wem Sie was zugesagt haben, wo ein Auftrag steht, Fristen und Wiedervorlagen, wer auf ein Angebot noch antworten muss, der Monat im Rückblick. Jede Baustelle mit ihren eigenen Regeln.</span></div><div><b>Zweiter Blick</b><span>Endsumme und Steuersatz nachgerechnet, Word und PDF fertig, ein Hinweis auf das, was leicht durchrutscht (<em>Gerüst bauseits</em>), die Einwände gegen den zweiten Transporter, Namen Dritter unkenntlich vor der Weitergabe.</span></div><div><b>Kunden gewinnen</b><span>Beitrag fürs Google-Profil, Stellenanzeige für Facebook und Instagram, Texte für eine Seite an Hausbesitzer mit Altbau, Fachneuigkeit zur Heizungsförderung, Website-Check, Bewertungscode zum Scannen, Schritt für Schritt zur Kampagne. Online stellen Sie selbst.</span></div><div><b>Auf Sie eingestellt</b><span>Ihr altes Angebot als Vorbild, Ihre Regeln einmal gesagt (<em>14 Tage Zahlungsziel</em>, <em>Familie Berger duzen wir</em>), bis zu drei Aufträge vormerken.</span></div><div><b>Im Hintergrund</b><span>Morgens der Bericht mit den Fristen der Woche, neue Fähigkeiten von selbst, auf Wunsch Outlook, Excel und OneDrive oder Ihr Postfach, Hilfe und Filme aus dem Handwerk, alles jederzeit als Paket.</span></div></div></div>
 </div></section>
 
 <section class="produkt" id="p-dienst"><div class="wrap">
@@ -389,7 +919,6 @@
     <iframe class="buehne-ein" title="Gernbei für Dienstleister am Laptop und am Handy" loading="lazy" scrolling="no" src="ausprobieren.html?p=dienstleister&amp;eingebettet=1"></iframe>
     <p class="bildunter">Erfundener Betrieb, echte Antworten aus Gernbei. <a href="ausprobieren.html?p=dienstleister">Selbst ausprobieren →</a></p>
   </div>
-  <div class="pk-alles"><p class="pk-titel">Was <span class="gb">Gern<b>bei</b></span> für Dienstleister alles für Sie tut</p><div class="pk-gruppen"><div><b>Festhalten</b><span>Neue Sache in einem Satz mit Frist, Besprechungsnotiz vom Foto, Anruf mit Erinnerung an den Rückruf, Protokoll vom Jour fixe mit den Aufgaben des Kunden, Gesprächsnotiz nach dem Termin, Belege vom Foto, unterwegs ins Handy sprechen.</span></div><div><b>Schreiben</b><span>Antwort an den Mandanten in Ihrem Ton, Exposé, Bericht oder Merkblatt, Angebot wie für den letzten Kunden mit fortlaufender Nummer, Nachfassen, Auftragsbestätigung, Rechnungsentwurf, Zahlungserinnerung, Folien fürs Erstgespräch, Entscheidungsvorlage, Workshop mit Agenda und Ergebnis.</span></div><div><b>Je nach Beruf</b><span>Projektleitung: Vorlagen vom Steckbrief bis zur Abnahme, Statusbericht, Projektstrukturplan. Immobilien: Stand zwischen zwei Terminen, LinkedIn-Beitrag. Versicherung: Bestandswechsel, Schadenmeldung, Beratungsdokumentation. Gutachten: Befund vom Ortstermin, Kostenschätzung fürs Gericht. Freelance: passt das Projekt vom Portal zu mir?</span></div><div><b>Nachschlagen</b><span><em>Wie habe ich das Gutachten Wolf aufgebaut?</em>, <em>Was hatten wir mit Herrn Berger zum Honorar vereinbart?</em>, <em>Warum der neue Anbieter?</em> Jede Antwort mit Fundstelle. Eine Liste prüft Gernbei gegen Ihre Unterlagen.</span></div><div><b>Überblick</b><span>Ihr Tag vor dem ersten Termin, Zusagen der Woche, Stand einer Sache in drei Zeilen, Fristen und Wiedervorlagen, wer noch antworten muss, der Monat im Rückblick. Jeder Kunde mit seinen eigenen Regeln.</span></div><div><b>Zweiter Blick</b><span>Summen und leere Felder geprüft, Word und PDF fertig, was Käufer zuerst fragen, die Einwände gegen Ihren Plan, Namen Dritter unkenntlich vor der Weitergabe.</span></div><div><b>Kunden gewinnen</b><span>Beitrag fürs Google-Profil, LinkedIn-Beitrag, Texte für eine Seite an Ihre Wunschkunden, Fachneuigkeit mit amtlicher Quelle, Website-Check, Bewertungscode zum Scannen, Schritt für Schritt zur Kampagne. Online stellen Sie selbst.</span></div><div><b>Auf Sie eingestellt</b><span>Ihr altes Exposé oder Angebot als Vorbild, <em>kürzer</em>, <em>förmlicher</em> einmal gesagt, bis zu drei Aufträge vormerken.</span></div><div><b>Im Hintergrund</b><span>Morgens der Bericht mit den Fristen der Woche, neue Fähigkeiten von selbst, auf Wunsch Outlook, Kalender, To Do, OneDrive und SharePoint oder Ihr Postfach, Hilfe und Filme aus Ihrem Beruf, alles jederzeit als Paket.</span></div></div></div>
 </div></section>
 
 <section class="produkt team flagge" id="p-gedaechtnis"><div class="wrap">
@@ -433,7 +962,6 @@
     <iframe class="buehne-ein" title="Gernbei Firmengedächtnis am Laptop und am Handy" loading="lazy" scrolling="no" src="ausprobieren.html?p=firmengedaechtnis&amp;eingebettet=1&amp;dunkel=1"></iframe>
     <p class="bildunter">Erfundener Betrieb, echte Antworten aus Gernbei. <a href="ausprobieren.html?p=firmengedaechtnis">Selbst ausprobieren →</a></p>
   </div>
-  <div class="pk-alles"><p class="pk-titel">Was das Firmengedächtnis alles für Ihr Team tut</p><div class="pk-gruppen"><div><b>Im Team</b><span>Mit dem Büro teilen, mit Absender. Sehen, was die anderen geteilt haben. Zurück aus dem Urlaub: was das Team notiert hat. Absprachen im Projekt (<em>Frag Lukas, ob der Plan gilt</em>), mit Frist. <em>Wo liegt das bei uns?</em> und <em>Wer weiß das bei uns?</em>, auch wenn der Kollege gegangen ist.</span></div><div><b>Wer sieht was</b><span>Jede Person arbeitet in ihrem Bereich, Privates bleibt privat. Die Chefin liest alle Projekte, Absprachen und Gruppen mit. Die Assistenz verteilt aus ihrem Eingangskorb und vertritt auf Wunsch.</span></div><div><b>Festhalten</b><span>Für jede Person: Projekt in einem Satz, Flipchart der Baubesprechung als Protokoll, Anrufe mit Erinnerung, Gesprächsnotizen nach dem Termin, Belege vom Foto, ins Handy sprechen und am Rechner weiterarbeiten.</span></div><div><b>Schreiben</b><span>Mail an die Gemeinde, Angebot wie beim letzten Projekt, auch wenn ein Kollege es geschrieben hat, alles im Briefkopf des Büros, Folien für die Bauherrenbesprechung, Vorlage für die Partnerrunde, Workshop für den Teamtag, alle Vorlagen aus Für Dienstleister.</span></div><div><b>Nachschlagen</b><span><em>Wie machen wir bei uns den Brandschutznachweis?</em>, <em>Warum beim Sonnenhof Variante B?</em>, aus dem, was Kollegen festgehalten haben, mit Quelle, im eigenen und im gemeinsamen Bereich.</span></div><div><b>Überblick</b><span>Jede Person ihren Tag und ihre Zusagen, die Büroleitung die Fristen aller Projekte, <em>Wo steht die Tagesklinik?</em> unterwegs in drei Zeilen.</span></div><div><b>Zweiter Blick</b><span>Geprüft vor dem Versand an den Bauherrn, die Einwände gegen ein Vorhaben für die Partnerrunde, Namen Dritter unkenntlich vor der Weitergabe.</span></div><div><b>Kunden gewinnen</b><span>Das fertige Projekt als Referenz, Stellenanzeige für LinkedIn, Texte für eine Seite an Bauherren, Fachneuigkeit für Ihre Bauherren, Website-Check. Online stellen Sie selbst.</span></div><div><b>Auf Ihr Büro eingestellt</b><span>Vorlagen des Büros als Vorbild, auch wenn ein Kollege sie geschrieben hat, Ihre Arbeitsweise einmal gesagt, eigene Regeln je Projekt.</span></div><div><b>Im Hintergrund</b><span>Morgens der Bericht mit dem, was für Sie ansteht und was Sie angestoßen haben, neue Fähigkeiten von selbst, Outlook, Excel, SharePoint und OneDrive, jeder in seinem eigenen Postfach, immer mit dem großen Modell von Anthropic.</span></div></div></div>
 </div></section>
 
 <section class="produkt" id="p-chatbot"><div class="wrap">
@@ -574,260 +1102,6 @@ document.addEventListener("click", function (e) {
 <script src="szenen-daten.js" defer></script>
 <script src="szene.js" defer></script>
 <script src="fenster.js" data-dienst="https://m2.ki-kurt.de" data-name="Fragen an Gernbei" data-untertitel="Digitaler Assistent, eine KI" data-telefon="0931 45321005" data-mail="hallo@gernbei.de" data-antwortzeit="Ein Mensch antwortet am nächsten Werktag." data-themen="Was kann Gernbei für mich tun?|Welches Angebot passt zu mir?|Wo liegen meine Daten?|Wie fange ich an?" defer></script>
-<!-- buehne:skript -->
-<script>
-(function(){
-  var ruhig = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var geraete = document.getElementById("geraete");
-  var G = {
-    rechner:{innen:document.getElementById("rechner"), schirm:document.getElementById("schirm-rechner"), w:1280, f:document.getElementById("f-rechner")},
-    handy:{innen:document.getElementById("handy"), schirm:document.getElementById("schirm-handy"), w:402, f:document.getElementById("f-handy")}
-  };
-  function skaliere(){ Object.keys(G).forEach(function(k){ var g=G[k]; g.innen.style.transform="scale("+(g.schirm.clientWidth/g.w)+")"; }); }
-  window.addEventListener("resize", skaliere); skaliere();
-  var heute = new Date();
-  document.getElementById("uhr").textContent = heute.toLocaleTimeString("de-DE",{hour:"numeric",minute:"2-digit"});
-  document.getElementById("menue-uhr").textContent = heute.toLocaleDateString("de-DE",{weekday:"short",day:"numeric",month:"short"})+"  "+heute.toLocaleTimeString("de-DE",{hour:"numeric",minute:"2-digit"});
-
-  // Die Folge der Buehne: echte Bitten, im Wechsel Rechner und Handy (Antworten liefert api.js aus den Laeufen)
-  var FOLGE = (window.BUEHNE_FOLGE || [
-    {g:"handy", art:"am Handy, morgens im Transporter", text:"Was steht heute an?"},
-    {g:"rechner", art:"am Rechner, im Büro", projekt:"02 - Aufträge/BRUNNER", text:"Zählerwechsel Brunner: 24. oder 26.11.? Was stimmt denn jetzt?"},
-    {g:"handy", art:"am Handy, zwischen zwei Baustellen", text:"Mail an Frau Rebhan wegen dem brummenden Dimmer: wir kommen am Donnerstag vormittag, passt ihr das?"},
-    {g:"rechner", art:"Funktionen entdecken: was Gernbei alles kann", zeigen:['css:[data-f="koennen"]', "text:E-Mail oder Brief schreiben", "scroll:420"]},
-    {g:"rechner", art:"am Rechner, Freitagnachmittag", text:"Mach mir aus dem Stundenzettel von Andrzej für KW 46 die Stunden für Brunner."},
-    {g:"rechner", art:"am Rechner, vor der Bestellung", projekt:"02 - Aufträge/DOERFLER", text:"Materialliste Wallbox Dörfler prüfen: fehlt da was?"},
-    {g:"handy", art:"am Handy, beim Kunden", text:"Wie weit ist das Prüfprotokoll DGUV V3 für die Bäckerei Reichart?"}
-  ]);
-  // Firmengedaechtnis: jede Szene gehoert einer Person, ihr Geraet zeigt ihren eigenen Platz (echte Laeufe, Haldenmeyer & Sorg)
-  var FOLGE_FG = [
-    {g:"rechner", wer:"lukas", art:"Lukas, zweite Woche im Büro, am Laptop", aus:"Tobias’ Vermerk auf dem Plan, 10.11.", text:"Welcher Planstand von Bauteil B ist der gültige, und wer hat ihn bekommen?"},
-    {g:"handy", wer:"katrin", art:"Katrin, Projektleitung, auf der Baustelle", aus:"Pavels Kostenfortschreibung, Oktober", text:"Welche Entscheidungen der Grundschule haben Kostenfolgen, und wo steht die Quelle?"},
-    {g:"rechner", wer:"renate", art:"Renate, Büroleitung, am Laptop", aus:"Protokolle und Zusagen aller Projekte", text:"Welche Termine und Fristen laufen in den nächsten vier Wochen, über alle Projekte?"},
-    {g:"handy", wer:"rainer", art:"Rainer, Partner, auf dem Weg zum Bauherrn", aus:"Projektstand vom 13.11. und offene Aufgaben", text:"Wo steht die Tagesklinik, und was ist offen?"},
-    {g:"rechner", wer:"lukas", art:"Lukas, vor der ersten Mail an die Gemeinde", aus:"Regel des Bauamts und Schreiben vom 12.11.", text:"Wem darf ich bei der Gemeinde Tannhofen schreiben, und wer muss in Kopie?"}
-  ];
-  var LEUTE = {lukas:"Lukas", katrin:"Katrin", renate:"Renate", rainer:"Rainer"};
-  // Dienstleister: Jonas Wiedemer, selbstaendiger IT-Projektleiter (Vorfuehrdaten Variante Freelancer, ganz erfunden)
-  var FOLGE_DL = [
-    {g:"handy", art:"am Handy, Montagmorgen", text:"Was steht diese Woche an?"},
-    {g:"rechner", art:"am Rechner, Monatsende", text:"Bereite die Rechnungen für Oktober vor. Alles, was ich dafür habe, steht in meinen Notizen."},
-    {g:"handy", art:"am Handy, vor dem Termin beim Einkauf", text:"Wie viel Kontingent ist beim Rahmenvertrag Lauterhain noch übrig, und was passiert zum Jahresende?"},
-    {g:"rechner", art:"am Rechner, Freitagnachmittag", text:"Schreib den Statusbericht für Frau Lindner, KW 46, aus meinen Notizen."},
-    {g:"handy", art:"am Handy, zwischen zwei Terminen", text:"Antworte Frau Falk auf LinkedIn. Freundlich, Interesse ja, ab Februar nur zwei Tage, einen Satz nenne ich noch nicht."}
-  ];
-  var TEXTE = {
-    handwerk:{ueber:"fürs Handwerk", adresse:"haberkorn.gernbei.de", unter:"Erfundener Betrieb, echte Antworten aus Gernbei, ungekürzt."},
-    dienstleister:{ueber:"für Dienstleister", adresse:"wiedemer.gernbei.de", unter:"Erfundener Freiberufler, echte Antworten aus Gernbei, ungekürzt."},
-    firmengedaechtnis:{ueber:"Firmengedächtnis", adresse:"haldenmeyer-sorg.gernbei.de", unter:"Erfundenes Büro, echte Antworten aus Gernbei, an einer Stelle gekürzt."}
-  };
-  var PROD = "", BESITZ = {rechner:"", handy:""};
-  var LEAD = {handwerk:"Das ist Gernbei, wie es bei einem Elektrobetrieb aussieht: Aufträge links, die letzten Gespräche darunter, Funktionen zum Entdecken. Schauen Sie zu oder klicken Sie selbst, am Rechner und am Handy.",
-    dienstleister:"Ein Freiberufler mit drei Kunden: Rechnungen, Kontingente, Statusberichte und Anfragen, vorbereitet aus seinen eigenen Notizen. Schauen Sie zu oder klicken Sie selbst, am Rechner und am Handy.",
-    firmengedaechtnis:"Ein Architekturbüro, ein Gedächtnis: Jeder im Team fragt an seinem eigenen Gerät und bekommt die Antwort aus den gemeinsamen Unterlagen, mit Quelle. Schauen Sie zu oder klicken Sie selbst."};
-  var FASSUNG = Date.now();   // frische Flaeche je Seitenaufruf, damit der Browser keine alte Fassung zeigt
-  function quelle(g, wer){ return "ausprobieren/index.html?p=" + PROD + "&g=" + g + (wer ? "&wer=" + wer : "") + "&v=" + FASSUNG; }
-  function laden(g, wer){
-    return new Promise(function(fertig){
-      var f = G[g].f; BESITZ[g] = wer || "";
-      f.addEventListener("load", function x(){ f.removeEventListener("load", x); setTimeout(fertig, 700); });
-      f.src = quelle(g, wer);
-    });
-  }
-  function hausZeigen(s){
-    Array.prototype.forEach.call(document.querySelectorAll(".haus .zi"), function(z){
-      var an = s && z.getAttribute("data-wer") === s.wer;
-      z.classList.toggle("fragt", !!an);
-      z.querySelector(".geraet").textContent = an ? (s.g === "handy" ? "AM HANDY" : "AM LAPTOP") : "";
-    });
-    document.getElementById("boden").classList.remove("liefert");
-    document.getElementById("weg").textContent = s ? LEUTE[s.wer] + " fragt" + (s.g === "handy" ? " am Handy" : " am Laptop") : "";
-    document.getElementById("aus").textContent = s && s.aus ? "Antwort aus: " + s.aus : "";
-    if (s && s.aus) setTimeout(function(){ document.getElementById("boden").classList.add("liefert"); }, 600);
-  }
-  var KLEIN = window.matchMedia(document.documentElement.classList.contains("eingebettet") ? "(max-width:430px)" : "(max-width:760px)");
-  var DAUER = {"Welcher Planstand von Bauteil B ist der gültige, und wer hat ihn bekommen?": "unter 1 Minute", "Welche Entscheidungen der Grundschule haben Kostenfolgen, und wo steht die Quelle?": "unter 1 Minute", "Welche Termine und Fristen laufen in den nächsten vier Wochen, über alle Projekte?": "unter 1 Minute", "Wo steht die Tagesklinik, und was ist offen?": "unter 1 Minute", "Wem darf ich bei der Gemeinde Tannhofen schreiben, und wer muss in Kopie?": "unter 1 Minute", "Was steht heute an?": "unter 1 Minute", "Zählerwechsel Brunner: 24. oder 26.11.? Was stimmt denn jetzt?": "unter 1 Minute", "Mail an Frau Rebhan wegen dem brummenden Dimmer: wir kommen am Donnerstag vormittag, passt ihr das?": "unter 1 Minute", "Mach mir aus dem Stundenzettel von Andrzej für KW 46 die Stunden für Brunner.": "unter 1 Minute", "Materialliste Wallbox Dörfler prüfen: fehlt da was?": "unter 1 Minute", "Wie weit ist das Prüfprotokoll DGUV V3 für die Bäckerei Reichart?": "unter 1 Minute", "Bereite die Rechnungen für Oktober vor. Alles, was ich dafür habe, steht in meinen Notizen.": "unter 2 Minuten", "Wie viel Kontingent ist beim Rahmenvertrag Lauterhain noch übrig, und was passiert zum Jahresende?": "unter 1 Minute", "Schreib den Statusbericht für Frau Lindner, KW 46, aus meinen Notizen.": "unter 2 Minuten", "Antworte Frau Falk auf LinkedIn. Freundlich, Interesse ja, ab Februar nur zwei Tage, einen Satz nenne ich noch nicht.": "unter 1 Minute", "Was steht diese Woche an?": "unter 1 Minute"};
-  var lauf = 0, n = 0, selbst = false, zuletztGeraet = "";
-  function warte(ms){ return new Promise(function(r){ setTimeout(r, ruhig ? 0 : ms); }); }
-  function doc(g){ try { return G[g].f.contentWindow.document; } catch (x) { return null; } }
-  // Zeiger (Rechner) und Fingertipp (Handy) auf ein Element der echten Seite, in Punkten der Flaeche
-  var zeiger = document.getElementById("zeiger");
-  function stelle(g, el){
-    var innen = G[g].innen, f = G[g].f, sk = G[g].schirm.clientWidth / G[g].w;
-    var fr = f.getBoundingClientRect(), ir = innen.getBoundingClientRect(), r = el.getBoundingClientRect();
-    return {x:(fr.left - ir.left) / sk + r.left + r.width / 2, y:(fr.top - ir.top) / sk + r.top + r.height / 2};
-  }
-  async function klicke(g, el, mein, echt){
-    if (!el) return;
-    var p = stelle(g, el);
-    if (g === "rechner") { zeiger.classList.add("an"); zeiger.style.transform = "translate(" + (p.x - 4) + "px," + (p.y - 2) + "px)"; await warte(1000); }
-    else await warte(350);
-    if (mein !== lauf) return;
-    var t = document.getElementById("tipp-" + g);
-    t.style.left = p.x + "px"; t.style.top = p.y + "px";
-    t.classList.remove("an"); void t.offsetWidth; t.classList.add("an");
-    if (echt) el.click();
-    await warte(450);
-  }
-  function winken(){
-    var k = document.querySelectorAll(".klick-schutz"), b = document.getElementById("m-selbst");
-    Array.prototype.forEach.call(k, function(x){ x.classList.add("winken"); });
-    b.classList.remove("winken"); void b.offsetWidth; b.classList.add("winken");
-    setTimeout(function(){ Array.prototype.forEach.call(k, function(x){ x.classList.remove("winken"); }); }, 4200);
-  }
-  async function tippe(g, text, mein, projekt){
-    var d = doc(g); if (!d) return false;
-    if (projekt) {
-      var pk = Array.prototype.filter.call(d.querySelectorAll("[data-projekt]"), function(x){ return x.getAttribute("data-projekt") === projekt; })[0];
-      await klicke(g, pk, mein, true); await warte(900);
-      if (mein !== lauf) return false;
-    }
-    var feld = d.getElementById("text"); if (!feld) return false;
-    if (!feld.offsetParent) { var zg = d.querySelector('[data-f="gespraech"]'); if (zg) { await klicke(g, zg, mein, true); await warte(700); } }
-    await klicke(g, feld, mein, false); feld.focus();
-    for (var i = 1; i <= text.length; i++) {
-      if (mein !== lauf) return false;
-      feld.value = text.slice(0, i);
-      feld.dispatchEvent(new Event("input", {bubbles:true}));
-      await warte(38);
-    }
-    await warte(400);
-    if (mein !== lauf) return false;
-    var knopf = d.getElementById("senden"); if (knopf) { knopf.disabled = false; await klicke(g, knopf, mein, true); }
-    if (PROD === "firmengedaechtnis") document.getElementById("boden").classList.add("liefert");
-    if (g === "rechner") setTimeout(function(){ zeiger.classList.remove("an"); }, 1200);
-    return true;
-  }
-  // Rundgang: Schritte auf der echten Seite zeigen. "css:" waehlt per Selektor, "text:" den Knopf mit diesem Text
-  function suche(d, w){
-    if (w.indexOf("css:") === 0) return d.querySelector(w.slice(4));
-    var t = w.slice(5);
-    return Array.prototype.filter.call(d.querySelectorAll("button,a,[role=button],.fkachel,li"), function(x){
-      return x.offsetParent && x.textContent.replace(/\s+/g, " ").indexOf(t) >= 0; })[0] || null;
-  }
-  async function zeigen(g, schritte, mein){
-    var d = doc(g); if (!d) return false;
-    for (var i = 0; i < schritte.length; i++) {
-      if (mein !== lauf) return false;
-      if (schritte[i].indexOf("scroll:") === 0) {   // Flaeche ruhig nach unten, etwa zum Beispiel unter dem Blatt
-        var sp = d.scrollingElement, kandidaten = Array.prototype.filter.call(d.querySelectorAll("main,section,div"), function(x){ return x.scrollHeight > x.clientHeight + 40 && x.clientHeight > 300; });
-        var box = kandidaten[kandidaten.length - 1] || sp;
-        box.scrollBy({top:parseInt(schritte[i].slice(7), 10), behavior:"smooth"});
-        await warte(3200); continue;
-      }
-      var el = suche(d, schritte[i]);
-      if (!el) continue;
-      el.scrollIntoView({block:"nearest"});
-      await warte(300);
-      await klicke(g, el, mein, true);
-      await warte(2600);
-    }
-    if (g === "rechner") setTimeout(function(){ zeiger.classList.remove("an"); }, 1500);
-    return true;
-  }
-  async function zuschauen(){
-    var mein = ++lauf;
-    while (mein === lauf && !selbst) {
-      var F = PROD === "firmengedaechtnis" ? FOLGE_FG : PROD === "dienstleister" ? FOLGE_DL : FOLGE;
-      var s = F[n % F.length]; n++;
-      // Am Handy spielt alles im iPhone: Rechner-Szenen wandern hinueber, der Rundgang ueber die Leiste entfaellt
-      if (KLEIN.matches) {
-        if (s.zeigen) continue;
-        s = Object.assign({}, s, {g:"handy", projekt:"", art:s.art.replace(/am Rechner|am Laptop/, "am Handy")});
-      }
-      // Firmengedaechtnis: Laptop und Handy immer im Wechsel, auch beim Neubeginn der Runde (Kurt 18.11.2026)
-      else if (s.wer && s.g === zuletztGeraet) {
-        s = s.g === "rechner" ? Object.assign({}, s, {g:"handy", art:s.art.replace(/am Laptop/, "am Handy")})
-                              : Object.assign({}, s, {g:"rechner", art:s.art.replace(/am Handy/, "am Laptop")});
-      }
-      zuletztGeraet = s.g;
-      if (s.wer) {
-        hausZeigen(s);
-        if (BESITZ[s.g] !== s.wer) await laden(s.g, s.wer);
-        if (mein !== lauf) return;
-      }
-      geraete.classList.toggle("handy-dran", s.g === "handy");
-      geraete.classList.toggle("rechner-dran", s.g === "rechner");
-      document.getElementById("notiz").textContent = s.art + (DAUER[s.text] ? ", fertig " + DAUER[s.text] : "");
-      await warte(900);
-      var ok = s.zeigen ? await zeigen(s.g, s.zeigen, mein) : await tippe(s.g, s.text, mein, s.projekt);
-      if (!ok) { await warte(1000); continue; }
-      await warte(5000);
-      if (mein !== lauf) return;
-      if (n % 2 === 0) winken();   // nach jeder zweiten Szene: Einladung zum Selberklicken
-      await warte(7000);
-    }
-  }
-  function modus(an){
-    selbst = an; lauf++;
-    document.getElementById("m-zu").setAttribute("aria-pressed", an ? "false" : "true");
-    document.getElementById("m-selbst").setAttribute("aria-pressed", an ? "true" : "false");
-    geraete.classList.toggle("selbst", an);
-    zeiger.classList.remove("an");
-    // halb getippte Bitte der Buehne nicht stehen lassen, wenn der Besucher uebernimmt
-    if (an) Object.keys(G).forEach(function(k){ var d = doc(k), t = d && d.getElementById("text");
-      if (t && t.value) { t.value = ""; t.dispatchEvent(new Event("input", {bubbles:true})); } });
-    geraete.classList.remove("handy-dran", "rechner-dran");
-    document.getElementById("notiz").textContent = an ? "Jetzt sind Sie dran" : "";
-    document.getElementById("hinweis").textContent = an ? "Klicken Sie links auf einen Auftrag, ein letztes Gespräch oder auf Funktionen entdecken. Am Handy öffnet das Menü oben links die Leiste." : "";
-    if (!an) zuschauen();
-  }
-  var wahlKnoepfe = document.querySelectorAll(".wahl button");
-  Array.prototype.forEach.call(wahlKnoepfe, function(b){
-    b.onclick = async function(){
-      var p = b.getAttribute("data-p"); if (p === PROD) return;
-      Array.prototype.forEach.call(wahlKnoepfe, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
-      lauf++; PROD = p; n = 0;
-      var fg = p === "firmengedaechtnis";
-      document.getElementById("haus").classList.toggle("an", fg);
-      document.getElementById("ueber-p").textContent = TEXTE[p].ueber;
-      document.getElementById("lead").textContent = LEAD[p];
-      document.getElementById("unterzeile").textContent = TEXTE[p].unter;
-      document.querySelector(".adresse").textContent = TEXTE[p].adresse;
-      hausZeigen(null);
-      await Promise.all([laden("rechner", fg ? "lukas" : ""), laden("handy", fg ? "katrin" : "")]);
-      if (!selbst) zuschauen();
-    };
-  });
-  var START = new URLSearchParams(location.search).get("p") || "firmengedaechtnis";
-  var sb = document.querySelector('.wahl [data-p="' + START + '"]') || document.querySelector(".wahl button");
-  if ("IntersectionObserver" in window) { var io = new IntersectionObserver(function(e){ if (e.some(function(x){ return x.isIntersecting; })) { io.disconnect(); sb.click(); } }, {rootMargin:"300px"}); io.observe(geraete); }
-  else sb.click();
-  document.getElementById("m-zu").onclick = function(){ modus(false); };
-  document.getElementById("m-selbst").onclick = function(){ modus(true); };
-  Array.prototype.forEach.call(document.querySelectorAll(".klick-schutz"), function(k){ k.onclick = function(){ modus(true); }; });
-  var geladen = 0;
-  Object.keys(G).forEach(function(k){ G[k].f.addEventListener("load", function(){ if (++geladen === 2) setTimeout(zuschauen, 1200); }); });
-})();
-</script>
-<script>
-(function(){
-  var T = {
-    firmengedaechtnis: [["Rainer fragt nach der Tagesklinik","Leistungsphase, Frist 18.12. und fünf offene Punkte mit den Zuständigen."],
-               ["Lukas, zweite Woche, schreibt dem Bauamt","Wer Ansprechpartnerin ist und wer in Kopie muss, nach der Regel des Amts."],
-               ["Welcher Plan von Bauteil B gilt?","Index B nicht freigegeben, Index C noch in Arbeit, die fehlende Liste benannt."]],
-    handwerk: [["Mail an Frau Rebhan","Termin am Donnerstag, Adresse aus dem Kundenstamm, Signatur darunter."],
-               ["Stunden für Brunner aus Andrzejs Stundenzettel","32,5 sichere Stunden. Den unklaren Dienstag fragt Gernbei nach, statt zu raten."],
-               ["Materialliste Wallbox geprüft","Vier Lücken gefunden, zwei davon heute zu klären, damit die Lieferung am Dienstag passt."]],
-    dienstleister: [["Antwort an Frau Falk auf LinkedIn","Interesse, zwei Tage ab Februar, der Tagessatz bleibt offen, wie gewünscht."],
-               ["Rahmenvertrag nachgerechnet","50 Tage offen, der Unterschied zum Einkauf benannt, und dass sie am 31.12. verfallen."],
-               ["Statusbericht für Frau Lindner","Eine Seite in Ihrem Aufbau, Ampel als Vorschlag, drei Lücken benannt statt erfunden."]]
-  };
-  var UHR = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>';
-  var reihe = document.getElementById("tempo-reihe");
-  function zeige(p){ if (!T[p]) return; reihe.innerHTML = T[p].map(function(t){ return "<div><em>" + UHR + "unter 3 Minuten</em><strong>" + t[0] + "</strong><span>" + t[1] + "</span></div>"; }).join(""); }
-  zeige(new URLSearchParams(location.search).get("p") || "firmengedaechtnis");
-  Array.prototype.forEach.call(document.querySelectorAll(".wahl button"), function(b){ b.addEventListener("click", function(){ zeige(b.getAttribute("data-p")); }); });
-  var geraete = document.getElementById("geraete"), hinweis = document.getElementById("hinweis");
-  function lage(){
-    if (geraete.classList.contains("selbst")) {
-      if (!hinweis.querySelector("button")) { var k = document.createElement("button"); k.type = "button"; k.textContent = "Wieder zuschauen"; k.onclick = function(){ document.getElementById("m-zu").click(); }; hinweis.appendChild(k); }
-    } else hinweis.textContent = "Gernbei arbeitet gerade vor. Tippen Sie in den Bildschirm, dann sind Sie dran.";
-  }
-  new MutationObserver(lage).observe(geraete, {attributes:true, attributeFilter:["class"]}); lage();
-})();
-</script>
-<!-- /buehne:skript -->
 <script>
 // Knopf unter der Chatbot-Szene oeffnet den echten Chatbot dieser Seite
 var sf = document.getElementById("selbst-fragen"); if (sf) sf.onclick = function(){ var w = document.getElementById("auskunft-fenster"); var b = w && w.shadowRoot && w.shadowRoot.querySelector(".start"); if (b) b.click(); };
@@ -896,7 +1170,7 @@ var sf = document.getElementById("selbst-fragen"); if (sf) sf.onclick = function
       Array.prototype.forEach.call(punkte.children, function(p, j){ p.classList.toggle("an", j === i); }); }
     zeige();
     if (ruhig) return;
-    setTimeout(function(){ setInterval(function(){ weg.classList.add("weg-aus"); setTimeout(function(){ i = (i + 1) % paare.length; zeige(); weg.classList.remove("weg-aus"); }, 280); }, 2600); }, nr * 650);
+    setTimeout(function(){ setInterval(function(){ weg.classList.add("weg-aus"); setTimeout(function(){ i = (i + 1) % paare.length; zeige(); weg.classList.remove("weg-aus"); }, 280); }, 4800); }, 1500 + nr * 1200);
   });
 })();
 </script>
