@@ -107,3 +107,6 @@
 .ws-knopf{position:absolute;right:14px;bottom:14px;background:var(--tinte);color:#fff;border-radius:999px;padding:8px 14px;font:600 13px var(--text)}
 .ws-selbst{text-align:center;margin-top:14px}
 @media(max-width:760px){.ws-seite{height:520px}.ws-h{font-size:17px}}
+
+/* Knoepfe unter dem Kopf (Kurt 19.11.2026, B3) */
+.hero.mitte .kopf-knoepfe{justify-content:center}
