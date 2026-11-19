@@ -775,3 +775,8 @@ a.ptile{color:inherit;text-decoration:none}
 .produkt.flagge .pk-gruppen span{color:rgba(255,255,255,.78)}
 @media(max-width:980px){.pk-gruppen{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.pk-gruppen{grid-template-columns:minmax(0,1fr)}}
+
+/* Startseite: Ablauf neben dem Text, Laptop und Handy als eigene Zeile darunter (Kurt 19.11.2026) */
+.produkt .pk-geraete{grid-column:1/-1;order:1;margin-top:4px}
+.produkt .pk-geraete .buehne-ein{max-width:860px;margin:0 auto}
+.produkt .pk-geraete .bildunter{text-align:center}
