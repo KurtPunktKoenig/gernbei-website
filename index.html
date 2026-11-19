@@ -658,6 +658,7 @@
     if (geladen === PROD) return; geladen = PROD;
     D.querySelectorAll(".schirm.echt iframe").forEach(function(f){
       var g = f.getAttribute("data-g"), wer = PROD === "team" ? (g === "rechner" ? "&wer=lukas" : "&wer=katrin") : "";
+      if (window.FILM_BILDER) { f.srcdoc = '<body style="margin:0"><img alt="" style="display:block;width:100%" src="' + window.FILM_BILDER[GP[PROD] + "-" + g] + '"></body>'; return; }
       f.src = BASIS + "ausprobieren/index.html?p=" + GP[PROD] + "&g=" + g + wer;
     });
   }
