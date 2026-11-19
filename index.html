@@ -113,7 +113,8 @@
 .ein svg,.anschluss svg{width:calc(3.4cqw*var(--z));height:calc(3.4cqw*var(--z));flex:none;stroke:var(--tinte);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ein small{display:block;font:500 calc(1.8cqw*var(--z)) var(--mono);color:var(--grau)}
 .ein:nth-child(1){left:4%;top:9%}.ein:nth-child(2){right:4%;top:11%}.ein:nth-child(3){left:3%;top:43%}.ein:nth-child(4){right:3%;top:46%}.ein:nth-child(5){left:30%;top:82%}
-.ein:nth-child(2){transition-delay:.12s}.ein:nth-child(3){transition-delay:.24s}.ein:nth-child(4){transition-delay:.36s}.ein:nth-child(5){transition-delay:.48s}
+.akt-1 .ein:nth-child(2){transition-delay:.7s}.akt-1 .ein:nth-child(3){transition-delay:1.4s}.akt-1 .ein:nth-child(4){transition-delay:2.1s}.akt-1 .ein:nth-child(5){transition-delay:2.8s}
+.akt-1.geschluckt .ein:nth-child(2){transition-delay:.15s}.akt-1.geschluckt .ein:nth-child(3){transition-delay:.3s}.akt-1.geschluckt .ein:nth-child(4){transition-delay:.45s}.akt-1.geschluckt .ein:nth-child(5){transition-delay:.6s}
 .akt-1 .ein{opacity:1}
 .akt-1.geschluckt .ein{opacity:0;transform:var(--zum-hirn) scale(.15)}
 
@@ -126,13 +127,13 @@
 .blatt .haken svg{width:calc(2.4cqw*var(--z));height:calc(2.4cqw*var(--z));flex:none;stroke:var(--rot);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .blatt.b1{left:4%;top:12%;--vx:42%;--vy:110%}.blatt.b2{right:4%;top:12%;--vx:-42%;--vy:110%}.blatt.b3{left:35%;top:66%;--vx:0%;--vy:-60%}
 .akt-2 .blatt,.akt-3 .blatt,.akt-4 .blatt{opacity:1;transform:none}
-.akt-2 .blatt.b2{transition-delay:.18s}.akt-2 .blatt.b3{transition-delay:.36s}
+.akt-2 .blatt.b2{transition-delay:.8s}.akt-2 .blatt.b3{transition-delay:1.6s}
 .akt-3 .blatt .haken,.akt-4 .blatt .haken{opacity:1;transform:none}
-.akt-3 .blatt.b2 .haken{transition-delay:.35s}.akt-3 .blatt.b3 .haken{transition-delay:.7s}
+.akt-3 .blatt.b2 .haken{transition-delay:1s}.akt-3 .blatt.b3 .haken{transition-delay:2s}
 .akt-4 .blatt{opacity:0!important}
 .stempel{position:absolute;right:calc(-1*1.5cqw*var(--z));top:calc(-1*2cqw*var(--z));font:700 calc(2.2cqw*var(--z)) var(--hand);color:var(--rot);border:2px solid var(--rot);border-radius:6px;padding:0 calc(1cqw*var(--z));transform:rotate(8deg) scale(1.6);opacity:0;transition:opacity .3s,transform .4s cubic-bezier(.3,1.5,.5,1);background:#fff}
 .akt-3 .stempel,.akt-4 .stempel{opacity:1;transform:rotate(8deg) scale(1)}
-.akt-3 .b1 .stempel{transition-delay:.9s}.akt-3 .b2 .stempel{transition-delay:1.2s}.akt-3 .b3 .stempel{transition-delay:1.5s}
+.akt-3 .b1 .stempel{transition-delay:.8s}.akt-3 .b2 .stempel{transition-delay:1.8s}.akt-3 .b3 .stempel{transition-delay:2.8s}
 
 /* 4 Abschicken */
 .geraete{position:absolute;left:50%;bottom:6%;width:90%;transform:translateX(-50%) translateY(30%);opacity:0;transition:transform .8s cubic-bezier(.3,1.2,.5,1),opacity .5s;z-index:5;display:flex;align-items:flex-end;justify-content:center;gap:calc(3cqw*var(--z))}
@@ -676,7 +677,7 @@
     spaeter(function(){ k[q.wer].classList.add("fragt"); fr.classList.add("zeigt"); }, 500);
     spaeter(function(){ pf[q.wer].classList.add("zieht"); lw.classList.add("schluckt"); }, 1500);
     spaeter(function(){ an.classList.add("zeigt"); lw.classList.remove("schluckt"); }, 2900);
-    spaeter(teamSpielen, 7600);
+    spaeter(teamSpielen, 10000);
   }
 
   // 6 Wer sieht was
@@ -742,19 +743,19 @@
     untertitel();
     D.querySelectorAll("#kapitel a").forEach(function(a){ a.classList.toggle("an", +a.getAttribute("data-akt") === n); });
     D.getElementById("kapitel").classList.toggle("an", n > 0);
-    if (n === 1) spaeter(function(){ lw.classList.add("geschluckt", "schluckt"); }, 1500);
+    if (n === 1) spaeter(function(){ lw.classList.add("geschluckt", "schluckt"); }, 9000);
     if (n >= 2 && n <= 6) geraeteLaden();
     if (n === 4) {
       var f = D.getElementById("finger"), s = D.getElementById("senden");
       s.classList.remove("tippt");
       spaeter(function(){ var r = s.getBoundingClientRect(), h = s.parentNode.getBoundingClientRect();
         f.style.left = (r.left - h.left + r.width/2 - f.offsetWidth/2) + "px"; f.style.top = (r.top - h.top + r.height/2 - f.offsetHeight/2) + "px";
-        f.classList.remove("an"); void f.offsetWidth; f.classList.add("an"); s.classList.add("tippt"); }, 1400);
-      spaeter(function(){ lw.classList.add("fertig"); }, 1900);
+        f.classList.remove("an"); void f.offsetWidth; f.classList.add("an"); s.classList.add("tippt"); }, 4000);
+      spaeter(function(){ lw.classList.add("fertig"); }, 4500);
     }
     if (n === 5) { fragNr = 0; teamSpielen(); }
-    if (n === 6) spaeter(function(){ lw.classList.add("geteilt"); }, 1300);
-    if (n === 9) spaeter(function(){ lw.classList.add("morgen"); }, 2600);
+    if (n === 6) spaeter(function(){ lw.classList.add("geteilt"); }, 3500);
+    if (n === 9) spaeter(function(){ lw.classList.add("morgen"); }, 5000);
     if (n === 10) { nutzer = false; spaeter(sternLauf, 1200); }
   }
   var szenen = D.querySelectorAll(".szene");
