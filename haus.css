@@ -780,3 +780,7 @@ a.ptile{color:inherit;text-decoration:none}
 .produkt .pk-geraete{grid-column:1/-1;order:1;margin-top:4px}
 .produkt .pk-geraete .buehne-ein{max-width:860px;margin:0 auto}
 .produkt .pk-geraete .bildunter{text-align:center}
+
+/* Startseite nach dem Film: Produktwahl knapp (Kurt 19.11.2026, Schritt 4) */
+.produkte .pt-peter{text-align:center;font-size:15px;color:var(--tinte-2);margin-top:28px;line-height:1.6}
+.produkte .pt-peter a{color:var(--tinte);font-weight:600;margin-left:10px;white-space:nowrap}
