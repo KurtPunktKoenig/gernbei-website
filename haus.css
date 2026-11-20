@@ -5,8 +5,9 @@
    Feste Bauteile auf jeder Seite: Navigation, Schrift, Maßlinie, Rotstift. Drei Schriften: Inter, JetBrains Mono, Caveat. */
 :root{
   --papier:#FFFFFF;--papier-2:#F5F5F7;--papier-3:#E8E8EA;
-  --tinte:#111214;--tinte-2:#3A3B40;--grau:#6E6E73;--grau-2:#86868B;--haar:#D2D2D7;
-  --rot:#D23A26;
+  --tinte:#111214;--tinte-2:#3A3B40;--grau:#68686D;--grau-2:#68686D;--haar:#D2D2D7;
+  /* 21.11.2026: ein Grau fuer Kleinschrift, mindestens 4,5 zu 1 auf Weiss, Grau und Handwerksplatte (Designpruefung) */
+  --rot:#D23A26;--rot-schrift:#C2311D;
   --braun-grund:#E7E4DD;--braun-platte:#F3F1EC;--braun-haar:#CFCAC0;--braun-dunkel:#2B2A27;--braun-mittel:#5E5A53;--braun-leise:#8A857C;
   --display:'Inter',system-ui,-apple-system,sans-serif;
   --text:'Inter',system-ui,-apple-system,sans-serif;
@@ -20,7 +21,7 @@ body{background:var(--papier);color:var(--tinte);font-family:var(--text);font-si
 a{color:inherit}
 img{max-width:100%;height:auto;display:block}
 .wrap{width:min(var(--breite),100%);margin:0 auto;padding:0 20px}
-.ueber{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--rot);margin-bottom:16px}
+.ueber{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--rot-schrift);margin-bottom:16px}
 h1,h2,h3{font-family:var(--display);color:var(--tinte);letter-spacing:-.045em;line-height:1.05;font-weight:600}
 h2{font-size:clamp(30px,4.6vw,50px);margin-bottom:18px;max-width:22em}
 h3{font-size:20px;letter-spacing:-.02em;line-height:1.2;margin-bottom:8px}
@@ -33,7 +34,7 @@ section{padding:104px 0}
 .kopf{max-width:46rem;margin-bottom:44px}
 
 /* Maßlinie, das Zeichen des Hauses */
-.mass{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;color:var(--rot)}
+.mass{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;color:var(--rot-schrift)}
 .mass i{flex:1;height:13px;position:relative}
 .mass i::before{content:"";position:absolute;left:0;right:0;top:6px;border-top:1px solid var(--rot)}
 .mass i:first-child::after{content:"";position:absolute;left:0;top:0;bottom:0;border-left:1px solid var(--rot)}
@@ -200,8 +201,8 @@ ul.punkte b{color:var(--tinte)}
 .kontakt .bafa b{color:var(--rot);font-weight:400}
 form.anfrage{display:flex;flex-direction:column;gap:6px}
 form.anfrage label{font-size:13px;color:#A1A1A6;margin-top:10px}
-form.anfrage input,form.anfrage textarea,form.anfrage select{background:#1D1E21;border:1px solid #2F3034;border-radius:12px;padding:13px 15px;color:#fff;font:16px var(--text);outline:none}
-form.anfrage input:focus,form.anfrage textarea:focus{border-color:#6E6E73}
+form.anfrage input,form.anfrage textarea,form.anfrage select{background:#1D1E21;border:1px solid #7A7B80;border-radius:12px;padding:13px 15px;color:#fff;font:16px var(--text);outline:none}
+form.anfrage input:focus,form.anfrage textarea:focus,form.anfrage select:focus{border-color:#fff;outline:2px solid #fff;outline-offset:2px}
 form.anfrage textarea{min-height:110px;resize:vertical}
 form.anfrage .knopf{background:#fff;color:var(--tinte);margin-top:18px;align-self:flex-start}
 form.anfrage .knopf:hover{background:#E8E8EA}
@@ -214,7 +215,7 @@ form.anfrage .knopf:hover{background:#E8E8EA}
 .fuss .plankopf{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;background:var(--papier);border:1px solid var(--tinte);font-family:var(--mono);font-size:12px;color:var(--tinte-2)}
 .fuss .plankopf div{padding:12px 16px;border-right:1px solid var(--haar)}
 .fuss .plankopf div:last-child{border-right:0}
-.fuss .plankopf small{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--grau-2);margin-bottom:2px}
+.fuss .plankopf small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--grau-2);margin-bottom:2px}
 .fuss .plankopf a{color:var(--tinte-2)}
 .fuss .credit{font-size:12px;color:var(--grau-2);margin-top:18px;max-width:48rem}
 @media(max-width:620px){.fuss .plankopf{grid-template-columns:1fr 1fr}.fuss .plankopf div:nth-child(2){border-right:0}.fuss .plankopf div:nth-child(-n+2){border-bottom:1px solid var(--haar)}}
@@ -222,7 +223,7 @@ form.anfrage .knopf:hover{background:#E8E8EA}
 
 /* ---------- Tür braun ---------- */
 body.werkzeug{background:var(--braun-platte)}
-.werkzeug .grau-bg{background:var(--braun-grund)}
+.werkzeug .grau-bg{background:var(--braun-grund);--grau:#636368;--grau-2:#636368}
 .werkzeug p{color:var(--braun-mittel)}
 .werkzeug h1,.werkzeug h2,.werkzeug h3{color:var(--braun-dunkel)}
 .werkzeug .lead{color:var(--braun-leise)}
@@ -316,7 +317,7 @@ body.werkzeug{background:var(--braun-platte)}
 .streifen .kopfzeile svg{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6}
 .streifen p{font-size:15px;line-height:1.5;margin:0 0 10px}
 .streifen ol{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--tinte-2)}
-.streifen ol b{font-family:var(--mono);font-size:12px;color:var(--rot);margin-right:6px;font-weight:500}
+.streifen ol b{font-family:var(--mono);font-size:12px;color:var(--rot-schrift);margin-right:6px;font-weight:500}
 .streifen ol a{color:var(--tinte)}
 .werkzeug .streifen{background:var(--braun-platte);border-color:var(--braun-haar)}
 
@@ -595,7 +596,7 @@ ol.fragen b{font-family:var(--display);font-weight:600;font-size:clamp(17px,2vw,
 .ptile:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1px var(--tinte)}
 .ptile .name{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:-.025em;line-height:1.15}
 .ptile .tut{font-size:14.5px;line-height:1.45;color:var(--grau)}
-.ptile small{margin-top:auto;padding-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--grau-2)}
+.ptile small{margin-top:auto;padding-top:8px;font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--grau-2)}
 .mini{position:relative;padding:2px 16% 12px 2px;margin-bottom:12px}
 .m-deckel{background:#0a0a0b;border-radius:9px 9px 0 0;padding:5px 5px 6px;box-shadow:0 0 0 1px #b9b9be}
 .m-schirm{position:relative;overflow:hidden;background:#fff}

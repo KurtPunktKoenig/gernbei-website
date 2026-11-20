@@ -55,7 +55,7 @@
     '.panel{position:fixed;right:20px;bottom:20px;z-index:2147483001;width:380px;max-width:calc(100vw - 32px);height:600px;max-height:calc(100vh - 40px);background:#fff;color:#111214;border-radius:18px;box-shadow:0 12px 48px rgba(0,0,0,.22);display:none;flex-direction:column;overflow:hidden;font-size:15px;line-height:1.5}' +
     '.panel.offen{display:flex}' +
     '.panel.gross{width:min(760px,calc(100vw - 32px));height:calc(100vh - 40px)}' +
-    '@media(max-width:520px){.panel{right:0;bottom:0;width:100vw;max-width:100vw;height:100%;max-height:100%;border-radius:0}.start{right:16px;bottom:16px}.kopf .gross-knopf{display:none}}' +
+    '@media(max-width:520px){.panel{right:0;bottom:0;width:100vw;max-width:100vw;height:100%;max-height:100%;border-radius:0}.start{right:12px;bottom:12px;width:52px;height:52px;padding:0;justify-content:center}.start .wort{display:none}.start.leise{display:none}.kopf .gross-knopf{display:none}}' +
     '.figur{flex:none;width:30px;height:30px;display:grid;place-items:center}.figur svg,.figur img{width:30px;height:30px}.figur svg{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}' +
     '.gruss{display:flex;gap:10px;align-items:flex-start}.gruss .figur{color:' + cfg.farbe + ';margin-top:4px}' +
     '.antwortzeit{margin-top:3px;color:#6E6E73}' +
@@ -90,7 +90,7 @@
     '.tippt{color:#6E6E73;font-size:13.5px}' +
     '.unsichtbar{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}' +
     '</style>' +
-    '<button class="start" type="button" aria-haspopup="dialog"><svg viewBox="0 0 32 32" stroke-linecap="round" stroke-linejoin="round">' + MASSBLASE + '</svg>Fragen?</button>' +
+    '<button class="start" type="button" aria-haspopup="dialog" aria-label="Fragen?"><svg viewBox="0 0 32 32" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + MASSBLASE + '</svg><span class="wort">Fragen?</span></button>' +
     '<div class="panel" role="dialog" aria-label="' + esc(cfg.name) + '">' +
     '  <div class="kopf">' + figurHtml() + '<div class="titel"><b>' + marke(cfg.name) + '</b><small>' + esc(cfg.untertitel) + '</small></div>' +
     '    <button type="button" class="brief" title="Anliegen per Nachricht" aria-label="Anliegen per Nachricht"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg></button>' +
@@ -107,6 +107,13 @@
   var start = w.querySelector(".start"), panel = w.querySelector(".panel"), verlauf = w.querySelector(".verlauf");
   var form = w.querySelector(".eingabe"), feld = w.querySelector("textarea"), senden = form.querySelector("button");
   var mensch = w.querySelector(".mensch");
+
+  // 21.11.2026: am Handy verdeckt der Knopf kein Feld der Seite, solange dort geschrieben wird
+  document.addEventListener("focusin", function (e) {
+    var t = e.target;
+    if (t && t !== wirt && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) start.classList.add("leise");
+  });
+  document.addEventListener("focusout", function () { start.classList.remove("leise"); });
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; });
