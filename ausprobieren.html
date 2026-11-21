@@ -83,6 +83,48 @@ html.eingebettet .geraete .notiz{font-size:21px;margin-bottom:10px}
 html.eingebettet .geraete .handy{position:absolute;right:0;bottom:-20px;width:24%;margin:0}
 html.dunkel .geraete .notiz{color:#F3F1EC}
 @media(max-width:430px){html.eingebettet .geraete{padding-right:0}html.eingebettet .geraete .handy{position:relative;right:auto;bottom:auto;width:min(290px,78%);margin:-60px auto 0}}
+/* Firmengedaechtnis: Team als Buerotafel ueber (Handy) oder neben (Rechner) den Geraeten */
+.haus{max-width:520px;margin:30px auto 0}
+.haus .haus-titel{font-family:var(--hand);font-size:21px;font-weight:400;letter-spacing:0;color:var(--tinte);text-align:center;margin-bottom:0}
+.haus .weg{font:600 15px/1.3 var(--text);color:var(--rot);text-align:center;margin:2px 0 8px;min-height:22px}
+.haus .dach-svg{display:none}
+.haus .zimmer{background:#FBFBF8;border:6px solid #cfd2d6;border-bottom:0;border-radius:8px 8px 0 0;box-shadow:inset 0 0 0 1px #aeb2b8}
+.haus .zi{padding:6px 3px 5px;border-left:1px dashed #d4d4d8;background:transparent}
+.haus .zi:first-child{border-left:0}
+.haus .zi.fragt{background:#fff;box-shadow:0 4px 10px -4px rgba(0,0,0,.25)}
+.haus .zi svg{width:34px;height:34px;margin-bottom:2px}
+.haus .zi b{font-size:11.5px}
+.haus .zi .geraet{font-size:9px;top:3px;right:3px}
+.haus .boden{display:flex;align-items:center;gap:8px;justify-content:center;flex-wrap:wrap;border:6px solid #cfd2d6;border-top:2px solid #aeb2b8;border-radius:0 0 8px 8px;background:#FBF3D9;box-shadow:0 18px 30px -18px rgba(0,0,0,.35);padding:8px 10px}
+.haus .boden .gehirn{width:46px;height:38px;flex:none}
+.haus .boden b{font-size:13.5px}
+.haus .boden small{display:none}
+.haus .boden .aus{flex-basis:100%;font:500 12.5px/1.35 var(--text);color:var(--rot);text-align:center;min-height:18px}
+.haus.an+.geraete{margin-top:18px}
+@media(max-width:899px){.haus{max-width:440px}.haus .zi small{display:none}}
+@media(max-width:620px){.haus .zi svg{width:28px;height:28px}.haus .zi b{font-size:10.5px}}
+@media(min-width:900px){
+  .tafel-buehne:has(.haus.an){display:grid;grid-template-columns:170px minmax(0,1fr);column-gap:34px;align-items:center;max-width:1240px;margin:0 auto}
+  .tafel-buehne:has(.haus.an)>*{grid-column:1/-1}
+  .tafel-buehne:has(.haus.an)>.haus{grid-column:1;margin:40px 0 0;max-width:none;align-self:center}
+  .tafel-buehne:has(.haus.an)>.geraete{grid-column:2;margin:40px 0 0;max-width:none;width:auto;justify-self:stretch}
+  .haus.an .haus-titel{text-align:left;font-size:19px;line-height:1.15}
+  .haus.an .weg{text-align:left}
+  .haus.an .zimmer{grid-template-columns:1fr;border:6px solid #cfd2d6;border-bottom:0;border-radius:8px 8px 0 0;overflow:visible}
+  .haus.an .zi{display:grid;grid-template-columns:34px 1fr;column-gap:10px;align-items:center;text-align:left;border-left:0;border-top:1px dashed #d4d4d8;padding:7px 10px}
+  .haus.an .zi:first-child{border-top:0}
+  .haus.an .zi svg{grid-column:1;grid-row:1/3;width:34px;height:34px;margin:0}
+  .haus.an .zi b{grid-column:2;grid-row:1;font-size:13px}
+  .haus.an .zi small{grid-column:2;grid-row:2;display:block;font-size:11px}
+  .haus.an .zi .geraet{grid-column:2;grid-row:2;position:static;justify-self:start;display:none}
+  .haus.an .zi.fragt .geraet{display:inline-block}
+  .haus.an .zi.fragt small{display:none}
+  .haus.an .zi .pfeil{display:none}
+  .haus.an .zi.fragt::after{content:"";position:absolute;right:-22px;top:50%;width:20px;height:2px;background:var(--rot)}
+  .haus.an .zi.fragt::before{content:"";position:absolute;right:-28px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left:8px solid var(--rot)}
+  .haus.an .boden{flex-direction:column;text-align:center}
+  .haus.an .boden .gehirn{width:54px;height:44px}
+}
 </style>
 </head>
 <body>
@@ -99,9 +141,9 @@ html.dunkel .geraete .notiz{color:#F3F1EC}
     <h1>Probieren Sie Gernbei aus.</h1>
     <p class="lead dunkler" id="lead">Das ist Gernbei, wie es bei einem Elektrobetrieb aussieht: Aufträge links, die letzten Gespräche darunter, Funktionen zum Entdecken. Schauen Sie zu oder klicken Sie selbst, am Rechner und am Handy.</p>
     <div class="wahl" role="group" aria-label="Produkt">
+      <button data-p="firmengedaechtnis" aria-pressed="false">Firmengedächtnis</button>
       <button data-p="handwerk" aria-pressed="true">Fürs Handwerk</button>
       <button data-p="dienstleister" aria-pressed="false">Für Dienstleister</button>
-      <button data-p="firmengedaechtnis" aria-pressed="false">Firmengedächtnis</button>
     </div>
     <div class="modus" role="group" aria-label="Ansicht">
       <button id="m-zu" aria-pressed="true">Zuschauen</button>
@@ -110,6 +152,30 @@ html.dunkel .geraete .notiz{color:#F3F1EC}
     <div class="vorteile mitte"><span>läuft im Browser, auf Ihren Geräten</span><span>Ihre Unterlagen in der EU</span><span>persönlich eingerichtet aus Würzburg</span></div>
     <p class="hinweis-selbst" id="hinweis"></p>
 
+    <div class="tafel-buehne">
+    <div class="haus" id="haus" aria-live="polite">
+      <p class="haus-titel">Haldenmeyer &amp; Sorg Architekten</p>
+      <p class="weg" id="weg"></p>
+      <svg class="dach-svg" viewBox="0 0 760 50" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,50 380,3 760,50" fill="#F3F1EC" stroke="#111214" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+      <div class="zimmer">
+        <div class="zi" data-wer="ottilie"><span class="geraet"></span>
+          <svg viewBox="0 0 60 60"><use href="#kopf"/><circle cx="30" cy="9" r="5" fill="#3A3B40"/><path d="M17.5 22 Q19 12 30 12 Q41 12 42.5 22" fill="none" stroke="#3A3B40" stroke-width="4" stroke-linecap="round"/></svg>
+          <b>Ottilie</b><small>Partnerin</small><i class="pfeil"></i></div>
+        <div class="zi" data-wer="rainer"><span class="geraet"></span>
+          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M17.3 26 Q16.5 16 21 13.5M42.7 26 Q43.5 16 39 13.5" fill="none" stroke="#9A9A9F" stroke-width="3.2" stroke-linecap="round"/><circle cx="25" cy="24" r="4.2" fill="none" stroke="#111" stroke-width="1.6"/><circle cx="35" cy="24" r="4.2" fill="none" stroke="#111" stroke-width="1.6"/><path d="M29.2 24h1.6" stroke="#111" stroke-width="1.6"/></svg>
+          <b>Rainer</b><small>Partner</small><i class="pfeil"></i></div>
+        <div class="zi" data-wer="katrin"><span class="geraet"></span>
+          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M16.5 21 Q16.5 8 30 8 Q43.5 8 43.5 21 Z" fill="#F2C94C" stroke="#111" stroke-width="2"/><path d="M13 21.5 H47" stroke="#111" stroke-width="2.4" stroke-linecap="round"/><path d="M30 8 V13" stroke="#111" stroke-width="1.6"/></svg>
+          <b>Katrin</b><small>Projektleitung</small><i class="pfeil"></i></div>
+        <div class="zi" data-wer="lukas"><span class="geraet"></span>
+          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M17.5 20 L20 12.5 L24 16.5 L27.5 10.5 L31 15.5 L35 10.5 L37.5 16 L42 13 L42.5 20" fill="#6B4E3A" stroke="#111" stroke-width="1.8" stroke-linejoin="round"/><path d="M24.5 30 Q30 37 35.5 30 Z" fill="#111"/></svg>
+          <b>Lukas</b><small>neu im Büro</small><i class="pfeil"></i></div>
+        <div class="zi" data-wer="renate"><span class="geraet"></span>
+          <svg viewBox="0 0 60 60"><path d="M15 33 Q12 12 30 11 Q48 12 45 33 Z" fill="#B5703F" stroke="#111" stroke-width="1.8"/><use href="#kopf"/><path d="M17.5 21 Q22 13 30 14 Q38 13 42.5 21" fill="#B5703F" stroke="#111" stroke-width="1.6"/><circle cx="16.5" cy="31" r="1.6" fill="#D23A26"/><circle cx="43.5" cy="31" r="1.6" fill="#D23A26"/></svg>
+          <b>Renate</b><small>Büroleitung</small><i class="pfeil"></i></div>
+      </div>
+      <div class="boden" id="boden"><svg class="gehirn" viewBox="0 0 64 52" aria-hidden="true"><g fill="#fff" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M31 6c-3-4-10-4-12 1-5-1-9 3-8 8-5 1-7 7-4 11-3 3-2 9 3 10 0 5 5 8 10 6 2 4 8 5 11 1z"/><path d="M33 6c3-4 10-4 12 1 5-1 9 3 8 8 5 1 7 7 4 11 3 3 2 9-3 10 0 5-5 8-10 6-2 4-8 5-11 1z"/></g><g fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round"><path d="M19 7c1 4 4 5 7 5M11 15c3 0 5 2 5 5M7 26c3-1 6 0 7 3M10 36c2-2 6-2 7 0M20 42c0-3 2-5 5-5"/><path d="M45 7c-1 4-4 5-7 5M53 15c-3 0-5 2-5 5M57 26c-3-1-6 0-7 3M54 36c-2-2-6-2-7 0M44 42c0-3-2-5-5-5"/></g><g fill="#D23A26"><circle cx="22" cy="24" r="2.4"/><circle cx="42" cy="20" r="2.4"/><circle cx="38" cy="34" r="2.4"/></g><path d="M22 24L42 20L38 34Z" fill="none" stroke="#D23A26" stroke-width="1.4" stroke-dasharray="2 2"/></svg><b>Das gemeinsame Gedächtnis</b><span class="aus" id="aus"></span><small>Projekte, Protokolle, Entscheidungen, Pläne. Jede Antwort nennt die Quelle.</small></div>
+    </div>
     <div class="geraete" id="geraete">
       <p class="notiz" id="notiz" aria-live="polite"></p>
       <div class="laptop">
@@ -140,34 +206,12 @@ html.dunkel .geraete .notiz{color:#F3F1EC}
         </div></div></div>
       </div>
     </div>
+    </div>
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
       <defs>
         <g id="kopf"><path d="M12 59 Q14 44 30 44 Q46 44 48 59" fill="#fff" stroke="#111" stroke-width="2.2" stroke-linecap="round"/><circle cx="30" cy="25" r="13" fill="#fff" stroke="#111" stroke-width="2.2"/><circle cx="25" cy="24" r="1.6" fill="#111"/><circle cx="35" cy="24" r="1.6" fill="#111"/><path d="M24.5 30 Q30 35 35.5 30" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/></g>
       </defs>
     </svg>
-    <div class="haus" id="haus" aria-live="polite">
-      <p class="haus-titel">Haldenmeyer &amp; Sorg Architekten · ein Büro, jeder mit eigenem Bereich</p>
-      <svg class="dach-svg" viewBox="0 0 760 50" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,50 380,3 760,50" fill="#F3F1EC" stroke="#111214" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
-      <div class="zimmer">
-        <div class="zi" data-wer="ottilie"><span class="geraet"></span>
-          <svg viewBox="0 0 60 60"><use href="#kopf"/><circle cx="30" cy="9" r="5" fill="#3A3B40"/><path d="M17.5 22 Q19 12 30 12 Q41 12 42.5 22" fill="none" stroke="#3A3B40" stroke-width="4" stroke-linecap="round"/></svg>
-          <b>Ottilie Haldenmeyer</b><small>Partnerin</small><i class="pfeil"></i></div>
-        <div class="zi" data-wer="rainer"><span class="geraet"></span>
-          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M17.3 26 Q16.5 16 21 13.5M42.7 26 Q43.5 16 39 13.5" fill="none" stroke="#9A9A9F" stroke-width="3.2" stroke-linecap="round"/><circle cx="25" cy="24" r="4.2" fill="none" stroke="#111" stroke-width="1.6"/><circle cx="35" cy="24" r="4.2" fill="none" stroke="#111" stroke-width="1.6"/><path d="M29.2 24h1.6" stroke="#111" stroke-width="1.6"/></svg>
-          <b>Rainer Sorg</b><small>Partner</small><i class="pfeil"></i></div>
-        <div class="zi" data-wer="katrin"><span class="geraet"></span>
-          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M16.5 21 Q16.5 8 30 8 Q43.5 8 43.5 21 Z" fill="#F2C94C" stroke="#111" stroke-width="2"/><path d="M13 21.5 H47" stroke="#111" stroke-width="2.4" stroke-linecap="round"/><path d="M30 8 V13" stroke="#111" stroke-width="1.6"/></svg>
-          <b>Katrin Ziegler</b><small>Projektleitung</small><i class="pfeil"></i></div>
-        <div class="zi" data-wer="lukas"><span class="geraet"></span>
-          <svg viewBox="0 0 60 60"><use href="#kopf"/><path d="M17.5 20 L20 12.5 L24 16.5 L27.5 10.5 L31 15.5 L35 10.5 L37.5 16 L42 13 L42.5 20" fill="#6B4E3A" stroke="#111" stroke-width="1.8" stroke-linejoin="round"/><path d="M24.5 30 Q30 37 35.5 30 Z" fill="#111"/></svg>
-          <b>Lukas Seidel</b><small>neu, zweite Woche</small><i class="pfeil"></i></div>
-        <div class="zi" data-wer="renate"><span class="geraet"></span>
-          <svg viewBox="0 0 60 60"><path d="M15 33 Q12 12 30 11 Q48 12 45 33 Z" fill="#B5703F" stroke="#111" stroke-width="1.8"/><use href="#kopf"/><path d="M17.5 21 Q22 13 30 14 Q38 13 42.5 21" fill="#B5703F" stroke="#111" stroke-width="1.6"/><circle cx="16.5" cy="31" r="1.6" fill="#D23A26"/><circle cx="43.5" cy="31" r="1.6" fill="#D23A26"/></svg>
-          <b>Renate Pfaff</b><small>Büroleitung</small><i class="pfeil"></i></div>
-      </div>
-      <div class="boden" id="boden"><b>Das gemeinsame Firmengedächtnis</b><small>Projekte, Protokolle, Entscheidungen, Pläne. Jede Antwort nennt die Quelle.</small></div>
-      <p class="weg" id="weg"></p>
-    </div>
     <p class="unterzeile" id="unterzeile">Erfundener Betrieb, echte Antworten aus Gernbei, ungekürzt.</p>
   </div>
 </header>
@@ -176,7 +220,7 @@ html.dunkel .geraete .notiz{color:#F3F1EC}
   <div class="plankopf">
     <div><small>Planverfasser</small>Kurt König · <span class="gb">Gern<b>bei</b></span><span class="slogan-fuss">KI? Gern dabei.</span></div>
     <div><small>Ort</small>Wittelsbacher Str. 2, 97074 Würzburg</div>
-    <div><small>Stand</small>12.11.2026</div>
+    <div><small>Stand</small>19.11.2026</div>
     <div><small>Blätter</small><a href="fragen.html">Fragen</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></div>
   </div>
   <p class="credit">© 2026 Kurt König. Gebaut und gepflegt mit derselben KI, die in Gernbei arbeitet. Richtung und Freigabe: Kurt König.</p>
@@ -208,11 +252,11 @@ html.dunkel .geraete .notiz{color:#F3F1EC}
   ]);
   // Firmengedaechtnis: jede Szene gehoert einer Person, ihr Geraet zeigt ihren eigenen Platz (echte Laeufe, Haldenmeyer & Sorg)
   var FOLGE_FG = [
-    {g:"rechner", wer:"lukas", art:"Lukas, zweite Woche im Büro, am Laptop", text:"Welcher Planstand von Bauteil B ist der gültige, und wer hat ihn bekommen?"},
-    {g:"handy", wer:"katrin", art:"Katrin, Projektleitung, auf der Baustelle", text:"Welche Entscheidungen der Grundschule haben Kostenfolgen, und wo steht die Quelle?"},
-    {g:"rechner", wer:"renate", art:"Renate, Büroleitung, am Laptop", text:"Welche Termine und Fristen laufen in den nächsten vier Wochen, über alle Projekte?"},
-    {g:"handy", wer:"rainer", art:"Rainer, Partner, auf dem Weg zum Bauherrn", text:"Wo steht die Tagesklinik, und was ist offen?"},
-    {g:"rechner", wer:"lukas", art:"Lukas, vor der ersten Mail an die Gemeinde", text:"Wem darf ich bei der Gemeinde Tannhofen schreiben, und wer muss in Kopie?"}
+    {g:"rechner", wer:"lukas", art:"Lukas, zweite Woche im Büro, am Laptop", aus:"Tobias’ Vermerk auf dem Plan, 10.11.", text:"Welcher Planstand von Bauteil B ist der gültige, und wer hat ihn bekommen?"},
+    {g:"handy", wer:"katrin", art:"Katrin, Projektleitung, auf der Baustelle", aus:"Pavels Kostenfortschreibung, Oktober", text:"Welche Entscheidungen der Grundschule haben Kostenfolgen, und wo steht die Quelle?"},
+    {g:"rechner", wer:"renate", art:"Renate, Büroleitung, am Laptop", aus:"Protokolle und Zusagen aller Projekte", text:"Welche Termine und Fristen laufen in den nächsten vier Wochen, über alle Projekte?"},
+    {g:"handy", wer:"rainer", art:"Rainer, Partner, auf dem Weg zum Bauherrn", aus:"Projektstand vom 13.11. und offene Aufgaben", text:"Wo steht die Tagesklinik, und was ist offen?"},
+    {g:"rechner", wer:"lukas", art:"Lukas, vor der ersten Mail an die Gemeinde", aus:"Regel des Bauamts und Schreiben vom 12.11.", text:"Wem darf ich bei der Gemeinde Tannhofen schreiben, und wer muss in Kopie?"}
   ];
   var LEUTE = {lukas:"Lukas", katrin:"Katrin", renate:"Renate", rainer:"Rainer"};
   // Dienstleister: Jonas Wiedemer, selbstaendiger IT-Projektleiter (Vorfuehrdaten Variante Freelancer, ganz erfunden)
@@ -248,7 +292,9 @@ html.dunkel .geraete .notiz{color:#F3F1EC}
       z.querySelector(".geraet").textContent = an ? (s.g === "handy" ? "AM HANDY" : "AM LAPTOP") : "";
     });
     document.getElementById("boden").classList.remove("liefert");
-    document.getElementById("weg").textContent = s ? "Gemeinsames Firmengedächtnis → für " + LEUTE[s.wer] + (s.g === "handy" ? ", am Handy" : ", am Laptop") : "";
+    document.getElementById("weg").textContent = s ? LEUTE[s.wer] + " fragt" + (s.g === "handy" ? " am Handy" : " am Laptop") : "";
+    document.getElementById("aus").textContent = s && s.aus ? "Antwort aus: " + s.aus : "";
+    if (s && s.aus) setTimeout(function(){ document.getElementById("boden").classList.add("liefert"); }, 600);
   }
   var KLEIN = window.matchMedia(document.documentElement.classList.contains("eingebettet") ? "(max-width:430px)" : "(max-width:760px)");
   var DAUER = {"Welcher Planstand von Bauteil B ist der gültige, und wer hat ihn bekommen?": "unter 1 Minute", "Welche Entscheidungen der Grundschule haben Kostenfolgen, und wo steht die Quelle?": "unter 1 Minute", "Welche Termine und Fristen laufen in den nächsten vier Wochen, über alle Projekte?": "unter 1 Minute", "Wo steht die Tagesklinik, und was ist offen?": "unter 1 Minute", "Wem darf ich bei der Gemeinde Tannhofen schreiben, und wer muss in Kopie?": "unter 1 Minute", "Was steht heute an?": "unter 1 Minute", "Zählerwechsel Brunner: 24. oder 26.11.? Was stimmt denn jetzt?": "unter 1 Minute", "Mail an Frau Rebhan wegen dem brummenden Dimmer: wir kommen am Donnerstag vormittag, passt ihr das?": "unter 1 Minute", "Mach mir aus dem Stundenzettel von Andrzej für KW 46 die Stunden für Brunner.": "unter 1 Minute", "Materialliste Wallbox Dörfler prüfen: fehlt da was?": "unter 1 Minute", "Wie weit ist das Prüfprotokoll DGUV V3 für die Bäckerei Reichart?": "unter 1 Minute", "Bereite die Rechnungen für Oktober vor. Alles, was ich dafür habe, steht in meinen Notizen.": "unter 2 Minuten", "Wie viel Kontingent ist beim Rahmenvertrag Lauterhain noch übrig, und was passiert zum Jahresende?": "unter 1 Minute", "Schreib den Statusbericht für Frau Lindner, KW 46, aus meinen Notizen.": "unter 2 Minuten", "Antworte Frau Falk auf LinkedIn. Freundlich, Interesse ja, ab Februar nur zwei Tage, einen Satz nenne ich noch nicht.": "unter 1 Minute", "Was steht diese Woche an?": "unter 1 Minute"};
@@ -394,7 +440,7 @@ html.dunkel .geraete .notiz{color:#F3F1EC}
       if (!selbst) zuschauen();
     };
   });
-  var START = new URLSearchParams(location.search).get("p");
+  var START = new URLSearchParams(location.search).get("p") || "firmengedaechtnis";
   if (START && START !== "handwerk") { var sb = document.querySelector('.wahl [data-p="' + START + '"]'); if (sb) setTimeout(function(){ sb.click(); }, 50); }
   document.getElementById("m-zu").onclick = function(){ modus(false); };
   document.getElementById("m-selbst").onclick = function(){ modus(true); };

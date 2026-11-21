@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de"><head><script src="daten.js?v=202611181602"></script><script src="api.js?v=202611181602"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="de"><head><script src="daten.js?v=202611210145"></script><script src="api.js?v=202611210145"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gernbei</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="schriften.css">
@@ -9,14 +9,14 @@
 <style>
 :root{/* Werkplan (E109, Kurts Ja vom 29.10.2026): Tinte, Papier, Haarlinie; Rotstift nur an
 Masslinie und Arbeitspunkt, nie als Flaeche oder Knopf */
---bg:#FFFFFF;--bg-alt:#F5F5F3;--bg-3:#EDEDEA;--text:#111214;--text-mid:#3A3B40;--text-muted:#6E6E73;--accent:#111214;--accent-dunkel:#000000;--accent-bg:#EDEDEA;--border:#D9D9D5;--ich:#111214;--rot:#D23A26;--mass:#A1A1A6;
+--bg:#FFFFFF;--bg-alt:#F5F5F3;--bg-3:#EDEDEA;--text:#111214;--text-mid:#3A3B40;--text-muted:#6E6E73;--accent:#111214;--accent-dunkel:#000000;--accent-bg:#EDEDEA;--border:#D9D9D5;--feld:#8A8A8E;--ich:#111214;--rot:#D23A26;--mass:#A1A1A6;
 --auf:#FFFFFF;--aus:#C9CBC6;--raster:rgba(17,18,20,0.035);--schatten:rgba(17,18,20,0.12);color-scheme:light;
 --display:'Inter',system-ui,-apple-system,sans-serif;--body:'Inter',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
 /* Dunkelansicht (Kurt 01.11.2026): Tafel statt Papier, Kreide statt Tinte, Rotstift heller.
 Wahl unten links unter dem Namen: Hell, Dunkel oder Wie das Gerät (folgt dem System) */
-@media (prefers-color-scheme:dark){:root:not([data-ansicht="hell"]){--bg:#1B1C20;--bg-alt:#141518;--bg-3:#26282D;--text:#ECECE8;--text-mid:#C4C5C1;--text-muted:#8F9094;--accent:#ECECE8;--accent-dunkel:#FFFFFF;--accent-bg:#26282D;--border:#2F3136;--ich:#ECECE8;--rot:#E8624F;--mass:#8F9094;
+@media (prefers-color-scheme:dark){:root:not([data-ansicht="hell"]){--bg:#1B1C20;--bg-alt:#141518;--bg-3:#26282D;--text:#ECECE8;--text-mid:#C4C5C1;--text-muted:#8F9094;--accent:#ECECE8;--accent-dunkel:#FFFFFF;--accent-bg:#26282D;--border:#2F3136;--feld:#76787E;--ich:#ECECE8;--rot:#E8624F;--mass:#8F9094;
 --auf:#141518;--aus:#3A3C42;--raster:rgba(236,236,232,0.03);--schatten:rgba(0,0,0,0.45);color-scheme:dark}}
-:root[data-ansicht="dunkel"]{--bg:#1B1C20;--bg-alt:#141518;--bg-3:#26282D;--text:#ECECE8;--text-mid:#C4C5C1;--text-muted:#8F9094;--accent:#ECECE8;--accent-dunkel:#FFFFFF;--accent-bg:#26282D;--border:#2F3136;--ich:#ECECE8;--rot:#E8624F;--mass:#8F9094;
+:root[data-ansicht="dunkel"]{--bg:#1B1C20;--bg-alt:#141518;--bg-3:#26282D;--text:#ECECE8;--text-mid:#C4C5C1;--text-muted:#8F9094;--accent:#ECECE8;--accent-dunkel:#FFFFFF;--accent-bg:#26282D;--border:#2F3136;--feld:#76787E;--ich:#ECECE8;--rot:#E8624F;--mass:#8F9094;
 --auf:#141518;--aus:#3A3C42;--raster:rgba(236,236,232,0.03);--schatten:rgba(0,0,0,0.45);color-scheme:dark}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
@@ -51,7 +51,7 @@ h1 span{color:var(--accent)}
 .unter{margin:0 0 1.8rem;color:var(--text-mid);font-size:1.05rem;text-align:center;max-width:30rem}
 .karte{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:1.4rem 1.4rem 1.2rem;width:min(380px,100%);display:flex;flex-direction:column;gap:0.8rem}
 .karte label{font-size:0.85rem;color:var(--text-muted);display:flex;flex-direction:column;gap:0.3rem}
-.karte input{border:1px solid var(--border);border-radius:12px;padding:0.7rem 0.9rem;background:var(--bg-alt);outline:none}
+.karte input{border:1px solid var(--feld);border-radius:12px;padding:0.7rem 0.9rem;background:var(--bg-alt);outline:none}
 .karte input:focus{border-color:var(--accent);background:var(--bg)}
 .los{font-size:1.1rem;font-weight:600;color:var(--auf);background:var(--accent);border:0;border-radius:999px;padding:0.85rem 2rem;min-height:52px;cursor:pointer;margin-top:0.3rem}
 .los:hover{background:var(--accent-dunkel)}
@@ -129,14 +129,14 @@ nav svg{flex:none}
 .punkt:hover{background:var(--bg-3);color:var(--text)}
 /* Unterzeile unter Notizen und Dokumente, was dort liegt (Kurt 05.11.2026) */
 .punkt .zwei{display:flex;flex-direction:column;line-height:1.2;min-width:0}
-.punkt .zwei small{font-size:0.78rem;color:var(--text-muted);font-weight:400}
+.punkt .zwei small{font-size:0.8125rem;white-space:normal;line-height:1.3;color:var(--text-muted);font-weight:400}
 .punkt.an{background:var(--bg);color:var(--text);font-weight:600;box-shadow:0 0 0 1px var(--border)}
 .punkt.an::before{content:'';position:absolute;left:-0.7rem;top:22%;bottom:22%;width:3px;border-radius:0 3px 3px 0;background:var(--rot)}
 /* Stand 103 (Kurt 15.11.2026: ja gleich mit): Neues Gespraech in der Form des Website-Knopfs, leise, wie Funktionen entdecken */
 .punkt.neu{background:var(--bg);color:var(--text);font-weight:600;padding:0.7rem 0.8rem;margin-bottom:1rem;border:1px solid var(--text);border-radius:10px;box-shadow:2px 2px 0 var(--rot-schrift);width:calc(100% - 3px)}
 .punkt.neu:hover{background:var(--bg-3);color:var(--text)}
-.etikett{font-family:var(--mono);font-size:0.72rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--rot-schrift);padding:0.2rem 0.7rem 0.35rem;white-space:nowrap}
-:root{--rot-schrift:#D23A26}
+.etikett{font-family:var(--mono);font-size:0.82rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--rot-schrift);padding:0.2rem 0.7rem 0.35rem;white-space:nowrap}
+:root{--rot-schrift:#B5321F}
 @media (prefers-color-scheme:dark){:root:not([data-ansicht="hell"]){--rot-schrift:#F0715E}}
 :root[data-ansicht="dunkel"]{--rot-schrift:#F0715E}
 .luft{flex:1}
@@ -362,7 +362,7 @@ zu drei fruehere, Titel ist die erste Frage. Eingeklappt verborgen, dafuer dort 
 .projekt:hover{background:var(--bg-3);color:var(--text)}
 .projekt.an{background:var(--bg);color:var(--text);font-weight:600;box-shadow:0 0 0 1px var(--border)}
 .projekt.an::before{content:'';position:absolute;left:-0.7rem;top:22%;bottom:22%;width:3px;border-radius:0 3px 3px 0;background:var(--rot)}
-.pin{width:1.55rem;height:1.55rem;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;font-size:0.62rem;font-weight:700;color:#fff;flex:none;letter-spacing:0;font-style:normal}.projekt .pname-p{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pin{width:1.55rem;height:1.55rem;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:#fff;flex:none;letter-spacing:0;font-style:normal}.projekt .pname-p{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .projekt .rad{opacity:0;display:inline-flex;padding:0.15rem;border-radius:6px;color:var(--text-muted);flex:none}
 .projekt .rad svg{width:1.125rem;height:1.125rem}
 .projekt:hover .rad,.projekt.an .rad,.projekt .rad:focus{opacity:1}
@@ -382,10 +382,16 @@ zu drei fruehere, Titel ist die erste Frage. Eingeklappt verborgen, dafuer dort 
 .ergebnis .titel{flex:1;min-width:12rem}
 .ergebnis .titel b{display:block;font-weight:600;overflow-wrap:anywhere}
 .ergebnis .titel small{display:block;font-size:0.82rem;color:var(--text-muted)}
+/* Stand 130: Stand der Datei aus Ergebnisse.md, Entwurf hervorgehoben */
+.ergebnis .dstand{display:inline-block;margin-left:0.45rem;padding:0.05rem 0.5rem;border-radius:999px;font-style:normal;font-size:0.74rem;font-weight:600;vertical-align:0.1em;border:1px solid var(--border);color:var(--text-muted)}
+.ergebnis .dstand.offen{border-color:currentColor;color:#9a5b00}
 .ergebnis .fmt{display:inline-flex;gap:0.3rem}
 .ergebnis .fmt a{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.04em;border:1px solid var(--border);border-radius:7px;padding:0.2rem 0.5rem;color:var(--text);text-decoration:none}
 .ergebnis .fmt a:hover{border-color:var(--accent)}
-.ergebnis .ueber{border:1px solid var(--border);background:var(--bg);border-radius:999px;padding:0.25rem 0.75rem;font-size:0.85rem;cursor:pointer;color:var(--text)}
+.ergebnis .ueber,.notiz-aktion{border:1px solid var(--border);background:var(--bg);border-radius:999px;padding:0.25rem 0.75rem;font-size:0.85rem;cursor:pointer;color:var(--text)}
+.notiz-aktion{margin-left:0.6rem}
+/* Stand 131 (Designlauf 20.11.2026): am Handy mindestens 44 Pixel zum Tippen, das Zeichen bleibt klein */
+@media(max-width:600px){#auf,#projekt-neu,.frage-oben,.ergebnis .ueber,.notiz-aktion{min-height:44px;min-width:44px}#projekt-neu{display:inline-flex;align-items:center;justify-content:center}.ergebnis .fmt a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;justify-content:center;font-size:0.8rem}.frage-oben{padding-top:0.4rem;padding-bottom:0.4rem}}
 .ergebnis .ueber:hover{border-color:var(--text)}
 .dfilter{display:flex;flex-wrap:wrap;gap:0.35rem;margin:0 0 0.5rem}
 .dfilter button{border:1px solid var(--border);background:var(--bg);border-radius:999px;padding:0.2rem 0.7rem;font-size:0.84rem;cursor:pointer;color:var(--text)}
@@ -584,6 +590,8 @@ zu drei fruehere, Titel ist die erste Frage. Eingeklappt verborgen, dafuer dort 
 #erst-blatt .erst-ok{background:var(--bg-alt);border-radius:10px;padding:0.6rem 0.8rem}
 #erst-blatt .erst-bis{border-left:3px solid var(--border);padding-left:0.75rem;font-size:0.93rem}
 #erst-blatt label{display:block;font-weight:600;margin-bottom:0.75rem}
+#erst-blatt .erst-wahl{margin:0 0 0.5rem}
+#erst-blatt .erst-wahl label{display:inline-flex;align-items:center;gap:6px;font-weight:400;margin:0 14px 6px 0;min-height:36px}
 #erst-blatt input{display:block;width:100%;box-sizing:border-box;margin-top:0.3rem;font:inherit;font-weight:400;padding:0.6rem 0.75rem;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text)}
 #erst-blatt .erst-knoepfe{display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;margin-top:0.4rem}
 #erst-blatt .erst-knoepfe button{min-height:44px}
@@ -994,6 +1002,8 @@ waehrend der Aufnahme ein Ring im Rotstift als Arbeitspunkt */
 .notiz h1.titel{font-size:clamp(1.7rem,4vw,2.3rem);text-align:left;margin:0 0 1rem}
 .sie h2,.notiz h2{font-family:var(--display);font-weight:600;letter-spacing:-0.02em;font-size:1.3rem;margin:1.3rem 0 0.5rem}
 .sie table,.notiz table{border-collapse:collapse;margin:0 0 0.9rem;font-size:0.93rem;display:block;overflow-x:auto;max-width:100%}
+/* Stand 130 (Bedienpruefung 20.11.2026): am Handy brechen Zellen um, statt rechts zu verschwinden; die Schreibzeile wird breiter */
+@media(max-width:600px){.sie table,.notiz table{font-size:0.84rem}.sie th,.sie td,.notiz th,.notiz td{overflow-wrap:anywhere;hyphens:auto;min-width:4.5rem}#eingabe{padding-left:0.6rem;padding-right:0.6rem}#eingabe textarea{scrollbar-width:none}}
 .sie th,.sie td,.notiz th,.notiz td{border:1px solid var(--border);padding:0.35rem 0.6rem;text-align:left;vertical-align:top}
 .sie th,.notiz th{background:var(--bg-alt);font-weight:600}
 .notiz blockquote{margin:0 0 0.8rem;padding:0.2rem 0 0.2rem 0.9rem;border-left:3px solid var(--accent-bg);color:var(--text-mid)}
@@ -1225,6 +1235,15 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     <div class="leiste-neu">
       <button class="punkt neu" id="neu" type="button" data-tipp="Neues Gespräch"><svg aria-hidden="true"><use href="#i-neu"/></svg><span>Neues Gespräch</span></button>
     </div>
+    <!-- Stand 130 (Bedienpruefung 20.11.2026): Notizen und Dokumente vor Projekten und Gespraechen -->
+    <div class="etikett">Arbeit</div>
+    <button class="punkt an nur-zu" data-f="gespraech" type="button" data-tipp="Gespräch"><svg aria-hidden="true"><use href="#i-gespraech"/></svg><span>Gespräch</span></button>
+    <!-- Was Gernbei kann (Stand 84): erscheint, sobald fuer Produkt und Beruf Zeilen da sind -->
+    <button class="punkt versteckt" data-f="koennen" id="koennen-punkt" type="button" data-tipp="Was Gernbei kann"><i class="k4" aria-hidden="true"><b style="background:#2E6B73"></b><b style="background:#D23A26"></b><b style="background:#3D6FA8"></b><b style="background:#B0702A"></b></i><span class="zwei"><span>Was Gernbei kann</span><small>Antippen und loslegen</small></span></button>
+    <button class="punkt" data-f="notizen" id="notizen-punkt" type="button" data-tipp="Notizen"><svg aria-hidden="true"><use href="#i-notizen"/></svg><span class="zwei">Notizen<small>Was ich mir gemerkt habe</small></span></button>
+    <button class="punkt" data-f="dokumente" id="dokumente-punkt" type="button" data-tipp="Dokumente"><svg aria-hidden="true"><use href="#i-dokumente"/></svg><span class="zwei">Dokumente<small>Ihre fertigen Briefe und Angebote</small></span></button>
+    <!-- Stand 120 (Kurt 17.11.2026): ein Ort fuer alles Geteilte, nur im Firmengedaechtnis -->
+    <button class="punkt versteckt" data-f="gemeinsam" id="gemeinsam-punkt" type="button" data-tipp="Für alle"><svg aria-hidden="true"><use href="#i-fueralle"/></svg><span class="zwei">Für alle<small>Was das Büro teilt</small></span><i class="gneu" id="gneu" aria-hidden="true"></i></button>
     <!-- Projekte, die angepinnt bleiben (Bauvorlage-Projekte): hoechstens sieben, der Rest unter Alle Projekte -->
     <!-- Schritt fuer Schritt (Bauvorlage-Wizard): nur solange ein Weg laeuft oder wartet, hoechstens drei -->
     <div class="schritte versteckt" id="schritte">
@@ -1239,14 +1258,6 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
       <div class="etikett">Letzte Gespräche</div>
       <div id="letzte-liste"></div>
     </div>
-    <div class="etikett">Arbeit</div>
-    <button class="punkt an nur-zu" data-f="gespraech" type="button" data-tipp="Gespräch"><svg aria-hidden="true"><use href="#i-gespraech"/></svg><span>Gespräch</span></button>
-    <!-- Was Gernbei kann (Stand 84): erscheint, sobald fuer Produkt und Beruf Zeilen da sind -->
-    <button class="punkt versteckt" data-f="koennen" id="koennen-punkt" type="button" data-tipp="Was Gernbei kann"><i class="k4" aria-hidden="true"><b style="background:#2E6B73"></b><b style="background:#D23A26"></b><b style="background:#3D6FA8"></b><b style="background:#B0702A"></b></i><span class="zwei"><span>Was Gernbei kann</span><small>Antippen und loslegen</small></span></button>
-    <button class="punkt" data-f="notizen" type="button" data-tipp="Notizen"><svg aria-hidden="true"><use href="#i-notizen"/></svg><span class="zwei">Notizen<small>Was ich mir gemerkt habe</small></span></button>
-    <button class="punkt" data-f="dokumente" id="dokumente-punkt" type="button" data-tipp="Dokumente"><svg aria-hidden="true"><use href="#i-dokumente"/></svg><span class="zwei">Dokumente<small>Ihre fertigen Briefe und Angebote</small></span></button>
-    <!-- Stand 120 (Kurt 17.11.2026): ein Ort fuer alles Geteilte, nur im Firmengedaechtnis -->
-    <button class="punkt versteckt" data-f="gemeinsam" id="gemeinsam-punkt" type="button" data-tipp="Für alle"><svg aria-hidden="true"><use href="#i-fueralle"/></svg><span class="zwei">Für alle<small>Was das Büro teilt</small></span><i class="gneu" id="gneu" aria-hidden="true"></i></button>
     <div class="luft"></div>
     <!-- Hilfe als eine Tuer (Stand 92, Kurt 13.11.2026, Bauvorlage Orientierung): Suchen, Nachlesen und
          Zuschauen auf der Hilfeseite; Fragen zur Bedienung steht oben rechts auf jeder Flaeche -->
@@ -1343,7 +1354,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
       <div class="schlange versteckt" id="schlange"><small>Kommt als Nächstes</small><ol id="schlange-liste"></ol></div>
       <div class="aufgabe versteckt" id="aufgabe" aria-live="polite"></div>
       <div class="zeile">
-        <button class="anhang" id="anhang" type="button" aria-label="Datei hineingeben" title="Datei hineingeben"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05 12 20.5a6 6 0 0 1-8.49-8.49l8.57-8.57a4 4 0 1 1 5.66 5.66l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></button>
+        <button class="anhang" id="anhang" type="button" aria-label="Datei hineingeben" title="Datei hineingeben"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05 12 20.5a6 6 0 0 1-8.49-8.49l8.57-8.57a4 4 0 1 1 5.66 5.66l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></button><button class="anhang versteckt" id="buchbild" type="button" aria-label="Buchbild in den Tresor" title="Buchbild in den Tresor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3l2-2h6l2 2h3v12H4z"/><circle cx="12" cy="13" r="3.5"/></svg></button>
         <input type="file" id="datei" multiple hidden>
         <textarea id="text" rows="1" placeholder="Einfach losschreiben"></textarea>
         <button class="mikro versteckt" id="mikro" type="button" aria-label="Diktieren" aria-pressed="false" title="Diktieren: tippen, sprechen, nochmal tippen. Die Sprache wandelt Ihr Browser in Text um, dabei geht sie an seinen Hersteller."><svg aria-hidden="true"><use href="#i-mikro"/></svg></button>
@@ -1410,10 +1421,12 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
 <div class="neuladen versteckt" id="neuladen" role="status"><p><b id="neuladen-titel"></b> Laden Sie die Seite neu, wenn Sie fertig geschrieben haben.</p><button type="button" id="neuladen-ja">Neu laden</button></div>
 <div class="schirm versteckt" id="holt" role="status"><div class="holt"><p><b id="holt-titel"></b></p><p id="holt-satz">Gleich bin ich wieder da.</p></div></div>
 
+<script src="qr.js"></script>
+<script src="tresor.js"></script>
 <script>
 (function(){
   var $=function(id){return document.getElementById(id);};
-  var platz=null,vorname='',laeuft=false,FILM=false,ERSTES=true;
+  var platz=null,vorname='',laeuft=false,FILM=false,ERSTES=true,LEHRKRAFT=false;
 
   function api(weg,daten){
     return fetch(weg,{method:daten===undefined?'GET':'POST',credentials:'same-origin',
@@ -1483,7 +1496,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
         });
         stuecke.forEach(function(s){
           if(s.a==='ul'){aus.push('<ul>'+s.z.map(function(l){return '<li>'+punkt(l.replace(/^\s*[-*•]\s+/,''))+'</li>';}).join('')+'</ul>');}
-          else if(s.a==='ol'){aus.push('<ol>'+s.z.map(function(l){return '<li>'+punkt(l.replace(/^\s*\d+[.)]\s+/,''))+'</li>';}).join('')+'</ol>');}
+          else if(s.a==='ol'){var n0=parseInt((s.z[0].match(/^\s*(\d+)[.)]/)||[0,1])[1],10)||1;aus.push('<ol'+(n0>1?' start="'+n0+'"':'')+'>'+s.z.map(function(l){return '<li>'+punkt(l.replace(/^\s*\d+[.)]\s+/,''))+'</li>';}).join('')+'</ol>');}
           else if(s.a==='tab'){aus.push(tabelle(s.z));}
           else if(s.a==='zit'){aus.push('<blockquote>'+s.z.map(function(l){return zeilen(l.replace(/^\s*>\s?/,''));}).join('<br>')+'</blockquote>');}
           else if(s.a==='hr'){aus.push('<hr>');}
@@ -1713,6 +1726,20 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     return '<div class="notiz-leer">Diese Notiz ist noch leer.</div>';
   }
   document.addEventListener('click',function(e){var b=e.target.closest('[data-regeln-notiz]');if(b){regelnZeigen(b.dataset.regelnNotiz);}});
+  var KERNNOTIZ=/^(Arbeitswissen|Aufgaben|Erledigte Aufgaben)\.md$/i;
+  function nurInhalt(t){
+    // Stand 131 (Designlauf 20.11.2026): der Abschnitt Lizenz und Stand gehoert der Maschine, nicht der Person
+    t=t.replace(/\r\n/g,'\n').replace(/\n## Lizenz und Stand\n[\s\S]*?(?=\n## |$)/,'\n')
+      // Tabellenzeilen, die nur einen Platzhalter der Vorlage tragen, zeigen nichts Eigenes
+      .replace(/^\|[^\n]*\|\s*`?\[[A-Z_]{3,}\]`?\s*\|[ \t]*\n/gm,'');
+    return t.split(/\n[ \t]*\n/).filter(function(b){var x=b.trim();
+      return /^#/.test(x)||/^[-+] /.test(x)||/^\* /.test(x)||/^\|/.test(x)||/^\d+[.)] /.test(x)||/^\*\(/.test(x);}).join('\n\n')
+      // in Tabellenzellen: lange fette Regelsaetze weg, Dateinamen ohne Endung
+      .replace(/^\|.*$/gm,function(z){if(/^\|[\s:|-]+$/.test(z)){return z;}var c=z.split('|');for(var i=2;i<c.length-1;i++){var m=c[i].search(/\*\*[^*|]{40,}\*\*/);
+        if(m>0){c[i]=c[i].slice(0,m);}c[i]=' '+c[i].replace(/`([^`]+?)\.md`/g,'$1').replace(/`/g,'').trim()+' ';
+        if(/^ offen[.,]/.test(c[i])){c[i]=' offen ';}}
+      return c.join('|');});
+  }
   async function notizOeffnen(id){
     flaeche('notizen',true);
     var f=$('notizflaeche');
@@ -1723,14 +1750,33 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     var vonG=G.zurueck;G.zurueck=false;
     var e=notizen.filter(function(n){return n.id===id;})[0]||(vonG&&G.daten&&(G.daten.eintraege||[]).filter(function(n){return n.id===id;})[0])||{name:id.split('/').pop(),bereich:'privat',ordner:''};
     var inhalt=r.ok?(await r.json()).text.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/,''):'';
+    // Stand 130 (Bedienpruefung 20.11.2026): in Arbeitswissen und Aufgaben stehen Arbeitsanweisungen an die Assistenz;
+    // die Person liest nur Ueberschriften, Listen und Tabellen. Die Datei bleibt, wie sie ist.
+    if(KERNNOTIZ.test(e.name)){inhalt=nurInhalt(inhalt);}
+    // Stand 131: steht der Name der Notiz noch einmal als erste Ueberschrift, faellt sie weg
+    var t1=e.name.replace(/\.md$/i,'').toLowerCase();inhalt=inhalt.replace(/^\s*#\s+([^\n]+)\n/,function(z,h){return h.trim().toLowerCase()===t1?'':z;});
     f.innerHTML='<div class="liste"><button class="zurueck" type="button" id="zurueck">'+(vonG?'‹ Für alle':'‹ Alle Notizen')+'</button>'+
       '<article class="notiz"><p class="ort">'+esc(ortName(e))+'</p><h1 class="titel">'+esc(e.name.replace(/\.md$/i,''))+'</h1>'+
       (r.ok?(notizLeer(inhalt)?leerHtml(e):md(inhalt.replace(/\r\n/g,'\n'))):'<p class="fehler">Diese Notiz gibt es nicht mehr.</p>')+'</article></div>';
     $('zurueck').addEventListener('click',vonG?function(){flaeche('gemeinsam');}:notizenZeigen);
+    // Stand 130 (Bedienpruefung 20.11.2026): aus einer eigenen Notiz direkt weiterarbeiten
+    if(r.ok&&!vonG&&!KERNNOTIZ.test(e.name)){
+      var nn=e.name.replace(/\.md$/i,''),mk=document.createElement('button');mk.type='button';mk.className='notiz-aktion';mk.textContent='Mail daraus';
+      mk.addEventListener('click',function(){probieren({probier:'Schreib eine Mail aus der Notiz „'+nn+'“: ',titel:'Mail daraus',braucht:'An wen, und was soll drinstehen?'},'Start');});
+      $('zurueck').insertAdjacentElement('afterend',mk);
+    }
     f.scrollTop=0;
   }
   // Stand 86: eigener Name. Bis 85 ueberschrieb das Gernbei-Zeichen weiter unten diese Liste beim Laden
-  var DATEIZEICHEN={docx:'W',xlsx:'X',pptx:'P',pdf:'PDF'};
+  var DATEIZEICHEN={docx:'W',xlsx:'X',pptx:'P',pdf:'PDF',html:'AB'};
+  // Stand 123 (Einfach lesbar): ein Arbeitsblatt (HTML aus 08 - Ergebnisse) wird nicht heruntergeladen,
+  // sondern in der Blattansicht geoeffnet; dort setzt die Lehrkraft Bild und Einstellungen
+  function holenText(name){return /\.html$/i.test(String(name||''))?'Öffnen':'Herunterladen';}
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest?e.target.closest('a[href^="/api/holen?id="]'):null;if(!a){return;}
+    var id=decodeURIComponent((a.getAttribute('href').split('id=')[1]||'').split('&')[0]);if(!/\.html$/i.test(id)){return;}
+    e.preventDefault();window.open('/blatt?id='+encodeURIComponent(id),'_blank');
+  },true);
   // Alles herunterladen: erst pruefen (Groesse, Kern-Inhalt), dann der Download selbst
   var EXPORTKNOPF='<p class="export"><button type="button" class="eintrag" id="exportknopf"><span class="titel">Alles herunterladen<small>Ihre ganze Ablage als ZIP: Notizen, Dokumente und alles andere, was Ihnen gehört</small></span><span class="holen">ZIP</span></button><span id="exportmeldung" class="leise-text"></span></p>';
   async function exportieren(){
@@ -1750,7 +1796,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
   // Dokumente je Ergebnis (Stand 94, Kurt 13.11.2026, R07): Dateien stehen in einer Zeile, wenn sie im selben
   // Ordner denselben Namen ohne Endung tragen und hoechstens eine Stunde auseinander geaendert wurden; sonst
   // getrennt. An den Dateien aendert sich nichts. Ort: der Name des Projekts, sonst wie bisher.
-  var FORMAT={docx:'Word',pdf:'PDF',xlsx:'Excel',pptx:'PowerPoint'},DOKANSICHT={liste:[],gruppen:[],filter:'alle',suche:''};
+  var FORMAT={docx:'Word',pdf:'PDF',xlsx:'Excel',pptx:'PowerPoint',html:'Blatt'},DOKANSICHT={liste:[],gruppen:[],filter:'alle',suche:''};
   function projektVon(e){
     if(e.bereich!=='privat'){return null;}
     var l=(PROJEKTE.alle||[]).concat(PROJEKTE.links||[]);
@@ -1765,20 +1811,23 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
       var l=nach[k].sort(function(a,b){return b.geaendert-a.geaendert;}),g=null;
       l.forEach(function(e){if(g&&g.dateien[0].geaendert-e.geaendert<=3600&&!g.dateien.some(function(x){return x.name.split('.').pop().toLowerCase()===e.name.split('.').pop().toLowerCase();})){g.dateien.push(e);}else{g={dateien:[e]};aus.push(g);}});
     });
-    aus.forEach(function(g){var e=g.dateien[0];g.titel=e.name.replace(/\.[^.]+$/,'');g.zeit=e.geaendert;g.projekt=projektVon(e);g.ort=ortName(e);});
+    aus.forEach(function(g){var e=g.dateien[0];g.titel=e.name.replace(/\.[^.]+$/,'');g.anzeige=dokTitel(g.titel);g.stand=(g.dateien.filter(function(x){return x.stand;})[0]||{}).stand||'';g.zeit=e.geaendert;g.projekt=projektVon(e);g.ort=ortName(e);});
     return aus.sort(function(a,b){return b.zeit-a.zeit;});
   }
+  // Stand 130 (Bedienpruefung 20.11.2026): Titel zum Lesen, ohne Datum vorn und ohne Unterstriche;
+  // der Dateiname bleibt fuer Suche, Herunterladen und Ueberarbeiten
+  function dokTitel(t){var x=t.replace(/^\d{4}-\d{2}-\d{2}[_ .-]+/,'').replace(/_+/g,' ');if(x.indexOf(' ')<0&&(x.match(/-/g)||[]).length>1){x=x.replace(/-(?=[A-ZÄÖÜ])/g,' ');}return x.trim()||t;}
   function dokumenteMalen(){
     var f=$('dokumentflaeche'),q=DOKANSICHT.suche.trim().toLowerCase(),fi=DOKANSICHT.filter;
     var pj={};DOKANSICHT.gruppen.forEach(function(g){if(g.projekt){pj[g.projekt.pfad]=g.projekt.name;}});
     schalterMalen('d',DOKANSICHT.liste,DBEREICH);
-    var l=DOKANSICHT.gruppen.filter(function(g){return imBereich(g.dateien[0],DBEREICH)&&(fi==='alle'||(g.projekt&&g.projekt.pfad===fi))&&(!q||(g.titel+' '+g.ort).toLowerCase().indexOf(q)>=0);});
+    var l=DOKANSICHT.gruppen.filter(function(g){return imBereich(g.dateien[0],DBEREICH)&&(fi==='alle'||(g.projekt&&g.projekt.pfad===fi))&&(!q||(g.titel+' '+(g.anzeige||'')+' '+g.ort).toLowerCase().indexOf(q)>=0);});
     var liste=$('dok-liste');if(!liste){return;}
     $('dok-filter').innerHTML=Object.keys(pj).length?'<button type="button" data-dfilter="alle" class="'+(fi==='alle'?'an':'')+'">Alle Projekte</button>'+Object.keys(pj).map(function(k){return '<button type="button" data-dfilter="'+esc(k)+'" class="'+(fi===k?'an':'')+'">'+esc(pj[k])+'</button>';}).join(''):'';
     $('dok-satz').textContent=(fi==='alle'?'Sie sehen alle Projekte':'Sie sehen nur '+(pj[fi]||''))+(q?', gefiltert nach „'+DOKANSICHT.suche.trim()+'“':'')+'. '+l.length+(l.length===1?' Ergebnis.':' Ergebnisse.');
     liste.innerHTML=l.length?l.map(function(g){
       var i=DOKANSICHT.gruppen.indexOf(g);
-      return '<div class="ergebnis"><span class="titel"><b>'+esc(g.titel)+'</b><small>'+esc(g.ort)+' · '+datum(g.zeit)+'</small></span><span class="fmt">'+
+      return '<div class="ergebnis"><span class="titel"><b>'+esc(g.anzeige||g.titel)+(g.stand?'<i class="dstand'+(g.stand==='Entwurf'?' offen':'')+'">'+esc(g.stand)+'</i>':'')+'</b><small>'+esc(g.ort)+' · '+datum(g.zeit)+'</small></span><span class="fmt">'+
         g.dateien.slice().sort(function(a,b){return a.name.split('.').pop()<b.name.split('.').pop()?1:-1;}).map(function(e){var en=e.name.split('.').pop().toLowerCase();return '<a href="/api/holen?id='+encodeURIComponent(e.id)+'" download title="'+esc(e.name)+' herunterladen">'+esc(FORMAT[en]||en.toUpperCase())+'</a>';}).join('')+
         '</span><button class="ueber" type="button" data-ueber="'+i+'">Überarbeiten</button></div>';}).join(''):'<p class="leise-text">Nichts gefunden.</p>';
   }
@@ -1800,7 +1849,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
       var endung=e.name.split('.').pop().toLowerCase();
       return '<a class="eintrag" href="/api/holen?id='+encodeURIComponent(e.id)+'" download><span class="zeichen">'+(DATEIZEICHEN[endung]||'')+
         '</span><span class="titel">'+esc(e.name.replace(/\.[^.]+$/,''))+'<small>'+esc(ortName(e))+' · '+datum(e.geaendert)+
-        '</small></span><span class="holen">Herunterladen</span></a>';
+        '</small></span><span class="holen">'+holenText(e.name)+'</span></a>';
     }).join('')+'</div>';
   }
   async function dokumenteZeigen(){
@@ -1823,6 +1872,11 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
   document.addEventListener('click',function(ev){
     var a=ev.target.closest&&ev.target.closest('[data-notiz]');
     if(a){ev.preventDefault();notizOeffnen(a.getAttribute('data-notiz'));}
+  });
+  // Stand 130: Wege aus dem Ergebniskasten (Notizen oeffnen, Projekt oeffnen)
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest&&ev.target.closest('.ergebnis button[data-f],.ergebnis button[data-projekt]');if(!b){return;}
+    if(b.dataset.projekt){projektOeffnen(b.dataset.projekt);}else{flaeche(b.dataset.f);}
   });
 
   function zeige(id){
@@ -1888,6 +1942,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     if(e.ansehen==='Vorführung: Projekte'){window.open('/anschauen/projekte','_blank','noopener');return;}
     if(e.ansehen==='Vorführung: Absprachen'){window.open('/anschauen/tafel','_blank','noopener');return;}
     if(e.ansehen==='Vorführung: Für alle'){window.open('/anschauen/fueralle','_blank','noopener');return;}
+    if(e.ansehen==='Vorführung: Arbeitsblatt'){window.open('/anschauen/blatt','_blank','noopener');return;}
     if(e.ansehen==='Vorführung: Was Gernbei kann'){window.open(FNEU?'anschauen-funktionen.html':'anschauen-funktionen.html','_blank','noopener');return;}
     if(e.ansehen==='Vorführung: Schritt für Schritt'){window.open('/anschauen/schritte','_blank','noopener');return;}
     if(e.ansehen==='Vorführung: Beim ersten Mal'){window.open('/anschauen/einrichten','_blank','noopener');return;}
@@ -2149,7 +2204,10 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
   }
   function fTreffer(){
     var d=KOENNEN,el=$('ftreffer');if(!el){return;}
-    var q=F.q.trim().toLowerCase(),h='',wege=fWege(),hatKunden=d.gruppen.some(function(g){return g.name==='Kunden gewinnen';});
+    var q=F.q.trim().toLowerCase(),h='',wege=fWege(),hf=document.querySelectorAll('#koennenflaeche .fhaeufig');
+    // Stand 130 (Bedienpruefung 20.11.2026): wer sucht, sieht zuerst den Treffer
+    for(var hi=0;hi<hf.length;hi++){hf[hi].classList.toggle('versteckt',!!q);}
+    var hatKunden=d.gruppen.some(function(g){return g.name==='Kunden gewinnen';});
     function wegeHtml(l){return l.length?'<div class="kwege" style="margin-top:0.85rem">'+l.map(function(x){return x.html;}).join('')+'</div>':'';}
     if(q){
       var t=fAlle().filter(function(x){return (x.z.titel+' '+x.z.nutzen+' '+x.z.karte+' '+x.g.name).toLowerCase().indexOf(q)>=0;});
@@ -2175,7 +2233,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
         if(g.name===FSTIL){return;}
         var n=g.zeilen.length+(g.name==='Kunden gewinnen'?wege.length:0);
         h+='<div class="fkachel"><div class="fgk"><i style="background:'+kFarbe(g.name)[0]+'"></i><h3>'+esc(g.name)+'</h3></div><p class="fgt">'+esc(g.text||'')+'</p>'+
-          g.zeilen.slice(0,4).map(function(z,i){return '<button class="fzeile" type="button" data-fkarte="'+gi+'-'+i+'">'+kApp(g.name,true)+'<span>'+esc(z.titel)+'</span>'+(z.direkt||z.anzeige||z.oeffnet?'<em>zeigt sofort</em>':'')+erstZeile(z)+'</button>';}).join('')+
+          g.zeilen.slice(0,4).map(function(z,i){return '<button class="fzeile" type="button" data-fkarte="'+gi+'-'+i+'">'+kApp(g.name,true)+'<span>'+esc(z.titel)+'</span>'+(z.anzeige||z.oeffnet?'<em>zeigt sofort</em>':(z.direkt?'<em>fragt gleich</em>':''))+erstZeile(z)+'</button>';}).join('')+
           '<button class="flink fmehr" type="button" data-fbereich="'+esc(g.name)+'">'+(n>4?'Alle '+n+' ansehen':'Ansehen')+'</button></div>';
       });
       if(!hatKunden&&wege.length){h+='<div class="fkachel"><div class="fgk"><h3>Geführt</h3></div><p class="fgt">Schritt für Schritt über mehrere Tage</p><button class="flink fmehr" type="button" data-fbereich="Geführt">Ansehen</button></div>';}
@@ -2208,7 +2266,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     $('koennenflaeche').innerHTML='<div class="liste koennen fneu"><p class="fvor">'+esc(SNAME)+'</p><h2>Was möchten Sie erledigen?</h2><p class="erklaer">Wählen Sie eine Aufgabe. Gernbei fragt nach und erstellt mit Ihnen das Ergebnis.</p>'+
       '<form class="fsuche" id="fsuche" role="search"><label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/></svg><input id="fq" type="text" autocomplete="off" placeholder="Aufgabe oder Funktion suchen …" aria-label="Aufgabe oder Funktion suchen" value="'+esc(F.q)+'"><button class="fx versteckt" id="fx" type="button" data-fleer="1" aria-label="Suche löschen">×</button></label><button class="forange" type="submit">Suchen</button></form>'+
       (stil||(d.verbindungen||[]).length?'<div class="feinr"><b>Gernbei einrichten</b>'+(stil?'<button class="flink" type="button" data-feinr="1">Stil &amp; Vorlagen</button>':'')+((d.verbindungen||[]).length?'<button class="flink" type="button" data-feinr="1">Verbindungen</button>':'')+'</div>':'')+
-      ((d.start||[]).length?'<div class="kkopf">Häufig bei Ihnen</div><div class="kreihen">'+d.start.map(function(z,i){return '<div class="kz"><button class="klos" type="button" data-kstart="'+i+'">'+kApp('Texte & Dokumente',true)+'<span class="tx"><b>'+esc(z.titel)+'</b><small>'+esc(z.braucht||z.nutzen)+'</small></span></button></div>';}).join('')+'</div>':'')+
+      ((d.start||[]).length?'<div class="kkopf fhaeufig">Häufig bei Ihnen</div><div class="kreihen fhaeufig">'+d.start.map(function(z,i){return '<div class="kz"><button class="klos" type="button" data-kstart="'+i+'">'+kApp('Texte & Dokumente',true)+'<span class="tx"><b>'+esc(z.titel)+'</b><small>'+esc(z.braucht||z.nutzen)+'</small></span></button></div>';}).join('')+'</div>':'')+
       '<div id="ftreffer"></div></div>';
     fTreffer();
   }
@@ -2319,6 +2377,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
       (pro.length?'<div class="fwahl" style="margin-top:0.85rem"><div><label class="l" for="fprojekt">Gehört es zu einem Projekt?</label><select id="fprojekt" data-fk="projekt"><option value="">Kein Projekt</option>'+pro.map(function(p){return '<option value="'+esc(p.pfad)+'"'+(p.pfad===e.projekt?' selected':'')+'>'+esc(p.name)+'</option>';}).join('')+'</select></div></div>':'')+
       (fGeuebt()||!(bl.erledigt||[]).length?'':'<div class="ferl"><b>Das erledigt Gernbei:</b>'+bl.erledigt.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div>')+
       '</form><p class="fklein" style="max-width:720px;margin:1rem auto 0">Sie prüfen das Ergebnis, bevor Sie es verwenden. Gesendet wird nichts.</p></div>';
+    $('koennenflaeche').scrollTop=0;
     if(bl.bezug){fDoksLaden().then(function(){if(F.offen&&F.karte===z){fBezugMalen();}});}
   }
   function fBlatt(){
@@ -2336,6 +2395,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
       '<div class="fpfeil">↓ Daraus macht Gernbei<small id="flegende"></small></div><div class="fbogen" id="fbogen"></div>'+
       (fGeuebt()||!(z.blatt.erledigt||[]).length?'':'<div class="ferl"><b>Das erledigt Gernbei:</b>'+z.blatt.erledigt.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div>')+
       '</form><p class="fklein" style="max-width:720px;margin:1rem auto 0">'+(ent?'Die Seite ist ein Entwurf. Entscheiden tun Sie.':'Sie prüfen den Entwurf, bevor Sie ihn verwenden. Gesendet wird nichts.')+'</p></div>';
+    $('koennenflaeche').scrollTop=0;
     fVorschau();
   }
   // Eine Startaufgabe mit Blatt oeffnet das Blatt, nicht den Satzanfang in der Schreibzeile
@@ -2447,6 +2507,8 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
           '<div class="erst-knoepfe"><button class="los erst-klammer" type="button" data-erst="bwahl">'+BKLAMMER+'Bild wählen</button><button class="erst-zweit" type="button" data-erst="zu">Später</button></div>'+
           '<p class="erst-bis" id="bcode-hinweis">Ein Bild als PNG, JPEG oder WebP, höchstens 5 MB.</p>';
       }
+    }else if(w==='blatteinstellungen'){
+      h=beMalen();
     }else if(w==='sortieren'){
       h=sortMalen();
     }else if(w==='absender'){
@@ -2475,6 +2537,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     // Stand 110: die Bueroklammer des Blatts nimmt nur ein Bild; der Klick muss direkt auf den Tipp folgen
     if(a==='bwahl'){$('bcode-datei').click();return;}
     if(a==='sein'||a==='saus'||a==='sms'||a==='spf'||a==='sbitte'){await sortKlick(a,b);return;}
+    if(a==='beok'){await beSpeichern(b);return;}
     if(a==='bja'){
       b.disabled=true;var bok=false;
       try{var br=await api('/api/bewertungscode/bestaetigen',{ja:true});bok=br.ok;}catch(x){}
@@ -2498,6 +2561,49 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
       erstZu();if(zl.karte){fKarteAuf(zl.karte);}return;
     }
   });
+  // ---- Stand 123 (Einfach lesbar): Blaetter fuer eine Klasse einstellen. Holt im Moment, was fehlt (E156):
+  // keine Klasse bekannt, dann ein Feld fuer die Klasse im selben Blatt. Nur Einstellungen, nie ein Bild
+  var BE={klassen:{},fehler:'',ok:''};
+  async function beStart(z){
+    BE.fehler='';BE.ok='';
+    try{var r=await api('/api/blatt-einstellungen');if(r.ok){BE.klassen=(await r.json()).klassen||{};}}catch(x){}
+    erstOeffnen('blatteinstellungen',{karte:z});
+  }
+  function beWerte(k){return Object.assign({plus:false,aus:[],gross:false,oben:false,loesung:true},BE.klassen[k]||{});}
+  function beMalen(){
+    var namen=Object.keys(BE.klassen),k=namen[0]||'',w=beWerte(k);
+    function wahl(name,a,b,an){return '<div class="erst-wahl"><label><input type="radio" name="be-'+name+'" value="0"'+(an?'':' checked')+'> '+a+'</label> <label><input type="radio" name="be-'+name+'" value="1"'+(an?' checked':'')+'> '+b+'</label></div>';}
+    function hilfe(key,text){return '<label><input type="checkbox" data-behilfe="'+key+'"'+(w.aus.indexOf(key)<0?' checked':'')+'> '+text+'</label> ';}
+    return '<h2 id="erst-titel">Blätter für eine Klasse einstellen</h2><p>Einmal festlegen, dann entsteht jedes neue Blatt dieser Klasse so. Ändern geht jederzeit, auch im Gespräch.</p>'+
+      '<label>Klasse<input type="text" id="be-klasse" list="be-liste" maxlength="20" autocomplete="off" value="'+esc(k)+'" placeholder="zum Beispiel 7b"></label>'+
+      '<datalist id="be-liste">'+namen.map(function(n){return '<option value="'+esc(n)+'">';}).join('')+'</datalist>'+
+      '<p><b>Fassung</b></p>'+wahl('plus','Grund, mit Hilfen','Plus, ohne Hilfen',w.plus)+
+      '<p><b>Hilfen in der Grundfassung</b></p><div class="erst-wahl">'+hilfe('wortspeicher','Wortspeicher')+hilfe('tipps','Tipps')+hilfe('satz','Satzanfänge')+'</div>'+
+      '<p><b>Schrift</b></p>'+wahl('gross','normal','groß',w.gross)+
+      '<p><b>Bild</b></p>'+wahl('oben','neben dem Text','groß oben',w.oben)+
+      '<p><b>Lösung</b></p>'+wahl('loesung','nicht mitdrucken','mitdrucken',w.loesung)+
+      (BE.fehler?'<p class="erst-ok" role="alert">'+esc(BE.fehler)+'</p>':'')+(BE.ok?'<p class="erst-ok" role="status">'+esc(BE.ok)+'</p>':'')+
+      '<div class="erst-knoepfe"><button class="los" type="button" data-erst="beok">Festhalten</button><button class="erst-zweit" type="button" data-erst="zu">Schließen</button></div>';
+  }
+  $('erst-inhalt').addEventListener('change',function(e){
+    if(!ERST||ERST.was!=='blatteinstellungen'||!e.target||e.target.id!=='be-klasse'){return;}
+    var k=e.target.value.trim();if(!BE.klassen[k]){return;}
+    var w=beWerte(k),f=$('erst-inhalt');
+    [['plus',w.plus],['gross',w.gross],['oben',w.oben],['loesung',w.loesung]].forEach(function(x){var r=f.querySelector('input[name="be-'+x[0]+'"][value="'+(x[1]?'1':'0')+'"]');if(r){r.checked=true;}});
+    Array.prototype.forEach.call(f.querySelectorAll('[data-behilfe]'),function(c){c.checked=w.aus.indexOf(c.dataset.behilfe)<0;});
+  });
+  async function beSpeichern(b){
+    var f=$('erst-inhalt'),k=($('be-klasse')||{}).value||'';k=k.trim();
+    function an(n){var r=f.querySelector('input[name="be-'+n+'"]:checked');return !!r&&r.value==='1';}
+    var e={plus:an('plus'),gross:an('gross'),oben:an('oben'),loesung:an('loesung'),aus:[]};
+    Array.prototype.forEach.call(f.querySelectorAll('[data-behilfe]'),function(c){if(!c.checked){e.aus.push(c.dataset.behilfe);}});
+    if(!k){BE.fehler='Für welche Klasse? Tragen Sie sie oben ein, zum Beispiel 7b.';BE.ok='';erstMalen();return;}
+    b.disabled=true;
+    try{var r=await api('/api/blatt-einstellungen',{klasse:k,einstellungen:e});var d=await r.json().catch(function(){return{};});
+      if(!r.ok){BE.fehler=d.fehler||'Das hat nicht geklappt.';BE.ok='';erstMalen();return;}
+      BE.klassen[k]=e;BE.fehler='';BE.ok='Festgehalten. Das nächste Blatt der '+k+' entsteht so.';erstMalen();
+    }catch(x){BE.fehler='Gerade nicht erreichbar.';BE.ok='';erstMalen();}
+  }
   // ---- Stand 110 (Bauvorlage Vom Ende des Auftrags, E156): der Google-Bewertungscode im Vollbild. Fehlt er, holt
   // das Blatt Beim ersten Mal ihn mit der Bueroklammer, zeigt ihn zurueck und fragt einmal; danach sofort das Vollbild
   var BCODE={stand:'',fehler:''},BKLAMMER='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.44 11.05 12 20.5a6 6 0 0 1-8.49-8.49l8.57-8.57a4 4 0 1 1 5.66 5.66l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>';
@@ -2602,6 +2708,8 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
       if(z.anzeige==='bewertungscode'){bcodeStart(z);return true;}
       // Stand 117: Post sortieren schaltet ein und aus; fehlt das Postfach, verbindet das Blatt es an Ort und Stelle
       if(z.anzeige==='sortieren'){api('/api/faehigkeiten/klick',{titel:z.karte});SORT.meldung='';erstOeffnen('sortieren',{karte:z});return true;}
+      // Stand 123: Blaetter fuer eine Klasse einstellen, dieselben Schalter wie an der Blattansicht
+      if(z.anzeige==='blatteinstellungen'){api('/api/faehigkeiten/klick',{titel:z.karte});beStart(z);return true;}
       if(z.blatt){if(F.gesendet||F.karte!==z){F.ein={};F.gesendet=false;F.ohne=false;F.waehlen=false;}F.karte=z;F.offen=true;fBlatt();$('fwas').focus();return true;}
       // Stand 103: eine fertige Frage geht gleich ab, in einem neuen Gespraech, ohne Umweg ueber die Schreibzeile
       if(z.direkt&&z.probier){fDirekt(z);return true;}
@@ -2753,7 +2861,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     // was laeuft oder wartet, steht vorn
     var wege=(WEGE.karten||[]).slice().sort(function(x,y){return (y.status==='laeuft'||y.status==='wartet'||y.status==='ruht')-(x.status==='laeuft'||x.status==='wartet'||x.status==='ruht');}).map(kWegHtml).concat((d.gefuehrt||[]).map(kGefuehrtHtml));
     f.innerHTML='<div class="liste koennen"><span class="kmarke arbeit">Arbeit</span><h2>Was Gernbei kann</h2><p class="erklaer">Alles hier arbeitet für Sie. Antippen, und der Anfang steht in der Schreibzeile; abgeschickt wird erst mit dem Pfeil.'+(wege.length?' Ein geführter Weg beginnt sofort und merkt sich, wo Sie sind.':'')+'</p>'+
-      ((d.start||[]).length?'<div class="kkopf">Häufig bei Ihnen</div><div class="kreihen">'+d.start.map(function(z,i){return '<div class="kz"><button class="klos" type="button" data-kstart="'+i+'">'+kApp('Schreiben',true)+'<span class="tx"><b>'+esc(z.titel)+'</b><small>'+esc(z.braucht||z.nutzen)+'</small></span></button></div>';}).join('')+'</div>':'')+
+      ((d.start||[]).length?'<div class="kkopf fhaeufig">Häufig bei Ihnen</div><div class="kreihen fhaeufig">'+d.start.map(function(z,i){return '<div class="kz"><button class="klos" type="button" data-kstart="'+i+'">'+kApp('Schreiben',true)+'<span class="tx"><b>'+esc(z.titel)+'</b><small>'+esc(z.braucht||z.nutzen)+'</small></span></button></div>';}).join('')+'</div>':'')+
       '<div class="ksuche"><input class="suche" id="ksuche" aria-label="Aufgabe suchen" placeholder="Welche Aufgabe suchen Sie?" autocomplete="off"></div>'+
       (wege.length?'<div class="kkopf">Geführt, Schritt für Schritt</div><div class="kwege">'+wege.join('')+'</div>':'')+
       '<div class="kkopf">Einzelne Aufträge</div><div class="ksprung">'+gg.map(function(g,gi){return '<button type="button" data-ksprung="'+gi+'"><i style="background:'+kFarbe(g.name)[0]+'"></i>'+esc(g.name)+'</button>';}).join('')+
@@ -3193,19 +3301,19 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     'Gernbei fürs Handwerk':{satz:'Foto, Stichwort oder einfach sprechen statt tippen. Daraus wird ein Entwurf.',k:[
       {z:'i-foto',t:'Vom Zettel zum Bericht',s:'Foto vom Regiezettel hineinlegen.',art:'Foto',foto:'Regiebericht aus dem Foto, bitte.'},
       {z:'i-gespraech',t:'Kundenanruf festhalten',s:'Wer angerufen hat und was er will.',art:'Stichworte',vor:'Kunde hat angerufen: '},
-      {z:'i-tag',t:'Was liegt heute an?',s:'Zusagen, offene Angebote, Termine.',art:'Sofort',senden:'Was liegt heute an?'}]},
+      {z:'i-tag',t:'Was liegt heute an?',s:'Zusagen, offene Angebote, Termine.',art:'Gleich gefragt',senden:'Was liegt heute an?'}]},
     'Gernbei für Dienstleister':{satz:'Ein paar Stichworte reichen. Daraus wird ein Entwurf im eigenen Stil.',k:[
-      {z:'i-kopieren',t:'Angebot wie das letzte',s:'Für wen, und was diesmal anders ist.',art:'Stichworte',vor:'Angebot wie das letzte, für '},
+      {z:'i-notizen',t:'Auftrag festhalten',s:'Was diese Woche ansteht, in eigenen Worten.',art:'Stichworte',vor:'Diese Woche steht an: '},
       {z:'i-gespraech',t:'Stand zwischen zwei Terminen',s:'Wo eine Sache gerade steht.',art:'Stichworte',vor:'Wo steht die Sache '},
-      {z:'i-tag',t:'Zusagen der Woche',s:'Was wem bis wann versprochen ist.',art:'Sofort',senden:'Was ist diese Woche wem zugesagt?'}]},
+      {z:'i-tag',t:'Zusagen der Woche',s:'Was wem bis wann versprochen ist.',art:'Gleich gefragt',senden:'Was ist diese Woche wem zugesagt?'}]},
     'Gernbei Firmengedächtnis':{satz:'Eine Frage in ganzen Sätzen. Die Antwort kommt mit Quelle.',k:[
       {z:'i-lupe',t:'Warum so entschieden?',s:'Grund und Quelle einer Entscheidung.',art:'Frage',vor:'Warum haben wir bei '},
       {z:'i-notizen',t:'Wie machen wir das?',s:'Der Ablauf, wie er im Haus gilt.',art:'Frage',vor:'Wie machen wir bei uns '},
-      {z:'i-tag',t:'Was liegt heute an?',s:'Zusagen, Termine, offene Vorgänge.',art:'Sofort',senden:'Was liegt heute an?'}]}};
+      {z:'i-tag',t:'Was liegt heute an?',s:'Zusagen, Termine, offene Vorgänge.',art:'Gleich gefragt',senden:'Was liegt heute an?'}]}};
   var KACHELN_SONST={satz:'Ein paar Stichworte reichen.',k:[
-      {z:'i-hilfe',t:'Was kann Gernbei?',s:'Ein Überblick in wenigen Sätzen.',art:'Sofort',senden:'Was kann Gernbei alles für mich tun?'},
+      {z:'i-hilfe',t:'Was kann Gernbei?',s:'Ein Überblick in wenigen Sätzen.',art:'Gleich gefragt',senden:'Was kann Gernbei alles für mich tun?'},
       {z:'i-gespraech',t:'Eine Mail schreiben',s:'An wen und worum es geht.',art:'Stichworte',vor:'Mail an '},
-      {z:'i-tag',t:'Was liegt heute an?',s:'Zusagen, Termine, Offenes.',art:'Sofort',senden:'Was liegt heute an?'}]};
+      {z:'i-tag',t:'Was liegt heute an?',s:'Zusagen, Termine, Offenes.',art:'Gleich gefragt',senden:'Was liegt heute an?'}]};
   function kachelnJetzt(){return KACHELN[APPNAME]||KACHELN_SONST;}
   function inZeile(t){var e=$('text');e.value=t;hoehe();knopf();e.focus();e.setSelectionRange(t.length,t.length);}
   function leer(){
@@ -3286,7 +3394,14 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
         var i=klein.indexOf(d.name.toLowerCase());
         h=esc(x.t.slice(0,i))+'<a href="/api/holen?id='+encodeURIComponent(d.id)+'" download>'+esc(x.t.slice(i,i+d.name.length))+'</a>'+esc(x.t.slice(i+d.name.length));
       }else if((DATEINAME.test(x.t)||NENNT_DOKUMENT.test(x.t))&&!x.rot){return;}
-      zeilen.push('<li'+(x.rot?' class="rot"':'')+'><span>'+h+'</span></li>');
+      // Stand 130 (Bedienpruefung 20.11.2026): eine gespeicherte Notiz oder ein angelegtes Projekt bekommt einen Weg dorthin
+      var wege='';
+      if(!x.rot&&!d){
+        var pj=((PROJEKTE.alle||[]).concat(PROJEKTE.links||[])).filter(function(q){return q.name&&(klein.indexOf(q.name.toLowerCase())>=0||(q.kurz&&new RegExp('\\b'+q.kurz.replace(/[^\wÄÖÜäöü]/g,'')+'\\b','i').test(x.t)));})[0];
+        if(/notiz/i.test(x.t)){wege+='<button class="flink" type="button" data-f="notizen">Notizen öffnen</button>';}
+        if(pj){wege+='<button class="flink" type="button" data-projekt="'+esc(pj.pfad)+'">Projekt öffnen</button>';}
+      }
+      zeilen.push('<li'+(x.rot?' class="rot"':'')+'><span>'+h+'</span>'+(wege?' '+wege:'')+'</li>');
     });
     if(!zeilen.length){return;}
     var box=document.createElement('div');box.className='ergebnis';
@@ -3321,6 +3436,8 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
   function angeboteNachVerlauf(verlauf){var l=verlauf[verlauf.length-1];if(l&&l.wer==='sie'){angeboteZeigen(antippenAus(l.ende||l.text));}}
 
   function starten(daten){
+    // Bildtresor (Bauvorlage 124, E163): nur das Berufsbild Lehrkraft hat Weiche und Knopf Buchbild
+    LEHRKRAFT=daten.berufsbild==='Lehrkraft'&&!!window.KKTRESOR;$('buchbild').classList.toggle('versteckt',!LEHRKRAFT);
     platz=daten.platz;vorname=daten.vorname||'';FNEU=!!daten.seite_neu;POSTFACH=String(daten.postfach||'');FILM=!!daten.film;ERSTES=!!daten.erstes_stueck;
     SORT=daten.sortieren||{};sortNachVerbinden();
     if(daten.wechsel){zeige('wechsel');$('w-eins').focus();return;}
@@ -3409,6 +3526,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     }
     laeuft=true;$('senden').disabled=true;$('text').value='';hoehe();diktatStopp();
     angeboteWeg();wegKnoepfeWeg();var ich=blase('ich',text);
+    buchbildKnopf(ich,text);
     if(!LETZTE.titel){LETZTE.titel=text.replace(/\s+/g,' ').slice(0,120);letzteMalen();}
     var sie=blase('sie','');var antwort='';
     // Zwischentext (W12 Befund 3): notizen = Abschnitte vor einem Werkzeug. Solange
@@ -3433,6 +3551,11 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     }
     // Handy-Abriss (Bauvorlage Handy-Abriss): endet der Strom ohne 'fertig' oder reisst er,
     // wartet die Seite auf die Antwort, statt einen Fehler zu zeigen
+    // Stand 130 (Bedienpruefung 20.11.2026): eine fertige lange Antwort beginnt vorn, mit der Frage darueber;
+    // eine kurze bleibt unten. Ein Entwurf scrollt sich selbst an seinen Kasten.
+    function anfang(){var v=$('verlauf');if(sie.querySelector('.fentwurf')){return;}
+      if(sie.offsetHeight+80<v.clientHeight){unten();return;}
+      var z=(ich&&ich.parentNode)?ich:sie;v.scrollTop=Math.max(0,z.offsetTop-v.offsetTop-8);}
     var angekommen=false,abgerissen=false,serverfehler=false,besetzt=false;
     try{
       var r=await api('/api/nachricht',{text:text});
@@ -3452,7 +3575,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
           if(e.art==='text'){antwort+=e.t;malen();st.classList.add('versteckt');}
           else if(e.art==='zwischen'){if(antwort.trim()){notizen.push(antwort);}antwort='';malen();}
           else if(e.art==='status'){st.querySelector('span').textContent=e.t;st.classList.remove('versteckt');$('spalte').appendChild(st);}
-          else if(e.art==='fehler'){sie.innerHTML='<p class="fehler">'+esc(e.t)+'</p>';}
+          else if(e.art==='fehler'){sie.innerHTML='<p class="fehler">'+esc(e.t)+'</p>'+(e.hilfe?'<button class="nachlesen" type="button" data-nachlesen="'+esc(e.hilfe)+'">In der Hilfe nachlesen</button>':'');}
           else if(e.art==='verbinden'){verbindenZeigen();}
           else if(e.art==='schluessel'){schluesselZeigen(e.t);}
           else if(e.art==='hinweis'){nachsatz=e.t;}
@@ -3467,13 +3590,13 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
         setTimeout(function(){var bx=sie.querySelector('.fentwurf');if(bx){bx.scrollIntoView({block:'start'});}},150);}
       var schluss=antwort.trim()?antwort:(notizen[notizen.length-1]||''),angebote=antippenAus(schluss);
       if(nachsatz){var ns=document.createElement('p');ns.className='nachsatz';ns.textContent=nachsatz;sie.appendChild(ns);}
-      DOKS=null;ergebnisAnhaengen(sie,schluss).then(unten);
+      DOKS=null;ergebnisAnhaengen(sie,schluss).then(anfang);
       angeboteZeigen(angebote);
     }catch(err){
       if(serverfehler){sie.innerHTML='<p class="fehler">'+esc(err.message||'Das hat gerade nicht geklappt. Versuchen Sie es bitte noch einmal.')+'</p>';}
       else{abgerissen=true;sie.innerHTML='<p class="leise-text">Ich arbeite noch daran …</p>';}
     }finally{
-      st.remove();laeuft=false;knopf();unten();$('text').focus();
+      st.remove();laeuft=false;knopf();if(angekommen&&!abgerissen){anfang();}else{unten();}$('text').focus({preventScroll:true});
       wegNachRunde();
       if(besetzt){ich.remove();sie.remove();vormerken(text);}
       else if(abgerissen||SCHLANGE.length){warten();}
@@ -3568,7 +3691,38 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
   $('eingabe').addEventListener('submit',function(e){e.preventDefault();senden($('text').value);});
 
   // Datei hineingeben: landet im Eingang der Ablage, die Assistenz sieht sie dort
+  // Bildtresor (Bauvorlage 124, E163): bei einer Lehrkraft fragt die Bueroklammer bei Bildern, ob sie aus
+  // einem Schulbuch sind. Ja: verschluesselt in den Tresor, nichts geht an /api/hochladen, Gernbei bekommt
+  // nur den Satz mit Buch und Seite. Nach dreimal Nein fragt sie nicht mehr, der Knopf Buchbild bleibt.
+  function buchbildGemeldet(m){
+    var s=$('spalte'),l=s.querySelector('.leer');if(l){s.innerHTML='';}
+    var h=document.createElement('div');h.className='hinweis';
+    h.textContent=KKTRESOR.satz(m)+' Verschlüsselt, Gernbei sieht es nicht. Im Arbeitsblatt erscheint es am Bildplatz.';
+    s.appendChild(h);unten();
+    var t=$('text');if(!t.value.trim()){t.value=KKTRESOR.satz(m)+' ';hoehe();knopf();}
+  }
+  var BUCHSTELLE=/\b(S\.|Seite)\s*\d+|\bM\s?\d+\b|\bKarte\b|\bAbbildung\b|\bAbb\.\s*\d+|\bSchulbuch/i;
+  function buchVorschlag(text){
+    var t=String(text||''),v={};
+    var k=t.match(/\b(\d{1,2}\s?[a-zA-Z])\b/);if(k){v.klasse=k[1].replace(/\s/,'');}
+    var sm=t.match(/\b(?:S\.|Seite)\s*(\d+)/i);if(sm){v.seite='S. '+sm[1];}
+    var b=t.match(/\b(Karte|Abbildung|Abb\.|Grafik|Foto|Bild)\s*(M\s?\d+|\d+)?/i);var m=t.match(/\bM\s?\d+\b/);
+    if(b){v.bild=(b[1]+(b[2]?' '+b[2]:(m?' '+m[0]:''))).replace(/\s+/g,' ');}else if(m){v.bild=m[0];}
+    return v;
+  }
+  function buchbildKnopf(blase,text){
+    if(!LEHRKRAFT||!BUCHSTELLE.test(text)){return;}
+    var b=document.createElement('button');b.type='button';b.className='gteilen';b.textContent='Buchbild fotografieren';
+    b.addEventListener('click',async function(){var m=await KKTRESOR.aufnehmen(buchVorschlag(text));if(m){b.remove();buchbildGemeldet(m);}});
+    var z=document.createElement('div');z.className='hinweis';z.appendChild(b);blase.parentNode.insertBefore(z,blase.nextSibling);
+  }
+  $('buchbild').addEventListener('click',async function(){if(!LEHRKRAFT){return;}var m=await KKTRESOR.aufnehmen(buchVorschlag($('text').value));if(m){buchbildGemeldet(m);}});
   async function hochladen(f){
+    if(LEHRKRAFT&&f&&/^image\//.test(f.type)){
+      var w=await KKTRESOR.weiche(f);
+      if(w==='abbruch'){return;}
+      if(w&&w.tresor){buchbildGemeldet(w.tresor);return;}
+    }
     var s=$('spalte'),l=s.querySelector('.leer');if(l){s.innerHTML='';}
     var h=document.createElement('div');h.className='hinweis';
     h.textContent='„'+f.name+'“ kommt an …';s.appendChild(h);unten();
@@ -3681,11 +3835,14 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
   if(lies('leiste-zu')==='1'&&!handy()){$('flaeche').classList.add('zu');$('klappen').setAttribute('aria-expanded','false');}
   $('klappen').addEventListener('click',function(){leisteZu(true);});
   $('produkt').addEventListener('click',function(){if($('flaeche').classList.contains('zu')){leisteZu(false);}});
-  $('auf').addEventListener('click',function(){$('flaeche').classList.remove('zu');$('flaeche').classList.add('offen');});
+  $('auf').addEventListener('click',function(){$('flaeche').classList.remove('zu');$('flaeche').classList.add('offen');
+    // Stand 131: der Fokus geht ins Menue, Escape schliesst es und gibt ihn zurueck
+    var erst=document.querySelector('nav .punkt.neu');if(erst){setTimeout(function(){erst.focus();},50);}});
   function schubladeZu(){$('flaeche').classList.remove('offen');if(!handy()&&lies('leiste-zu')==='1'){$('flaeche').classList.add('zu');}}
   $('schleier').addEventListener('click',schubladeZu);
   document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){menueZu();rueckZu();neukarteZu();$('fragefenster').classList.add('versteckt');}
+    if(e.key==='Escape'){menueZu();rueckZu();neukarteZu();$('fragefenster').classList.add('versteckt');
+      if(handy()&&$('flaeche').classList.contains('offen')){schubladeZu();$('auf').focus();}}
     if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&!e.altKey&&e.key.toLowerCase()==='b'&&!$('flaeche').classList.contains('versteckt')){
       e.preventDefault();if(handy()){$('flaeche').classList.toggle('offen');}else{leisteZu(!$('flaeche').classList.contains('zu'));}
     }
@@ -3721,7 +3878,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     // Stand 96: unter 700 Pixel Hoehe ein frueheres Gespraech, der Rest hinter N weitere zeigen
     var zeigen=LETZTE_AUF||!NIEDRIG.matches||LETZTE.frueher.length<=2?LETZTE.frueher.length:1;
     html+=LETZTE.frueher.slice(0,zeigen).map(function(e){
-      var t=e.titel||'Gespräch ohne Frage',wo=e.projekt?'Projekt '+e.projekt+': ':'';
+      var t=e.titel||'Gespräch ohne Frage',wo=e.projekt?'Projekt '+pName(e)+': ':'';
       var k=e.kurz?'<i class="ppunkt" aria-hidden="true" style="background:'+pinFarbe(e.kurz)+'"></i>':'';
       return '<button class="zeile" data-oeffnen="'+esc(e.sitzung)+'" type="button" title="'+esc(wo+t)+'"><span>'+k+esc(t)+'</span></button>';}).join('');
     var rest=LETZTE.frueher.length-zeigen;
@@ -3909,6 +4066,8 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
   });
   // Karten oben in der Hilfe und die Karte Fortsetzen im leeren Gespraech
   // Hier weitermachen (Stand 93): das juengste fruehere Gespraech im offenen Projekt, nur wenn es eins gibt
+  // Stand 130 (Bedienpruefung 20.11.2026): ein Gespraech zeigt den heutigen Namen seines Projekts, nicht den beim Anlegen
+  function pName(e){var pf=e&&e.pfad,a=(PROJEKTE.alle||[]).concat(PROJEKTE.links||[]);for(var i=0;i<a.length;i++){if(pf&&a[i].pfad===pf&&a[i].name){return a[i].name;}}return (e&&e.projekt)||'';}
   function weiterMalen(){
     var l=$('spalte').querySelector('.leer');if(!l){return;}
     l.querySelectorAll('.weiter-gespraech').forEach(function(x){x.remove();});
@@ -3916,7 +4075,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     var e=(LETZTE.frueher||[]).filter(function(x){return x.pfad===PROJEKT.pfad;}).sort(function(a,b){return (b.zuletzt||0)-(a.zuletzt||0);})[0];
     if(!e){return;}
     var d=document.createElement('div');d.className='wegweiter weiter-gespraech';
-    d.innerHTML='<div class="t"><b>'+esc(e.titel||'Gespräch ohne Frage')+'</b><span>'+esc(wann(e.zuletzt))+' in '+esc(PROJEKT.name)+'</span></div><button type="button" data-weiter="'+esc(e.sitzung)+'">Fortsetzen</button>';
+    d.innerHTML='<div class="t"><b>'+esc(e.titel||'Gespräch ohne Frage')+'</b><span>'+esc(wann(e.zuletzt))+'</span></div><button type="button" data-weiter="'+esc(e.sitzung)+'">Fortsetzen</button>';
     l.insertBefore(d,ziel);
   }
   function wann(t){
@@ -3936,7 +4095,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     if(!d.length){return;}
     $('zuletzt').innerHTML='<p class="kreihe-kopf">Zuletzt entstanden in '+esc(name)+'</p>'+d.map(function(e){
       var endung=String(e.name).split('.').pop().toLowerCase();
-      return '<a class="eintrag" href="/api/holen?id='+encodeURIComponent(e.id)+'" download><span class="zeichen">'+(DATEIZEICHEN[endung]||'')+'</span><span class="titel">'+esc(String(e.name).replace(/\.[^.]+$/,''))+'<small>'+esc(wann(e.geaendert))+'</small></span><span class="holen">Herunterladen</span></a>';}).join('');
+      return '<a class="eintrag" href="/api/holen?id='+encodeURIComponent(e.id)+'" download><span class="zeichen">'+(DATEIZEICHEN[endung]||'')+'</span><span class="titel">'+esc(String(e.name).replace(/\.[^.]+$/,''))+'<small>'+esc(wann(e.geaendert))+'</small></span><span class="holen">'+holenText(e.name)+'</span></a>';}).join('');
   }
   document.addEventListener('click',function(e){var b=e.target.closest('[data-weiter]');if(b){oeffnen(b.dataset.weiter);}});
   function startkartenMalen(){
@@ -3958,7 +4117,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
   // Projekte, die angepinnt bleiben (Bauvorlage-Projekte, Kurt 10.11.2026: sofort bauen). Links
   // hoechstens sieben; ein Klick beginnt ein Gespraech im Projekt, dort gelten seine Regeln und
   // keine anderen. Die Regeln stehen in Projektregeln.md des Projektordners.
-  var PROJEKTE={links:[],alle:[]},PROJEKT=null,PFARBEN=['#2E6B73','#7A4E9C','#B0702A','#3D6FA8','#8A5A44','#4F7A3A','#A04A5E'];
+  var PROJEKTE={links:[],alle:[]},PROJEKT=null,PFARBEN=['#2E6B73','#7A4E9C','#8F5A1F','#3D6FA8','#8A5A44','#4F7A3A','#A04A5E'];
   function pinFarbe(n){var h=0;n=String(n||'');for(var i=0;i<n.length;i++){h=(h*31+n.charCodeAt(i))>>>0;}return PFARBEN[h%PFARBEN.length];}
   function pinHtml(p){return '<b class="pin" style="background:'+pinFarbe(p.kurz||p.name)+'">'+esc(p.kurz||'')+'</b>';}
   async function projekteHolen(){try{var r=await api('/api/projekte');if(r.ok){PROJEKTE=await r.json();projekteMalen();}}catch(x){}}
@@ -4218,7 +4377,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     return tage===0?'Heute':tage===1?'Gestern, '+dat:wt+', '+dat;
   }
   function wwiZeile(g,erst){
-    var wo=g.projekt?'<i class="ppunkt" style="display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:0.4rem;background:'+pinFarbe(g.kurz||g.projekt)+'"></i>Projekt '+esc(g.projekt):'Ohne Projekt';
+    var wo=g.projekt?'<i class="ppunkt" style="display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:0.4rem;background:'+pinFarbe(g.kurz||g.projekt)+'"></i>Projekt '+esc(pName(g)):'Ohne Projekt';
     var an=g.laufend?' data-wwi-laufend="1"':' data-wwi-oeffnen="'+esc(g.sitzung)+'"';
     return '<button class="eintrag'+(erst?' wwi-erst':'')+'" type="button"'+an+'><span class="titel">'+esc(g.titel||'Gespräch ohne Frage')+
       '<small>'+wo+'</small></span><span class="weiter">'+(g.laufend?'Hier weiter':'Weitermachen')+'</span></button>';
@@ -4248,7 +4407,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
       h+='<h3 class="wwi-h">Zuletzt erstellte Dokumente</h3>'+dl.slice().sort(function(a,b){return (b.geaendert||0)-(a.geaendert||0);}).slice(0,5).map(function(e){
         var en=e.name.split('.').pop().toLowerCase();
         return '<a class="eintrag" href="/api/holen?id='+encodeURIComponent(e.id)+'" download><span class="zeichen">'+(DATEIZEICHEN[en]||'')+
-          '</span><span class="titel">'+esc(e.name.replace(/\.[^.]+$/,''))+'<small>'+esc(ortName(e))+' · '+datum(e.geaendert)+'</small></span><span class="holen">Herunterladen</span></a>';}).join('');
+          '</span><span class="titel">'+esc(e.name.replace(/\.[^.]+$/,''))+'<small>'+esc(ortName(e))+' · '+datum(e.geaendert)+'</small></span><span class="holen">'+holenText(e.name)+'</span></a>';}).join('');
     }
     h+='<p class="wwi-fuss">Gespräche bleiben '+(d.frist_tage||30)+' Tage. Was länger bleiben soll, legt Gernbei in Ihre Ablage.</p></div>';
     f.innerHTML=h;
@@ -4264,9 +4423,10 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
   var RG_HALTE=[
     {ziel:'text',satz:'Hier schreiben oder sprechen Sie, was Sie brauchen. Stichworte reichen.',leiste:false},
     {ziel:'neu',satz:'Für eine neue Sache fangen Sie hier frisch an. Das alte Gespräch finden Sie unter Wo war ich.',leiste:true},
+    {ziel:'notizen-punkt',satz:'Hier steht, was ich mir merke: Ihre Angaben, Ihre Aufgaben und Ihre Notizen.',leiste:true},
+    {ziel:'dokumente-punkt',satz:'Ihre fertigen Briefe, Angebote und Protokolle zum Herunterladen.',leiste:true},
     {ziel:'projekte',satz:'Für jeden Kunden oder Auftrag ein Projekt. Gernbei hält dort alles zusammen.',leiste:true},
     {ziel:'letzte',satz:'Ihre letzten Gespräche. Ein Klick, und Sie machen weiter.',leiste:true},
-    {ziel:'dokumente-punkt',satz:'Ihre fertigen Briefe, Angebote und Protokolle zum Herunterladen.',leiste:true},
     {ziel:'frage-auf',satz:'Wenn Sie nicht weiterwissen, fragen Sie hier zur Bedienung.',leiste:false}];
   var RG=-1,RG_LISTE=[];
   function rgSichtbar(id){var e=$(id);return !!(e&&!e.classList.contains('versteckt')&&e.getClientRects().length);}
@@ -4455,7 +4615,7 @@ Produkte wie auf den Tueren der Website, auf die Figur zugeschnitten, Rotstift n
     }
     h.textContent=d.fehler||'Das hat gerade nicht geklappt. Versuchen Sie es gleich noch einmal.';$('pf-pw').focus();
   });
-  $('ab-ja').addEventListener('click',async function(){rueckZu();diktatStopp();await api('/api/abmelden',{});schlangeSetzen([]);platz=null;zeige('anmeldung');$('a-platz').focus();});
+  $('ab-ja').addEventListener('click',async function(){rueckZu();diktatStopp();await api('/api/abmelden',{});schlangeSetzen([]);platz=null;location.replace('/');});
 
   $('anmeldeform').addEventListener('submit',async function(e){
     e.preventDefault();$('a-hinweis').textContent='';
