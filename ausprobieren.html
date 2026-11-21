@@ -17,7 +17,7 @@
 .handy .rest{flex:1;min-height:0;overflow:hidden}
 .handy .innen .strich{z-index:3}
 .modus{display:flex;gap:10px;justify-content:center;margin:26px 0 0;flex-wrap:wrap}
-.modus button{font:500 15px var(--text);border-radius:999px;padding:10px 20px;cursor:pointer;border:1px solid var(--tinte);background:#fff;color:var(--tinte)}
+.modus button{min-height:44px;font:500 15px var(--text);border-radius:999px;padding:10px 20px;cursor:pointer;border:1px solid var(--tinte);background:#fff;color:var(--tinte)}
 .modus button[aria-pressed=true]{background:var(--tinte);color:#fff}
 .hinweis-selbst{font-size:14px;color:var(--grau);text-align:center;margin-top:12px;min-height:22px}
 .geraete .klick-schutz{position:absolute;inset:0;z-index:5;cursor:pointer}
@@ -43,7 +43,7 @@
 @keyframes tipp{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(1.5)}}
 /* Produktwahl */
 .wahl{display:flex;gap:8px;justify-content:center;margin:22px 0 0;flex-wrap:wrap}
-.wahl button{font:500 14px var(--text);border:1px solid var(--haar);background:#fff;color:var(--tinte-2);border-radius:999px;padding:8px 16px;cursor:pointer}
+.wahl button{min-height:44px;font:500 14px var(--text);border:1px solid var(--haar);background:#fff;color:var(--tinte-2);border-radius:999px;padding:8px 16px;cursor:pointer}
 .wahl button[aria-pressed=true]{background:var(--papier-2);color:var(--tinte);border-color:var(--tinte)}
 /* Firmengedaechtnis als Haus (wie das Systembild): je Person ein Zimmer mit Gesicht, darunter das gemeinsame Gedaechtnis */
 .haus{display:none;max-width:760px;margin:64px auto 0;position:relative}
