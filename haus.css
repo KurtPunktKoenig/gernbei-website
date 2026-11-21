@@ -8,7 +8,7 @@
   --tinte:#111214;--tinte-2:#3A3B40;--grau:#68686D;--grau-2:#68686D;--haar:#D2D2D7;
   /* 21.11.2026: ein Grau fuer Kleinschrift, mindestens 4,5 zu 1 auf Weiss, Grau und Handwerksplatte (Designpruefung) */
   --rot:#D23A26;--rot-schrift:#C2311D;
-  --braun-grund:#E7E4DD;--braun-platte:#F3F1EC;--braun-haar:#CFCAC0;--braun-dunkel:#2B2A27;--braun-mittel:#5E5A53;--braun-leise:#8A857C;
+  --braun-grund:#E7E4DD;--braun-platte:#F3F1EC;--braun-haar:#CFCAC0;--braun-dunkel:#2B2A27;--braun-mittel:#5E5A53;--braun-leise:#68645C;
   --display:'Inter',system-ui,-apple-system,sans-serif;
   --text:'Inter',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
@@ -16,7 +16,8 @@
   --breite:1080px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media(max-width:1120px){html{scroll-padding-top:120px}}
 body{background:var(--papier);color:var(--tinte);font-family:var(--text);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
 img{max-width:100%;height:auto;display:block}
@@ -59,7 +60,7 @@ section{padding:104px 0}
 .nav ul a.aktuell{color:var(--tinte);font-weight:600}
 .nav .knopf{padding:8px 16px;font-size:14px;white-space:nowrap}
 /* Am Handy steht das Menue als zweite Zeile zum Wischen, statt zu verschwinden (Kurt 31.10.2026, Handytest) */
-@media(max-width:1120px){.nav .wrap{flex-wrap:wrap;height:auto;padding-top:10px;row-gap:2px}.nav ul{order:3;width:100%;overflow-x:auto;white-space:nowrap;gap:18px;padding:6px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.nav ul::-webkit-scrollbar{display:none}}
+@media(max-width:1120px){.nav .wrap{flex-wrap:wrap;height:auto;padding-top:10px;row-gap:2px}.nav ul{order:3;width:100%;overflow-x:auto;white-space:nowrap;gap:18px;padding:0;scrollbar-width:none;-webkit-overflow-scrolling:touch}.nav ul::-webkit-scrollbar{display:none}.nav ul a{display:inline-block;padding:13px 0}.nav .knopf{min-height:44px}}
 
 /* Hero */
 .hero{position:relative;padding:92px 0 72px;overflow:hidden}
@@ -80,7 +81,8 @@ section{padding:104px 0}
 .schirm .leiste span{margin-left:10px;font-family:var(--mono);font-size:10px;color:var(--grau-2);letter-spacing:.04em}
 .handy{width:min(260px,70vw);border:1px solid var(--tinte);border-radius:34px;padding:9px;background:#fff;box-shadow:0 40px 70px -40px rgba(17,18,20,.45)}
 .handy img{border-radius:26px}
-.bildunter{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--grau-2);margin-top:12px}
+.bildunter{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--grau-2);margin-top:12px}
+@media(max-width:600px){.bildunter a{display:block;padding:12px 0}.szene-wahl button,.szene-beruf button{min-height:44px}.fuss .plankopf a{display:inline-block;padding:14px 0}}
 .bildpaar{display:grid;grid-template-columns:1fr auto;gap:34px;align-items:center}
 @media(max-width:820px){.bildpaar{grid-template-columns:1fr}.bildpaar .handy{margin:0 auto}}
 
@@ -758,7 +760,7 @@ a.mini2{display:block}
 .alles .mehr-inhalt{columns:2;column-gap:40px}
 .alles .mehr-inhalt .ueber,.alles .punkte{break-inside:avoid-column}
 .alles .alles-satz{column-span:all;font-size:14.5px;color:var(--grau);margin:0 0 12px}
-.alles .nur{display:inline-block;font:500 10.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--rot);border-radius:4px;padding:1px 6px;margin-left:4px;vertical-align:1px}
+.alles .nur{display:inline-block;font:500 10.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--rot-schrift);background:#fff;box-shadow:inset 0 0 0 1px var(--rot);border-radius:4px;padding:1px 6px;margin-left:4px;vertical-align:1px}
 @media(max-width:860px){.alles .mehr-inhalt{columns:1}}
 
 /* Startseite in der Darstellung vom 18.11. 19:09, alles je Produkt (Kurt 19.11.2026) */
