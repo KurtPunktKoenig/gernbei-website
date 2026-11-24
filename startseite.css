@@ -110,3 +110,7 @@
 
 /* Knoepfe unter dem Kopf (Kurt 19.11.2026, B3) */
 .hero.mitte .kopf-knoepfe{justify-content:center}
+.schaubild-kopf{margin:0 auto 22px;max-width:600px}
+.schaubild-kopf img{display:block;width:100%;height:auto;border-radius:14px;box-shadow:0 1px 0 #E6E3DA,0 10px 30px rgba(17,18,20,.06)}
+.partner-zeile{margin-top:18px;padding:12px 16px;border:1px solid #E6E3DA;border-radius:12px;background:#FBFAF7;font-size:15px;line-height:1.5;color:var(--tinte-2)}
+.partner-zeile b{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--tinte);margin-bottom:4px}
